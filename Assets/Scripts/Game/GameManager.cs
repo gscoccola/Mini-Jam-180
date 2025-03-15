@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] InGameMenu _inGameMenu;
+    //[SerializeField] InGameMenu _inGameMenu;
+    [SerializeField] InGameMenu _loseMenu;
+    [SerializeField] InGameMenu _winMenu;
 
     private void Awake()
     {
@@ -27,7 +29,6 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
-        if (levelIndex > 0) _inGameMenu = FindAnyObjectByType<InGameMenu>();
     }
 
     public void ReloadLevel()
@@ -36,8 +37,13 @@ public class GameManager : MonoBehaviour
         LoadLevel(currentSceneIndex);
     }
 
-    public void GameOver()
+    public void Lose()
     {
-        _inGameMenu.gameObject.SetActive(true);
+        _loseMenu.gameObject.SetActive(true);
+    }
+
+    public void Win()
+    {
+        _winMenu.gameObject.SetActive(true);
     }
 }

@@ -87,9 +87,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChangeStance",
+                    "name": "ReloadLevel",
                     "type": "Button",
-                    "id": "715bff28-3976-4e5d-9287-355dc35f5bfa",
+                    "id": "3bfe767a-196c-47f5-8bf4-db2b0bdc2e3f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -473,23 +473,12 @@
                 },
                 {
                     "name": "",
-                    "id": "0057feb1-0fb4-4e14-8346-73201fb8b068",
-                    "path": "<Keyboard>/e",
+                    "id": "0f86c746-0bbf-43fa-908c-28cba668c985",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeStance",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a2687047-a014-4cf9-9d44-0dc4e02095b3",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeStance",
+                    "action": "ReloadLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

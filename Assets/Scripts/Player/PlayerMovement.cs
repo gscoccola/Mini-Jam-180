@@ -39,12 +39,14 @@ public class PlayerMovement : MonoBehaviour
     Vector2 _moveInput;
     Rigidbody2D _rigidBody;
     int _fallingStance;
+    GameManager _gameManager;
 
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
     #endregion
 
     private void Awake()
     {
+        _gameManager = FindAnyObjectByType<GameManager>();
         _feetCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -124,5 +126,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidBody.linearVelocityX += _enemyBoosts[type][0];
         ChangeStance();
+    }
+
+    private void OnReloadLevel(InputValue value)
+    {
+        _gameManager.ReloadLevel();
     }
 }

@@ -1,6 +1,7 @@
 using Alchemy.Inspector;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 
@@ -8,6 +9,7 @@ public class EnemyBounceable : MonoBehaviour
 {
 
     public EnemyType _enemytype;
+    public float _maxXValue = 200f;
     bool _isDestroyed;
 
     private void Awake()
@@ -35,6 +37,10 @@ public class EnemyBounceable : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (transform.position.x > _maxXValue) Destroy(gameObject);
+    }
 
 }
 

@@ -39,7 +39,7 @@ public class PlayerHeat : MonoBehaviour
     {
         _currentHeat += (_heatGainRate - (_heatDissipateRate * _rigidbody.linearVelocity.magnitude)) * Time.deltaTime;
         _heatSlider.value = _currentHeat;
-        if (_currentHeat >= _maxHeat) _gameManager.GameOver();
+        //if (_currentHeat >= _maxHeat) _gameManager.GameOver();
     }
     
 }
