@@ -12,10 +12,12 @@ public class EnemyBounceable : MonoBehaviour
     //public float _maxXValue = 200f;
     bool _isDestroyed;
     Animator _animator;
+    SFXPlayer _SFXPlayer;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -23,6 +25,7 @@ public class EnemyBounceable : MonoBehaviour
         if (!_isDestroyed && collider.tag == "Player" )
         {
             collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
+            PlaySFX();
             Die();
         }
     }
@@ -32,6 +35,7 @@ public class EnemyBounceable : MonoBehaviour
         if (!_isDestroyed && collision.collider.tag == "Player")
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
+            PlaySFX();
             Die();
         }
         else if (!_isDestroyed && collision.collider.tag == "Ground")
@@ -50,6 +54,24 @@ public class EnemyBounceable : MonoBehaviour
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         _isDestroyed = true;
         Destroy(gameObject, 0.01f);
+    }
+
+    void PlaySFX()
+    {
+        switch (_enemytype)
+        {
+            case EnemyType.Bird:
+                _SFXPlayer.PlayRandomClip(_SFXPlayer._birdDeath);
+                break;
+
+            case EnemyType.Drone:
+                _SFXPlayer.PlayRandomClip(_SFXPlayer._droneDeath);
+                break;
+
+            case EnemyType.Balloon:
+                //_SFXPlayer.PlayRandomClip(_SFXPlayer._droneDeath);
+                break;
+        }
     }
 
 }

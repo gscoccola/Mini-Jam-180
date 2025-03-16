@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1624585313393945010}
   - component: {fileID: 7171805494944018293}
   - component: {fileID: 8139365418179160242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyBird
   m_TagString: Untagged
   m_Icon: {fileID: 0}

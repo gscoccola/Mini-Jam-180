@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7171805494944018293}
   - component: {fileID: 8139365418179160242}
   - component: {fileID: 1925391003768292856}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyBalloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

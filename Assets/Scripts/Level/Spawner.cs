@@ -7,9 +7,14 @@ using UnityEngine.UIElements;
 public class Spawner : MonoBehaviour
 {
     [Header("Spawn")]
-    [FoldoutGroup("Parameters")][SerializeField] float _averageSpawnFrequency;
+    [FoldoutGroup("Parameters")][SerializeField] float _maxSpawnsPerSecond;
     [FoldoutGroup("Parameters")][SerializeField] float _minSpawnHeight;
     [FoldoutGroup("Parameters")][SerializeField] float _spawnXOffset;
+
+    [Header("Chances")]
+    [FoldoutGroup("Parameters")][SerializeField] float _birdSpawnChance;
+    [FoldoutGroup("Parameters")][SerializeField] float _droneSpawnChance;
+    [FoldoutGroup("Parameters")][SerializeField] float _balloonSpawnChance;
 
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabBird;
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabDrone;
@@ -31,25 +36,25 @@ public class Spawner : MonoBehaviour
     {
         _mapWidth = _player.position.x;
         _mapHeight = _player.position.y;
-        _spawnPeriod = 1f / _averageSpawnFrequency;
+        _spawnPeriod = 1f / _maxSpawnsPerSecond;
         StartCoroutine(ISpawnCoroutine());
     }
 
     IEnumerator ISpawnCoroutine()
     {
-        SpawnEnemy(_player.position.x - _spawnXOffset);
+        float XPosition = _player.position.x - _spawnXOffset;
+        if (_random.NextDouble() < _birdSpawnChance) SpawnEnemy(XPosition, _enemyPrefabBird);
+        if (_random.NextDouble() < _droneSpawnChance) SpawnEnemy(XPosition, _enemyPrefabDrone);
+        if (_random.NextDouble() < _balloonSpawnChance) SpawnEnemy(XPosition, _enemyPrefabBalloon);
+
         yield return new WaitForSeconds(_spawnPeriod);
         StartCoroutine(ISpawnCoroutine());
     }
 
-    private void SpawnEnemy(float xPosition)
+    private void SpawnEnemy(float xPosition, GameObject prefab)
     {
         float height = (float)_random.NextDouble() * (_mapHeight - _minSpawnHeight -2f) + _minSpawnHeight;
-        int type = _random.Next(3);
-        if (type == 0) Instantiate(_enemyPrefabBird, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
-        else if (type == 1) Instantiate(_enemyPrefabDrone, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
-        else if (type == 2) Instantiate(_enemyPrefabBalloon, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
-
+        Instantiate(prefab, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
     }
 
 }

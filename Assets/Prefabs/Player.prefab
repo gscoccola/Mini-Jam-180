@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5645529416132895096}
   - component: {fileID: 5492189868088593829}
+  - component: {fileID: 5683657900095994645}
   - component: {fileID: 5089687418223102057}
   - component: {fileID: 250695678086047977}
   - component: {fileID: 4675737445004141531}
@@ -62,6 +63,30 @@ MonoBehaviour:
   _birdBoost: 10
   _droneBoost: 10
   _tenderBoost: 10
+--- !u!114 &5683657900095994645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7949803413985941516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25a6c8d12c288c4c98bd3537670ed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _birdDeath:
+  - {fileID: 8300000, guid: 710bf4cd0ac870549baaae71ad4abb27, type: 3}
+  - {fileID: 8300000, guid: 0c2456bf9c5e8a54bbccf22da1c28d1e, type: 3}
+  - {fileID: 8300000, guid: 325e292aeaf99564aa2a3b38c1122ddb, type: 3}
+  _droneDeath:
+  - {fileID: 8300000, guid: 6cf0fb4c87a5a5f4bb707d45321aa16d, type: 3}
+  - {fileID: 8300000, guid: 04681dc7a8e9a5d4eaa626bd591553cb, type: 3}
+  _playerWin:
+  - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
+  _playerDeath:
+  - {fileID: 8300000, guid: c270d8209a37351449a20752f7b13635, type: 3}
+  - {fileID: 8300000, guid: d161cd4779b9ed944880060e559f5895, type: 3}
 --- !u!212 &5089687418223102057
 SpriteRenderer:
   m_ObjectHideFlags: 0
