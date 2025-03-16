@@ -82,13 +82,19 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _moveSpeed, _groundAcceleration * Time.deltaTime).x;
             bool playerHasHorizontalSpeed = Mathf.Abs(_moveInput.x) > Mathf.Epsilon;
+            if (playerHasHorizontalSpeed)
+            {
+                transform.localScale = new Vector3(MathF.Sign(_moveInput.x), 1f, 1f);
+            }
+            
             _animator.SetBool("_isRunning", playerHasHorizontalSpeed);
         }
     }
 
     private void MoveVertically()
     {
-        _animator.SetBool("_isFalling", _rigidBody.linearVelocityY < -1f);
+        //_animator.SetBool("_isFalling", Mathf.Abs(_rigidBody.linearVelocityY) > 0.5f);
+        _animator.SetBool("_isFalling", !_isOnFloor);
         if (_isOnFloor) return;
         _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _gravityAcceleration * Time.deltaTime).y;
     }

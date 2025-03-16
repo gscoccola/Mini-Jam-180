@@ -18,12 +18,6 @@ public class EnemyBounceable : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        if (_enemytype == EnemyType.Drone) GetComponent<SpriteRenderer>().color = Color.grey;
-        if (_enemytype == EnemyType.Balloon) GetComponent<SpriteRenderer>().color = Color.red;
-    }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (!_isDestroyed && collider.tag == "Player" )

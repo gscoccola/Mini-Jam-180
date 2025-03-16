@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     [Header("Spawn")]
     [FoldoutGroup("Parameters")][SerializeField] float _averageSpawnFrequency;
     [FoldoutGroup("Parameters")][SerializeField] float _minSpawnHeight;
+    [FoldoutGroup("Parameters")][SerializeField] float _spawnXOffset;
 
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabBird;
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabDrone;
@@ -30,34 +31,15 @@ public class Spawner : MonoBehaviour
     {
         _mapWidth = _player.position.x;
         _mapHeight = _player.position.y;
-        //InitialSpawn();
-        StartCoroutine(IInitialSpawn());
         _spawnPeriod = 1f / _averageSpawnFrequency;
         StartCoroutine(ISpawnCoroutine());
     }
 
     IEnumerator ISpawnCoroutine()
     {
-        SpawnEnemy(-_mapWidth);
+        SpawnEnemy(_player.position.x - _spawnXOffset);
         yield return new WaitForSeconds(_spawnPeriod);
         StartCoroutine(ISpawnCoroutine());
-    }
-
-    void InitialSpawn()
-    {
-        for (int i=-(int)_mapWidth; i < _mapWidth; i++)
-        {
-            SpawnEnemy(i);
-        }
-    }
-
-    IEnumerator IInitialSpawn()
-    {
-        for (int i = -(int)_mapWidth; i < (int)_mapWidth; i++)
-        {
-            yield return new WaitForSeconds(0.01f);
-            SpawnEnemy(- i);
-        }
     }
 
     private void SpawnEnemy(float xPosition)
