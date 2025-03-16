@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 5dfe4244c7ce6724280924dc743ae78f
+guid: 5c625eb1f06c6da4dbe7aa0a3095ac1e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -838772343075170770
-    second: buildings_640x180_0
-  - first:
-      213: -4991295580587662391
-    second: buildings_640x180_1
-  - first:
-      213: -5928430208327401332
-    second: buildings_640x180_2
-  - first:
-      213: 105695574584035244
-    second: buildings_640x180_3
-  - first:
-      213: -8583894915275222686
-    second: buildings_640x180_4
+      213: 7745840689195864237
+    second: mountain_640x180_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,9 +40,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -87,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: buildings_640x180_0
+      name: mountain_640x180_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 640
-        height: 180
+        height: 110
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fe66054f9b3236c4dbd6f9e51f829cc0
-      internalID: 340198482
+      spriteID: da0594e4111ce7b60800000000000000
+      internalID: 7745840689195864237
       vertices: []
       indices: 
       edges: []
@@ -150,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 55fcf2d24dcc9b6409ee359cbd627bdf
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -160,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      buildings_640x180_0: 340198482
+      mountain_640x180_0: 7745840689195864237
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -9,7 +9,7 @@ public class EnemyBounceable : MonoBehaviour
 {
     [SerializeField] GameObject _explosionPrefab;
     public EnemyType _enemytype;
-    //public float _maxXValue = 200f;
+    public float _maxXValue = 150f;
     bool _isDestroyed;
     Animator _animator;
     SFXPlayer _SFXPlayer;
@@ -25,7 +25,8 @@ public class EnemyBounceable : MonoBehaviour
         if (!_isDestroyed && collider.tag == "Player" )
         {
             collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
-            PlaySFX();
+            _SFXPlayer.PlayRandomClip(_SFXPlayer._playerHurt);
+            PlayDeathSFX();
             Die();
         }
     }
@@ -35,18 +36,15 @@ public class EnemyBounceable : MonoBehaviour
         if (!_isDestroyed && collision.collider.tag == "Player")
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
-            PlaySFX();
-            Die();
-        }
-        else if (!_isDestroyed && collision.collider.tag == "Ground")
-        {
+            PlayDeathSFX();
+            _SFXPlayer.PlayRandomClip(_SFXPlayer._playerBounce);
             Die();
         }
     }
 
     private void Update()
     {
-        //if (transform.position.x > _maxXValue) Destroy(gameObject);
+        if (transform.position.x > _maxXValue) Destroy(gameObject);
     }
 
     void Die()
@@ -56,7 +54,7 @@ public class EnemyBounceable : MonoBehaviour
         Destroy(gameObject, 0.01f);
     }
 
-    void PlaySFX()
+    void PlayDeathSFX()
     {
         switch (_enemytype)
         {
@@ -69,7 +67,7 @@ public class EnemyBounceable : MonoBehaviour
                 break;
 
             case EnemyType.Balloon:
-                //_SFXPlayer.PlayRandomClip(_SFXPlayer._droneDeath);
+                _SFXPlayer.PlayRandomClip(_SFXPlayer._balloonDeath);
                 break;
         }
     }

@@ -1,34 +1,22 @@
 fileFormatVersion: 2
-guid: 0242352fc4da4f74593015e7bebdc827
+guid: 5dfe4244c7ce6724280924dc743ae78f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1062938222754789094
-    second: clouds_variants_89x33__0
+      213: -838772343075170770
+    second: buildings_640x180_0
   - first:
-      213: -8231789848237332996
-    second: clouds_variants_89x33__1
+      213: -4991295580587662391
+    second: buildings_640x180_1
   - first:
-      213: -496945190046241869
-    second: clouds_variants_89x33__2
+      213: -5928430208327401332
+    second: buildings_640x180_2
   - first:
-      213: 6594774043735141421
-    second: clouds_variants_89x33__3
+      213: 105695574584035244
+    second: buildings_640x180_3
   - first:
-      213: 8986029770877876298
-    second: clouds_variants_89x33__4
-  - first:
-      213: -8443890915083845303
-    second: clouds_variants_89x33__5
-  - first:
-      213: -4823831774532568507
-    second: clouds_variants_89x33__6
-  - first:
-      213: 1380228720088782809
-    second: clouds_variants_89x33__7
-  - first:
-      213: 2854488593751714732
-    second: clouds_variants_89x33__8
+      213: -8583894915275222686
+    second: buildings_640x180_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -64,9 +52,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -99,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -137,23 +125,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: clouds_variants_89x33__0
+      name: buildings_640x180_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 623
-        height: 33
+        width: 640
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6e6fb719ea050ce00800000000000000
-      internalID: 1062938222754789094
+      spriteID: fe66054f9b3236c4dbd6f9e51f829cc0
+      internalID: 340198482
       vertices: []
       indices: 
       edges: []
@@ -162,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e8a8f144d3ec4944b903a604bf01d1fa
+    spriteID: 55fcf2d24dcc9b6409ee359cbd627bdf
     internalID: 0
     vertices: []
     indices: 
@@ -172,7 +160,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      clouds_variants_89x33__0: 1062938222754789094
+      buildings_640x180_0: 340198482
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 5c625eb1f06c6da4dbe7aa0a3095ac1e
+guid: da5e6de1de553a64f9e2f018235f05f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7745840689195864237
-    second: mountain_640x180_0
+      213: -4547218364110690479
+    second: player_death_20x22_0
+  - first:
+      213: 335898820723257078
+    second: player_death_20x22_1
+  - first:
+      213: -7489972988770862321
+    second: player_death_20x22_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mountain_640x180_0
+      name: player_death_20x22_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 640
-        height: 110
+        y: 1
+        width: 20
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +134,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: da0594e4111ce7b60800000000000000
-      internalID: 7745840689195864237
+      spriteID: 157ac037df805e0c0800000000000000
+      internalID: -4547218364110690479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_death_20x22_1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6feaea1a23a59a400800000000000000
+      internalID: 335898820723257078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_death_20x22_2
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 0
+        width: 81
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0bba0310454e0890800000000000000
+      internalID: -7489972988770862321
       vertices: []
       indices: 
       edges: []
@@ -148,7 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mountain_640x180_0: 7745840689195864237
+      player_death_20x22_0: -4547218364110690479
+      player_death_20x22_1: 335898820723257078
+      player_death_20x22_2: -7489972988770862321
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
