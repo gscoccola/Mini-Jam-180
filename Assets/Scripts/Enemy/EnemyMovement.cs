@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Header("Speeds")]
-    [FoldoutGroup("Parameters")][SerializeField] float _birdSpeed;
-    [FoldoutGroup("Parameters")][SerializeField] float _droneSpeed;
+    [FoldoutGroup("Parameters")][SerializeField] float _horizontalSpeed;
+    [FoldoutGroup("Parameters")][SerializeField] float _verticalSpeed;
 
-    Dictionary<EnemyType, float> _enemySpeeds = new Dictionary<EnemyType, float>();
+    
     EnemyBounceable _enemyBounceable;
-    float _speed;
+    Vector3 _speed;
 
     private void Awake()
     {
@@ -19,18 +18,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        _enemySpeeds = new Dictionary<EnemyType, float>
-        {
-            [EnemyType.Bird] = _birdSpeed,
-            [EnemyType.Drone] = _droneSpeed,
-            [EnemyType.Tender] = 0f,
-        };
-
-        _speed = _enemySpeeds[_enemyBounceable._enemytype];
+        _speed = new Vector3(_horizontalSpeed, _verticalSpeed, 0);
     }
 
     private void Update()
     {
-        transform.position += Vector3.right * _speed * Time.deltaTime;
+        transform.position += _speed * Time.deltaTime;
     }
 }

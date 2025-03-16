@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565320616811853919}
-  - component: {fileID: 5181539860035519098}
   - component: {fileID: 4621908720522897026}
+  - component: {fileID: 5181539860035519098}
   - component: {fileID: 6003322094492297565}
+  - component: {fileID: 6004270170565987692}
   - component: {fileID: 1624585313393945010}
   - component: {fileID: 7171805494944018293}
   - component: {fileID: 8139365418179160242}
@@ -37,19 +38,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5181539860035519098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174810378592755860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e39ebd36ec254614a991a125b4b407bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemytype: 0
 --- !u!114 &4621908720522897026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,8 +50,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da2d4c1a362946f4692c2025a5e4e4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _birdSpeed: 3
-  _droneSpeed: 6
+  _horizontalSpeed: 3
+  _verticalSpeed: 0.5
+--- !u!114 &5181539860035519098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4174810378592755860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39ebd36ec254614a991a125b4b407bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionPrefab: {fileID: 3467801179110129099, guid: c8787dccbed7949489de727454d935ab, type: 3}
+  _enemytype: 0
 --- !u!212 &6003322094492297565
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 680589151997688627, guid: bc6417448fd2ce045be632f327d0b68a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,6 +121,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6004270170565987692
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4174810378592755860}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d9b5ed6eeb309a246a95ea604e6ab3d2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!58 &1624585313393945010
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,7 +244,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.25, y: 1.1875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

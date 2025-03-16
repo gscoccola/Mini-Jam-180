@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565320616811853919}
-  - component: {fileID: 5181539860035519098}
   - component: {fileID: 4621908720522897026}
+  - component: {fileID: 5181539860035519098}
   - component: {fileID: 6003322094492297565}
   - component: {fileID: 1624585313393945010}
   - component: {fileID: 7171805494944018293}
@@ -37,19 +37,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5181539860035519098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174810378592755860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e39ebd36ec254614a991a125b4b407bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemytype: 1
 --- !u!114 &4621908720522897026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,8 +49,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da2d4c1a362946f4692c2025a5e4e4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _birdSpeed: 3
-  _droneSpeed: 6
+  _horizontalSpeed: 5
+  _verticalSpeed: 0
+--- !u!114 &5181539860035519098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4174810378592755860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39ebd36ec254614a991a125b4b407bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionPrefab: {fileID: 3467801179110129099, guid: c8787dccbed7949489de727454d935ab, type: 3}
+  _enemytype: 1
 --- !u!212 &6003322094492297565
 SpriteRenderer:
   m_ObjectHideFlags: 0

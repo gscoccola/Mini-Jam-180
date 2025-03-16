@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         {
             [EnemyType.Bird] = new float[2]{ _birdDeviation, _birdBoost },
             [EnemyType.Drone] = new float[2]{ _droneDeviation, _droneBoost },
-            [EnemyType.Tender] = new float[2]{ _tenderDeviation, _tenderBoost },
+            [EnemyType.Balloon] = new float[2]{ _tenderDeviation, _tenderBoost },
         };
     }
 

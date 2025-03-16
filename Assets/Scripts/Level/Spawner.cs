@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
 
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabBird;
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabDrone;
+    [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabBalloon;
 
     Transform _player;
     System.Random _random;
@@ -29,7 +30,8 @@ public class Spawner : MonoBehaviour
     {
         _mapWidth = _player.position.x;
         _mapHeight = _player.position.y;
-        InitialSpawn();
+        //InitialSpawn();
+        StartCoroutine(IInitialSpawn());
         _spawnPeriod = 1f / _averageSpawnFrequency;
         StartCoroutine(ISpawnCoroutine());
     }
@@ -49,12 +51,22 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    IEnumerator IInitialSpawn()
+    {
+        for (int i = -(int)_mapWidth; i < (int)_mapWidth; i++)
+        {
+            yield return new WaitForSeconds(0.01f);
+            SpawnEnemy(- i);
+        }
+    }
+
     private void SpawnEnemy(float xPosition)
     {
         float height = (float)_random.NextDouble() * (_mapHeight - _minSpawnHeight -2f) + _minSpawnHeight;
-        int type = _random.Next(2);
+        int type = _random.Next(3);
         if (type == 0) Instantiate(_enemyPrefabBird, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
-        else Instantiate(_enemyPrefabDrone, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
+        else if (type == 1) Instantiate(_enemyPrefabDrone, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
+        else if (type == 2) Instantiate(_enemyPrefabBalloon, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
 
     }
 
