@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     int _fallingStance;
     GameManager _gameManager;
     SFXPlayer _SFXPlayer;
+    bool _isDead;
 
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
     #endregion
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         IsOnFloor();
+        if (_isDead) return;
         MoveHorizontally();
         MoveVertically();
     }
@@ -140,5 +142,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnReloadLevel(InputValue value)
     {
         _gameManager.ReloadLevel();
+    }
+
+    public void Die()
+    {
+        _isDead = true;
+        _animator.SetTrigger("_die");
     }
 }
