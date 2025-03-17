@@ -27,8 +27,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        StopAllCoroutines();
-        _animator.SetBool("isPressed", false);
+        
     }
 
     IEnumerator ILoadScene()

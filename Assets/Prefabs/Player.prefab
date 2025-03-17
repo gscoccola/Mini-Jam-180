@@ -53,16 +53,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _groundAcceleration: 200
-  _airAcceleration: 10
+  _airAcceleration: 15
   _jumpSpeed: 10
   _fallSpeed: 10
   _gravityAcceleration: 10
   _birdDeviation: 10
-  _droneDeviation: 10
-  _tenderDeviation: 10
+  _droneDeviation: 15
+  _tenderDeviation: 20
   _birdBoost: 10
-  _droneBoost: 10
-  _tenderBoost: 10
+  _droneBoost: 12
+  _tenderBoost: 15
 --- !u!114 &5683657900095994645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +101,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: eb882500a95ae334388dcc002f0af673, type: 3}
   - {fileID: 8300000, guid: bc1a7b85990c71e4db09f2dd7a80d3e4, type: 3}
   - {fileID: 8300000, guid: 1ffde86bb25af5547beeffb8444f5cc5, type: 3}
+  _victory: []
+  _defeat: []
+  _winDialog: []
 --- !u!212 &5089687418223102057
 SpriteRenderer:
   m_ObjectHideFlags: 0

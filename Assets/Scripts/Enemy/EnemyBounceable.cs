@@ -9,7 +9,7 @@ public class EnemyBounceable : MonoBehaviour
 {
     [SerializeField] GameObject _explosionPrefab;
     public EnemyType _enemytype;
-    public float _maxXValue = 150f;
+    float _maxXValue = 250f;
     bool _isDestroyed;
     Animator _animator;
     SFXPlayer _SFXPlayer;
