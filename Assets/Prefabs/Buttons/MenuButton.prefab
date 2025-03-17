@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1674233849453714883}
   - component: {fileID: 8251190534581269605}
   m_Layer: 5
-  m_Name: Button
+  m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e777a604f944aed4d9d7b0a4afcbf2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 1
   _clip: {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
 --- !u!222 &1987308019525244857
 CanvasRenderer:
@@ -71,7 +71,7 @@ Animator:
   m_GameObject: {fileID: 4908996042354860345}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae52f552a6a9d674b94c372f9a376915, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4b353942acfc3dc4d91971b648dce4d3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

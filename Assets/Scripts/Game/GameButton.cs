@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -48,9 +49,16 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             _gameManager.LoadLevel(0);
         }
+        else if (_type == ButtonType.Restart)
+        {
+            _gameManager.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        }
         else if (_type == ButtonType.Next)
         {
-            _gameManager.LoadLevel(0);
+            int i = SceneManager.GetActiveScene().buildIndex;
+            i++;
+            i = i % 4;
+            _gameManager.LoadLevel(i);
         }
     }
 
@@ -61,4 +69,5 @@ public enum ButtonType
     Start,
     Quit,
     Next,
+    Restart,
 }
