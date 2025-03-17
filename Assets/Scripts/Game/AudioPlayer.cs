@@ -26,7 +26,7 @@ public class AudioPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 1)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Destroy(this.gameObject);
         }

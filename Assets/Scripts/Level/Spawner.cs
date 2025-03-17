@@ -24,7 +24,6 @@ public class Spawner : MonoBehaviour
     System.Random _random;
     float _spawnPeriod;
     float _mapHeight;
-    float _mapWidth;
 
     private void Awake()
     {
@@ -34,8 +33,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        _mapWidth = _player.position.x;
-        _mapHeight = _player.position.y;
+        _mapHeight = Mathf.Max(_player.position.y, 50f);
         _spawnPeriod = 1f / _maxSpawnsPerSecond;
         StartCoroutine(ISpawnCoroutine());
     }

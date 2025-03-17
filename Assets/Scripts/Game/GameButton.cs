@@ -7,7 +7,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] ButtonType _type;
     GameManager _gameManager;
-    float _menuClickDelay = 0.3f;
+    float _menuClickDelay = 0.6f;
     bool _isBeingPressed;
     Animator _animator;
     [SerializeField] AudioClip _clip;
@@ -26,13 +26,12 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //StopAllCoroutines();
+        StopAllCoroutines();
         _animator.SetBool("isPressed", false);
     }
 
     IEnumerator ILoadScene()
     {
-        
         _animator.SetBool("isPressed", true);
         yield return new WaitForSeconds(_menuClickDelay);
         LoadScene();
@@ -49,6 +48,10 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             _gameManager.LoadLevel(0);
         }
+        else if (_type == ButtonType.Next)
+        {
+            _gameManager.LoadLevel(0);
+        }
     }
 
 }
@@ -57,4 +60,5 @@ public enum ButtonType
 {
     Start,
     Quit,
+    Next,
 }

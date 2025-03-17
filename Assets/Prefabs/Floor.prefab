@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e5a4f2131c00b41830122bc80e1e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bloodSplatter: {fileID: 0}
-  _waterSplash: {fileID: 0}
+  _bloodSplatter: {fileID: 8512843963887993240, guid: df81998fceab35340a5a446991108e25, type: 3}
+  _waterSplash: {fileID: 8512843963887993240, guid: 62f6975cca821774dbf82678446d114a, type: 3}
