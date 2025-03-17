@@ -70,7 +70,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         IsOnFloor();
-        if (_isDead) return;
+        if (_isDead)
+        {
+            _rigidBody.linearVelocityX = 0f;
+            return;
+        }
+            
         MoveHorizontally();
         MoveVertically();
     }
@@ -148,5 +153,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _isDead = true;
         _animator.SetTrigger("_die");
+    }
+
+    public void Win()
+    {
+        _isDead = true;
     }
 }

@@ -7,6 +7,7 @@ public class Floor : MonoBehaviour
     PlayerMovement _playerMovement;
     [SerializeField] GameObject _bloodSplatter;
     [SerializeField] GameObject _waterSplash;
+    bool _isTriggered;
 
     private void Awake()
     {
@@ -15,11 +16,12 @@ public class Floor : MonoBehaviour
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.tag == "Player")
+        if (!_isTriggered && collision.tag == "Player")
         {
-            if (collision.collider.transform.position.x > 0f)
+            _isTriggered = true;
+            if (collision.transform.position.x > 0f)
             {
                 _gameManager.Lose();
                 _playerMovement.Die();
@@ -30,6 +32,7 @@ public class Floor : MonoBehaviour
             }
             _gameManager.Win();
             _SFXPlayer.PlayRandomClip(_SFXPlayer._playerWin);
+            _playerMovement.Win();
             Instantiate(_waterSplash, _playerMovement.transform.position, Quaternion.identity);
         }
     }

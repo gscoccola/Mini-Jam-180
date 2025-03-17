@@ -3,9 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class AudioPlayer : MonoBehaviour
 {
+    AudioSource _audioSource;
+
     private void Awake()
     {
         ManageSingleton();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void ManageSingleton()
@@ -27,5 +30,15 @@ public class AudioPlayer : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void Pause()
+    {
+        _audioSource.Pause();
+    }
+
+    public void Play()
+    {
+        _audioSource.Play();
     }
 }

@@ -16,6 +16,13 @@ public class SFXPlayer : MonoBehaviour
     public AudioClip[] _playerHurt;
     public AudioClip[] _playerBounce;
 
+    [Header("End Music")]
+    public AudioClip[] _victory;
+    public AudioClip[] _defeat;
+
+    [Header("End Dialog")]
+    public AudioClip[] _winDialog;
+
     float _combo = 0f;
 
     public void PlayRandomClip(AudioClip[] clipArray)
