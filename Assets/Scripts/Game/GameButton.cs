@@ -8,21 +8,24 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] ButtonType _type;
     GameManager _gameManager;
-    float _menuClickDelay = 0.6f;
+    float _menuClickDelay = 1.0f;
     bool _isBeingPressed;
     Animator _animator;
+    Camera _camera;
     [SerializeField] AudioClip _clip;
+    [SerializeField] float _buttonVolume;
 
     private void Awake()
     {
         _gameManager = FindAnyObjectByType<GameManager>();
         _animator = GetComponent<Animator>();
+        _camera = FindAnyObjectByType<Camera>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         StartCoroutine(ILoadScene());
-        AudioSource.PlayClipAtPoint(_clip, Vector3.zero, 0.8f);
+        AudioSource.PlayClipAtPoint(_clip, _camera.transform.position, _buttonVolume);
     }
 
     public void OnPointerUp(PointerEventData eventData)

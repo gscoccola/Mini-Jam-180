@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 3
   _clip: {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
+  _buttonVolume: 0.1
 --- !u!222 &1987308019525244857
 CanvasRenderer:
   m_ObjectHideFlags: 0
