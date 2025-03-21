@@ -153,10 +153,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _isDead = true;
         _animator.SetTrigger("_die");
+        GetComponent<SpriteRenderer>().sortingLayerName = "Water";
     }
 
     public void Win()
     {
         _isDead = true;
+        //_animator.SetTrigger("_win");
+        _fallingStance = 2;
+        _animator.SetInteger("_fallingStance", _fallingStance);
     }
 }

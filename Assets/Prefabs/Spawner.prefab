@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSpawnsPerSecond: 5
-  _minSpawnHeight: 2
+  _minSpawnHeight: 3
   _spawnXOffset: 30
   _birdSpawnChance: 0.5
   _droneSpawnChance: 0.2

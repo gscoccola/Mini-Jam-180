@@ -7,7 +7,7 @@ public class AudioPlayer : MonoBehaviour
 
     private void Awake()
     {
-        ManageSingleton();
+        //ManageSingleton();
         _audioSource = GetComponent<AudioSource>();
     }
 

@@ -279,7 +279,7 @@ Transform:
   m_GameObject: {fileID: 3525313338217764298}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5.15}
+  m_LocalPosition: {x: 1.1818485, y: 11.86887, z: -5.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -358,7 +358,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 50.2
+  field of view: 82.6
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -712,8 +712,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -200, y: 0}
-      - {x: 200, y: 0}
+    - - {x: -200, y: -3}
+      - {x: 200, y: -3}
       - {x: 200, y: 200}
       - {x: -200, y: 200}
   m_UseDelaunayMesh: 0
