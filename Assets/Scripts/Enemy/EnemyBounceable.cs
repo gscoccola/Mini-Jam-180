@@ -25,7 +25,7 @@ public class EnemyBounceable : MonoBehaviour
         if (!_isDestroyed && collider.tag == "Player" )
         {
             collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
-            _SFXPlayer.PlayRandomClip(_SFXPlayer._playerHurt);
+            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerHurt);
             PlayDeathSFX();
             Die();
         }
@@ -37,7 +37,7 @@ public class EnemyBounceable : MonoBehaviour
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
             PlayDeathSFX();
-            _SFXPlayer.PlayRandomClip(_SFXPlayer._playerBounce);
+            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerBounce);
             Die();
         }
     }
@@ -59,15 +59,15 @@ public class EnemyBounceable : MonoBehaviour
         switch (_enemytype)
         {
             case EnemyType.Bird:
-                _SFXPlayer.PlayRandomClip(_SFXPlayer._birdDeath);
+                _SFXPlayer.PlayClipFromArray(_SFXPlayer._birdDeath);
                 break;
 
             case EnemyType.Drone:
-                _SFXPlayer.PlayRandomClip(_SFXPlayer._droneDeath);
+                _SFXPlayer.PlayClipFromArray(_SFXPlayer._droneDeath);
                 break;
 
             case EnemyType.Balloon:
-                _SFXPlayer.PlayRandomClip(_SFXPlayer._balloonDeath);
+                _SFXPlayer.PlayClipFromArray(_SFXPlayer._balloonDeath);
                 break;
         }
     }

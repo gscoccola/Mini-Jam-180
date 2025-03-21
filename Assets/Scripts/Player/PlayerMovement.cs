@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        _SFXPlayer = GetComponent<SFXPlayer>();
+        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
         _gameManager = FindAnyObjectByType<GameManager>();
         _feetCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         if (!_isOnFloor) return;
         _rigidBody.linearVelocityY += _jumpSpeed;
         _fallingStance = 0;
-        _SFXPlayer.PlayRandomClip(_SFXPlayer._playerJump);
+        _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerJump);
     }
 
     void ChangeStance()

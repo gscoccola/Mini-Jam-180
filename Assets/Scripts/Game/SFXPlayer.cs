@@ -1,31 +1,80 @@
+using System.Collections.Generic;
+using Alchemy.Inspector;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SFXPlayer : MonoBehaviour
 {
     [Header("EnemyDeath")]
-    public AudioClip[] _birdDeath;
-    public AudioClip[] _droneDeath;
-    public AudioClip[] _balloonDeath;
+    [FoldoutGroup("Enemy")] public AudioClip[] _birdDeath;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _birdDeathVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _droneDeath;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _droneDeathVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _balloonDeath;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _balloonDeathVolume;
 
     [Header("Player Fall")]
-    public AudioClip[] _playerWin;
-    public AudioClip[] _playerDeath;
-
-    [Header("Player")]
-    public AudioClip[] _playerJump;
-    public AudioClip[] _playerHurt;
-    public AudioClip[] _playerBounce;
-
-    [Header("End Music")]
-    public AudioClip[] _victory;
-    public AudioClip[] _defeat;
+    [FoldoutGroup("Player")] public AudioClip[] _playerSplash;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerSplashVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerDeath;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerDeathVolume;
 
     [Header("End Dialog")]
-    public AudioClip[] _winDialog;
+    [FoldoutGroup("Player")] public AudioClip[] _winDialog;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _winDialogVolume;
+
+    [Header("Player misc")]
+    [FoldoutGroup("Player")] public AudioClip[] _playerJump;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerJumpVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerHurt;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerHurtVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerBounce;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerBounceVolume;
+
+    [Header("End Music")]
+    [FoldoutGroup("Music")] public AudioClip[] _victory;
+    [FoldoutGroup("Music")][SerializeField][Range(0f, 1f)] float[] _victoryVolume;
+    [FoldoutGroup("Music")] public AudioClip[] _defeat;
+    [FoldoutGroup("Music")][SerializeField][Range(0f, 1f)] float[] _defeatVolume;
+
+    
+
+    [Header("Button")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _button;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
 
     float _combo = 0f;
+    Vector3 _cameraPosition;
 
-    public void PlayRandomClip(AudioClip[] clipArray)
+    Dictionary<AudioClip[], float[]> _volumeDictionary = new();
+
+    private void Awake()
+    {
+        _cameraPosition = FindAnyObjectByType<Camera>().transform.position;
+    }
+
+    private void Start()
+    {
+        _volumeDictionary = new Dictionary<AudioClip[], float[]>()
+        {
+            [_birdDeath] = _birdDeathVolume,
+            [_droneDeath] = _droneDeathVolume,
+            [_balloonDeath] = _balloonDeathVolume,
+            [_balloonDeath] = _balloonDeathVolume,
+            [_playerSplash] = _playerSplashVolume,
+            [_playerDeath] = _playerDeathVolume,
+            [_playerJump] = _playerJumpVolume,
+            [_playerHurt] = _playerHurtVolume,
+            [_playerBounce] = _playerBounceVolume,
+            [_victory] = _victoryVolume,
+            [_defeat] = _defeatVolume,
+            [_winDialog] = _winDialogVolume,
+            [_button] = _buttonVolume,
+
+        };
+    }
+
+    public void PlayClipFromArray(AudioClip[] clipArray)
     {
         
         int indexToPlay;
@@ -43,7 +92,7 @@ public class SFXPlayer : MonoBehaviour
         {
             indexToPlay = Random.Range(0, clipArray.Length);
         }
-        AudioSource.PlayClipAtPoint(clipArray[indexToPlay], transform.position);
+        PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
     }
 
     void IncreaseCombo()
@@ -56,6 +105,26 @@ public class SFXPlayer : MonoBehaviour
     {
         _combo = 0f;
         _combo = Mathf.Clamp(_combo, 0f, _playerBounce.Length - 1f);
+    }
+
+    public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, float pitch = 1, bool dontDestroyOnLoad = false)
+    {
+        GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+        tempGO.transform.position = pos; // set its position
+        AudioSource tempASource = tempGO.AddComponent<AudioSource>(); // add an audio source
+        if (dontDestroyOnLoad)
+        {
+            DontDestroyOnLoad(tempASource);
+        }
+        tempASource.clip = clip;
+        tempASource.pitch = pitch;
+        tempASource.volume = volume;
+        tempASource.rolloffMode = AudioRolloffMode.Linear;
+        tempASource.maxDistance = 200f;
+        // set other aSource properties here, if desired
+        tempASource.Play(); // start the sound
+        MonoBehaviour.Destroy(tempGO, tempASource.clip.length); // destroy object after clip duration (this will not account for whether it is set to loop)
+        return tempASource; // return the AudioSource reference
     }
 
 }

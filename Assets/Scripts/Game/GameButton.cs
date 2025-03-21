@@ -12,20 +12,20 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     bool _isBeingPressed;
     Animator _animator;
     Camera _camera;
-    [SerializeField] AudioClip _clip;
-    [SerializeField] float _buttonVolume;
+    SFXPlayer _SFXPlayer;
 
     private void Awake()
     {
         _gameManager = FindAnyObjectByType<GameManager>();
         _animator = GetComponent<Animator>();
         _camera = FindAnyObjectByType<Camera>();
+        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         StartCoroutine(ILoadScene());
-        AudioSource.PlayClipAtPoint(_clip, _camera.transform.position, _buttonVolume);
+        _SFXPlayer.PlayClipFromArray(_SFXPlayer._button);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -43,24 +43,25 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void LoadScene()
     {
-        if (_type== ButtonType.Start)
+        switch (_type)
         {
-            _gameManager.LoadLevel(1);
-        }
-        else if (_type == ButtonType.Quit)
-        {
-            _gameManager.LoadLevel(0);
-        }
-        else if (_type == ButtonType.Restart)
-        {
-            _gameManager.LoadLevel(SceneManager.GetActiveScene().buildIndex);
-        }
-        else if (_type == ButtonType.Next)
-        {
-            int i = SceneManager.GetActiveScene().buildIndex;
-            i++;
-            i = i % 4;
-            _gameManager.LoadLevel(i);
+            case ButtonType.Start:
+                _gameManager.LoadLevel(1);
+                break;
+            case ButtonType.Quit:
+                _gameManager.LoadLevel(0);
+                break;
+            case ButtonType.Restart:
+                _gameManager.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+                break;
+            case ButtonType.Next:
+                {
+                    int i = SceneManager.GetActiveScene().buildIndex;
+                    i++;
+                    i = i % 4;
+                    _gameManager.LoadLevel(i);
+                    break;
+                }
         }
     }
 

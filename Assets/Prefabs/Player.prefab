@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5645529416132895096}
   - component: {fileID: 5492189868088593829}
-  - component: {fileID: 5683657900095994645}
   - component: {fileID: 5089687418223102057}
   - component: {fileID: 250695678086047977}
   - component: {fileID: 4675737445004141531}
@@ -63,47 +62,6 @@ MonoBehaviour:
   _birdBoost: 10
   _droneBoost: 12
   _tenderBoost: 15
---- !u!114 &5683657900095994645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7949803413985941516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25a6c8d12c288c4c98bd3537670ed50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _birdDeath:
-  - {fileID: 8300000, guid: 710bf4cd0ac870549baaae71ad4abb27, type: 3}
-  - {fileID: 8300000, guid: 0c2456bf9c5e8a54bbccf22da1c28d1e, type: 3}
-  - {fileID: 8300000, guid: 325e292aeaf99564aa2a3b38c1122ddb, type: 3}
-  _droneDeath:
-  - {fileID: 8300000, guid: 6cf0fb4c87a5a5f4bb707d45321aa16d, type: 3}
-  - {fileID: 8300000, guid: 04681dc7a8e9a5d4eaa626bd591553cb, type: 3}
-  _balloonDeath: []
-  _playerWin:
-  - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
-  _playerDeath:
-  - {fileID: 8300000, guid: c270d8209a37351449a20752f7b13635, type: 3}
-  - {fileID: 8300000, guid: d161cd4779b9ed944880060e559f5895, type: 3}
-  _playerJump:
-  - {fileID: 8300000, guid: 04eadf6f779f67a4b9baf9f20c63096d, type: 3}
-  - {fileID: 8300000, guid: b2c34416f1a829f46a0187428e5d8117, type: 3}
-  - {fileID: 8300000, guid: 6c9933cf59b9058479f2d950cfb31e4a, type: 3}
-  _playerHurt:
-  - {fileID: 8300000, guid: 0dc970d5220bfef4aa5576fec5080db4, type: 3}
-  - {fileID: 8300000, guid: 5f144d2052ac4a54997b8c57ab46d0c8, type: 3}
-  - {fileID: 8300000, guid: 81096b36253d4ad469a3b2e8726f264c, type: 3}
-  _playerBounce:
-  - {fileID: 8300000, guid: 7d26cb712ab9e634f91cefa6da8ed9b0, type: 3}
-  - {fileID: 8300000, guid: eb882500a95ae334388dcc002f0af673, type: 3}
-  - {fileID: 8300000, guid: bc1a7b85990c71e4db09f2dd7a80d3e4, type: 3}
-  - {fileID: 8300000, guid: 1ffde86bb25af5547beeffb8444f5cc5, type: 3}
-  _victory: []
-  _defeat: []
-  _winDialog: []
 --- !u!212 &5089687418223102057
 SpriteRenderer:
   m_ObjectHideFlags: 0

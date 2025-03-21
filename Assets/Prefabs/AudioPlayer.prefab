@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7151640412744923075}
   - component: {fileID: 7207338226210703694}
+  - component: {fileID: 1496860868317368669}
   - component: {fileID: 2565876176405641814}
   m_Layer: 0
   m_Name: AudioPlayer
@@ -45,6 +46,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282f82f98ccc5684f9f218a2c47a1ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1496860868317368669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011237236054601744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25a6c8d12c288c4c98bd3537670ed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _birdDeath:
+  - {fileID: 8300000, guid: 710bf4cd0ac870549baaae71ad4abb27, type: 3}
+  - {fileID: 8300000, guid: 0c2456bf9c5e8a54bbccf22da1c28d1e, type: 3}
+  - {fileID: 8300000, guid: 325e292aeaf99564aa2a3b38c1122ddb, type: 3}
+  _birdDeathVolume:
+  - 0.5
+  - 0.5
+  - 0.5
+  _droneDeath:
+  - {fileID: 8300000, guid: e90de12e2ab6dd24bb14e6f8a8f26733, type: 3}
+  - {fileID: 8300000, guid: 8fcfb79828a9bf1428af5adf1ba7a519, type: 3}
+  _droneDeathVolume:
+  - 0.5
+  - 0.5
+  _balloonDeath:
+  - {fileID: 8300000, guid: 560a7ad091b2f10488e8047b9f03a460, type: 3}
+  - {fileID: 8300000, guid: 1ffc0ca4d5019db4abffd257e7fecaef, type: 3}
+  _balloonDeathVolume:
+  - 0.5
+  - 0.5
+  _playerSplash:
+  - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
+  _playerSplashVolume:
+  - 0.5
+  _playerDeath:
+  - {fileID: 8300000, guid: c270d8209a37351449a20752f7b13635, type: 3}
+  - {fileID: 8300000, guid: d161cd4779b9ed944880060e559f5895, type: 3}
+  _playerDeathVolume:
+  - 0.5
+  - 0.5
+  _playerJump:
+  - {fileID: 8300000, guid: 04eadf6f779f67a4b9baf9f20c63096d, type: 3}
+  - {fileID: 8300000, guid: b2c34416f1a829f46a0187428e5d8117, type: 3}
+  - {fileID: 8300000, guid: 6c9933cf59b9058479f2d950cfb31e4a, type: 3}
+  _playerJumpVolume:
+  - 0.5
+  - 0.5
+  - 0.5
+  _playerHurt:
+  - {fileID: 8300000, guid: 0dc970d5220bfef4aa5576fec5080db4, type: 3}
+  - {fileID: 8300000, guid: 5f144d2052ac4a54997b8c57ab46d0c8, type: 3}
+  - {fileID: 8300000, guid: 81096b36253d4ad469a3b2e8726f264c, type: 3}
+  _playerHurtVolume:
+  - 0.5
+  - 0.5
+  - 0.5
+  _playerBounce:
+  - {fileID: 8300000, guid: 7d26cb712ab9e634f91cefa6da8ed9b0, type: 3}
+  - {fileID: 8300000, guid: eb882500a95ae334388dcc002f0af673, type: 3}
+  - {fileID: 8300000, guid: bc1a7b85990c71e4db09f2dd7a80d3e4, type: 3}
+  - {fileID: 8300000, guid: 1ffde86bb25af5547beeffb8444f5cc5, type: 3}
+  _playerBounceVolume:
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  _victory:
+  - {fileID: 8300000, guid: a3bfc5d8cec544c48bead744455b835e, type: 3}
+  _victoryVolume:
+  - 0.5
+  _defeat:
+  - {fileID: 8300000, guid: 6645f0aa095d8b149a813875b98cd2d6, type: 3}
+  _defeatVolume:
+  - 0.5
+  _winDialog:
+  - {fileID: 8300000, guid: 3f0134e8841b7684fa738343e6b3d73f, type: 3}
+  - {fileID: 8300000, guid: b39f76b9f546fbe458e3a5ae3f3a8448, type: 3}
+  _winDialogVolume:
+  - 0.5
+  - 0.5
+  _button:
+  - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
+  _buttonVolume:
+  - 0.5
 --- !u!82 &2565876176405641814
 AudioSource:
   m_ObjectHideFlags: 0
@@ -58,7 +145,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: aa911653fda8931429364e48952ccc76, type: 3}
   m_Resource: {fileID: 8300000, guid: aa911653fda8931429364e48952ccc76, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.077
+  m_Volume: 0.265
   m_Pitch: 1
   Loop: 1
   Mute: 0

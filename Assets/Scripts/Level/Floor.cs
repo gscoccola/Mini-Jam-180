@@ -25,13 +25,13 @@ public class Floor : MonoBehaviour
             {
                 _gameManager.Lose();
                 _playerMovement.Die();
-                _SFXPlayer.PlayRandomClip(_SFXPlayer._playerDeath);
+                _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerDeath);
                 Instantiate(_bloodSplatter, _playerMovement.transform.position, Quaternion.identity);
 
                 return;
             }
             _gameManager.Win();
-            _SFXPlayer.PlayRandomClip(_SFXPlayer._playerWin);
+            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerSplash);
             _playerMovement.Win();
             Instantiate(_waterSplash, _playerMovement.transform.position, Quaternion.identity);
         }

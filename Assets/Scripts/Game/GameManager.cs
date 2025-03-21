@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         _audioPlayer.Pause();
         yield return new WaitForSeconds(_endDelay);
         _loseMenu.gameObject.SetActive(true);
-        _SFXPlayer.PlayRandomClip(_SFXPlayer._defeat);
+        _SFXPlayer.PlayClipFromArray(_SFXPlayer._defeat);
     }
 
     IEnumerator IWin()
@@ -82,8 +82,8 @@ public class GameManager : MonoBehaviour
         _audioPlayer.Pause();
         yield return new WaitForSeconds(_endDelay);
         _winMenu.gameObject.SetActive(true);
-        _SFXPlayer.PlayRandomClip(_SFXPlayer._victory);
+        _SFXPlayer.PlayClipFromArray(_SFXPlayer._victory);
         yield return new WaitForSeconds(3f);
-        _SFXPlayer.PlayRandomClip(_SFXPlayer._winDialog);
+        _SFXPlayer.PlayClipFromArray(_SFXPlayer._winDialog);
     }
 }
