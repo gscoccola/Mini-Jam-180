@@ -52,8 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _clip: {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
-  _buttonVolume: 0.1
 --- !u!222 &1987308019525244857
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -106,7 +104,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 8713832449545346197, guid: 9111959031301d244a7483cefb55a1cb, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
