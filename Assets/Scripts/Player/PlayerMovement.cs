@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     #region Global Variables
     Animator _animator;
     BoxCollider2D _feetCollider;
-    bool _isOnFloor;
+    public bool IsOnFloor {  get; private set; }
     Vector2 _moveInput;
     Rigidbody2D _rigidBody;
     int _fallingStance;
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IsOnFloor();
+        CalculateIsOnFloor();
         if (_isDead)
         {
             _rigidBody.linearVelocityX = 0f;
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     private void MoveHorizontally()
     {
         Vector2 playerVelocity = new Vector2(_moveInput.x, 0f);
-        if (!_isOnFloor)
+        if (!IsOnFloor)
         {
             _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _moveSpeed, _airAcceleration * Time.deltaTime).x;
         }
@@ -103,14 +103,14 @@ public class PlayerMovement : MonoBehaviour
     private void MoveVertically()
     {
         //_animator.SetBool("_isFalling", Mathf.Abs(_rigidBody.linearVelocityY) > 0.5f);
-        _animator.SetBool("_isFalling", !_isOnFloor);
-        if (_isOnFloor) return;
+        _animator.SetBool("_isFalling", !IsOnFloor);
+        if (IsOnFloor) return;
         _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _gravityAcceleration * Time.deltaTime).y;
     }
 
-    void IsOnFloor()
+    void CalculateIsOnFloor()
     {
-        _isOnFloor = _feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        IsOnFloor = _feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 
     void OnMove(InputValue value)
@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (!_isOnFloor) return;
+        if (!IsOnFloor) return;
         _rigidBody.linearVelocityY += _jumpSpeed;
         _fallingStance = 0;
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerJump);

@@ -139,7 +139,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 62, y: 135}
-  m_SizeDelta: {x: 1318.75, y: 843.75}
+  m_SizeDelta: {x: 1506.25, y: 506.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3965959307201414646
 CanvasRenderer:
@@ -384,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4979512785286134366
 RectTransform:
   m_ObjectHideFlags: 0
