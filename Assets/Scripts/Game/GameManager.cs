@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
+    [SerializeField] GameObject _confetti;
+    Camera _camera;
     SFXPlayer _SFXPlayer;
     AudioPlayer _audioPlayer;
 
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        _camera = FindAnyObjectByType<Camera>();
         _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
     }
 
@@ -83,7 +86,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(_endDelay);
         _winMenu.gameObject.SetActive(true);
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._victory);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.2f);
+        Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
+        yield return new WaitForSeconds(1.8f);
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._winDialog);
     }
 }

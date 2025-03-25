@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3062bbb47869b48b7acf551a63ff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _endDelay: 0
+  _loseMenu: {fileID: 0}
+  _winMenu: {fileID: 0}
+  _confetti: {fileID: 8512843963887993240, guid: 35470c359b4d6bf4489aac8d8d3da0b6, type: 3}
