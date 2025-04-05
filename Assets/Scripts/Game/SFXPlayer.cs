@@ -43,14 +43,14 @@ public class SFXPlayer : MonoBehaviour
     [FoldoutGroup("Game misc")] public AudioClip[] _button;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
 
-    float _combo = 0f;
     Vector3 _cameraPosition;
-
+    PlayerMovement _playerMovement;
     Dictionary<AudioClip[], float[]> _volumeDictionary = new();
 
     private void Awake()
     {
         _cameraPosition = FindAnyObjectByType<Camera>().transform.position;
+        _playerMovement = FindAnyObjectByType<PlayerMovement>();
     }
 
     private void Start()
@@ -80,12 +80,10 @@ public class SFXPlayer : MonoBehaviour
         int indexToPlay;
         if (clipArray== _playerBounce)
         {
-            IncreaseCombo();
-            indexToPlay = (int)_combo;
+            indexToPlay = _playerMovement.PlayerCombo;
         }
         else if (clipArray == _playerHurt)
         {
-            ResetCombo();
             indexToPlay = Random.Range(0, clipArray.Length);
         }
         else
@@ -93,18 +91,6 @@ public class SFXPlayer : MonoBehaviour
             indexToPlay = Random.Range(0, clipArray.Length);
         }
         PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
-    }
-
-    void IncreaseCombo()
-    {
-        _combo++;
-        _combo = Mathf.Clamp(_combo, 0f, _playerBounce.Length - 1f);
-    }
-
-    void ResetCombo()
-    {
-        _combo = 0f;
-        _combo = Mathf.Clamp(_combo, 0f, _playerBounce.Length - 1f);
     }
 
     public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, float pitch = 1, bool dontDestroyOnLoad = false)

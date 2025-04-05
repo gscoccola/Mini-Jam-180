@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AudioPlayer : MonoBehaviour
+public class MusicPlayer : MonoBehaviour
 {
     AudioSource _audioSource;
 
@@ -13,7 +13,7 @@ public class AudioPlayer : MonoBehaviour
 
     void ManageSingleton()
     {
-        int numGameManagers = FindObjectsByType<AudioPlayer>(FindObjectsSortMode.None).Length;
+        int numGameManagers = FindObjectsByType<MusicPlayer>(FindObjectsSortMode.None).Length;
         if (numGameManagers > 1)
         {
             Destroy(this.gameObject);

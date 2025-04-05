@@ -43,7 +43,9 @@ public class PlayerMovement : MonoBehaviour
     SFXPlayer _SFXPlayer;
     bool _isDead;
 
+    ParticleSystem _particleSystem;
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
+    public int PlayerCombo { get; private set; } = 0;
     #endregion
 
     private void Awake()
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         _feetCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _particleSystem = GetComponent<ParticleSystem>();
     }
 
     private void Start()
@@ -135,12 +138,14 @@ public class PlayerMovement : MonoBehaviour
     public void Boost(EnemyType type)
     {
         _rigidBody.linearVelocityY = _enemyBoosts[type][1];
+        IncreaseCombo();
         ChangeStance();
     }
 
     public void Deviate(EnemyType type)
     {
         _rigidBody.linearVelocityX += _enemyBoosts[type][0];
+        ResetCombo();
         ChangeStance();
     }
 
@@ -162,5 +167,21 @@ public class PlayerMovement : MonoBehaviour
         //_animator.SetTrigger("_win");
         _fallingStance = 2;
         _animator.SetInteger("_fallingStance", _fallingStance);
+    }
+
+    void IncreaseCombo()
+    {
+        PlayerCombo++;
+        PlayerCombo = (int)Mathf.Clamp(PlayerCombo, 0, 3);
+        if (PlayerCombo == 3)
+        {
+            _particleSystem.Play();
+        }
+    }
+
+    void ResetCombo()
+    {
+        PlayerCombo = 0;
+        _particleSystem.Stop();
     }
 }

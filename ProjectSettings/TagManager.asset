@@ -42,14 +42,14 @@ TagManager:
   - name: Background
     uniqueID: 3846843509
     locked: 0
+  - name: Building
+    uniqueID: 440181797
+    locked: 0
   - name: Pointer
     uniqueID: 925421531
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Building
-    uniqueID: 440181797
     locked: 0
   - name: Enemy
     uniqueID: 1310998815

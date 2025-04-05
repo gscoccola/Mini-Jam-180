@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _confetti;
     Camera _camera;
     SFXPlayer _SFXPlayer;
-    AudioPlayer _audioPlayer;
+    MusicPlayer _musicPlayer;
 
     float _musicStartDelay = 0.3f;
     
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         _camera = FindAnyObjectByType<Camera>();
         _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
+        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
     }
 
     private void Start()
@@ -32,8 +33,8 @@ public class GameManager : MonoBehaviour
     IEnumerator StartMusic()
     {
         yield return new WaitForSeconds(_musicStartDelay);
-        _audioPlayer = FindAnyObjectByType<AudioPlayer>();
-        _audioPlayer.Play();
+        
+        _musicPlayer.Play();
     }
 
     void ManageSingleton()
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ILose()
     {
-        _audioPlayer.Pause();
+        _musicPlayer.Pause();
         yield return new WaitForSeconds(_endDelay);
         _loseMenu.gameObject.SetActive(true);
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._defeat);
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator IWin()
     {
-        _audioPlayer.Pause();
+        _musicPlayer.Pause();
         yield return new WaitForSeconds(_endDelay);
         _winMenu.gameObject.SetActive(true);
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._victory);
