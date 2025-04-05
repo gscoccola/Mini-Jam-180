@@ -159,7 +159,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -175,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
+        y: 144
         width: 69
         height: 36
       alignment: 0
@@ -197,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 69
-        y: 108
+        y: 144
         width: 69
         height: 36
       alignment: 0
@@ -219,7 +219,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 138
-        y: 108
+        y: 144
         width: 69
         height: 36
       alignment: 0
@@ -241,7 +241,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 207
-        y: 108
+        y: 144
         width: 69
         height: 36
       alignment: 0
@@ -263,7 +263,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 72
+        y: 108
         width: 69
         height: 36
       alignment: 0
@@ -285,7 +285,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 69
-        y: 72
+        y: 108
         width: 69
         height: 36
       alignment: 0
@@ -307,7 +307,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 138
-        y: 72
+        y: 108
         width: 69
         height: 36
       alignment: 0
@@ -329,7 +329,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 207
-        y: 72
+        y: 108
         width: 69
         height: 36
       alignment: 0
@@ -351,7 +351,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 36
+        y: 72
         width: 69
         height: 36
       alignment: 0
@@ -373,7 +373,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 69
-        y: 36
+        y: 72
         width: 69
         height: 36
       alignment: 0
@@ -395,7 +395,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 138
-        y: 36
+        y: 72
         width: 69
         height: 36
       alignment: 0
@@ -417,7 +417,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 207
-        y: 36
+        y: 72
         width: 69
         height: 36
       alignment: 0
@@ -438,7 +438,7 @@ TextureImporter:
       name: buttons_69x36_12
       rect:
         serializedVersion: 2
-        x: 276
+        x: 0
         y: 36
         width: 69
         height: 36
@@ -460,7 +460,7 @@ TextureImporter:
       name: buttons_69x36_13
       rect:
         serializedVersion: 2
-        x: 345
+        x: 69
         y: 36
         width: 69
         height: 36
@@ -482,7 +482,7 @@ TextureImporter:
       name: buttons_69x36_14
       rect:
         serializedVersion: 2
-        x: 414
+        x: 138
         y: 36
         width: 69
         height: 36
@@ -504,6 +504,28 @@ TextureImporter:
       name: buttons_69x36_15
       rect:
         serializedVersion: 2
+        x: 207
+        y: 36
+        width: 69
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc84497309323c14b9294810785cdf0f
+      internalID: -2141327332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_69x36_16
+      rect:
+        serializedVersion: 2
         x: 0
         y: 0
         width: 69
@@ -514,16 +536,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fc7268291261a96d0800000000000000
-      internalID: -2983047469731534897
+      spriteID: d642b1422fcf21744b8a2cff54f432dd
+      internalID: -2027845942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: buttons_69x36_16
+      name: buttons_69x36_17
       rect:
         serializedVersion: 2
         x: 69
@@ -538,14 +560,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9846fcca52aab00409d17dea8c25245c
-      internalID: 169461576
+      spriteID: ddf2575b45218cb44851fb9743ab7f92
+      internalID: 2014484765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: buttons_69x36_17
+      name: buttons_69x36_18
       rect:
         serializedVersion: 2
         x: 138
@@ -560,14 +582,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb79d7d74398082499c6d2271f9314f6
-      internalID: -1990447189
+      spriteID: ae38ba1230f94e440a42aa891e49cdc8
+      internalID: 1275634056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: buttons_69x36_18
+      name: buttons_69x36_19
       rect:
         serializedVersion: 2
         x: 207
@@ -582,8 +604,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76537734bd1cdd04db98455743950b55
-      internalID: -1308561139
+      spriteID: 0c4693b234158204c9b1007134983260
+      internalID: -737459012
       vertices: []
       indices: 
       edges: []
@@ -592,7 +614,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8d0a93a9e8ca0924e9b893d7c59a792b
+    spriteID: 290d6645e2c2e564caac510703825030
     internalID: 0
     vertices: []
     indices: 
@@ -609,10 +631,11 @@ TextureImporter:
       buttons_69x36_12: -3629460775943425511
       buttons_69x36_13: 8527029083479129483
       buttons_69x36_14: 568012563090023087
-      buttons_69x36_15: -2983047469731534897
-      buttons_69x36_16: 169461576
-      buttons_69x36_17: -1990447189
-      buttons_69x36_18: -1308561139
+      buttons_69x36_15: -2141327332
+      buttons_69x36_16: -2027845942
+      buttons_69x36_17: 2014484765
+      buttons_69x36_18: 1275634056
+      buttons_69x36_19: -737459012
       buttons_69x36_2: 5742526558825548301
       buttons_69x36_3: -6423866123856541530
       buttons_69x36_4: -4583956798165567975

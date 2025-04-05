@@ -6,8 +6,12 @@ using UnityEngine.UIElements;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("Spacing")]
+    [FoldoutGroup("Parameters")][SerializeField] float _laneHeight;
+    [FoldoutGroup("Parameters")][SerializeField] float _minXSpacing;
+
     [Header("Spawn")]
-    [FoldoutGroup("Parameters")][SerializeField] float _maxSpawnsPerSecond;
+    [FoldoutGroup("Parameters")][SerializeField] float _spawnPeriod;
     [FoldoutGroup("Parameters")][SerializeField] float _minSpawnHeight;
     [FoldoutGroup("Parameters")][SerializeField] float _spawnXOffset;
 
@@ -22,8 +26,8 @@ public class Spawner : MonoBehaviour
 
     Transform _player;
     System.Random _random;
-    float _spawnPeriod;
     float _mapHeight;
+    int _laneNumber;
 
     private void Awake()
     {
@@ -34,25 +38,39 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         _mapHeight = Mathf.Max(_player.position.y, 50f);
-        _spawnPeriod = 1f / _maxSpawnsPerSecond;
+        CalculateLanes();
         StartCoroutine(ISpawnCoroutine());
     }
 
+    private void CalculateLanes()
+    {
+        _laneNumber = Mathf.FloorToInt((_mapHeight- _minSpawnHeight)/_laneHeight);
+    }
+
+
     IEnumerator ISpawnCoroutine()
     {
-        float XPosition = _player.position.x - _spawnXOffset;
-        if (_random.NextDouble() < _birdSpawnChance) SpawnEnemy(XPosition, _enemyPrefabBird);
-        if (_random.NextDouble() < _droneSpawnChance) SpawnEnemy(XPosition, _enemyPrefabDrone);
-        if (_random.NextDouble() < _balloonSpawnChance) SpawnEnemy(XPosition, _enemyPrefabBalloon);
+        for (int i = 0; i<= _laneNumber; i++)
+        {
+            double spawnRandomDouble = _random.NextDouble();
+            Vector3 spawnPosition = new Vector3(_player.position.x - _spawnXOffset,
+                _minSpawnHeight + _laneHeight * i, 0f);
+
+            if (spawnRandomDouble < _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabBird);
+            else if (spawnRandomDouble < _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabDrone);
+            else if (spawnRandomDouble < _balloonSpawnChance + _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabBalloon);
+        }
 
         yield return new WaitForSeconds(_spawnPeriod);
         StartCoroutine(ISpawnCoroutine());
     }
 
-    private void SpawnEnemy(float xPosition, GameObject prefab)
+    private void SpawnEnemy(Vector3 position, GameObject prefab)
     {
-        float height = (float)_random.NextDouble() * (_mapHeight - _minSpawnHeight -2f) + _minSpawnHeight;
-        Instantiate(prefab, Vector3.right * xPosition + Vector3.up * height, Quaternion.identity);
+        Instantiate(prefab,
+            position + Vector3.up * (((float)_random.NextDouble() - 0.5f) * _laneHeight)
+            + Vector3.right * (((float)_random.NextDouble() - 0.5f) * _minXSpacing),
+            Quaternion.identity);
     }
 
 }

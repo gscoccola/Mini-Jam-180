@@ -7,21 +7,7 @@ public class MusicPlayer : MonoBehaviour
 
     private void Awake()
     {
-        //ManageSingleton();
         _audioSource = GetComponent<AudioSource>();
-    }
-
-    void ManageSingleton()
-    {
-        int numGameManagers = FindObjectsByType<MusicPlayer>(FindObjectsSortMode.None).Length;
-        if (numGameManagers > 1)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject);
-        }
     }
 
     private void Update()

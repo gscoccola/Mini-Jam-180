@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b89f56ea1729c4a98aba5c29373fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpawnsPerSecond: 5
+  _laneHeight: 4
+  _minXSpacing: 7
+  _spawnPeriod: 2
   _minSpawnHeight: 3
   _spawnXOffset: 30
-  _birdSpawnChance: 0.5
+  _birdSpawnChance: 0.3
   _droneSpawnChance: 0.2
   _balloonSpawnChance: 0.1
   _enemyPrefabBird: {fileID: 4174810378592755860, guid: 5f8198dbd79a40d4590f32f31f3e26e3, type: 3}

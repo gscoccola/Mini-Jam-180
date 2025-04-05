@@ -52,7 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _horizontalSpeed: 2
-  _verticalSpeed: 2
+  _verticalSpeed: 0.7
+  _oscilates: 0
+  _oscilationAmplitude: 0
+  _oscilationPeriod: 1
 --- !u!114 &5181539860035519098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +70,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionPrefab: {fileID: 3467801179110129099, guid: c8787dccbed7949489de727454d935ab, type: 3}
   _enemytype: 2
-  _maxXValue: 150
 --- !u!212 &6003322094492297565
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -110,7 +112,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 690074621
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 865755581, guid: 2fa0fe6ce7aa59c4e9b3d260e99fc84a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
