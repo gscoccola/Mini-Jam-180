@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         if (!IsOnFloor)
         {
             _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _moveSpeed, _airAcceleration * Time.deltaTime).x;
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else
         {

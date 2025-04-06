@@ -46,13 +46,16 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         switch (_type)
         {
             case ButtonType.Start:
-                _gameManager.LoadLevel(1);
+                _gameManager.TutorialOrStart();
                 break;
             case ButtonType.Quit:
                 _gameManager.LoadLevel(0);
                 break;
             case ButtonType.Restart:
                 _gameManager.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+                break;
+            case ButtonType.Credits:
+                _gameManager.ToggleCredits(); ;
                 break;
             case ButtonType.Next:
                 {

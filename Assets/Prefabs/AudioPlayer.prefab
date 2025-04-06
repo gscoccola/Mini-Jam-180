@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeRate: 0.8
-  _maxVolume: 0.4
+  _maxVolume2: 0.2
+  _maxVolume3: 0.35
   _isSecondTrackEnabled: 0
 --- !u!114 &1496860868317368669
 MonoBehaviour:
@@ -75,8 +76,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e90de12e2ab6dd24bb14e6f8a8f26733, type: 3}
   - {fileID: 8300000, guid: 8fcfb79828a9bf1428af5adf1ba7a519, type: 3}
   _droneDeathVolume:
-  - 0.5
-  - 0.5
+  - 0.25
+  - 0.25
   _balloonDeath:
   - {fileID: 8300000, guid: 560a7ad091b2f10488e8047b9f03a460, type: 3}
   - {fileID: 8300000, guid: 1ffc0ca4d5019db4abffd257e7fecaef, type: 3}
@@ -140,7 +141,7 @@ MonoBehaviour:
   _button:
   - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
   _buttonVolume:
-  - 0.5
+  - 0.322
 --- !u!82 &2565876176405641814
 AudioSource:
   m_ObjectHideFlags: 0

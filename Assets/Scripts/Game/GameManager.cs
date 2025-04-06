@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _winMenu;
     [SerializeField] InGameMenu _creditsMenu;
     [SerializeField] InGameMenu _startMenu;
+    [SerializeField] InGameMenu _tutorialMenu;
     [SerializeField] GameObject _confetti;
     Camera _camera;
     SFXPlayer _SFXPlayer;
@@ -86,5 +87,16 @@ public class GameManager : MonoBehaviour
     {
         _creditsMenu.gameObject.SetActive(!_creditsMenu.gameObject.activeSelf);
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
+    }
+
+    internal void TutorialOrStart()
+    {
+        if (_tutorialMenu.gameObject.activeSelf)
+        {
+            LoadLevel(1);
+            return;
+        }
+        _tutorialMenu.gameObject.SetActive(true);
+        _startMenu.gameObject.SetActive(false);
     }
 }

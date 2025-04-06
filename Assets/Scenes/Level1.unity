@@ -15794,6 +15794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tutorial Popup
       objectReference: {fileID: 0}
+    - target: {fileID: 1380501062942225566, guid: 43325f6812e9e9c429a11a8c1f8c507b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1907109954940432675, guid: 43325f6812e9e9c429a11a8c1f8c507b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.389999

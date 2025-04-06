@@ -148,9 +148,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 26
-        width: 17
-        height: 17
+        y: 0
+        width: 141
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,143 +165,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: tutorial_2.0_1
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 16
-        width: 20
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dd61d9ffa130601d0800000000000000
-      internalID: -3385014655429830947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_2.0_2
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 26
-        width: 18
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7b586d470f98bf9b0800000000000000
-      internalID: -5045287291693136457
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_2.0_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 17
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 13e9340ae00bea800800000000000000
-      internalID: 625630975115894321
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_2.0_4
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 18
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bc5e5aa2c9880e910800000000000000
-      internalID: 1864640450043176395
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_2.0_5
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 3
-        width: 30
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 737f0076a0e8caaa0800000000000000
-      internalID: -6148383215938635977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_2.0_6
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 65
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 45f9dcb01350c6a00800000000000000
-      internalID: 750980946073591636
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0da8471e49695ab4d9c600560380f26a
     internalID: 0
     vertices: []
     indices: 
@@ -312,12 +180,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       tutorial_2.0_0: -5922501737765074303
-      tutorial_2.0_1: -3385014655429830947
-      tutorial_2.0_2: -5045287291693136457
-      tutorial_2.0_3: 625630975115894321
-      tutorial_2.0_4: 1864640450043176395
-      tutorial_2.0_5: -6148383215938635977
-      tutorial_2.0_6: 750980946073591636
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
