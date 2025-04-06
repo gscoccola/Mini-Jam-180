@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 4621908720522897026}
   - component: {fileID: 5181539860035519098}
   - component: {fileID: 6003322094492297565}
-  - component: {fileID: 1624585313393945010}
   - component: {fileID: 7171805494944018293}
   - component: {fileID: 8139365418179160242}
   - component: {fileID: 1846238590908464650}
-  - component: {fileID: 6515387280976601283}
+  - component: {fileID: 6156797867748404084}
   m_Layer: 7
   m_Name: EnemyDrone
   m_TagString: Untagged
@@ -53,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _horizontalSpeed: 5
   _verticalSpeed: 0
+  _oscilates: 0
   _oscilationAmplitude: 0
   _oscilationPeriod: 1
 --- !u!114 &5181539860035519098
@@ -124,42 +124,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1624585313393945010
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4174810378592755860}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.34455073, y: -0.34172642}
-  m_Radius: 0.5028244
 --- !u!50 &7171805494944018293
 Rigidbody2D:
   serializedVersion: 5
@@ -255,8 +219,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &6515387280976601283
-BoxCollider2D:
+--- !u!70 &6156797867748404084
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -285,19 +249,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.5337336, y: -0.18169689}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.0625, y: 1.8125}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.6588936, y: 0.6042175}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.059973333, y: -0.21989818}
+  m_Size: {x: 1.9996759, y: 0.6403045}
+  m_Direction: 1

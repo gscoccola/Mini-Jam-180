@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     int _fallingStance;
     GameManager _gameManager;
     SFXPlayer _SFXPlayer;
+    MusicPlayer _musicPlayer;
     bool _isDead;
 
     ParticleSystem _particleSystem;
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
+        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
         _gameManager = FindAnyObjectByType<GameManager>();
         _feetCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
@@ -142,9 +144,10 @@ public class PlayerMovement : MonoBehaviour
         ChangeStance();
     }
 
-    public void Deviate(EnemyType type)
+    public void Deviate(EnemyType type, bool appliesBackwardsMomentunm = true)
     {
-        _rigidBody.linearVelocityX += _enemyBoosts[type][0];
+        if (appliesBackwardsMomentunm) _rigidBody.linearVelocityX += _enemyBoosts[type][0];
+        else _rigidBody.linearVelocityX = 0f;
         ResetCombo();
         ChangeStance();
     }
@@ -175,13 +178,16 @@ public class PlayerMovement : MonoBehaviour
         PlayerCombo = (int)Mathf.Clamp(PlayerCombo, 0, 3);
         if (PlayerCombo == 3)
         {
+            _musicPlayer._isSecondTrackEnabled = true;
             _particleSystem.Play();
         }
     }
 
     void ResetCombo()
     {
+        if (PlayerCombo == 3) _SFXPlayer.PlayClipFromArray(_SFXPlayer._comboLost);
         PlayerCombo = 0;
         _particleSystem.Stop();
+        _musicPlayer._isSecondTrackEnabled = false;
     }
 }

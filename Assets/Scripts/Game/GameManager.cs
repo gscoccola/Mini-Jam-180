@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
+    [SerializeField] InGameMenu _creditsMenu;
+    [SerializeField] InGameMenu _startMenu;
     [SerializeField] GameObject _confetti;
     Camera _camera;
     SFXPlayer _SFXPlayer;
@@ -35,19 +37,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(_musicStartDelay);
         
         _musicPlayer.Play();
-    }
-
-    void ManageSingleton()
-    {
-        int numGameManagers = FindObjectsByType<GameManager>(FindObjectsSortMode.None).Length;
-        if (numGameManagers > 1)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject);
-        }
     }
 
     public void LoadLevel(int levelIndex)
@@ -91,5 +80,11 @@ public class GameManager : MonoBehaviour
         Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
         yield return new WaitForSeconds(1.8f);
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._winDialog);
+    }
+
+    internal void ToggleCredits()
+    {
+        _creditsMenu.gameObject.SetActive(!_creditsMenu.gameObject.activeSelf);
+        _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
     }
 }

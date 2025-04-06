@@ -73,4 +73,5 @@ public enum ButtonType
     Quit,
     Next,
     Restart,
+    Credits,
 }

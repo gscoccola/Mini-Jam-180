@@ -24,6 +24,8 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabDrone;
     [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabBalloon;
 
+    float _localTime;
+    float _lastX;
     Transform _player;
     System.Random _random;
     float _mapHeight;
@@ -33,13 +35,29 @@ public class Spawner : MonoBehaviour
     {
         _player = FindAnyObjectByType<PlayerMovement>().transform;
         _random = new System.Random();
+        transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
     }
 
     private void Start()
     {
         _mapHeight = Mathf.Max(_player.position.y, 50f);
         CalculateLanes();
-        StartCoroutine(ISpawnCoroutine());
+        _lastX = transform.position.x;
+    }
+
+    private void Update()
+    {
+        transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
+        _localTime += Mathf.Max( Time.deltaTime  * (
+             1 - (transform.position.x - _lastX) / (Time.deltaTime * 3 )
+            ), 0f) ;
+        _lastX = transform.position.x;
+
+        if (_localTime > _spawnPeriod)
+        {
+            _localTime = 0f;
+            SpawnEnemies();
+        }
     }
 
     private void CalculateLanes()
@@ -48,21 +66,18 @@ public class Spawner : MonoBehaviour
     }
 
 
-    IEnumerator ISpawnCoroutine()
+    void SpawnEnemies()
     {
         for (int i = 0; i<= _laneNumber; i++)
         {
             double spawnRandomDouble = _random.NextDouble();
-            Vector3 spawnPosition = new Vector3(_player.position.x - _spawnXOffset,
+            Vector3 spawnPosition = new Vector3(transform.position.x,
                 _minSpawnHeight + _laneHeight * i, 0f);
 
             if (spawnRandomDouble < _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabBird);
             else if (spawnRandomDouble < _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabDrone);
             else if (spawnRandomDouble < _balloonSpawnChance + _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabBalloon);
         }
-
-        yield return new WaitForSeconds(_spawnPeriod);
-        StartCoroutine(ISpawnCoroutine());
     }
 
     private void SpawnEnemy(Vector3 position, GameObject prefab)

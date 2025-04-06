@@ -37,7 +37,9 @@ public class SFXPlayer : MonoBehaviour
     [FoldoutGroup("Music")] public AudioClip[] _defeat;
     [FoldoutGroup("Music")][SerializeField][Range(0f, 1f)] float[] _defeatVolume;
 
-    
+    [Header("Lost Combo")]
+    [FoldoutGroup("Music")] public AudioClip[] _comboLost;
+    [FoldoutGroup("Music")][SerializeField][Range(0f, 1f)] float[] _comboLostVolume;
 
     [Header("Button")]
     [FoldoutGroup("Game misc")] public AudioClip[] _button;
@@ -68,6 +70,7 @@ public class SFXPlayer : MonoBehaviour
             [_playerBounce] = _playerBounceVolume,
             [_victory] = _victoryVolume,
             [_defeat] = _defeatVolume,
+            [_comboLost] = _comboLostVolume,
             [_winDialog] = _winDialogVolume,
             [_button] = _buttonVolume,
 
