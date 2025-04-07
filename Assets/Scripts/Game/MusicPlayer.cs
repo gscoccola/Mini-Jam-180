@@ -33,6 +33,8 @@ public class MusicPlayer : MonoBehaviour
         {
             _audioSource.resource = _secondPhaseTrack;
             _audioSource2.resource = _secondPhaseComboTrack;
+            _audioSource.Play();
+            _audioSource2.Play();
         }
         if (_gamePhase == GamePhase.Epilogue)
         {
