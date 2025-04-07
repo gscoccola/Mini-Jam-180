@@ -11,9 +11,12 @@ public class PlayerMovement : MonoBehaviour
     #region Parameters
 
     [Header("Horizontal")]
-    [FoldoutGroup("Player Parameters")][SerializeField] float _moveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultMoveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedMoveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultAirAcceleration;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedAirAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _groundAcceleration;
-    [FoldoutGroup("Player Parameters")][SerializeField] float _airAcceleration;
+    
 
     [Header("Vertical")]
     [FoldoutGroup("Player Parameters")][SerializeField] float _jumpSpeed;
@@ -43,6 +46,11 @@ public class PlayerMovement : MonoBehaviour
     SFXPlayer _SFXPlayer;
     MusicPlayer _musicPlayer;
     bool _isDead;
+    bool _isHurtSoundOnCooldown;
+    public bool _isDisabled = false;
+
+    float _currentMoveSpeed;
+    float _currentAirAcceleration;
 
     ParticleSystem _particleSystem;
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
@@ -62,6 +70,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        _currentAirAcceleration = _defaultAirAcceleration;
+        _currentMoveSpeed = _defaultMoveSpeed;
+
         _enemyBoosts = new Dictionary<EnemyType, float[]>
         {
             [EnemyType.Bird] = new float[2]{ _birdDeviation, _birdBoost },
@@ -87,15 +98,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveHorizontally()
     {
+        if (_isDisabled)
+        {
+            _rigidBody.linearVelocityX = 0f;
+            return;
+        }
         Vector2 playerVelocity = new Vector2(_moveInput.x, 0f);
         if (!IsOnFloor)
         {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _moveSpeed, _airAcceleration * Time.deltaTime).x;
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultMoveSpeed, _defaultAirAcceleration * Time.deltaTime).x;
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else
         {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _moveSpeed, _groundAcceleration * Time.deltaTime).x;
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultMoveSpeed, _groundAcceleration * Time.deltaTime).x;
             bool playerHasHorizontalSpeed = Mathf.Abs(_moveInput.x) > Mathf.Epsilon;
             if (playerHasHorizontalSpeed)
             {
@@ -108,7 +124,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveVertically()
     {
-        //_animator.SetBool("_isFalling", Mathf.Abs(_rigidBody.linearVelocityY) > 0.5f);
         _animator.SetBool("_isFalling", !IsOnFloor);
         if (IsOnFloor) return;
         _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _gravityAcceleration * Time.deltaTime).y;
@@ -149,8 +164,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (appliesBackwardsMomentunm) _rigidBody.linearVelocityX += _enemyBoosts[type][0];
         else _rigidBody.linearVelocityX = 0f;
+        if (!_isHurtSoundOnCooldown)
+        {
+            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerHurt);
+            _isHurtSoundOnCooldown = true;
+            StartCoroutine(HurtSoundCooldown());
+        }   
         ResetCombo();
         ChangeStance();
+    }
+
+    IEnumerator HurtSoundCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        _isHurtSoundOnCooldown = false;
     }
 
     private void OnReloadLevel(InputValue value)
@@ -158,8 +185,14 @@ public class PlayerMovement : MonoBehaviour
         _gameManager.ReloadLevel();
     }
 
+    private void OnSkipLevel(InputValue value)
+    {
+        _gameManager.NextLevel();
+    }
+
     public void Die()
     {
+        _particleSystem.Stop();
         _isDead = true;
         _animator.SetTrigger("_die");
         GetComponent<SpriteRenderer>().sortingLayerName = "Water";
@@ -167,8 +200,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Win()
     {
+        _particleSystem.Stop();
         _isDead = true;
-        //_animator.SetTrigger("_win");
         _fallingStance = 2;
         _animator.SetInteger("_fallingStance", _fallingStance);
     }
@@ -181,6 +214,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _musicPlayer._isSecondTrackEnabled = true;
             _particleSystem.Play();
+            _currentAirAcceleration = _upgradedAirAcceleration;
+            _currentMoveSpeed = _upgradedMoveSpeed;
         }
     }
 
@@ -188,6 +223,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PlayerCombo == 3) _SFXPlayer.PlayClipFromArray(_SFXPlayer._comboLost);
         PlayerCombo = 0;
+        _currentAirAcceleration = _defaultAirAcceleration;
+        _currentMoveSpeed = _defaultMoveSpeed;
         _particleSystem.Stop();
         _musicPlayer._isSecondTrackEnabled = false;
     }

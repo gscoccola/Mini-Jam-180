@@ -52,9 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc5aeca61b445d4b86b71f297a13b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 10
+  _defaultMoveSpeed: 10
+  _upgradedMoveSpeed: 18
+  _defaultAirAcceleration: 15
+  _upgradedAirAcceleration: 30
   _groundAcceleration: 200
-  _airAcceleration: 15
   _jumpSpeed: 10
   _fallSpeed: 10
   _gravityAcceleration: 10

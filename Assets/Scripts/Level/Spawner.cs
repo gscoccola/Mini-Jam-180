@@ -68,7 +68,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnEnemies()
     {
-        for (int i = 0; i<= _laneNumber; i++)
+        for (int i = 1; i<= _laneNumber; i++)
         {
             double spawnRandomDouble = _random.NextDouble();
             Vector3 spawnPosition = new Vector3(transform.position.x,
@@ -78,6 +78,14 @@ public class Spawner : MonoBehaviour
             else if (spawnRandomDouble < _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabDrone);
             else if (spawnRandomDouble < _balloonSpawnChance + _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabBalloon);
         }
+
+        double spawnRandomDouble0 = _random.NextDouble();
+        Vector3 spawnPosition0 = new Vector3(transform.position.x,
+            _minSpawnHeight + _laneHeight, 0f);
+
+        if (spawnRandomDouble0 < 2*_birdSpawnChance) SpawnEnemy(spawnPosition0, _enemyPrefabBird);
+        else if (spawnRandomDouble0 < _droneSpawnChance + 2 * _birdSpawnChance) SpawnEnemy(spawnPosition0, _enemyPrefabDrone);
+        else if (spawnRandomDouble0 < 2 * _balloonSpawnChance + 2 * _droneSpawnChance + 2 * _birdSpawnChance) SpawnEnemy(spawnPosition0, _enemyPrefabBalloon);
     }
 
     private void SpawnEnemy(Vector3 position, GameObject prefab)

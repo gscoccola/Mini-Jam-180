@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
     Camera _camera;
     SFXPlayer _SFXPlayer;
     MusicPlayer _musicPlayer;
-
-    float _musicStartDelay = 0.3f;
     
 
     private void Awake()
@@ -29,20 +27,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0) StartCoroutine(StartMusic());
-    }
-
-
-    IEnumerator StartMusic()
-    {
-        yield return new WaitForSeconds(_musicStartDelay);
-        
-        _musicPlayer.Play();
+        if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            _musicPlayer.PlayWind();
+        }
+        else _musicPlayer.Play();
     }
 
     public void LoadLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void NextLevel()
+    {
+        LoadLevel(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     public void ReloadLevel()

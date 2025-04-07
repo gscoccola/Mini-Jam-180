@@ -32,7 +32,6 @@ public class EnemyBounceable : MonoBehaviour
             {
                 collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
             }
-            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerHurt);
             PlayDeathSFX();
             Die();
         }

@@ -48,11 +48,13 @@ public class SFXPlayer : MonoBehaviour
     Vector3 _cameraPosition;
     PlayerMovement _playerMovement;
     Dictionary<AudioClip[], float[]> _volumeDictionary = new();
+    GamePhase _gamePhase;
 
     private void Awake()
     {
         _cameraPosition = FindAnyObjectByType<Camera>().transform.position;
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
+        _gamePhase = FindAnyObjectByType<MusicPlayer>()._gamePhase;
     }
 
     private void Start()
@@ -88,6 +90,10 @@ public class SFXPlayer : MonoBehaviour
         else if (clipArray == _playerHurt)
         {
             indexToPlay = Random.Range(0, clipArray.Length);
+        }
+        else if (clipArray == _comboLost)
+        {
+            indexToPlay = (int)_gamePhase;
         }
         else
         {

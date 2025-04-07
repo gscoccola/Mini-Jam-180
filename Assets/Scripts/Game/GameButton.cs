@@ -8,18 +8,17 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] ButtonType _type;
     GameManager _gameManager;
-    float _menuClickDelay = 1.0f;
-    bool _isBeingPressed;
+    float _menuClickDelay = 0.6f;
     Animator _animator;
-    Camera _camera;
     SFXPlayer _SFXPlayer;
+    MusicPlayer _musicPlayer;
 
     private void Awake()
     {
         _gameManager = FindAnyObjectByType<GameManager>();
         _animator = GetComponent<Animator>();
-        _camera = FindAnyObjectByType<Camera>();
         _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
+        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -59,10 +58,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 break;
             case ButtonType.Next:
                 {
-                    int i = SceneManager.GetActiveScene().buildIndex;
-                    i++;
-                    i = i % 5;
-                    _gameManager.LoadLevel(i);
+                    _gameManager.NextLevel();
                     break;
                 }
         }
