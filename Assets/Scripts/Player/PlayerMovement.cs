@@ -139,7 +139,15 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = value.Get<Vector2>();
     }
 
-    void OnJump(InputValue value)
+    /*void OnJump(InputValue value)
+    {
+        if (!IsOnFloor) return;
+        _rigidBody.linearVelocityY += _jumpSpeed;
+        _fallingStance = 0;
+        _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerJump);
+    }*/
+
+    public void Jump()
     {
         if (!IsOnFloor) return;
         _rigidBody.linearVelocityY += _jumpSpeed;

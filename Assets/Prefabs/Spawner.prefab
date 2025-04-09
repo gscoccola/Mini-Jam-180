@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laneHeight: 7
-  _minXSpacing: 8
+  _minXSpacing: 4
   _spawnPeriod: 1.5
   _minSpawnHeight: 4.5
   _spawnXOffset: 30

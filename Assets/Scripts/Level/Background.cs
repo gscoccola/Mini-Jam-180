@@ -34,7 +34,6 @@ public class Background : MonoBehaviour
         
         virtualPosition += new Vector3(10 * Time.deltaTime, 0f, 0f);
         transform.position = (1 - displacementRatio) * virtualPosition + offset;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
     }
 }

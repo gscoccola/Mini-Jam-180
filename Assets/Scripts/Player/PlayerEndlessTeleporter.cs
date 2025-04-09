@@ -12,6 +12,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
     float velocity;
     CinemachineConfiner2D _confiner;
     PlayerMovement _playerMovement;
+    GameManager _gameManager;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
          _playerTransform = _playerMovement.transform;
         _camera = FindAnyObjectByType<CinemachineCamera>();
         _confiner = _camera.gameObject.GetComponent<CinemachineConfiner2D>();
+        _gameManager = FindAnyObjectByType<GameManager>();
         _musicPlayer = FindAnyObjectByType<MusicPlayer>();
     }
 
@@ -27,6 +29,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         if (!_isGameOver  && _playerTransform.position.y < 17f)
         {
             _isGameOver = true;
+            _gameManager.DisableMobileInput();
             _playerMovement._isDisabled = true;
             StartCoroutine(IGameOver());
             _musicPlayer._beginFadeOutWind = true;
@@ -38,7 +41,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
             _camera.Lens.FieldOfView = Mathf.SmoothDamp(_camera.Lens.FieldOfView, 44, ref velocity, 17.5f);
         }
 
-        if (_playerTransform.position.y < -500f)
+        if (_playerTransform.position.y < -1200f)
         {
             _playerTransform.position = new Vector3(_playerTransform.position.x, -100f, 0f);
         }

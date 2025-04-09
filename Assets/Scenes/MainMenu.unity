@@ -672,7 +672,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2786.2, y: 2.05}
+  m_Size: {x: 60000, y: 2.05}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1095,7 +1095,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2786.2, y: 6.8}
+  m_Size: {x: 60000, y: 6.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1243,7 +1243,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1772415114}
   - component: {fileID: 1772415116}
-  - component: {fileID: 1772415115}
   m_Layer: 0
   m_Name: Sky
   m_TagString: Untagged
@@ -1260,26 +1259,12 @@ Transform:
   m_GameObject: {fileID: 1772415113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89, y: 34.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6049621, y: 1.6049621, z: 1.6049621}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 394272319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1772415115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772415113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e2eb4580c956c84eb461fbe13cc90ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displacementRatio: 0
-  offset: {x: 0, y: 0, z: 0}
 --- !u!212 &1772415116
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1329,7 +1314,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2786.2, y: 11.25}
+  m_Size: {x: 3478.86, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1431,7 +1416,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2786.2, y: 11}
+  m_Size: {x: 60000, y: 11}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1872,6 +1857,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4272824297058417056, guid: 1e46bdda5b7363d459d80331e787ac14, type: 3}
+      propertyPath: _version
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4272824297058417056, guid: 1e46bdda5b7363d459d80331e787ac14, type: 3}
       propertyPath: _startMenu
       value: 

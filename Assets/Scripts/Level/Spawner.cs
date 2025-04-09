@@ -43,6 +43,7 @@ public class Spawner : MonoBehaviour
         _mapHeight = Mathf.Max(_player.position.y, 50f);
         CalculateLanes();
         _lastX = transform.position.x;
+        SpawnEnemies();
     }
 
     private void Update()
@@ -92,7 +93,7 @@ public class Spawner : MonoBehaviour
     {
         Instantiate(prefab,
             position + Vector3.up * (((float)_random.NextDouble() - 0.5f) * _laneHeight)
-            + Vector3.right * (((float)_random.NextDouble() - 0.5f) * _minXSpacing),
+            + Vector3.right * (-(float)_random.NextDouble() * _minXSpacing),
             Quaternion.identity);
     }
 

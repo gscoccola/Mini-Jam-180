@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
+    [SerializeField] InGameMenu _mobileInputButtons;
     [SerializeField] InGameMenu _creditsMenu;
     [SerializeField] InGameMenu _startMenu;
     [SerializeField] InGameMenu _tutorialMenu;
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     Camera _camera;
     SFXPlayer _SFXPlayer;
     MusicPlayer _musicPlayer;
+    bool _isPlayingOnMobile;
     
 
     private void Awake()
@@ -32,6 +35,17 @@ public class GameManager : MonoBehaviour
             _musicPlayer.PlayWind();
         }
         else _musicPlayer.Play();
+
+        _isPlayingOnMobile = Application.isMobilePlatform;
+
+        if (SceneManager.GetActiveScene().buildIndex != 0 && _isPlayingOnMobile)
+            _mobileInputButtons.gameObject.SetActive(true);
+
+    }
+
+    public void DisableMobileInput()
+    {
+        _mobileInputButtons.gameObject.SetActive(false);
     }
 
     public void LoadLevel(int levelIndex)
@@ -52,12 +66,14 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
+        _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
         StartCoroutine(ILose());
     }
 
     public void Win()
     {
+        _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
         StartCoroutine(IWin());
     }
@@ -90,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     internal void TutorialOrStart()
     {
-        if (_tutorialMenu.gameObject.activeSelf)
+        if (_tutorialMenu.gameObject.activeSelf || _isPlayingOnMobile)
         {
             LoadLevel(1);
             return;

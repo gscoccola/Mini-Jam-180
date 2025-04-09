@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5645529416132895096}
   - component: {fileID: 5492189868088593829}
+  - component: {fileID: 2748669042865368266}
   - component: {fileID: 5089687418223102057}
   - component: {fileID: 250695678086047977}
   - component: {fileID: 4675737445004141531}
   - component: {fileID: 3920717967585266227}
-  - component: {fileID: 2748669042865368266}
   - component: {fileID: 5855246699414869843}
   - component: {fileID: 5453554688559554922}
   - component: {fileID: 5198506600535921773}
@@ -57,7 +57,7 @@ MonoBehaviour:
   _defaultAirAcceleration: 15
   _upgradedAirAcceleration: 30
   _groundAcceleration: 200
-  _jumpSpeed: 10
+  _jumpSpeed: 7
   _fallSpeed: 10
   _gravityAcceleration: 10
   _birdDeviation: 10
@@ -66,6 +66,37 @@ MonoBehaviour:
   _birdBoost: 10
   _droneBoost: 12
   _tenderBoost: 15
+  _isDisabled: 0
+--- !u!114 &2748669042865368266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7949803413985941516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!212 &5089687418223102057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -216,36 +247,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5206528, y: 0.14212036}
   m_EdgeRadius: 0
---- !u!114 &2748669042865368266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7949803413985941516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!70 &5855246699414869843
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
