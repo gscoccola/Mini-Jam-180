@@ -178,12 +178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51e3ea6661301746b72edafbcf6b696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fadeRate: 0.8
+  _fadeRate: 0.25
   _maxVolume2: 0.2
   _maxVolume3: 0.35
   _gamePhase: 0
-  _secondPhaseTrack: {fileID: 8300000, guid: e63a7b25c1523a14abced75fba925af1, type: 3}
-  _secondPhaseComboTrack: {fileID: 8300000, guid: c683335f079d43b43a413cbc213a5995, type: 3}
+  _secondPhaseTrack: {fileID: 0}
+  _secondPhaseComboTrack: {fileID: 0}
   _EpilogueTrack: {fileID: 8300000, guid: a9e26535a45708843ba34f2ff1916fd2, type: 3}
   _isSecondTrackEnabled: 0
   _beginFadeOutWind: 0

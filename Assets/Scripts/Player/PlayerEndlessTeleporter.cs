@@ -30,7 +30,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         {
             _isGameOver = true;
             _gameManager.DisableMobileInput();
-            _playerMovement._isDisabled = true;
+            _playerMovement.IsHorizonalMovementDisabled = true;
             StartCoroutine(IGameOver());
             _musicPlayer._beginFadeOutWind = true;
         }

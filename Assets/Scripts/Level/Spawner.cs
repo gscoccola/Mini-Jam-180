@@ -30,6 +30,7 @@ public class Spawner : MonoBehaviour
     System.Random _random;
     float _mapHeight;
     int _laneNumber;
+    bool _hasStarted;
 
     private void Awake()
     {
@@ -43,11 +44,18 @@ public class Spawner : MonoBehaviour
         _mapHeight = Mathf.Max(_player.position.y, 50f);
         CalculateLanes();
         _lastX = transform.position.x;
+        
+    }
+
+    public void StartSpawning()
+    {
         SpawnEnemies();
+        _hasStarted = true;
     }
 
     private void Update()
     {
+        if (!_hasStarted) return;
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
         _localTime += Mathf.Max( Time.deltaTime  * (
              1 - (transform.position.x - _lastX) / (Time.deltaTime * 3 )

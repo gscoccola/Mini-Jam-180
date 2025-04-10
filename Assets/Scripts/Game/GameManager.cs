@@ -15,9 +15,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _startMenu;
     [SerializeField] InGameMenu _tutorialMenu;
     [SerializeField] GameObject _confetti;
+
+    CameraScript _cameraScript;
     Camera _camera;
     SFXPlayer _SFXPlayer;
     MusicPlayer _musicPlayer;
+    LevelLoader _levelLoader;
+    Spawner _spawner;
     bool _isPlayingOnMobile;
     
 
@@ -26,21 +30,48 @@ public class GameManager : MonoBehaviour
         _camera = FindAnyObjectByType<Camera>();
         _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
         _musicPlayer = FindAnyObjectByType<MusicPlayer>();
+        _levelLoader = FindAnyObjectByType<LevelLoader>();
+        _spawner = FindAnyObjectByType<Spawner>();
+        _cameraScript = FindAnyObjectByType<CameraScript>();
     }
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 5)
+        int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (activeSceneIndex == 0 || activeSceneIndex ==  SceneManager.sceneCountInBuildSettings-1)
         {
             _musicPlayer.PlayWind();
+            return;
         }
-        else _musicPlayer.Play();
 
+
+        if (!PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenShown)
+        {
+            PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenShown = true;
+            StartCoroutine(_cameraScript.ICameraPan());
+            _musicPlayer.PlayWind();
+        }
+        else
+        {
+            _cameraScript.SwitchToPlayerCam();
+            StartLevel();
+        }
+        
         _isPlayingOnMobile = Application.isMobilePlatform;
-
-        if (SceneManager.GetActiveScene().buildIndex != 0 && _isPlayingOnMobile)
+        if (activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
 
+    }
+    public void AlmostStartLevel()
+    {
+        _musicPlayer._beginFadeOutWind = true;
+    }
+
+    public void StartLevel()
+    {
+        _musicPlayer.Play();
+        _spawner.StartSpawning();
+        FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }
 
     public void DisableMobileInput()
@@ -50,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
-        SceneManager.LoadScene(levelIndex);
+        _levelLoader.LoadLevel(levelIndex);
     }
 
     public void NextLevel()
@@ -65,6 +96,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void Lose()
+    {
+        _mobileInputButtons.gameObject.SetActive(false);
+        StopAllCoroutines();
+        StartCoroutine(ILose());
+    }
+    
+    public void OutOfBounds()
     {
         _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
@@ -108,6 +146,7 @@ public class GameManager : MonoBehaviour
     {
         if (_tutorialMenu.gameObject.activeSelf || _isPlayingOnMobile)
         {
+            _musicPlayer._beginFadeOutWind = true;
             LoadLevel(1);
             return;
         }

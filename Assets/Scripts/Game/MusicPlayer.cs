@@ -33,8 +33,6 @@ public class MusicPlayer : MonoBehaviour
         {
             _audioSource.resource = _secondPhaseTrack;
             _audioSource2.resource = _secondPhaseComboTrack;
-            _audioSource.Play();
-            _audioSource2.Play();
         }
         if (_gamePhase == GamePhase.Epilogue)
         {
@@ -46,19 +44,21 @@ public class MusicPlayer : MonoBehaviour
 
     private void Update()
     {
-       if (_isSecondTrackEnabled)
+
+        if (_beginFadeOutWind)
         {
-            _audioSource2.volume = Mathf.Lerp(_audioSource2.volume, _maxVolume2, _fadeRate * Time.deltaTime);
-            if (_gamePhase == GamePhase.First)  _audioSource3.volume = Mathf.Lerp(_audioSource3.volume, _maxVolume3, _fadeRate * Time.deltaTime);
+            _audioSourceWind.volume = Mathf.MoveTowards(_audioSourceWind.volume, 0, _fadeRate * Time.deltaTime);
+        }
+
+        if (_isSecondTrackEnabled)
+        {
+            _audioSource2.volume = Mathf.MoveTowards(_audioSource2.volume, _maxVolume2, _fadeRate * Time.deltaTime);
+            if (_gamePhase == GamePhase.First)  _audioSource3.volume = Mathf.MoveTowards(_audioSource3.volume, _maxVolume3, _fadeRate * Time.deltaTime);
             return;
         }
         _audioSource2.volume = 0f;
         if (_gamePhase == GamePhase.First) _audioSource3.volume = 0f;
 
-        if (_beginFadeOutWind)
-        {
-            _audioSourceWind.volume = Mathf.Lerp(_audioSourceWind.volume, 0, _fadeRate/3 * Time.deltaTime);
-        }
     }
 
     public void Pause()

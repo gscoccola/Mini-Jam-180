@@ -4,6 +4,7 @@ using UnityEngine;
 using Alchemy.Inspector;
 using System;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -45,16 +46,18 @@ public class PlayerMovement : MonoBehaviour
     GameManager _gameManager;
     SFXPlayer _SFXPlayer;
     MusicPlayer _musicPlayer;
-    bool _isDead;
+    public bool IsDead { get; private set; }
     bool _isHurtSoundOnCooldown;
-    public bool _isDisabled = false;
-
+    public bool IsHorizonalMovementDisabled = false;
     float _currentMoveSpeed;
     float _currentAirAcceleration;
-
+    float worldMin;
+    float worldMax;
     ParticleSystem _particleSystem;
+    CinemachineCamera _camera;
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
     public int PlayerCombo { get; private set; } = 0;
+    bool _isOutOfBounds;
     #endregion
 
     private void Awake()
@@ -66,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _particleSystem = GetComponent<ParticleSystem>();
+        _camera = FindAnyObjectByType<CinemachineCamera>();
     }
 
     private void Start()
@@ -79,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
             [EnemyType.Drone] = new float[2]{ _droneDeviation, _droneBoost },
             [EnemyType.Balloon] = new float[2]{ _tenderDeviation, _tenderBoost },
         };
+
+        CalculateBounds();
     }
 
 
@@ -86,19 +92,55 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CalculateIsOnFloor();
-        if (_isDead)
-        {
-            _rigidBody.linearVelocityX = 0f;
-            return;
-        }
-            
-        MoveHorizontally();
         MoveVertically();
+        HandleOutOfBounds();
+        if (IsDead)
+        {
+            if (!_isOutOfBounds)_rigidBody.linearVelocityX = 0f;
+            return;
+        }  
+        MoveHorizontally();
+        
     }
+
+    private void CalculateBounds()
+    {
+        PolygonCollider2D confiner = FindAnyObjectByType<PolygonCollider2D>();
+        worldMin = confiner.bounds.min.x - 0.6f;
+        worldMax = confiner.bounds.max.x + 0.6f;
+    }
+
+    private void HandleOutOfBounds()
+    {
+        if ( !IsOnFloor && transform.position.x < worldMin )
+        {
+            _rigidBody.linearVelocityY = 0f;
+            _rigidBody.linearVelocityX = -3f;
+            if (!_isOutOfBounds) GoOutOfBounds();
+
+        }
+        else if (!IsOnFloor && transform.position.x > worldMax)
+        {
+            _rigidBody.linearVelocityY = 0f;
+            _rigidBody.linearVelocityX = 3f;
+            if (!_isOutOfBounds) GoOutOfBounds();
+
+        }
+    }
+
+    public void GoOutOfBounds()
+    {
+        _isOutOfBounds = true;
+        _gameManager.OutOfBounds();
+        _particleSystem.Stop();
+        IsDead = true;
+        _camera.gameObject.SetActive(false);
+    }
+
 
     private void MoveHorizontally()
     {
-        if (_isDisabled)
+        if (IsHorizonalMovementDisabled)
         {
             _rigidBody.linearVelocityX = 0f;
             return;
@@ -138,14 +180,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveInput = value.Get<Vector2>();
     }
-
-    /*void OnJump(InputValue value)
-    {
-        if (!IsOnFloor) return;
-        _rigidBody.linearVelocityY += _jumpSpeed;
-        _fallingStance = 0;
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerJump);
-    }*/
 
     public void Jump()
     {
@@ -201,15 +235,16 @@ public class PlayerMovement : MonoBehaviour
     public void Die()
     {
         _particleSystem.Stop();
-        _isDead = true;
+        IsDead = true;
         _animator.SetTrigger("_die");
         GetComponent<SpriteRenderer>().sortingLayerName = "Water";
     }
 
+ 
     public void Win()
     {
         _particleSystem.Stop();
-        _isDead = true;
+        IsDead = true;
         _fallingStance = 2;
         _animator.SetInteger("_fallingStance", _fallingStance);
     }

@@ -22,7 +22,7 @@ public class EnemyBounceable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!_isDestroyed && collider.tag == "Player" )
+        if (!_isDestroyed && collider.tag == "Player" && !collider.GetComponent<PlayerMovement>().IsDead)
         {
             if ( Vector3.Dot(collider.transform.position - transform.position, Vector3.left) > 0.2f)
             {
@@ -39,7 +39,7 @@ public class EnemyBounceable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!_isDestroyed && collision.collider.tag == "Player")
+        if (!_isDestroyed && collision.collider.tag == "Player" && !collision.collider.GetComponent<PlayerMovement>().IsDead)
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
             PlayDeathSFX();

@@ -24,11 +24,17 @@ public class Floor : MonoBehaviour
     }
     private void Start()
     {
+        DefineBoundaries();
+    }
+
+    private void DefineBoundaries()
+    {
         if (_floorType == FloorType.Ground) { return; }
         Bounds bounds = _tilemapCollider2D.bounds;
         float worldMin = _tilemap.transform.TransformPoint(bounds.min).x;
         float worldMax = _tilemap.transform.TransformPoint(bounds.max).x;
         FindAnyObjectByType<TargetIndicator>().SetBounds(worldMin, worldMax);
+        FindAnyObjectByType<CameraScript>().SetStartPosition(worldMax);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
