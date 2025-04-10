@@ -38,7 +38,7 @@ public class EnemyMovement : MonoBehaviour
             
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         
         if (_oscilates)

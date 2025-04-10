@@ -134,7 +134,6 @@ public class PlayerMovement : MonoBehaviour
         _gameManager.OutOfBounds();
         _particleSystem.Stop();
         IsDead = true;
-        _camera.gameObject.SetActive(false);
     }
 
 
@@ -230,6 +229,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnSkipLevel(InputValue value)
     {
         _gameManager.NextLevel();
+    }
+
+    private void OnExitLevel(InputValue value)
+    {
+        _gameManager.ExitLevel();
     }
 
     public void Die()

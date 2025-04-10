@@ -4,15 +4,17 @@ using UnityEngine.SceneManagement;
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
-    public Dictionary<int, LevelInfo> LevelsInfo = new Dictionary<int, LevelInfo>();
+    public List<LevelInfo> LevelsInfo = new List<LevelInfo>();
 
     private void Start()
     {
+        Application.targetFrameRate = 50;
+
         int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
 
         for (int i = 0; i < sceneCount; i++)
         {
-            LevelsInfo.Add(i, new LevelInfo(false, false));
+            LevelsInfo.Add(new LevelInfo(false, false));
         }
     }
 } 

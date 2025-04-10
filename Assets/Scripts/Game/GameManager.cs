@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _creditsMenu;
     [SerializeField] InGameMenu _startMenu;
     [SerializeField] InGameMenu _tutorialMenu;
+    [SerializeField] InGameMenu _levelSelectMenu;
     [SerializeField] GameObject _confetti;
 
     CameraScript _cameraScript;
@@ -23,7 +24,9 @@ public class GameManager : MonoBehaviour
     LevelLoader _levelLoader;
     Spawner _spawner;
     bool _isPlayingOnMobile;
-    
+    int activeSceneIndex;
+
+
 
     private void Awake()
     {
@@ -37,8 +40,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (activeSceneIndex == 0 || activeSceneIndex ==  SceneManager.sceneCountInBuildSettings-1)
+        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (activeSceneIndex == 0 || activeSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
             _musicPlayer.PlayWind();
             return;
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour
             _cameraScript.SwitchToPlayerCam();
             StartLevel();
         }
-        
+
         _isPlayingOnMobile = Application.isMobilePlatform;
         if (activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
@@ -86,7 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        LoadLevel(SceneManager.GetActiveScene().buildIndex +1);
+        LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ReloadLevel()
@@ -101,7 +104,7 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(ILose());
     }
-    
+
     public void OutOfBounds()
     {
         _mobileInputButtons.gameObject.SetActive(false);
@@ -111,6 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
+        PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenBeaten = true;
         _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
         StartCoroutine(IWin());
@@ -142,15 +146,34 @@ public class GameManager : MonoBehaviour
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
     }
 
-    internal void TutorialOrStart()
+    internal void TutorialOrLevelsMenu()
     {
-        if (_tutorialMenu.gameObject.activeSelf || _isPlayingOnMobile)
+        if (PersistentInfo.Instance.LevelsInfo[1].HasBeenShown)
+        { 
+            if (!_levelSelectMenu.gameObject.activeSelf)
+            {
+                _levelSelectMenu.gameObject.SetActive(true);
+                _startMenu.gameObject.SetActive(false);
+                return;
+            }
+            _levelSelectMenu.gameObject.SetActive(false);
+            _startMenu.gameObject.SetActive(true);
+            return;
+        }
+
+        else if (_tutorialMenu.gameObject.activeSelf || _isPlayingOnMobile)
         {
-            _musicPlayer._beginFadeOutWind = true;
             LoadLevel(1);
             return;
         }
+
         _tutorialMenu.gameObject.SetActive(true);
         _startMenu.gameObject.SetActive(false);
+    }
+
+    public void ExitLevel()
+    {
+        if (activeSceneIndex != 0)
+        LoadLevel(0);
     }
 }

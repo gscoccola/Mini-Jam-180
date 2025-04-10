@@ -10,6 +10,7 @@ public class Background : MonoBehaviour
     [SerializeField] Vector3 offset;
     Vector3 _initialPosition;
     Vector3 virtualPosition;
+    bool _isSceneZero;
 
     private void Awake()
     {
@@ -20,11 +21,12 @@ public class Background : MonoBehaviour
     {
         _initialPosition = transform.position;
         virtualPosition = Vector3.zero;
+        _isSceneZero = SceneManager.GetActiveScene().buildIndex == 0;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
+        if (!_isSceneZero)
         {
             transform.position = (1 - displacementRatio) * _camera.transform.position + offset;
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);

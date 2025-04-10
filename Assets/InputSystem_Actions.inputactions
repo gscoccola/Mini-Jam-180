@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ExitLevel",
+                    "type": "Button",
+                    "id": "7b8876df-ba9c-4c1e-9942-7c92ac94c024",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -225,6 +234,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SkipLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d90bf10-b525-4529-8cc1-828f61c63e71",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

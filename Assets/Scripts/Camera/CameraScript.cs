@@ -41,7 +41,7 @@ public class CameraScript : MonoBehaviour
         _cameraVerticalSpeed = Mathf.Min (_cameraMaxSpeed, 2 * Mathf.Abs(_virtualTarget.position.y - _playerMovement.transform.position.y) / _panDuration);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
        
         if (_isPanningHorizontally) _virtualTarget.position =
