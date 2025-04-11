@@ -13,14 +13,12 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     float _menuClickDelay = 0.35f;
     Animator _animator;
     SFXPlayer _SFXPlayer;
-    MusicPlayer _musicPlayer;
 
     private void Awake()
     {
         _gameManager = FindAnyObjectByType<GameManager>();
         _animator = GetComponent<Animator>();
         _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
-        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
     }
 
     public void OnPointerDown(PointerEventData eventData)

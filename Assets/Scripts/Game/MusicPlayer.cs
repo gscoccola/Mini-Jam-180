@@ -23,10 +23,8 @@ public class MusicPlayer : Singleton<MusicPlayer>
     public bool _isPlayingWind;
     public bool _isPlayingMusic;
 
-    private void Awake()
+    private void OnEnable()
     {
-        DontDestroyOnLoad(gameObject);
-
         _audioSource = GetComponent<AudioSource>();
         _audioSource2 = transform.GetChild(0).GetComponent<AudioSource>();
         _audioSourceWind = transform.GetChild(2).GetComponent<AudioSource>();
@@ -45,8 +43,12 @@ public class MusicPlayer : Singleton<MusicPlayer>
 
         if (_gamePhase == GamePhase.First)
         {
-            _audioSource.resource = _firstPhaseTrack;
-            _audioSource2.resource = _firstPhaseComboTrack;
+            if (_audioSource is not null)
+            {
+                _audioSource.resource = _firstPhaseTrack;
+                _audioSource2.resource = _firstPhaseComboTrack;
+            }
+            
         }
         if (_gamePhase == GamePhase.Second)
         {

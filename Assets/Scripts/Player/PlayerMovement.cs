@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     int _fallingStance;
     GameManager _gameManager;
     SFXPlayer _SFXPlayer;
-    MusicPlayer _musicPlayer;
     public bool IsDead { get; private set; }
     bool _isHurtSoundOnCooldown;
     public bool IsHorizonalMovementDisabled = false;
@@ -63,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
-        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
         _gameManager = FindAnyObjectByType<GameManager>();
         _feetCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
@@ -259,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerCombo = (int)Mathf.Clamp(PlayerCombo, 0, 3);
         if (PlayerCombo == 3)
         {
-            _musicPlayer._isSecondTrackEnabled = true;
+            MusicPlayer.Instance._isSecondTrackEnabled = true;
             _particleSystem.Play();
             _currentAirAcceleration = _upgradedAirAcceleration;
             _currentMoveSpeed = _upgradedMoveSpeed;
@@ -273,6 +271,6 @@ public class PlayerMovement : MonoBehaviour
         _currentAirAcceleration = _defaultAirAcceleration;
         _currentMoveSpeed = _defaultMoveSpeed;
         _particleSystem.Stop();
-        _musicPlayer._isSecondTrackEnabled = false;
+        MusicPlayer.Instance._isSecondTrackEnabled = false;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerEndlessTeleporter : MonoBehaviour
 {
     Transform _playerTransform;
-    MusicPlayer _musicPlayer;
     bool _isGameOver;
     [SerializeField] InGameMenu _credits;
     CinemachineCamera _camera;
@@ -21,7 +20,6 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         _camera = FindAnyObjectByType<CinemachineCamera>();
         _confiner = _camera.gameObject.GetComponent<CinemachineConfiner2D>();
         _gameManager = FindAnyObjectByType<GameManager>();
-        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
     }
 
     private void Update()
@@ -31,7 +29,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
             _isGameOver = true;
             _playerMovement.IsHorizonalMovementDisabled = true;
             StartCoroutine(IGameOver());
-            _musicPlayer._beginFadeOutWind = true;
+            MusicPlayer.Instance._beginFadeOutWind = true;
         }
 
         if (_isGameOver)
@@ -49,7 +47,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
     IEnumerator IGameOver()
     {
         yield return new WaitForSeconds(3f);
-        _musicPlayer.Play();
+        MusicPlayer.Instance.Play();
 
         yield return new WaitForSeconds(17.35f);
         _credits.gameObject.SetActive(true);
