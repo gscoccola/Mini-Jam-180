@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _levelSelectMenu;
     [SerializeField] GameObject _confetti;
 
+  
     CameraScript _cameraScript;
     Camera _camera;
     SFXPlayer _SFXPlayer;
@@ -34,8 +35,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _camera = FindAnyObjectByType<Camera>();
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
-        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
+        
         _levelLoader = FindAnyObjectByType<LevelLoader>();
         _spawner = FindAnyObjectByType<Spawner>();
         _cameraScript = FindAnyObjectByType<CameraScript>();
@@ -43,8 +43,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
+        _musicPlayer = FindAnyObjectByType<MusicPlayer>();
+
+        Debug.Log("there are " + FindObjectsByType<MusicPlayer>(FindObjectsSortMode.None).Length + "music players");
         _isPlayingOnMobile = Application.isMobilePlatform;
         activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        _SFXPlayer.OnLevelLoad(activeSceneIndex);
+        _musicPlayer.OnLevelLoad(activeSceneIndex);
 
         if (activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
@@ -52,19 +59,21 @@ public class GameManager : MonoBehaviour
         
         if (activeSceneIndex == 0 || activeSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
-            _musicPlayer.PlayWind();
+            if (!_musicPlayer._isPlayingWind) _musicPlayer.PlayWind();
+            _musicPlayer.Pause();
             return;
         }
 
-
-        if (!PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenShown)
+        else if (!PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenShown)
         {
             PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenShown = true;
             StartCoroutine(_cameraScript.ICameraPan());
-            _musicPlayer.PlayWind();
+            if (!_musicPlayer._isPlayingWind) _musicPlayer.PlayWind();
+            _musicPlayer.Pause();
         }
         else
         {
+            _musicPlayer._beginFadeOutWind = true;
             _cameraScript.SwitchToPlayerCam();
             StartLevel();
         }
@@ -95,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel()
     {
-        _musicPlayer.Play();
+        if(!_musicPlayer._isPlayingMusic) _musicPlayer.Play();
         _spawner.StartSpawning();
         FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }

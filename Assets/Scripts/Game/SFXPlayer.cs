@@ -52,13 +52,15 @@ public class SFXPlayer : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void OnLevelLoad(int levelIndex)
+    {
         _cameraPosition = FindAnyObjectByType<Camera>().transform.position;
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
         _gamePhase = FindAnyObjectByType<MusicPlayer>()._gamePhase;
-    }
 
-    private void Start()
-    {
         _volumeDictionary = new Dictionary<AudioClip[], float[]>()
         {
             [_birdDeath] = _birdDeathVolume,

@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class MusicPlayer : MonoBehaviour
+public class MusicPlayer : Singleton<MusicPlayer>
 {
     [SerializeField] float _fadeRate = 0.2f;
     [SerializeField] float _maxVolume2 = 0.2f;
@@ -12,23 +13,41 @@ public class MusicPlayer : MonoBehaviour
     AudioSource _audioSource2;
     AudioSource _audioSource3;
     AudioSource _audioSourceWind;
+    [SerializeField] AudioResource _firstPhaseTrack;
+    [SerializeField] AudioResource _firstPhaseComboTrack;
     [SerializeField] AudioResource _secondPhaseTrack;
     [SerializeField] AudioResource _secondPhaseComboTrack;
     [SerializeField] AudioResource _EpilogueTrack;
     public bool _isSecondTrackEnabled;
     public bool _beginFadeOutWind;
+    public bool _isPlayingWind;
+    public bool _isPlayingMusic;
 
     private void Awake()
     {
-        
+        DontDestroyOnLoad(gameObject);
+
         _audioSource = GetComponent<AudioSource>();
         _audioSource2 = transform.GetChild(0).GetComponent<AudioSource>();
         _audioSourceWind = transform.GetChild(2).GetComponent<AudioSource>();
-        if (_gamePhase == GamePhase.First) _audioSource3 = transform.GetChild(1).GetComponent<AudioSource>();
+        _audioSource3 = transform.GetChild(1).GetComponent<AudioSource>();
+
     }
 
-    private void Start()
+
+    public void OnLevelLoad(int levelIndex)
     {
+        if (new List<int> { 1, 2, 3, }.Contains(levelIndex)) _gamePhase = GamePhase.First;
+        else if (new List<int> { 4}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
+        else if(new List<int> { 5}.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
+
+        _isSecondTrackEnabled = false;
+
+        if (_gamePhase == GamePhase.First)
+        {
+            _audioSource.resource = _firstPhaseTrack;
+            _audioSource2.resource = _firstPhaseComboTrack;
+        }
         if (_gamePhase == GamePhase.Second)
         {
             _audioSource.resource = _secondPhaseTrack;
@@ -39,14 +58,13 @@ public class MusicPlayer : MonoBehaviour
             _audioSource.resource = _EpilogueTrack;
             _audioSource.volume = 0.6f;
         }
-            
     }
 
     private void Update()
     {
-
         if (_beginFadeOutWind)
         {
+            _isPlayingWind = false;
             _audioSourceWind.volume = Mathf.MoveTowards(_audioSourceWind.volume, 0, _fadeRate * Time.deltaTime);
         }
 
@@ -63,13 +81,15 @@ public class MusicPlayer : MonoBehaviour
 
     public void Pause()
     {
-        _audioSource.Pause();
-        _audioSource2.Pause();
-        if (_gamePhase == GamePhase.First) _audioSource3.Pause();
+        _isPlayingMusic = false;
+        _audioSource.Stop();
+        _audioSource2.Stop();
+        if (_gamePhase == GamePhase.First) _audioSource3.Stop();
     }
 
     public void Play()
     {
+        _isPlayingMusic = true;
         _audioSource.Play();
         _audioSource2.Play();
         if (_gamePhase == GamePhase.First) _audioSource3.Play();
@@ -77,7 +97,9 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayWind()
     {
-        _audioSourceWind.Play();
+        _beginFadeOutWind = false;
+        _audioSourceWind.volume = 0.344f;
+        _isPlayingWind = true;
     }
 
 }

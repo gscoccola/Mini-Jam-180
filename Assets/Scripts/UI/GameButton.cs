@@ -10,7 +10,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] bool _isInstant;
     [SerializeField] int _level = 1;
     GameManager _gameManager;
-    float _menuClickDelay = 0.6f;
+    float _menuClickDelay = 0.35f;
     Animator _animator;
     SFXPlayer _SFXPlayer;
     MusicPlayer _musicPlayer;
