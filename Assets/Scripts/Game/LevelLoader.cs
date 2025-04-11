@@ -9,13 +9,14 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
+        Time.timeScale = 1f;
         StartCoroutine(ILoadLevel(levelIndex));
     }
 
     IEnumerator ILoadLevel(int levelIndex)
     {
         _animator.SetTrigger("Start");
-        yield return new WaitForSeconds(_animationDuration);
+        yield return new WaitForSecondsRealtime(_animationDuration);
         SceneManager.LoadScene(levelIndex);
     }
 }

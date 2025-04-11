@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
+    [SerializeField] InGameMenu _pauseMenu;
+    [SerializeField] GameButton _pauseButton;
     [SerializeField] InGameMenu _mobileInputButtons;
     [SerializeField] InGameMenu _creditsMenu;
     [SerializeField] InGameMenu _startMenu;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     Spawner _spawner;
     bool _isPlayingOnMobile;
     int activeSceneIndex;
+    bool _isPaused;
 
 
 
@@ -40,7 +43,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _isPlayingOnMobile = Application.isMobilePlatform;
         activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (activeSceneIndex != 0 && _isPlayingOnMobile)
+            _mobileInputButtons.gameObject.SetActive(true);
+
+        
         if (activeSceneIndex == 0 || activeSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
             _musicPlayer.PlayWind();
@@ -60,14 +69,28 @@ public class GameManager : MonoBehaviour
             StartLevel();
         }
 
-        _isPlayingOnMobile = Application.isMobilePlatform;
-        if (activeSceneIndex != 0 && _isPlayingOnMobile)
-            _mobileInputButtons.gameObject.SetActive(true);
+        
 
     }
     public void AlmostStartLevel()
     {
         _musicPlayer._beginFadeOutWind = true;
+    }
+
+    public void Pause()
+    {
+        if (_isPaused)
+        {
+            _isPaused = false;
+            Time.timeScale = 1f;
+            _pauseMenu.gameObject.SetActive(false);
+            if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(true);
+            return;
+        }
+        _isPaused = true;
+        Time.timeScale = 0f;
+        _pauseMenu.gameObject.SetActive(true);
+        if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(false);
     }
 
     public void StartLevel()
@@ -77,10 +100,6 @@ public class GameManager : MonoBehaviour
         FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }
 
-    public void DisableMobileInput()
-    {
-        _mobileInputButtons.gameObject.SetActive(false);
-    }
 
     public void LoadLevel(int levelIndex)
     {
@@ -114,14 +133,15 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
-        PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenBeaten = true;
         _mobileInputButtons.gameObject.SetActive(false);
+        PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenBeaten = true;
         StopAllCoroutines();
         StartCoroutine(IWin());
     }
 
     IEnumerator ILose()
     {
+        _pauseButton.gameObject.SetActive(false);
         _musicPlayer.Pause();
         yield return new WaitForSeconds(_endDelay);
         _loseMenu.gameObject.SetActive(true);
@@ -130,6 +150,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator IWin()
     {
+        _pauseButton.gameObject.SetActive(false);
         _musicPlayer.Pause();
         yield return new WaitForSeconds(_endDelay);
         _winMenu.gameObject.SetActive(true);

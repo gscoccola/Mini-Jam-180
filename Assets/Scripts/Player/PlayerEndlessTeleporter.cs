@@ -29,7 +29,6 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         if (!_isGameOver  && _playerTransform.position.y < 17f)
         {
             _isGameOver = true;
-            _gameManager.DisableMobileInput();
             _playerMovement.IsHorizonalMovementDisabled = true;
             StartCoroutine(IGameOver());
             _musicPlayer._beginFadeOutWind = true;

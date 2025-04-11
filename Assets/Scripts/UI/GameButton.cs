@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] ButtonType _type;
+    [SerializeField] bool _isInstant;
     [SerializeField] int _level = 1;
     GameManager _gameManager;
     float _menuClickDelay = 0.6f;
@@ -24,7 +25,8 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        StartCoroutine(ILoadScene());
+        if (!_isInstant) StartCoroutine(ILoadScene());
+        else PerfomButtonAction();
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._button);
     }
 
@@ -36,17 +38,20 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     IEnumerator ILoadScene()
     {
         _animator.SetBool("isPressed", true);
-        yield return new WaitForSeconds(_menuClickDelay);
-        LoadScene();
+        yield return new WaitForSecondsRealtime(_menuClickDelay);
+        PerfomButtonAction();
     }
 
 
-    private void LoadScene()
+    private void PerfomButtonAction()
     {
         switch (_type)
         {
             case ButtonType.LevelSelect:
                 _gameManager.LoadLevel(_level);
+                break;
+            case ButtonType.Pause:
+                _gameManager.Pause();
                 break;
             case ButtonType.Start:
                 _gameManager.TutorialOrLevelsMenu();
@@ -78,4 +83,5 @@ public enum ButtonType
     Restart,
     Credits,
     LevelSelect,
+    Pause,
 }
