@@ -51,7 +51,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         MusicPlayer.Instance.Play();
 
         yield return new WaitForSeconds(17.35f / 2);
-        Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
+        //Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
 
         yield return new WaitForSeconds(17.35f/2);
         _credits.gameObject.SetActive(true);
