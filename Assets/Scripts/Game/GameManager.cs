@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
         _SFXPlayer.OnLevelLoad(activeSceneIndex);
         MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
 
+
+        if (activeSceneIndex==0) ActivateProperTutorial();
+
         if (activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
 
@@ -174,7 +177,7 @@ public class GameManager : MonoBehaviour
     internal void TutorialOrLevelsMenu()
     {
         if (PersistentInfo.Instance.LevelsInfo[1].HasBeenShown)
-        { 
+        {
             if (!_levelSelectMenu.gameObject.activeSelf)
             {
                 _levelSelectMenu.gameObject.SetActive(true);
@@ -186,19 +189,33 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        else if (_tutorialMenu.gameObject.activeSelf || _isPlayingOnMobile)
+        else if (_tutorialMenu.gameObject.activeSelf)
         {
             LoadLevel(1);
             return;
         }
 
         _tutorialMenu.gameObject.SetActive(true);
+        _tutorialMenu.transform.GetChild(2).gameObject.SetActive(true);
+        _tutorialMenu.transform.GetChild(3).gameObject.SetActive(false);
         _startMenu.gameObject.SetActive(false);
+    }
+
+    private void ActivateProperTutorial()
+    {
+        if (!_isPlayingOnMobile) _tutorialMenu.transform.GetChild(0).gameObject.SetActive(true);
+        else _tutorialMenu.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void ExitLevel()
     {
         if (activeSceneIndex != 0)
         LoadLevel(0);
+    }
+
+    public void ShowTutorial()
+    {
+        _tutorialMenu.gameObject.SetActive(!_tutorialMenu.gameObject.activeSelf);
+        _levelSelectMenu.gameObject.SetActive(!_levelSelectMenu.gameObject.activeSelf);
     }
 }

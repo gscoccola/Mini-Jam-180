@@ -12,6 +12,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
     CinemachineConfiner2D _confiner;
     PlayerMovement _playerMovement;
     GameManager _gameManager;
+    [SerializeField] GameObject _confetti;
 
     private void Awake()
     {
@@ -49,7 +50,10 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         yield return new WaitForSeconds(3f);
         MusicPlayer.Instance.Play();
 
-        yield return new WaitForSeconds(17.35f);
+        yield return new WaitForSeconds(17.35f / 2);
+        Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
+
+        yield return new WaitForSeconds(17.35f/2);
         _credits.gameObject.SetActive(true);
     }
 }

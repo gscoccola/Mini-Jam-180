@@ -13,6 +13,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     float _menuClickDelay = 0.35f;
     Animator _animator;
     SFXPlayer _SFXPlayer;
+    bool _isOnCooldown;
 
     private void Awake()
     {
@@ -23,8 +24,15 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (_isOnCooldown) return;
+        _isOnCooldown = true;
+        _animator.SetBool("isPressed", !_animator.GetBool("isPressed")) ;
         if (!_isInstant) StartCoroutine(ILoadScene());
-        else PerfomButtonAction();
+        else 
+        {
+            PerfomButtonAction();
+            StartCoroutine(IButtonCooldown());
+        } 
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._button);
     }
 
@@ -33,11 +41,20 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         
     }
 
+    IEnumerator IButtonCooldown()
+    {
+
+        yield return new WaitForSecondsRealtime(0.15f);
+        _isOnCooldown = false;
+    }
+
+
     IEnumerator ILoadScene()
     {
-        _animator.SetBool("isPressed", true);
+        
         yield return new WaitForSecondsRealtime(_menuClickDelay);
         PerfomButtonAction();
+        _isOnCooldown = false;
     }
 
 
@@ -45,6 +62,9 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         switch (_type)
         {
+            case ButtonType.Tutorial:
+                _gameManager.ShowTutorial();
+                break;
             case ButtonType.LevelSelect:
                 _gameManager.LoadLevel(_level);
                 break;
@@ -82,4 +102,5 @@ public enum ButtonType
     Credits,
     LevelSelect,
     Pause,
+    Tutorial,
 }

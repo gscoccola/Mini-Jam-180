@@ -927,8 +927,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Paused
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d88ca1e9074a714b94fabf3a0db192e, type: 2}
-  m_sharedMaterial: {fileID: 6767477810016230126, guid: 0d88ca1e9074a714b94fabf3a0db192e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fc97f51961597444c8439ed7bc3d2349, type: 2}
+  m_sharedMaterial: {fileID: 6767477810016230126, guid: fc97f51961597444c8439ed7bc3d2349, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1681,6 +1681,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 13525893249336799}
     m_Modifications:
+    - target: {fileID: 1674233849453714883, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6a9e9cbdace9f09409824f6a972a924f, type: 2}
     - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1707,11 +1711,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 184.03882
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 79.1048
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_LocalScale.x
@@ -1755,11 +1759,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -106.95
+      value: -135.7
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -63.7
+      value: -116.8
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1773,6 +1777,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3374007649485858958, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4908996042354860345, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_Name
       value: PauseButton
@@ -1780,7 +1788,7 @@ PrefabInstance:
     - target: {fileID: 8251190534581269605, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -3629460775943425511, guid: 9111959031301d244a7483cefb55a1cb, type: 3}
+      objectReference: {fileID: -3083808157813759790, guid: 34a054d954cf43f42a53c5a3a7074c73, type: 3}
     - target: {fileID: 9216459590364807686, guid: a385b0fc8081ced4eb4e0e3612f1c716, type: 3}
       propertyPath: _type
       value: 6
