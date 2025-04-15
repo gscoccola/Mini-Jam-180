@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerEndlessTeleporter : MonoBehaviour
@@ -13,6 +14,8 @@ public class PlayerEndlessTeleporter : MonoBehaviour
     PlayerMovement _playerMovement;
     GameManager _gameManager;
     [SerializeField] GameObject _confetti;
+     FireworkSpawner _fireworkSpawner;
+    const float period = 8.64864864865f;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         _camera = FindAnyObjectByType<CinemachineCamera>();
         _confiner = _camera.gameObject.GetComponent<CinemachineConfiner2D>();
         _gameManager = FindAnyObjectByType<GameManager>();
+        _fireworkSpawner = FindAnyObjectByType<FireworkSpawner>();
     }
 
     private void Update()
@@ -28,7 +32,6 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         if (!_isGameOver  && _playerTransform.position.y < 17f)
         {
             _isGameOver = true;
-            _playerMovement.IsHorizonalMovementDisabled = true;
             StartCoroutine(IGameOver());
             MusicPlayer.Instance._beginFadeOutWind = true;
         }
@@ -36,7 +39,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         if (_isGameOver)
         {
             _confiner.InvalidateBoundingShapeCache();
-            _camera.Lens.FieldOfView = Mathf.SmoothDamp(_camera.Lens.FieldOfView, 44, ref velocity, 17.5f);
+            _camera.Lens.FieldOfView = Mathf.SmoothDamp(_camera.Lens.FieldOfView, 44, ref velocity, 17.5f/2);
         }
 
         if (_playerTransform.position.y < -1200f)
@@ -45,15 +48,20 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+       // _fireworkSpawner.Begin();
+    }
+
     IEnumerator IGameOver()
     {
         yield return new WaitForSeconds(3f);
         MusicPlayer.Instance.Play();
 
-        yield return new WaitForSeconds(17.35f / 2);
-        //Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
+        yield return new WaitForSeconds(period -2f);
+        _fireworkSpawner.Begin();
 
-        yield return new WaitForSeconds(17.35f/2);
+        yield return new WaitForSeconds(period +2);
         _credits.gameObject.SetActive(true);
     }
 }

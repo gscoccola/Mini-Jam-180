@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsDead { get; private set; }
     bool _isHurtSoundOnCooldown;
     public bool IsHorizonalMovementDisabled = false;
+    public bool IsHorizonalInputDisabled = false;
     float _currentMoveSpeed;
     float _currentAirAcceleration;
     float worldMin;
@@ -142,7 +143,10 @@ public class PlayerMovement : MonoBehaviour
             _rigidBody.linearVelocityX = 0f;
             return;
         }
-        Vector2 playerVelocity = new Vector2(_moveInput.x, 0f);
+
+        Vector2 playerVelocity = IsHorizonalInputDisabled ? Vector2.zero : new Vector2(_moveInput.x, 0f);
+
+
         if (!IsOnFloor)
         {
             _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultMoveSpeed, _defaultAirAcceleration * Time.deltaTime).x;

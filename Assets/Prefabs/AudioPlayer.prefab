@@ -183,6 +183,8 @@ MonoBehaviour:
   _maxVolume2: 0.2
   _maxVolume3: 0.35
   _gamePhase: 0
+  _firstPhaseTrack: {fileID: 0}
+  _firstPhaseComboTrack: {fileID: 0}
   _secondPhaseTrack: {fileID: 0}
   _secondPhaseComboTrack: {fileID: 0}
   _EpilogueTrack: {fileID: 8300000, guid: a9e26535a45708843ba34f2ff1916fd2, type: 3}
@@ -282,6 +284,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
   _buttonVolume:
   - 0.322
+  _fireworkExplosion:
+  - {fileID: 8300000, guid: 1a8893601027e144cabd0e3cf82e4c3c, type: 3}
+  - {fileID: 8300000, guid: 685051510cb8f7544aa172cbb1c6b7ef, type: 3}
+  - {fileID: 8300000, guid: af62c504e651c6f4cb2df06bb0cd3b99, type: 3}
+  - {fileID: 8300000, guid: f2c8b045b4259ef4a8155409a0b06bbc, type: 3}
+  _fireworkExplosionVolume:
+  - 0.572
+  - 0.572
+  - 0.572
+  - 0.572
+  _fireworkWhistle:
+  - {fileID: 8300000, guid: 5443fad3b040f7142888e485e7410d1f, type: 3}
+  - {fileID: 8300000, guid: 9b1b69b946c6d3f47a3869fe308451fb, type: 3}
+  _fireworkWhistleVolume:
+  - 0.189
+  - 0.151
 --- !u!114 &8782741816491427133
 MonoBehaviour:
   m_ObjectHideFlags: 0

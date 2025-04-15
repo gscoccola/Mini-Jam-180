@@ -45,6 +45,12 @@ public class SFXPlayer : MonoBehaviour
     [FoldoutGroup("Game misc")] public AudioClip[] _button;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
 
+    [Header("Fireworks")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _fireworkExplosion;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkExplosionVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _fireworkWhistle;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkWhistleVolume;
+
     Vector3 _cameraPosition;
     PlayerMovement _playerMovement;
     Dictionary<AudioClip[], float[]> _volumeDictionary = new();
@@ -77,6 +83,8 @@ public class SFXPlayer : MonoBehaviour
             [_comboLost] = _comboLostVolume,
             [_winDialog] = _winDialogVolume,
             [_button] = _buttonVolume,
+            [_fireworkExplosion] = _fireworkExplosionVolume,
+            [_fireworkWhistle] = _fireworkWhistleVolume,
 
         };
     }
