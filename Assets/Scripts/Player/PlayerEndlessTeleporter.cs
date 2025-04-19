@@ -29,7 +29,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
 
     private void Update()
     {
-        if (!_isGameOver  && _playerTransform.position.y < 17f)
+        if (!_isGameOver  && _playerMovement.IsHorizonalInputDisabled)
         {
             _isGameOver = true;
             StartCoroutine(IGameOver());
@@ -42,20 +42,16 @@ public class PlayerEndlessTeleporter : MonoBehaviour
             _camera.Lens.FieldOfView = Mathf.SmoothDamp(_camera.Lens.FieldOfView, 44, ref velocity, 17.5f/2);
         }
 
-        if (_playerTransform.position.y < -1200f)
+        if (_playerTransform.position.y < -2000f)
         {
-            _playerTransform.position = new Vector3(_playerTransform.position.x, -100f, 0f);
+            _playerTransform.position = new Vector3(_playerTransform.position.x, 0f, 0f);
         }
     }
 
-    void Start()
-    {
-       // _fireworkSpawner.Begin();
-    }
 
     IEnumerator IGameOver()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
         MusicPlayer.Instance.Play();
 
         yield return new WaitForSeconds(period -2f);

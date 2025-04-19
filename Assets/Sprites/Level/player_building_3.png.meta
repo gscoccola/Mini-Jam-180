@@ -136,16 +136,24 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 12
-        width: 114
-        height: 96
+        y: 0
+        width: 132
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 66, y: 32}
+        - {x: 53, y: 32}
+        - {x: 53, y: 64}
+        - {x: -6, y: 64}
+        - {x: -6, y: 32}
+        - {x: -66, y: 32}
+        - {x: -66, y: -32}
+        - {x: 66, y: -32}
+      tessellationDetail: 0
       bones: []
       spriteID: c07b60e8d0ab058b0800000000000000
       internalID: -5165424205213812980
@@ -157,19 +165,19 @@ TextureImporter:
       name: player_building_3_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 114
-        height: 67
+        x: 132
+        y: 32
+        width: 132
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fcdb45f940e0c1370800000000000000
+      spriteID: 64772af08dc21504186f2f9553aaedcb
       internalID: 8294520026725400015
       vertices: []
       indices: 
@@ -179,19 +187,19 @@ TextureImporter:
       name: player_building_3_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 60
-        width: 114
+        x: 264
+        y: 32
+        width: 132
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 98f4749b0465e55a0800000000000000
+      spriteID: 150eef7a0b52b1d41bab294b5bf974b6
       internalID: -6530687573654286455
       vertices: []
       indices: 

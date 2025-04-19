@@ -43,7 +43,6 @@ public class CameraScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
         if (_isPanningHorizontally) _virtualTarget.position =
         Vector2.MoveTowards(_virtualTarget.position,
         new Vector3(_playerMovement.transform.position.x, _virtualTarget.position.y, 0f), 

@@ -65,6 +65,7 @@ public class SFXPlayer : MonoBehaviour
     {
         _cameraPosition = FindAnyObjectByType<Camera>().transform.position;
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
+        //Debug.Log(_playerMovement);
         _gamePhase = FindAnyObjectByType<MusicPlayer>()._gamePhase;
 
         _volumeDictionary = new Dictionary<AudioClip[], float[]>()

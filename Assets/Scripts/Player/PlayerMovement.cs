@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneBoost;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _tenderBoost;
 
+    [Header("Is this the epilogue?")]
+    [FoldoutGroup("Epilogue")][SerializeField] bool _isEpilogue;
+
     #endregion
 
     #region Global Variables
@@ -54,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
     float worldMin;
     float worldMax;
     ParticleSystem _particleSystem;
-    CinemachineCamera _camera;
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
     public int PlayerCombo { get; private set; } = 0;
     bool _isOutOfBounds;
@@ -68,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _particleSystem = GetComponent<ParticleSystem>();
-        _camera = FindAnyObjectByType<CinemachineCamera>();
     }
 
     private void Start()
@@ -86,8 +87,6 @@ public class PlayerMovement : MonoBehaviour
         CalculateBounds();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         CalculateIsOnFloor();
@@ -105,8 +104,8 @@ public class PlayerMovement : MonoBehaviour
     private void CalculateBounds()
     {
         PolygonCollider2D confiner = FindAnyObjectByType<PolygonCollider2D>();
-        worldMin = confiner.bounds.min.x - 0.6f;
-        worldMax = confiner.bounds.max.x + 0.6f;
+        worldMin = confiner.bounds.min.x;
+        worldMax = confiner.bounds.max.x;
     }
 
     private void HandleOutOfBounds()
@@ -149,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!IsOnFloor)
         {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultMoveSpeed, _defaultAirAcceleration * Time.deltaTime).x;
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _currentMoveSpeed, _currentAirAcceleration * Time.deltaTime).x;
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else
@@ -188,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody.linearVelocityY += _jumpSpeed;
         _fallingStance = 0;
         _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerJump);
+        if (_isEpilogue) IsHorizonalInputDisabled = true;
     }
 
     void ChangeStance()

@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 3264411279155145568}
   - component: {fileID: 6888151413053199027}
   - component: {fileID: 6273205492111134594}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundTIlemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8545,7 +8545,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.03333336, y: 0.03333336, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -8565,6 +8565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorType: 1
+  _groundOffset: 0.3
   _bloodSplatter: {fileID: 8512843963887993240, guid: df81998fceab35340a5a446991108e25, type: 3}
   _waterSplash: {fileID: 8512843963887993240, guid: 62f6975cca821774dbf82678446d114a, type: 3}
 --- !u!19719996 &6273205492111134594

@@ -7,44 +7,47 @@ using UnityEngine.UIElements;
 public class Spawner : MonoBehaviour
 {
     [Header("Spacing")]
-    [FoldoutGroup("Parameters")][SerializeField] float _laneHeight;
-    [FoldoutGroup("Parameters")][SerializeField] float _minXSpacing;
+    [FoldoutGroup("Parameters")][SerializeField] private float _laneHeight;
+    [FoldoutGroup("Parameters")][SerializeField] private float _minXSpacing;
 
     [Header("Spawn")]
-    [FoldoutGroup("Parameters")][SerializeField] float _spawnPeriod;
-    [FoldoutGroup("Parameters")][SerializeField] float _minSpawnHeight;
-    [FoldoutGroup("Parameters")][SerializeField] float _spawnXOffset;
+    [FoldoutGroup("Parameters")][SerializeField] private float _spawnPeriod;
+    [FoldoutGroup("Parameters")][SerializeField] private float _minSpawnHeight;
+    [FoldoutGroup("Parameters")][SerializeField] private float _spawnXOffset;
 
     [Header("Chances")]
-    [FoldoutGroup("Parameters")][SerializeField] float _birdSpawnChance;
-    [FoldoutGroup("Parameters")][SerializeField] float _droneSpawnChance;
-    [FoldoutGroup("Parameters")][SerializeField] float _balloonSpawnChance;
+    [FoldoutGroup("Parameters")][SerializeField] private float _birdSpawnChance;
+    [FoldoutGroup("Parameters")][SerializeField] private float _droneSpawnChance;
+    [FoldoutGroup("Parameters")][SerializeField] private float _balloonSpawnChance;
 
-    [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabBird;
-    [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabDrone;
-    [FoldoutGroup("Reference")][SerializeField] GameObject _enemyPrefabBalloon;
+    [Header("Reference")]
+    [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBird;
+    [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabDrone;
+    [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBalloon;
 
-    float _localTime;
-    float _lastX;
-    Transform _player;
-    System.Random _random;
-    float _mapHeight;
-    int _laneNumber;
-    bool _hasStarted;
+    private float _localTime;
+    private float _lastX;
+    private Transform _player;
+    private System.Random _random;
+    private int _laneNumber;
+    private bool _hasStarted;
+    private float _worldMax;
+    private GameObject _enemies;
+    public float _mapHeight;
 
     private void Awake()
     {
         _player = FindAnyObjectByType<PlayerMovement>().transform;
         _random = new System.Random();
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
+        _enemies = GameObject.Find("Enemies");
     }
 
     private void Start()
     {
-        _mapHeight = Mathf.Max(_player.position.y, 50f);
+        CalculateBounds();
         CalculateLanes();
         _lastX = transform.position.x;
-        
     }
 
     public void StartSpawning()
@@ -56,10 +59,10 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         if (!_hasStarted) return;
+
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
-        _localTime += Mathf.Max( Time.deltaTime  * (
-             1 - (transform.position.x - _lastX) / (Time.deltaTime * 3 )
-            ), 0f) ;
+        float deltaX = transform.position.x - _lastX;
+        _localTime += Mathf.Max(Time.deltaTime * (1 - deltaX / (Time.deltaTime * 3)), 0f);
         _lastX = transform.position.x;
 
         if (_localTime > _spawnPeriod)
@@ -71,30 +74,47 @@ public class Spawner : MonoBehaviour
 
     private void CalculateLanes()
     {
-        _laneNumber = Mathf.FloorToInt((_mapHeight- _minSpawnHeight)/_laneHeight);
-    }
-
-
-    void SpawnEnemies()
-    {
-        for (int i = 1; i<= _laneNumber; i++)
+        if (_laneHeight <= 0)
         {
-            double spawnRandomDouble = _random.NextDouble();
-            Vector3 spawnPosition = new Vector3(transform.position.x,
-                _minSpawnHeight + _laneHeight * i, 0f);
-
-            if (spawnRandomDouble < _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabBird);
-            else if (spawnRandomDouble < _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabDrone);
-            else if (spawnRandomDouble < _balloonSpawnChance + _droneSpawnChance + _birdSpawnChance) SpawnEnemy(spawnPosition, _enemyPrefabBalloon);
+            Debug.LogError("Lane height must be greater than zero.");
+            _laneNumber = 0;
+            return;
         }
 
-        double spawnRandomDouble0 = _random.NextDouble();
-        Vector3 spawnPosition0 = new Vector3(transform.position.x,
-            _minSpawnHeight + _laneHeight, 0f);
+        _laneNumber = Mathf.FloorToInt((_mapHeight - _minSpawnHeight - _laneHeight) / _laneHeight);
+    }
 
-        if (spawnRandomDouble0 < 2*_birdSpawnChance) SpawnEnemy(spawnPosition0, _enemyPrefabBird);
-        else if (spawnRandomDouble0 < _droneSpawnChance + 2 * _birdSpawnChance) SpawnEnemy(spawnPosition0, _enemyPrefabDrone);
-        else if (spawnRandomDouble0 < 2 * _balloonSpawnChance + 2 * _droneSpawnChance + 2 * _birdSpawnChance) SpawnEnemy(spawnPosition0, _enemyPrefabBalloon);
+    private void SpawnEnemies()
+    {
+        for (int i = 1; i <= _laneNumber; i++)
+        {
+            Vector3 spawnPosition = new Vector3(transform.position.x, _minSpawnHeight + _laneHeight * i, 0f);
+            SpawnRandomEnemy(spawnPosition);
+        }
+    }
+
+    private void SpawnRandomEnemy(Vector3 position)
+    {
+        double spawnRandomDouble = _random.NextDouble();
+        GameObject prefabToSpawn = null;
+
+        if (spawnRandomDouble < _birdSpawnChance)
+        {
+            prefabToSpawn = _enemyPrefabBird;
+        }
+        else if (spawnRandomDouble < _birdSpawnChance + _droneSpawnChance)
+        {
+            prefabToSpawn = _enemyPrefabDrone;
+        }
+        else if (spawnRandomDouble < _birdSpawnChance + _droneSpawnChance + _balloonSpawnChance)
+        {
+            prefabToSpawn = _enemyPrefabBalloon;
+        }
+
+        if (prefabToSpawn != null)
+        {
+            SpawnEnemy(position, prefabToSpawn);
+        }
     }
 
     private void SpawnEnemy(Vector3 position, GameObject prefab)
@@ -102,7 +122,19 @@ public class Spawner : MonoBehaviour
         Instantiate(prefab,
             position + Vector3.up * (((float)_random.NextDouble() - 0.5f) * _laneHeight)
             + Vector3.right * (-(float)_random.NextDouble() * _minXSpacing),
-            Quaternion.identity);
+            Quaternion.identity, _enemies.transform).GetComponent<EnemyMovement>()._maxXValue = _worldMax;
     }
 
+    private void CalculateBounds()
+    {
+        var collider = FindAnyObjectByType<PolygonCollider2D>();
+        if (collider == null)
+        {
+            Debug.LogError("PolygonCollider2D not found in the scene.");
+            enabled = false;
+            return;
+        }
+
+        _worldMax = collider.bounds.max.x + 0.6f;
+    }
 }

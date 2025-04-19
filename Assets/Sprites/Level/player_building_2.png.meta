@@ -136,16 +136,24 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 44
-        width: 114
-        height: 75
+        y: 0
+        width: 132
+        height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 66, y: 32}
+        - {x: 48, y: 32}
+        - {x: 48, y: 43}
+        - {x: 32, y: 43}
+        - {x: 32, y: 32}
+        - {x: -66, y: 32}
+        - {x: -66, y: -32}
+        - {x: 66, y: -32}
+      tessellationDetail: 0
       bones: []
       spriteID: 00d70b7e6addb1e00800000000000000
       internalID: 1016649849823591680
@@ -157,17 +165,17 @@ TextureImporter:
       name: player_building_2_1
       rect:
         serializedVersion: 2
-        x: 131
-        y: 46
-        width: 114
-        height: 67
+        x: 132
+        y: 0
+        width: 132
+        height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 11, z: 0, w: 11}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
       spriteID: 4e80246cf371afa60800000000000000
       internalID: 7708499274874620132
@@ -179,17 +187,17 @@ TextureImporter:
       name: player_building_2_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 60
-        width: 114
-        height: 64
+        x: 264
+        y: 0
+        width: 132
+        height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 11, z: 0, w: 11}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
       spriteID: 70c75a39aabbf7890800000000000000
       internalID: -7458036116606321657

@@ -5,7 +5,6 @@ public class JumpPad : MonoBehaviour
 {
     bool _isOnCooldown;
     [SerializeField] float _boostAmount;
-    [SerializeField] bool _isEpilogue;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -15,10 +14,6 @@ public class JumpPad : MonoBehaviour
             StartCoroutine(IJumpCooldown());
             Rigidbody2D rigidbody2D = collider.transform.GetComponent<Rigidbody2D>();
             rigidbody2D.linearVelocityX = Mathf.Sign(rigidbody2D.linearVelocityX) * _boostAmount;
-            if (_isEpilogue)
-            {
-                collider.GetComponent<PlayerMovement>().IsHorizonalInputDisabled = true;
-            }
         }
     }
 

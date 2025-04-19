@@ -11,18 +11,16 @@ public class EnemyMovement : MonoBehaviour
     [FoldoutGroup("Parameters")][SerializeField] float _oscilationAmplitude;
     [FoldoutGroup("Parameters")][SerializeField] float _oscilationPeriod;
 
-
-    Vector3 basePosition;
     float _angularFrequency;
-    float phase = 0;
+    float _phase;
+    public float _maxXValue;
 
-
-    EnemyBounceable _enemyBounceable;
+    Rigidbody2D _rigidBody2D;
     Vector3 _speed;
 
     private void Awake()
     {
-        _enemyBounceable = GetComponent<EnemyBounceable>();
+        _rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -32,10 +30,16 @@ public class EnemyMovement : MonoBehaviour
         if (_oscilates)
         {
             _angularFrequency = (2 * Mathf.PI) / _oscilationPeriod;
-            basePosition = transform.position;
-            phase = Random.Range(0, (2 * Mathf.PI));
+            _phase = Random.Range(0, (2 * Mathf.PI));
         }
-            
+
+        _rigidBody2D.linearVelocity = _speed;
+
+    }
+
+    private void Update()
+    {
+        if (transform.position.x > _maxXValue) Destroy(gameObject);
     }
 
     private void FixedUpdate()
@@ -43,12 +47,8 @@ public class EnemyMovement : MonoBehaviour
         
         if (_oscilates)
         {
-            basePosition += _speed * Time.deltaTime;
-            phase += Time.deltaTime * _angularFrequency;
-            transform.position = basePosition + Vector3.up * _oscilationAmplitude * Mathf.Sin(phase);
+            _phase += Time.deltaTime * _angularFrequency;
+            _rigidBody2D.linearVelocity = _speed + Vector3.up * _oscilationAmplitude * Mathf.Sin(_phase);
         }
-        else transform.position += _speed * Time.deltaTime;
-
-
     }
 }

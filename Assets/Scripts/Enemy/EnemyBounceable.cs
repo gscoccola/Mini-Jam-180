@@ -9,7 +9,7 @@ public class EnemyBounceable : MonoBehaviour
 {
     [SerializeField] GameObject _explosionPrefab;
     public EnemyType _enemytype;
-    float _maxXValue = 250f;
+    float _maxXValue;
     bool _isDestroyed;
     Animator _animator;
     SFXPlayer _SFXPlayer;
@@ -22,7 +22,7 @@ public class EnemyBounceable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!_isDestroyed && collider.tag == "Player" && !collider.GetComponent<PlayerMovement>().IsDead)
+        if (!_isDestroyed && !collider.GetComponent<PlayerMovement>().IsDead)
         {
             if ( Vector3.Dot(collider.transform.position - transform.position, Vector3.left) > 0.2f)
             {
@@ -39,18 +39,13 @@ public class EnemyBounceable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!_isDestroyed && collision.collider.tag == "Player" && !collision.collider.GetComponent<PlayerMovement>().IsDead)
+        if (!_isDestroyed && !collision.collider.GetComponent<PlayerMovement>().IsDead)
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
             PlayDeathSFX();
             _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerBounce);
             Die();
         }
-    }
-
-    private void Update()
-    {
-        if (transform.position.x > _maxXValue) Destroy(gameObject);
     }
 
     void Die()

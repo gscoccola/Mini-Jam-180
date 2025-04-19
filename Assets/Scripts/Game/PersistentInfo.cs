@@ -6,7 +6,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
 {
     public List<LevelInfo> LevelsInfo = new List<LevelInfo>();
 
-    private void Start()
+    private void OnEnable()
     {
         Application.targetFrameRate = 50;
 

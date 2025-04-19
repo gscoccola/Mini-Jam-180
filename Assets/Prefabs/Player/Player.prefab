@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3920717967585266227}
   - component: {fileID: 5855246699414869843}
   - component: {fileID: 5198506600535921773}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -53,9 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultMoveSpeed: 10
-  _upgradedMoveSpeed: 18
+  _upgradedMoveSpeed: 15
   _defaultAirAcceleration: 15
-  _upgradedAirAcceleration: 30
+  _upgradedAirAcceleration: 22
   _groundAcceleration: 200
   _jumpSpeed: 7
   _fallSpeed: 10
@@ -65,8 +65,10 @@ MonoBehaviour:
   _tenderDeviation: 20
   _birdBoost: 10
   _droneBoost: 12
-  _tenderBoost: 15
+  _tenderBoost: 13.5
+  _isEpilogue: 0
   IsHorizonalMovementDisabled: 0
+  IsHorizonalInputDisabled: 0
 --- !u!114 &2748669042865368266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4960,7 +4962,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015125275, y: -0.74482346}
+  m_Offset: {x: 0.015125275, y: -0.73376703}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4970,7 +4972,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5206528, y: 0.14212036}
+  m_Size: {x: 0.5206528, y: 0.120007515}
   m_EdgeRadius: 0
 --- !u!70 &5855246699414869843
 CapsuleCollider2D:
