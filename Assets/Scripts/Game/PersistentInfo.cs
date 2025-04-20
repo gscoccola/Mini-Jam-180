@@ -1,32 +1,35 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
-    public List<LevelInfo> LevelsInfo = new List<LevelInfo>();
+    public List<LevelInfo> LevelCompletionInfo = new List<LevelInfo>();
+    public Dictionary<int, bool> AchievementCompletionInfo = new();
 
     private void OnEnable()
     {
-        Application.targetFrameRate = 50;
+        LevelButtonSetup();
+        AchievementButtonSetup();
+    }
 
-        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+    private void AchievementButtonSetup()
+    {
+        AchievementButton[] achievementButtons = FindObjectsByType<AchievementButton>(FindObjectsSortMode.None);
+        foreach (AchievementButton button in achievementButtons)
+        {
+            AchievementCompletionInfo.Add(button.GetId(), false);
+        }
+    }
+
+    private void LevelButtonSetup()
+    {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
 
         for (int i = 0; i < sceneCount; i++)
         {
-            LevelsInfo.Add(new LevelInfo(false, false));
+            LevelCompletionInfo.Add(new LevelInfo(i, false, false));
         }
     }
 } 
-
-public class LevelInfo
-{
-    public bool HasBeenShown;
-    public bool HasBeenBeaten;
-
-    public LevelInfo(bool hasBeenShown, bool hasBeenBeaten)
-    {
-        HasBeenShown = hasBeenShown;
-        HasBeenBeaten = hasBeenBeaten;
-    }
-}

@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D _rigidBody;
     int _fallingStance;
     GameManager _gameManager;
-    SFXPlayer _SFXPlayer;
     public bool IsDead { get; private set; }
     bool _isHurtSoundOnCooldown;
     public bool IsHorizonalMovementDisabled = false;
@@ -64,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
         _gameManager = FindAnyObjectByType<GameManager>();
         _feetCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
@@ -174,6 +172,10 @@ public class PlayerMovement : MonoBehaviour
     void CalculateIsOnFloor()
     {
         IsOnFloor = _feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        if (IsOnFloor && PlayerCombo!=0)
+        {
+            ResetCombo();
+        }
     }
 
     void OnMove(InputValue value)
@@ -186,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
         if (!IsOnFloor) return;
         _rigidBody.linearVelocityY += _jumpSpeed;
         _fallingStance = 0;
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerJump);
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerJump);
         if (_isEpilogue) IsHorizonalInputDisabled = true;
     }
 
@@ -209,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
         else _rigidBody.linearVelocityX = 0f;
         if (!_isHurtSoundOnCooldown)
         {
-            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerHurt);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerHurt);
             _isHurtSoundOnCooldown = true;
             StartCoroutine(HurtSoundCooldown());
         }   
@@ -270,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ResetCombo()
     {
-        if (PlayerCombo == 3) _SFXPlayer.PlayClipFromArray(_SFXPlayer._comboLost);
+        if (PlayerCombo == 3) SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._comboLost);
         PlayerCombo = 0;
         _currentAirAcceleration = _defaultAirAcceleration;
         _currentMoveSpeed = _defaultMoveSpeed;

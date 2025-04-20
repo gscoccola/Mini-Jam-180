@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 public class Floor : MonoBehaviour
 {
     GameManager _gameManager;
-    SFXPlayer _SFXPlayer;
     PlayerMovement _playerMovement;
     [SerializeField] FloorType _floorType;
     [SerializeField] float _groundOffset;
@@ -18,7 +17,6 @@ public class Floor : MonoBehaviour
 
     private void Awake()
     {
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
         _gameManager = FindAnyObjectByType<GameManager>();
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
         _tilemapCollider2D = GetComponent<TilemapCollider2D>();
@@ -68,12 +66,12 @@ public class Floor : MonoBehaviour
             {
                 _gameManager.Lose();
                 _playerMovement.Die();
-                _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerDeath);
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerDeath);
                 Instantiate(_bloodSplatter, _playerMovement.transform.position, Quaternion.identity);
                 return;
             }
             _gameManager.Win();
-            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerSplash);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerSplash);
             _playerMovement.Win();
             Instantiate(_waterSplash, _playerMovement.transform.position, Quaternion.identity);
         }

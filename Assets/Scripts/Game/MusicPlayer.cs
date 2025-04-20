@@ -35,9 +35,9 @@ public class MusicPlayer : Singleton<MusicPlayer>
 
     public void OnLevelLoad(int levelIndex)
     {
-        if (new List<int> { 1, 2, 3, }.Contains(levelIndex)) _gamePhase = GamePhase.First;
-        else if (new List<int> { 4}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
-        else if(new List<int> { 5}.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
+        if (new List<int> { 1, 2, 3, 4}.Contains(levelIndex)) _gamePhase = GamePhase.First;
+        else if (new List<int> { 5}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
+        else if(new List<int> {SceneManager.sceneCountInBuildSettings - 1 }.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
 
         _isSecondTrackEnabled = false;
 

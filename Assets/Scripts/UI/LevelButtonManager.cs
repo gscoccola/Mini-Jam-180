@@ -1,5 +1,4 @@
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelButtonManager : MonoBehaviour
@@ -9,13 +8,13 @@ public class LevelButtonManager : MonoBehaviour
 
     private void Start()
     {
-        var beatenLevels = PersistentInfo.Instance.LevelsInfo
-            .Where((levelinfo) => levelinfo.HasBeenBeaten);
+        var beatenLevels = PersistentInfo.Instance.LevelCompletionInfo
+            .Where((levelinfo) => levelinfo.WasBeaten);
 
         EnableButton(_gameButtons[0]);
-        for (int i = 0; i < beatenLevels.Count(); i++) 
+        foreach (LevelInfo levelInfo in beatenLevels)
         {
-            EnableButton(_gameButtons[i + 1]);
+            EnableButton(_gameButtons[levelInfo.Id]);
         }
     }
 

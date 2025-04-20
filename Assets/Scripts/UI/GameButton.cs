@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class GameButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] ButtonType _type;
     [SerializeField] bool _isInstant;
@@ -12,14 +13,13 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     GameManager _gameManager;
     float _menuClickDelay = 0.35f;
     Animator _animator;
-    SFXPlayer _SFXPlayer;
     bool _isOnCooldown;
+    public event EventHandler<PopupEventHandler> PopupClose;
 
     private void Awake()
     {
         _gameManager = FindAnyObjectByType<GameManager>();
         _animator = GetComponent<Animator>();
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -32,13 +32,8 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             PerfomButtonAction();
             StartCoroutine(IButtonCooldown());
-        } 
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._button);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        
+        }
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
     }
 
     IEnumerator IButtonCooldown()
@@ -81,7 +76,14 @@ public class GameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 _gameManager.LoadLevel(SceneManager.GetActiveScene().buildIndex);
                 break;
             case ButtonType.Credits:
-                _gameManager.ToggleCredits(); ;
+                _gameManager.ToggleCredits();
+                break;
+            case ButtonType.Achievements:
+                _gameManager.ToggleAchievements();
+                break;
+            case ButtonType.BackFromAchievements:
+                _gameManager.ToggleAchievements();
+                PopupClose.Invoke(this, new PopupEventHandler());
                 break;
             case ButtonType.Next:
                 {
@@ -103,4 +105,6 @@ public enum ButtonType
     LevelSelect,
     Pause,
     Tutorial,
+    Achievements,
+    BackFromAchievements,
 }

@@ -15,12 +15,10 @@ public class FireworkSpawner : MonoBehaviour
     List<Color> _colors;
     List<Vector3> _positions1;
     List<Vector3> _positions2;
-    SFXPlayer _SFXPlayer;
 
     private void Awake()
     {
         _camera = FindAnyObjectByType<Camera>();
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
     }
 
     private void Start()
@@ -38,7 +36,7 @@ public class FireworkSpawner : MonoBehaviour
 
     public IEnumerator ISpawnWave()
     {
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._fireworkWhistle);
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._fireworkWhistle);
 
         yield return new WaitForSeconds(2f);
 
@@ -65,7 +63,7 @@ public class FireworkSpawner : MonoBehaviour
 
     private IEnumerator ISpawnFirework(Vector3 position, Color color)
     {
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._fireworkExplosion);
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._fireworkExplosion);
         Vector3 startPosition = _camera.transform.position + position;
         GameObject fireWork = Instantiate(_fireWorkPrefab,
             new Vector3(startPosition.x + Random.Range(-_offset, _offset), startPosition.y + Random.Range(-_offset, _offset), 0f),

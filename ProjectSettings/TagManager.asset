@@ -63,5 +63,8 @@ TagManager:
   - name: DeadPlayer
     uniqueID: 454996199
     locked: 0
+  - name: Popup
+    uniqueID: 3374126975
+    locked: 0
   m_RenderingLayers:
   - Default

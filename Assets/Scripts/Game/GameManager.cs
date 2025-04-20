@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //[SerializeField] InGameMenu _inGameMenu;
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
@@ -14,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameButton _pauseButton;
     [SerializeField] InGameMenu _mobileInputButtons;
     [SerializeField] InGameMenu _creditsMenu;
+    [SerializeField] InGameMenu _achievementsMenu;
     [SerializeField] InGameMenu _startMenu;
     [SerializeField] InGameMenu _tutorialMenu;
     [SerializeField] InGameMenu _levelSelectMenu;
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
   
     CameraScript _cameraScript;
     Camera _camera;
-    SFXPlayer _SFXPlayer;
+    
     LevelLoader _levelLoader;
     Spawner _spawner;
     bool _isPlayingOnMobile;
@@ -41,11 +41,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
         _isPlayingOnMobile = Application.isMobilePlatform;
         activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        _SFXPlayer.OnLevelLoad(activeSceneIndex);
+        SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
         MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
 
 
@@ -62,10 +61,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        else if (!PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenShown)
+        else if (!PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].HasBeenShown)
         {
-            PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenShown = true;
-            StartCoroutine(_cameraScript.ICameraPan());
+            PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].HasBeenShown = true;
+            if (_cameraScript is not null) StartCoroutine(_cameraScript.ICameraPan());
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
         }
@@ -141,7 +140,7 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         _mobileInputButtons.gameObject.SetActive(false);
-        PersistentInfo.Instance.LevelsInfo[activeSceneIndex].HasBeenBeaten = true;
+        PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
         StopAllCoroutines();
         StartCoroutine(IWin());
     }
@@ -152,7 +151,7 @@ public class GameManager : MonoBehaviour
         MusicPlayer.Instance.Pause();
         yield return new WaitForSeconds(_endDelay);
         _loseMenu.gameObject.SetActive(true);
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._defeat);
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
     }
 
     IEnumerator IWin()
@@ -161,11 +160,11 @@ public class GameManager : MonoBehaviour
         MusicPlayer.Instance.Pause();
         yield return new WaitForSeconds(_endDelay);
         _winMenu.gameObject.SetActive(true);
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._victory);
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
         yield return new WaitForSeconds(1.2f);
         Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
         yield return new WaitForSeconds(1.8f);
-        _SFXPlayer.PlayClipFromArray(_SFXPlayer._winDialog);
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._winDialog);
     }
 
     internal void ToggleCredits()
@@ -173,10 +172,16 @@ public class GameManager : MonoBehaviour
         _creditsMenu.gameObject.SetActive(!_creditsMenu.gameObject.activeSelf);
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
     }
+    
+    internal void ToggleAchievements()
+    {
+        _achievementsMenu.gameObject.SetActive(!_achievementsMenu.gameObject.activeSelf);
+        _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
+    }
 
     internal void TutorialOrLevelsMenu()
     {
-        if (PersistentInfo.Instance.LevelsInfo[1].HasBeenShown)
+        if (PersistentInfo.Instance.LevelCompletionInfo[1].HasBeenShown)
         {
             if (!_levelSelectMenu.gameObject.activeSelf)
             {

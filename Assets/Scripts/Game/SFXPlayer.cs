@@ -3,7 +3,7 @@ using Alchemy.Inspector;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SFXPlayer : MonoBehaviour
+public class SFXPlayer : Singleton<SFXPlayer>
 {
     [Header("EnemyDeath")]
     [FoldoutGroup("Enemy")] public AudioClip[] _birdDeath;
@@ -56,23 +56,16 @@ public class SFXPlayer : MonoBehaviour
     Dictionary<AudioClip[], float[]> _volumeDictionary = new();
     GamePhase _gamePhase;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     public void OnLevelLoad(int levelIndex)
     {
         _cameraPosition = FindAnyObjectByType<Camera>().transform.position;
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
-        //Debug.Log(_playerMovement);
         _gamePhase = FindAnyObjectByType<MusicPlayer>()._gamePhase;
 
         _volumeDictionary = new Dictionary<AudioClip[], float[]>()
         {
             [_birdDeath] = _birdDeathVolume,
             [_droneDeath] = _droneDeathVolume,
-            [_balloonDeath] = _balloonDeathVolume,
             [_balloonDeath] = _balloonDeathVolume,
             [_playerSplash] = _playerSplashVolume,
             [_playerDeath] = _playerDeathVolume,

@@ -12,12 +12,10 @@ public class EnemyBounceable : MonoBehaviour
     float _maxXValue;
     bool _isDestroyed;
     Animator _animator;
-    SFXPlayer _SFXPlayer;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -43,7 +41,7 @@ public class EnemyBounceable : MonoBehaviour
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
             PlayDeathSFX();
-            _SFXPlayer.PlayClipFromArray(_SFXPlayer._playerBounce);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerBounce);
             Die();
         }
     }
@@ -60,15 +58,15 @@ public class EnemyBounceable : MonoBehaviour
         switch (_enemytype)
         {
             case EnemyType.Bird:
-                _SFXPlayer.PlayClipFromArray(_SFXPlayer._birdDeath);
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._birdDeath);
                 break;
 
             case EnemyType.Drone:
-                _SFXPlayer.PlayClipFromArray(_SFXPlayer._droneDeath);
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneDeath);
                 break;
 
             case EnemyType.Balloon:
-                _SFXPlayer.PlayClipFromArray(_SFXPlayer._balloonDeath);
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonDeath);
                 break;
         }
     }
