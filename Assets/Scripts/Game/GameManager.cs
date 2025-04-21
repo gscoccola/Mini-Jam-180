@@ -19,10 +19,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _levelSelectMenu;
     [SerializeField] GameObject _confetti;
 
-  
     CameraScript _cameraScript;
     Camera _camera;
-    
+    PersistentCanvas AchievementPopup;
+
     LevelLoader _levelLoader;
     Spawner _spawner;
     bool _isPlayingOnMobile;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         _levelLoader = FindAnyObjectByType<LevelLoader>();
         _spawner = FindAnyObjectByType<Spawner>();
         _cameraScript = FindAnyObjectByType<CameraScript>();
+        AchievementPopup = FindAnyObjectByType<PersistentCanvas>();
     }
 
     private void Start()
@@ -50,6 +51,8 @@ public class GameManager : MonoBehaviour
 
         if (activeSceneIndex==0) ActivateProperTutorial();
 
+        if (activeSceneIndex == 0 && _achievementsMenu is not null) _achievementsMenu.gameObject.SetActive(false);
+
         if (activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
 
@@ -61,9 +64,9 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        else if (!PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].HasBeenShown)
+        else if (!PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasShown)
         {
-            PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].HasBeenShown = true;
+            PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasShown = true;
             if (_cameraScript is not null) StartCoroutine(_cameraScript.ICameraPan());
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
@@ -133,6 +136,7 @@ public class GameManager : MonoBehaviour
     public void OutOfBounds()
     {
         _mobileInputButtons.gameObject.SetActive(false);
+        OnAchievementUnlocked(3);
         StopAllCoroutines();
         StartCoroutine(ILose());
     }
@@ -141,6 +145,7 @@ public class GameManager : MonoBehaviour
     {
         _mobileInputButtons.gameObject.SetActive(false);
         PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
+        if (activeSceneIndex == 1) OnAchievementUnlocked(1);
         StopAllCoroutines();
         StartCoroutine(IWin());
     }
@@ -181,7 +186,7 @@ public class GameManager : MonoBehaviour
 
     internal void TutorialOrLevelsMenu()
     {
-        if (PersistentInfo.Instance.LevelCompletionInfo[1].HasBeenShown)
+        if (PersistentInfo.Instance.LevelCompletionInfo[1].WasShown)
         {
             if (!_levelSelectMenu.gameObject.activeSelf)
             {
@@ -222,5 +227,12 @@ public class GameManager : MonoBehaviour
     {
         _tutorialMenu.gameObject.SetActive(!_tutorialMenu.gameObject.activeSelf);
         _levelSelectMenu.gameObject.SetActive(!_levelSelectMenu.gameObject.activeSelf);
+    }
+
+    public void OnAchievementUnlocked(int achievementIndex)
+    {
+        if (PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked) return;
+        PersistentCanvas.Instance.ShowPopup();
+        PersistentInfo.Instance.UnlockAchievement(achievementIndex);
     }
 }

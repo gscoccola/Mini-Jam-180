@@ -21,7 +21,7 @@ public class AchievementButtonManager : MonoBehaviour
     private void Start()
     {
         var unlockedAchievements = PersistentInfo.Instance.AchievementCompletionInfo
-            .Where((achievementInfo) => achievementInfo.Value)
+            .Where((achievementInfo) => achievementInfo.Value.WasUnlocked)
             .Select((achievementInfo) => achievementInfo.Key);
 
         foreach (int achievementId in unlockedAchievements)
@@ -30,7 +30,7 @@ public class AchievementButtonManager : MonoBehaviour
         }
     }
 
-    public void CloseAllPopups(object sender, PopupEventHandler eventArgs)
+    public void CloseAllPopups(object sender, ClosePopupEventArgs eventArgs)
     {
         foreach (var achievementButton in _achievementButtonsById.Values)
         {

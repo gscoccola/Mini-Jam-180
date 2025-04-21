@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class LevelButtonManager : MonoBehaviour
@@ -9,12 +11,12 @@ public class LevelButtonManager : MonoBehaviour
     private void Start()
     {
         var beatenLevels = PersistentInfo.Instance.LevelCompletionInfo
-            .Where((levelinfo) => levelinfo.WasBeaten);
+            .Where((levelinfo) => levelinfo.Value.WasBeaten);
 
         EnableButton(_gameButtons[0]);
-        foreach (LevelInfo levelInfo in beatenLevels)
+        foreach (KeyValuePair<int, LevelMileStones> levelInfo in beatenLevels)
         {
-            EnableButton(_gameButtons[levelInfo.Id]);
+            EnableButton(_gameButtons[levelInfo.Key]);
         }
     }
 

@@ -56,6 +56,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
 
         yield return new WaitForSeconds(period -2f);
         _fireworkSpawner.Begin();
+        _gameManager.OnAchievementUnlocked(2);
 
         yield return new WaitForSeconds(period +2);
         _credits.gameObject.SetActive(true);

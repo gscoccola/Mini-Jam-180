@@ -14,7 +14,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
     float _menuClickDelay = 0.35f;
     Animator _animator;
     bool _isOnCooldown;
-    public event EventHandler<PopupEventHandler> PopupClose;
+    public event EventHandler<ClosePopupEventArgs> PopupClose;
 
     private void Awake()
     {
@@ -83,13 +83,11 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
                 break;
             case ButtonType.BackFromAchievements:
                 _gameManager.ToggleAchievements();
-                PopupClose.Invoke(this, new PopupEventHandler());
+                PopupClose.Invoke(this, new ClosePopupEventArgs());
                 break;
-            case ButtonType.Next:
-                {
-                    _gameManager.NextLevel();
-                    break;
-                }
+            case ButtonType.Next: 
+                _gameManager.NextLevel();
+                break;
         }
     }
 

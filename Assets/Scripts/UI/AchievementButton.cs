@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class AchievementButton : MonoBehaviour, IPointerDownHandler
 {
-    public event EventHandler<PopupEventHandler> PopupClose;
+    public event EventHandler<ClosePopupEventArgs> PopupClose;
 
     [SerializeField] AchievementInfoSO _achievement;
     [SerializeField] GameObject _popup;
@@ -36,13 +36,10 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         }
         _achievementDescription.text = "????";
         _achievementDescription.fontSize = 180f;
-
-        StartCoroutine(AdjustPopup());
     }
 
-    IEnumerator AdjustPopup()
+    private void AdjustPopup()
     {
-        yield return new WaitForEndOfFrame();
         if (transform.position.x > Screen.width /2)
         _popup.transform.localPosition = new Vector3(-_popup.transform.localPosition.x, _popup.transform.localPosition.y, 0f);
     }
@@ -55,9 +52,10 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_isOnCooldown) return;
+        AdjustPopup();
         _isOnCooldown = true;
         bool wasPressed = _popup.gameObject.activeSelf;
-        PopupClose.Invoke(this, new PopupEventHandler());
+        PopupClose.Invoke(this, new ClosePopupEventArgs());
         SetPopup(!wasPressed);
         StartCoroutine(IButtonCooldown());
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);

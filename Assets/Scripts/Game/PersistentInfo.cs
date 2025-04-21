@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
-    public List<LevelInfo> LevelCompletionInfo = new List<LevelInfo>();
-    public Dictionary<int, bool> AchievementCompletionInfo = new();
+    public Dictionary<int, LevelMileStones> LevelCompletionInfo = new();
+    public Dictionary<int, AchievementMilestones> AchievementCompletionInfo = new();
 
     private void OnEnable()
     {
@@ -19,7 +19,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
         AchievementButton[] achievementButtons = FindObjectsByType<AchievementButton>(FindObjectsSortMode.None);
         foreach (AchievementButton button in achievementButtons)
         {
-            AchievementCompletionInfo.Add(button.GetId(), false);
+            AchievementCompletionInfo.Add(button.GetId(), new AchievementMilestones());
         }
     }
 
@@ -29,7 +29,18 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
         for (int i = 0; i < sceneCount; i++)
         {
-            LevelCompletionInfo.Add(new LevelInfo(i, false, false));
+            LevelCompletionInfo.Add(i, new LevelMileStones());
         }
     }
+
+    public void UnlockAchievement(int achievementId)
+    {
+        if (AchievementCompletionInfo.ContainsKey(achievementId))
+        {
+            AchievementCompletionInfo[achievementId].WasUnlocked = true;
+        }
+    }
+
 } 
+
+
