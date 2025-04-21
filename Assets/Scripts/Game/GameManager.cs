@@ -232,7 +232,7 @@ public class GameManager : MonoBehaviour
     public void OnAchievementUnlocked(int achievementIndex)
     {
         if (PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked) return;
-        PersistentCanvas.Instance.ShowPopup();
+        PersistentCanvas.Instance.ShowPopup(PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].Title);
         PersistentInfo.Instance.UnlockAchievement(achievementIndex);
     }
 }

@@ -49,6 +49,11 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         return _achievement.GetId();
     }
 
+    public string GetTitle()
+    {
+        return _achievement.GetName();
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_isOnCooldown) return;

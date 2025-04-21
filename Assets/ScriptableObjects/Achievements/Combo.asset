@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 735b50d5b5b9dd94e8b0e3a5136fe89b, type: 3}
-  m_Name: EasterEgg
+  m_Name: Combo
   m_EditorClassIdentifier: 
   Id: 4
-  Name: Easter Egg
-  Description: Find Charlies Guardian Angel
+  Name: Full Combo
+  Description: Reach charlie's full potential

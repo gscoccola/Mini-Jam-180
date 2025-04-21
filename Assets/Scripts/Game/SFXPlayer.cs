@@ -23,6 +23,12 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Player")] public AudioClip[] _winDialog;
     [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _winDialogVolume;
 
+    [Header("Player footsteps")]
+    [FoldoutGroup("Player")] public AudioClip[] _playerRightFootsteps;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerRightFootstepsVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerLeftFootsteps;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerLeftFootstepsVolume;
+
     [Header("Player misc")]
     [FoldoutGroup("Player")] public AudioClip[] _playerJump;
     [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerJumpVolume;
@@ -72,6 +78,8 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_playerJump] = _playerJumpVolume,
             [_playerHurt] = _playerHurtVolume,
             [_playerBounce] = _playerBounceVolume,
+            [_playerRightFootsteps] = _playerRightFootstepsVolume,
+            [_playerLeftFootsteps] = _playerLeftFootstepsVolume,
             [_victory] = _victoryVolume,
             [_defeat] = _defeatVolume,
             [_comboLost] = _comboLostVolume,

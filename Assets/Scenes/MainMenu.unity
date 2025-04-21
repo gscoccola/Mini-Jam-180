@@ -2893,6 +2893,7 @@ MonoBehaviour:
   - {fileID: 861600760}
   - {fileID: 46418316}
   - {fileID: 1711297767}
+  - {fileID: 1704771889}
 --- !u!1001 &1422683926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3206,7 +3207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8098905381055520300, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
       propertyPath: m_text
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3354,6 +3355,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692560987}
   m_CullTransparentMesh: 1
+--- !u!114 &1704771889 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6117058736419058413, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
+  m_PrefabInstance: {fileID: 1453570952}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e777a604f944aed4d9d7b0a4afcbf2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1711297763 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4254655904754660228, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
@@ -3480,6 +3492,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1496860868317368669, guid: 3dc0a1015b8c30c4d83c9f851b67ce5a, type: 3}
+      propertyPath: _playerFootstepsVolume.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3602665203335607043, guid: 3dc0a1015b8c30c4d83c9f851b67ce5a, type: 3}
       propertyPath: _firstPhaseTrack
       value: 
@@ -4895,10 +4911,6 @@ PrefabInstance:
     - target: {fileID: 1728838421632899604, guid: 30cd96fdb66b93a41b5188d6e9c1aa38, type: 3}
       propertyPath: m_Name
       value: PersistentCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5018542963689109990, guid: 30cd96fdb66b93a41b5188d6e9c1aa38, type: 3}
-      propertyPath: _delay
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

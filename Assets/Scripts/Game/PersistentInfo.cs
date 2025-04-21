@@ -19,7 +19,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
         AchievementButton[] achievementButtons = FindObjectsByType<AchievementButton>(FindObjectsSortMode.None);
         foreach (AchievementButton button in achievementButtons)
         {
-            AchievementCompletionInfo.Add(button.GetId(), new AchievementMilestones());
+            AchievementCompletionInfo.Add(button.GetId(), new AchievementMilestones(button.GetTitle()));
         }
     }
 

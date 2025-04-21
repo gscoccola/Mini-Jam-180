@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultMoveSpeed: 10
+  _defaultGroundSpeed: 5
   _upgradedMoveSpeed: 15
   _defaultAirAcceleration: 15
   _upgradedAirAcceleration: 22
@@ -63,6 +64,7 @@ MonoBehaviour:
   _birdDeviation: 10
   _droneDeviation: 15
   _tenderDeviation: 20
+  _footstepsDelay: 0.3
   _birdBoost: 10
   _droneBoost: 12
   _tenderBoost: 13.5

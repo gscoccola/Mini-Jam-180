@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Horizontal")]
     [FoldoutGroup("Player Parameters")][SerializeField] float _defaultMoveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultGroundSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedMoveSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _defaultAirAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedAirAcceleration;
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Boost Parameters")][SerializeField] float _birdDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _tenderDeviation;
+    [FoldoutGroup("Boost Parameters")][SerializeField] float _footstepsDelay;
 
     [Header("Vertical")]
     [FoldoutGroup("Boost Parameters")][SerializeField] float _birdBoost;
@@ -59,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
     public int PlayerCombo { get; private set; } = 0;
     bool _isOutOfBounds;
+    bool _isRunning;
+    bool _isPlayingFootsteps;
+    bool _isLeftFootstepNext;
+    float _lastX;
     #endregion
 
     private void Awake()
@@ -85,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         CalculateBounds();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         CalculateIsOnFloor();
         MoveVertically();
@@ -151,15 +157,36 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultMoveSpeed, _groundAcceleration * Time.deltaTime).x;
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultGroundSpeed, _groundAcceleration * Time.deltaTime).x;
             bool playerHasHorizontalSpeed = Mathf.Abs(_moveInput.x) > Mathf.Epsilon;
             if (playerHasHorizontalSpeed)
             {
                 transform.localScale = new Vector3(MathF.Sign(_moveInput.x), 1f, 1f);
             }
-            
+            playerHasHorizontalSpeed = (playerHasHorizontalSpeed && Mathf.Abs(transform.position.x - _lastX) > Mathf.Epsilon);
+            _isRunning = playerHasHorizontalSpeed;
             _animator.SetBool("_isRunning", playerHasHorizontalSpeed);
+            _lastX = transform.position.x;
         }
+        HandleFootsteps();
+    }
+
+    private void HandleFootsteps()
+    {
+        if (_isRunning && !_isPlayingFootsteps)
+        {
+            StartCoroutine(PlayFootsteps());
+        }
+    }
+
+    private IEnumerator PlayFootsteps()
+    {
+        _isPlayingFootsteps = true;
+        if (_isLeftFootstepNext) SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerLeftFootsteps);
+        else SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerRightFootsteps);
+        _isLeftFootstepNext = !_isLeftFootstepNext;
+        yield return new WaitForSeconds(_footstepsDelay);
+        _isPlayingFootsteps = false;
     }
 
     private void MoveVertically()
@@ -172,6 +199,7 @@ public class PlayerMovement : MonoBehaviour
     void CalculateIsOnFloor()
     {
         IsOnFloor = _feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        if (!IsOnFloor) _isRunning = false;
         if (IsOnFloor && PlayerCombo!=0)
         {
             ResetCombo();
@@ -267,6 +295,7 @@ public class PlayerMovement : MonoBehaviour
             _particleSystem.Play();
             _currentAirAcceleration = _upgradedAirAcceleration;
             _currentMoveSpeed = _upgradedMoveSpeed;
+            _gameManager.OnAchievementUnlocked(4);
         }
     }
 

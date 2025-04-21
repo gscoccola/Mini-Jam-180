@@ -240,6 +240,22 @@ MonoBehaviour:
   _winDialogVolume:
   - 0.5
   - 0.5
+  _playerRightFootsteps:
+  - {fileID: 8300000, guid: e33784c80a22b294e839cceba153eb18, type: 3}
+  - {fileID: 8300000, guid: 87786ef134986304295da351729bfda8, type: 3}
+  - {fileID: 8300000, guid: 196f2f5dbfd41f0439b13c5b61d04f93, type: 3}
+  _playerRightFootstepsVolume:
+  - 0.2
+  - 0.2
+  - 0.2
+  _playerLeftFootsteps:
+  - {fileID: 8300000, guid: 09e514e8e5b77034f91d6756285c28e7, type: 3}
+  - {fileID: 8300000, guid: 8530f908cbd8d8b46b76c364041e9032, type: 3}
+  - {fileID: 8300000, guid: b6e2a6f0bfd257445b402fb744f24043, type: 3}
+  _playerLeftFootstepsVolume:
+  - 0.25
+  - 0.25
+  - 0.25
   _playerJump:
   - {fileID: 8300000, guid: 04eadf6f779f67a4b9baf9f20c63096d, type: 3}
   - {fileID: 8300000, guid: b2c34416f1a829f46a0187428e5d8117, type: 3}
