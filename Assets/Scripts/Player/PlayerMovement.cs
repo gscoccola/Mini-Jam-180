@@ -4,6 +4,7 @@ using UnityEngine;
 using Alchemy.Inspector;
 using System;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class PlayerMovement : MonoBehaviour
     #region Parameters
 
     [Header("Horizontal")]
-    [FoldoutGroup("Player Parameters")][SerializeField] float _moveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultMoveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultGroundSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedMoveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultAirAcceleration;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedAirAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _groundAcceleration;
-    [FoldoutGroup("Player Parameters")][SerializeField] float _airAcceleration;
+    
 
     [Header("Vertical")]
     [FoldoutGroup("Player Parameters")][SerializeField] float _jumpSpeed;
@@ -24,93 +29,181 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Boost Parameters")][SerializeField] float _birdDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _tenderDeviation;
+    [FoldoutGroup("Boost Parameters")][SerializeField] float _footstepsDelay;
 
     [Header("Vertical")]
     [FoldoutGroup("Boost Parameters")][SerializeField] float _birdBoost;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneBoost;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _tenderBoost;
 
+    [Header("Is this the epilogue?")]
+    [FoldoutGroup("Epilogue")][SerializeField] bool _isEpilogue;
+
     #endregion
 
     #region Global Variables
     Animator _animator;
     BoxCollider2D _feetCollider;
-    bool _isOnFloor;
+    public bool IsOnFloor {  get; private set; }
     Vector2 _moveInput;
     Rigidbody2D _rigidBody;
     int _fallingStance;
     GameManager _gameManager;
-    SFXPlayer _SFXPlayer;
-    bool _isDead;
-
+    public bool IsDead { get; private set; }
+    bool _isHurtSoundOnCooldown;
+    public bool IsHorizonalMovementDisabled = false;
+    public bool IsHorizonalInputDisabled = false;
+    float _currentMoveSpeed;
+    float _currentAirAcceleration;
+    float worldMin;
+    float worldMax;
+    ParticleSystem _particleSystem;
     Dictionary<EnemyType, float[]> _enemyBoosts = new Dictionary<EnemyType, float[]>();
+    public int PlayerCombo { get; private set; } = 0;
+    bool _isOutOfBounds;
+    bool _isRunning;
+    bool _isPlayingFootsteps;
+    bool _isLeftFootstepNext;
+    float _lastX;
     #endregion
 
     private void Awake()
     {
-        _SFXPlayer = GetComponent<SFXPlayer>();
         _gameManager = FindAnyObjectByType<GameManager>();
         _feetCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _particleSystem = GetComponent<ParticleSystem>();
     }
 
     private void Start()
     {
+        _currentAirAcceleration = _defaultAirAcceleration;
+        _currentMoveSpeed = _defaultMoveSpeed;
+
         _enemyBoosts = new Dictionary<EnemyType, float[]>
         {
             [EnemyType.Bird] = new float[2]{ _birdDeviation, _birdBoost },
             [EnemyType.Drone] = new float[2]{ _droneDeviation, _droneBoost },
             [EnemyType.Balloon] = new float[2]{ _tenderDeviation, _tenderBoost },
         };
+
+        CalculateBounds();
+    }
+
+    void FixedUpdate()
+    {
+        CalculateIsOnFloor();
+        MoveVertically();
+        HandleOutOfBounds();
+        if (IsDead)
+        {
+            if (!_isOutOfBounds)_rigidBody.linearVelocityX = 0f;
+            return;
+        }  
+        MoveHorizontally();
+        
+    }
+
+    private void CalculateBounds()
+    {
+        PolygonCollider2D confiner = FindAnyObjectByType<PolygonCollider2D>();
+        worldMin = confiner.bounds.min.x;
+        worldMax = confiner.bounds.max.x;
+    }
+
+    private void HandleOutOfBounds()
+    {
+        if ( !IsOnFloor && transform.position.x < worldMin )
+        {
+            _rigidBody.linearVelocityY = 0f;
+            _rigidBody.linearVelocityX = -3f;
+            if (!_isOutOfBounds) GoOutOfBounds();
+
+        }
+        else if (!IsOnFloor && transform.position.x > worldMax)
+        {
+            _rigidBody.linearVelocityY = 0f;
+            _rigidBody.linearVelocityX = 3f;
+            if (!_isOutOfBounds) GoOutOfBounds();
+
+        }
+    }
+
+    public void GoOutOfBounds()
+    {
+        _isOutOfBounds = true;
+        _gameManager.OutOfBounds();
+        _particleSystem.Stop();
+        IsDead = true;
     }
 
 
-    // Update is called once per frame
-    void Update()
+    private void MoveHorizontally()
     {
-        IsOnFloor();
-        if (_isDead)
+        if (IsHorizonalMovementDisabled)
         {
             _rigidBody.linearVelocityX = 0f;
             return;
         }
-            
-        MoveHorizontally();
-        MoveVertically();
-    }
 
-    private void MoveHorizontally()
-    {
-        Vector2 playerVelocity = new Vector2(_moveInput.x, 0f);
-        if (!_isOnFloor)
+        Vector2 playerVelocity = IsHorizonalInputDisabled ? Vector2.zero : new Vector2(_moveInput.x, 0f);
+
+
+        if (!IsOnFloor)
         {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _moveSpeed, _airAcceleration * Time.deltaTime).x;
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _currentMoveSpeed, _currentAirAcceleration * Time.deltaTime).x;
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else
         {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _moveSpeed, _groundAcceleration * Time.deltaTime).x;
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultGroundSpeed, _groundAcceleration * Time.deltaTime).x;
             bool playerHasHorizontalSpeed = Mathf.Abs(_moveInput.x) > Mathf.Epsilon;
             if (playerHasHorizontalSpeed)
             {
                 transform.localScale = new Vector3(MathF.Sign(_moveInput.x), 1f, 1f);
             }
-            
+            playerHasHorizontalSpeed = (playerHasHorizontalSpeed && Mathf.Abs(transform.position.x - _lastX) > Mathf.Epsilon);
+            _isRunning = playerHasHorizontalSpeed;
             _animator.SetBool("_isRunning", playerHasHorizontalSpeed);
+            _lastX = transform.position.x;
         }
+        HandleFootsteps();
+    }
+
+    private void HandleFootsteps()
+    {
+        if (_isRunning && !_isPlayingFootsteps)
+        {
+            StartCoroutine(PlayFootsteps());
+        }
+    }
+
+    private IEnumerator PlayFootsteps()
+    {
+        _isPlayingFootsteps = true;
+        if (_isLeftFootstepNext) SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerLeftFootsteps);
+        else SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerRightFootsteps);
+        _isLeftFootstepNext = !_isLeftFootstepNext;
+        yield return new WaitForSeconds(_footstepsDelay);
+        _isPlayingFootsteps = false;
     }
 
     private void MoveVertically()
     {
-        //_animator.SetBool("_isFalling", Mathf.Abs(_rigidBody.linearVelocityY) > 0.5f);
-        _animator.SetBool("_isFalling", !_isOnFloor);
-        if (_isOnFloor) return;
+        _animator.SetBool("_isFalling", !IsOnFloor);
+        if (IsOnFloor) return;
         _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _gravityAcceleration * Time.deltaTime).y;
     }
 
-    void IsOnFloor()
+    void CalculateIsOnFloor()
     {
-        _isOnFloor = _feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        IsOnFloor = _feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        if (!IsOnFloor) _isRunning = false;
+        if (IsOnFloor && PlayerCombo!=0)
+        {
+            ResetCombo();
+        }
     }
 
     void OnMove(InputValue value)
@@ -118,12 +211,13 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = value.Get<Vector2>();
     }
 
-    void OnJump(InputValue value)
+    public void Jump()
     {
-        if (!_isOnFloor) return;
+        if (!IsOnFloor) return;
         _rigidBody.linearVelocityY += _jumpSpeed;
         _fallingStance = 0;
-        _SFXPlayer.PlayRandomClip(_SFXPlayer._playerJump);
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerJump);
+        if (_isEpilogue) IsHorizonalInputDisabled = true;
     }
 
     void ChangeStance()
@@ -135,13 +229,28 @@ public class PlayerMovement : MonoBehaviour
     public void Boost(EnemyType type)
     {
         _rigidBody.linearVelocityY = _enemyBoosts[type][1];
+        IncreaseCombo();
         ChangeStance();
     }
 
-    public void Deviate(EnemyType type)
+    public void Deviate(EnemyType type, bool appliesBackwardsMomentunm = true)
     {
-        _rigidBody.linearVelocityX += _enemyBoosts[type][0];
+        if (appliesBackwardsMomentunm) _rigidBody.linearVelocityX += _enemyBoosts[type][0];
+        else _rigidBody.linearVelocityX = 0f;
+        if (!_isHurtSoundOnCooldown)
+        {
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerHurt);
+            _isHurtSoundOnCooldown = true;
+            StartCoroutine(HurtSoundCooldown());
+        }   
+        ResetCombo();
         ChangeStance();
+    }
+
+    IEnumerator HurtSoundCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        _isHurtSoundOnCooldown = false;
     }
 
     private void OnReloadLevel(InputValue value)
@@ -149,14 +258,54 @@ public class PlayerMovement : MonoBehaviour
         _gameManager.ReloadLevel();
     }
 
-    public void Die()
+    private void OnSkipLevel(InputValue value)
     {
-        _isDead = true;
-        _animator.SetTrigger("_die");
+        _gameManager.NextLevel();
     }
 
+    private void OnExitLevel(InputValue value)
+    {
+        _gameManager.ExitLevel();
+    }
+
+    public void Die()
+    {
+        _particleSystem.Stop();
+        IsDead = true;
+        _animator.SetTrigger("_die");
+        GetComponent<SpriteRenderer>().sortingLayerName = "Water";
+    }
+
+ 
     public void Win()
     {
-        _isDead = true;
+        _particleSystem.Stop();
+        IsDead = true;
+        _fallingStance = 2;
+        _animator.SetInteger("_fallingStance", _fallingStance);
+    }
+
+    void IncreaseCombo()
+    {
+        PlayerCombo++;
+        PlayerCombo = (int)Mathf.Clamp(PlayerCombo, 0, 3);
+        if (PlayerCombo == 3)
+        {
+            MusicPlayer.Instance._isSecondTrackEnabled = true;
+            _particleSystem.Play();
+            _currentAirAcceleration = _upgradedAirAcceleration;
+            _currentMoveSpeed = _upgradedMoveSpeed;
+            _gameManager.OnAchievementUnlocked(4);
+        }
+    }
+
+    void ResetCombo()
+    {
+        if (PlayerCombo == 3) SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._comboLost);
+        PlayerCombo = 0;
+        _currentAirAcceleration = _defaultAirAcceleration;
+        _currentMoveSpeed = _defaultMoveSpeed;
+        _particleSystem.Stop();
+        MusicPlayer.Instance._isSecondTrackEnabled = false;
     }
 }

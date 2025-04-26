@@ -10,13 +10,25 @@ EditorBuildSettings:
     guid: a799f6f91d174a74ea5196471fc77165
   - enabled: 1
     path: Assets/Scenes/Level1.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    guid: e8330492643ddfd4fa168cb8ee29e10e
   - enabled: 1
     path: Assets/Scenes/Level2.unity
-    guid: b73e8754ad8422b4397bbef814486bff
+    guid: 936c270f66e2709439c36bef2284c1d1
   - enabled: 1
     path: Assets/Scenes/Level3.unity
-    guid: 40646547787078646a977858d4411675
+    guid: b73e8754ad8422b4397bbef814486bff
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: efe10ba70f14d0040a8fb9fc4eba66df
+  - enabled: 1
+    path: Assets/Scenes/LevelLast.unity
+    guid: b2ce05f0a24468f45807b760258dd53c
+  - enabled: 1
+    path: Assets/Scenes/Epilogue.unity
+    guid: f4594501ce2382948941c0bdf6e9b7f0
+  - enabled: 1
+    path: Assets/Scenes/LevelEndless.unity
+    guid: 983b60c601a433647a21655e18c702cf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

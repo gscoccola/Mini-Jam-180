@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b663b2cbbad7799458aeab695a604d0a, type: 3}
+  m_Name: NightSet
+  m_EditorClassIdentifier: 
+  SkySprite: {fileID: 214582040267025251, guid: 81e684ec290189d40aaa3ddc0ea9cf43, type: 3}
+  CloudsSprite: {fileID: 1062938222754789094, guid: 3539fffe2882f914895bcb3ec01fb9db, type: 3}
+  MountainsSprite: {fileID: 3434072792666490558, guid: 2c655bfa6d6445e44b3566ca9441ae32, type: 3}
+  BuidlingsSprite: {fileID: 6454316093721598762, guid: 674df1ae4b876a14d825ecbe745dc392, type: 3}
+  BushesSprite: {fileID: 2395028364090877961, guid: e24076cbbe00e8141afcd04c9f1323d9, type: 3}

@@ -14,7 +14,7 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - 
+  - Player
   - 
   - 
   - 
@@ -42,11 +42,14 @@ TagManager:
   - name: Background
     uniqueID: 3846843509
     locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Building
     uniqueID: 440181797
+    locked: 0
+  - name: Pointer
+    uniqueID: 925421531
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Enemy
     uniqueID: 1310998815
@@ -56,6 +59,12 @@ TagManager:
     locked: 0
   - name: Water
     uniqueID: 2886402797
+    locked: 0
+  - name: DeadPlayer
+    uniqueID: 454996199
+    locked: 0
+  - name: Popup
+    uniqueID: 3374126975
     locked: 0
   m_RenderingLayers:
   - Default

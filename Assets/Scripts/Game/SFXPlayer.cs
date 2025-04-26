@@ -1,61 +1,137 @@
+using System.Collections.Generic;
+using Alchemy.Inspector;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class SFXPlayer : MonoBehaviour
+public class SFXPlayer : Singleton<SFXPlayer>
 {
     [Header("EnemyDeath")]
-    public AudioClip[] _birdDeath;
-    public AudioClip[] _droneDeath;
-    public AudioClip[] _balloonDeath;
+    [FoldoutGroup("Enemy")] public AudioClip[] _birdDeath;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _birdDeathVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _droneDeath;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _droneDeathVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _balloonDeath;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _balloonDeathVolume;
 
     [Header("Player Fall")]
-    public AudioClip[] _playerWin;
-    public AudioClip[] _playerDeath;
-
-    [Header("Player")]
-    public AudioClip[] _playerJump;
-    public AudioClip[] _playerHurt;
-    public AudioClip[] _playerBounce;
-
-    [Header("End Music")]
-    public AudioClip[] _victory;
-    public AudioClip[] _defeat;
+    [FoldoutGroup("Player")] public AudioClip[] _playerSplash;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerSplashVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerDeath;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerDeathVolume;
 
     [Header("End Dialog")]
-    public AudioClip[] _winDialog;
+    [FoldoutGroup("Player")] public AudioClip[] _winDialog;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _winDialogVolume;
 
-    float _combo = 0f;
+    [Header("Player footsteps")]
+    [FoldoutGroup("Player")] public AudioClip[] _playerRightFootsteps;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerRightFootstepsVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerLeftFootsteps;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerLeftFootstepsVolume;
 
-    public void PlayRandomClip(AudioClip[] clipArray)
+    [Header("Player misc")]
+    [FoldoutGroup("Player")] public AudioClip[] _playerJump;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerJumpVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerHurt;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerHurtVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerBounce;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerBounceVolume;
+
+    [Header("End Music")]
+    [FoldoutGroup("Music")] public AudioClip[] _victory;
+    [FoldoutGroup("Music")][SerializeField][Range(0f, 1f)] float[] _victoryVolume;
+    [FoldoutGroup("Music")] public AudioClip[] _defeat;
+    [FoldoutGroup("Music")][SerializeField][Range(0f, 1f)] float[] _defeatVolume;
+
+    [Header("Lost Combo")]
+    [FoldoutGroup("Music")] public AudioClip[] _comboLost;
+    [FoldoutGroup("Music")][SerializeField][Range(0f, 1f)] float[] _comboLostVolume;
+
+    [Header("Button")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _button;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
+
+    [Header("Fireworks")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _fireworkExplosion;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkExplosionVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _fireworkWhistle;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkWhistleVolume;
+
+    Vector3 _cameraPosition;
+    PlayerMovement _playerMovement;
+    Dictionary<AudioClip[], float[]> _volumeDictionary = new();
+    GamePhase _gamePhase;
+
+    public void OnLevelLoad(int levelIndex)
+    {
+        _cameraPosition = FindAnyObjectByType<Camera>().transform.position;
+        _playerMovement = FindAnyObjectByType<PlayerMovement>();
+        _gamePhase = FindAnyObjectByType<MusicPlayer>()._gamePhase;
+
+        _volumeDictionary = new Dictionary<AudioClip[], float[]>()
+        {
+            [_birdDeath] = _birdDeathVolume,
+            [_droneDeath] = _droneDeathVolume,
+            [_balloonDeath] = _balloonDeathVolume,
+            [_playerSplash] = _playerSplashVolume,
+            [_playerDeath] = _playerDeathVolume,
+            [_playerJump] = _playerJumpVolume,
+            [_playerHurt] = _playerHurtVolume,
+            [_playerBounce] = _playerBounceVolume,
+            [_playerRightFootsteps] = _playerRightFootstepsVolume,
+            [_playerLeftFootsteps] = _playerLeftFootstepsVolume,
+            [_victory] = _victoryVolume,
+            [_defeat] = _defeatVolume,
+            [_comboLost] = _comboLostVolume,
+            [_winDialog] = _winDialogVolume,
+            [_button] = _buttonVolume,
+            [_fireworkExplosion] = _fireworkExplosionVolume,
+            [_fireworkWhistle] = _fireworkWhistleVolume,
+
+        };
+    }
+
+    public void PlayClipFromArray(AudioClip[] clipArray)
     {
         
         int indexToPlay;
         if (clipArray== _playerBounce)
         {
-            IncreaseCombo();
-            indexToPlay = (int)_combo;
+            indexToPlay = _playerMovement.PlayerCombo;
         }
         else if (clipArray == _playerHurt)
         {
-            ResetCombo();
             indexToPlay = Random.Range(0, clipArray.Length);
+        }
+        else if (clipArray == _comboLost)
+        {
+            indexToPlay = (int)_gamePhase;
         }
         else
         {
             indexToPlay = Random.Range(0, clipArray.Length);
         }
-        AudioSource.PlayClipAtPoint(clipArray[indexToPlay], transform.position);
+        PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
     }
 
-    void IncreaseCombo()
+    public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, float pitch = 1, bool dontDestroyOnLoad = false)
     {
-        _combo++;
-        _combo = Mathf.Clamp(_combo, 0f, _playerBounce.Length - 1f);
-    }
-
-    void ResetCombo()
-    {
-        _combo = 0f;
-        _combo = Mathf.Clamp(_combo, 0f, _playerBounce.Length - 1f);
+        GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+        tempGO.transform.position = pos; // set its position
+        AudioSource tempASource = tempGO.AddComponent<AudioSource>(); // add an audio source
+        if (dontDestroyOnLoad)
+        {
+            DontDestroyOnLoad(tempASource);
+        }
+        tempASource.clip = clip;
+        tempASource.pitch = pitch;
+        tempASource.volume = volume;
+        tempASource.rolloffMode = AudioRolloffMode.Linear;
+        tempASource.maxDistance = 200f;
+        // set other aSource properties here, if desired
+        tempASource.Play(); // start the sound
+        MonoBehaviour.Destroy(tempGO, tempASource.clip.length); // destroy object after clip duration (this will not account for whether it is set to loop)
+        return tempASource; // return the AudioSource reference
     }
 
 }

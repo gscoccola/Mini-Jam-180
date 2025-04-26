@@ -9,23 +9,27 @@ public class EnemyBounceable : MonoBehaviour
 {
     [SerializeField] GameObject _explosionPrefab;
     public EnemyType _enemytype;
-    public float _maxXValue = 150f;
+    float _maxXValue;
     bool _isDestroyed;
     Animator _animator;
-    SFXPlayer _SFXPlayer;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _SFXPlayer = FindAnyObjectByType<SFXPlayer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!_isDestroyed && collider.tag == "Player" )
+        if (!_isDestroyed && !collider.GetComponent<PlayerMovement>().IsDead)
         {
-            collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
-            _SFXPlayer.PlayRandomClip(_SFXPlayer._playerHurt);
+            if ( Vector3.Dot(collider.transform.position - transform.position, Vector3.left) > 0.2f)
+            {
+                collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype, false);
+            }
+            else
+            {
+                collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
+            }
             PlayDeathSFX();
             Die();
         }
@@ -33,18 +37,13 @@ public class EnemyBounceable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!_isDestroyed && collision.collider.tag == "Player")
+        if (!_isDestroyed && !collision.collider.GetComponent<PlayerMovement>().IsDead)
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
             PlayDeathSFX();
-            _SFXPlayer.PlayRandomClip(_SFXPlayer._playerBounce);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerBounce);
             Die();
         }
-    }
-
-    private void Update()
-    {
-        if (transform.position.x > _maxXValue) Destroy(gameObject);
     }
 
     void Die()
@@ -59,15 +58,15 @@ public class EnemyBounceable : MonoBehaviour
         switch (_enemytype)
         {
             case EnemyType.Bird:
-                _SFXPlayer.PlayRandomClip(_SFXPlayer._birdDeath);
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._birdDeath);
                 break;
 
             case EnemyType.Drone:
-                _SFXPlayer.PlayRandomClip(_SFXPlayer._droneDeath);
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneDeath);
                 break;
 
             case EnemyType.Balloon:
-                _SFXPlayer.PlayRandomClip(_SFXPlayer._balloonDeath);
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonDeath);
                 break;
         }
     }

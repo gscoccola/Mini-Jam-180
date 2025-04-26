@@ -1,0 +1,537 @@
+fileFormatVersion: 2
+guid: b4670802155d3634d829beaae9bb1e7e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4544488166004780725
+    second: You_Win_Spawn_241x81_0
+  - first:
+      213: -1873677864801225977
+    second: You_Win_Spawn_241x81_1
+  - first:
+      213: 2609847682693439502
+    second: You_Win_Spawn_241x81_2
+  - first:
+      213: -4703649456928464171
+    second: You_Win_Spawn_241x81_3
+  - first:
+      213: -628422938645693830
+    second: You_Win_Spawn_241x81_4
+  - first:
+      213: -4342534938090066087
+    second: You_Win_Spawn_241x81_5
+  - first:
+      213: 5642875605155499413
+    second: You_Win_Spawn_241x81_6
+  - first:
+      213: 6078730154892046443
+    second: You_Win_Spawn_241x81_7
+  - first:
+      213: -2922551128834193435
+    second: You_Win_Spawn_241x81_8
+  - first:
+      213: -5851562365858335399
+    second: You_Win_Spawn_241x81_9
+  - first:
+      213: 3957493553204871404
+    second: You_Win_Spawn_241x81_10
+  - first:
+      213: -3544552710430102583
+    second: You_Win_Spawn_241x81_11
+  - first:
+      213: -3855557727711368733
+    second: You_Win_Spawn_241x81_12
+  - first:
+      213: -6450584737972563681
+    second: You_Win_Spawn_241x81_13
+  - first:
+      213: -8919424747459658864
+    second: You_Win_Spawn_241x81_14
+  - first:
+      213: -1222726846056314357
+    second: You_Win_Spawn_241x81_15
+  - first:
+      213: 7950764636607323686
+    second: You_Win_Spawn_241x81_16
+  - first:
+      213: 1932481959317620518
+    second: You_Win_Spawn_241x81_17
+  - first:
+      213: -339822409526721131
+    second: You_Win_Spawn_241x81_18
+  - first:
+      213: 6767578473802924662
+    second: You_Win_Spawn_241x81_19
+  - first:
+      213: 1616525799576421401
+    second: You_Win_Spawn_241x81_20
+  - first:
+      213: 1766372601796058274
+    second: You_Win_Spawn_241x81_21
+  - first:
+      213: -3540111503924249407
+    second: You_Win_Spawn_241x81_22
+  - first:
+      213: 8934954959350877661
+    second: You_Win_Spawn_241x81_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be6ea4c8e3411f30800000000000000
+      internalID: 4544488166004780725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_1
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703b20db8eb5ff5e0800000000000000
+      internalID: -1873677864801225977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_2
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e00a1dcc3aa083420800000000000000
+      internalID: 2609847682693439502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_3
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d2e1db6db749beb0800000000000000
+      internalID: -4703649456928464171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_4
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7af055baa46747f0800000000000000
+      internalID: -628422938645693830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_5
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95f2b664b773cb3c0800000000000000
+      internalID: -4342534938090066087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_6
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59dc20537758f4e40800000000000000
+      internalID: 5642875605155499413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_7
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b60bbcf8edcfb5450800000000000000
+      internalID: 6078730154892046443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_8
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e7cbef8b330177d0800000000000000
+      internalID: -2922551128834193435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_9
+      rect:
+        serializedVersion: 2
+        x: 2169
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95538f9f7031bcea0800000000000000
+      internalID: -5851562365858335399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_10
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce0ccaf3b67dbe630800000000000000
+      internalID: 3957493553204871404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_11
+      rect:
+        serializedVersion: 2
+        x: 2651
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb6a27f6183fcec0800000000000000
+      internalID: -3544552710430102583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_12
+      rect:
+        serializedVersion: 2
+        x: 2892
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e960cc9cae4e7ac0800000000000000
+      internalID: -3855557727711368733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: You_Win_Spawn_241x81_13
+      rect:
+        serializedVersion: 2
+        x: 3133
+        y: 0
+        width: 241
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f11d6938b5bea76a0800000000000000
+      internalID: -6450584737972563681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fe50fcd1204c89e4a91e9058f86c51ab
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      You_Win_Spawn_241x81_0: 4544488166004780725
+      You_Win_Spawn_241x81_1: -1873677864801225977
+      You_Win_Spawn_241x81_10: 3957493553204871404
+      You_Win_Spawn_241x81_11: -3544552710430102583
+      You_Win_Spawn_241x81_12: -3855557727711368733
+      You_Win_Spawn_241x81_13: -6450584737972563681
+      You_Win_Spawn_241x81_2: 2609847682693439502
+      You_Win_Spawn_241x81_3: -4703649456928464171
+      You_Win_Spawn_241x81_4: -628422938645693830
+      You_Win_Spawn_241x81_5: -4342534938090066087
+      You_Win_Spawn_241x81_6: 5642875605155499413
+      You_Win_Spawn_241x81_7: 6078730154892046443
+      You_Win_Spawn_241x81_8: -2922551128834193435
+      You_Win_Spawn_241x81_9: -5851562365858335399
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b663b2cbbad7799458aeab695a604d0a, type: 3}
+  m_Name: AfternoonSet
+  m_EditorClassIdentifier: 
+  SkySprite: {fileID: 214582040267025251, guid: 0589591cb5ce7a143a57c75d01feb348, type: 3}
+  CloudsSprite: {fileID: 1062938222754789094, guid: 24ce159dd528ee64c9038b02e9ff03cb, type: 3}
+  MountainsSprite: {fileID: 3434072792666490558, guid: 49eb48603fd0bea4dbc80e6821d1144d, type: 3}
+  BuidlingsSprite: {fileID: 6454316093721598762, guid: 4ff4314890b860d4eb2e0b85c03d99c2, type: 3}
+  BushesSprite: {fileID: 2395028364090877961, guid: 24e077671ab05994eaab32769e6846e2, type: 3}

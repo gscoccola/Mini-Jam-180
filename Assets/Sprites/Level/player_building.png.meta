@@ -115,6 +115,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -122,17 +135,25 @@ TextureImporter:
       name: player_building_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 116
-        width: 114
-        height: 74
+        x: 0
+        y: 0
+        width: 132
+        height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 66, y: 32}
+        - {x: 21, y: 32}
+        - {x: 21, y: 42}
+        - {x: 7, y: 42}
+        - {x: 7, y: 32}
+        - {x: -66, y: 32}
+        - {x: -66, y: -32}
+        - {x: 66, y: -32}
+      tessellationDetail: 0
       bones: []
       spriteID: 2ac41cada2a33d580800000000000000
       internalID: -8803628890846049118
@@ -144,17 +165,17 @@ TextureImporter:
       name: player_building_1
       rect:
         serializedVersion: 2
-        x: 281
-        y: 119
-        width: 114
+        x: 132
+        y: 10
+        width: 132
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
       spriteID: 8cea5fbe6ca85ec80800000000000000
       internalID: -8294070551765995832
@@ -166,17 +187,17 @@ TextureImporter:
       name: player_building_2
       rect:
         serializedVersion: 2
-        x: 12
-        y: 31
-        width: 114
+        x: 264
+        y: 10
+        width: 132
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
       spriteID: c2ddff7540685c900800000000000000
       internalID: 704116269967727916
