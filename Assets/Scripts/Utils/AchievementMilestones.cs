@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class AchievementMilestones
 {
-    public string Title { get; }
     public bool WasUnlocked { get; set; }
     public bool WasShown { get; set; }
 
-    public AchievementMilestones(string title)
+    public AchievementMilestones(bool wasUnlocked = false, bool wasShown = false)
     {
-        Title = title;
+        WasUnlocked = wasUnlocked;
+        WasShown = wasShown;
     }
 }

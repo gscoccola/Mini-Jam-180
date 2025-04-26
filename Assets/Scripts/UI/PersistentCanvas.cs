@@ -12,9 +12,10 @@ public class PersistentCanvas : Singleton<PersistentCanvas>
     public void ShowPopup(string text)
     {
         GameObject popup = Instantiate(_popupPrefab, transform.position, Quaternion.identity, transform);
-        popup.GetComponent<RectTransform>().anchorMax = new Vector2(1f, 1f);
-        popup.GetComponent<RectTransform>().anchorMin = new Vector2(1f, 1f);
-        popup.GetComponent<RectTransform>().anchoredPosition = new Vector2(-300f, 85f);
+        RectTransform rectTransform = popup.GetComponent<RectTransform>();
+        rectTransform.anchorMax = new Vector2(0f, 1f);
+        rectTransform.anchorMin = new Vector2(0f, 1f);
+        rectTransform.anchoredPosition = new Vector2(300f, 85f);
         popup.GetComponent<Animator>().SetBool("IsActive", true);
         popup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Achievement"+ Environment.NewLine + "Unlocked: " + Environment.NewLine + text;
         StartCoroutine(IRemovePopup(popup));

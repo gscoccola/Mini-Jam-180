@@ -7,16 +7,16 @@ public class MusicPlayer : Singleton<MusicPlayer>
 {
     [SerializeField] float _fadeRate = 0.2f;
     [SerializeField] float _maxVolume2 = 0.2f;
-    [SerializeField] float _maxVolume3 = 0.35f;
     public GamePhase _gamePhase;
     AudioSource _audioSource;
     AudioSource _audioSource2;
-    AudioSource _audioSource3;
     AudioSource _audioSourceWind;
     [SerializeField] AudioResource _firstPhaseTrack;
     [SerializeField] AudioResource _firstPhaseComboTrack;
     [SerializeField] AudioResource _secondPhaseTrack;
     [SerializeField] AudioResource _secondPhaseComboTrack;
+    [SerializeField] AudioResource _thirdPhaseTrack;
+    [SerializeField] AudioResource _thirdPhaseComboTrack;
     [SerializeField] AudioResource _EpilogueTrack;
     public bool _isSecondTrackEnabled;
     public bool _beginFadeOutWind;
@@ -27,39 +27,44 @@ public class MusicPlayer : Singleton<MusicPlayer>
     {
         _audioSource = GetComponent<AudioSource>();
         _audioSource2 = transform.GetChild(0).GetComponent<AudioSource>();
-        _audioSourceWind = transform.GetChild(2).GetComponent<AudioSource>();
-        _audioSource3 = transform.GetChild(1).GetComponent<AudioSource>();
+        _audioSourceWind = transform.GetChild(1).GetComponent<AudioSource>();
 
     }
 
 
     public void OnLevelLoad(int levelIndex)
     {
-        if (new List<int> { 1, 2, 3, 4}.Contains(levelIndex)) _gamePhase = GamePhase.First;
-        else if (new List<int> { 5}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
+        _isSecondTrackEnabled = false;
+        GamePhase previousPhase = _gamePhase;
+        if (new List<int> { 1, 2, 3}.Contains(levelIndex)) _gamePhase = GamePhase.First;
+        else if (new List<int> { 4, 7}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
+        else if (new List<int> { 5}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
         else if(new List<int> {SceneManager.sceneCountInBuildSettings - 1 }.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
 
-        _isSecondTrackEnabled = false;
+        if (previousPhase == _gamePhase) return;
 
         if (_gamePhase == GamePhase.First)
         {
-            if (_audioSource is not null)
-            {
-                _audioSource.resource = _firstPhaseTrack;
-                _audioSource2.resource = _firstPhaseComboTrack;
-            }
-            
+            _audioSource.resource = _firstPhaseTrack;
+            _audioSource2.resource = _firstPhaseComboTrack;
         }
-        if (_gamePhase == GamePhase.Second)
+        else if (_gamePhase == GamePhase.Second)
         {
             _audioSource.resource = _secondPhaseTrack;
             _audioSource2.resource = _secondPhaseComboTrack;
         }
-        if (_gamePhase == GamePhase.Epilogue)
+        else if (_gamePhase == GamePhase.Third)
+        {
+            _audioSource.resource = _thirdPhaseTrack;
+            _audioSource2.resource = _thirdPhaseComboTrack;
+        }
+
+        else if(_gamePhase == GamePhase.Epilogue)
         {
             _audioSource.resource = _EpilogueTrack;
             _audioSource.volume = 0.6f;
         }
+        _isPlayingMusic = false;
     }
 
     private void Update()
@@ -73,11 +78,9 @@ public class MusicPlayer : Singleton<MusicPlayer>
         if (_isSecondTrackEnabled)
         {
             _audioSource2.volume = Mathf.MoveTowards(_audioSource2.volume, _maxVolume2, _fadeRate * Time.deltaTime);
-            if (_gamePhase == GamePhase.First)  _audioSource3.volume = Mathf.MoveTowards(_audioSource3.volume, _maxVolume3, _fadeRate * Time.deltaTime);
             return;
         }
         _audioSource2.volume = 0f;
-        if (_gamePhase == GamePhase.First) _audioSource3.volume = 0f;
 
     }
 
@@ -86,7 +89,6 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _isPlayingMusic = false;
         _audioSource.Stop();
         _audioSource2.Stop();
-        if (_gamePhase == GamePhase.First) _audioSource3.Stop();
     }
 
     public void Play()
@@ -94,7 +96,6 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _isPlayingMusic = true;
         _audioSource.Play();
         _audioSource2.Play();
-        if (_gamePhase == GamePhase.First) _audioSource3.Play();
     }
 
     public void PlayWind()
@@ -110,5 +111,6 @@ public enum GamePhase
 {
     First,
     Second,
+    Third,
     Epilogue,
 }

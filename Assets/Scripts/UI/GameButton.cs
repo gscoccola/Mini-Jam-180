@@ -88,6 +88,10 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
             case ButtonType.Next: 
                 _gameManager.NextLevel();
                 break;
+            case ButtonType.DeleteSavedData:
+                PersistentInfo.Instance.ResetData();
+                _gameManager.LoadLevel(0);
+                break;
         }
     }
 
@@ -105,4 +109,5 @@ public enum ButtonType
     Tutorial,
     Achievements,
     BackFromAchievements,
+    DeleteSavedData,
 }

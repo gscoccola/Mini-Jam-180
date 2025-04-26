@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] int _epilogueLevelIndex = 6;
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour
 
     CameraScript _cameraScript;
     Camera _camera;
-    PersistentCanvas AchievementPopup;
 
     LevelLoader _levelLoader;
     Spawner _spawner;
@@ -37,27 +37,27 @@ public class GameManager : MonoBehaviour
         _levelLoader = FindAnyObjectByType<LevelLoader>();
         _spawner = FindAnyObjectByType<Spawner>();
         _cameraScript = FindAnyObjectByType<CameraScript>();
-        AchievementPopup = FindAnyObjectByType<PersistentCanvas>();
+
+        _isPlayingOnMobile = Application.isMobilePlatform;
+        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        
     }
 
     private void Start()
     {
-        _isPlayingOnMobile = Application.isMobilePlatform;
-        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
+        PersistentInfo.Instance.SaveData();
+        if (activeSceneIndex == 0 && _achievementsMenu is not null) _achievementsMenu.gameObject.SetActive(false);
         SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
         MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
 
 
         if (activeSceneIndex==0) ActivateProperTutorial();
 
-        if (activeSceneIndex == 0 && _achievementsMenu is not null) _achievementsMenu.gameObject.SetActive(false);
-
         if (activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
 
-        
-        if (activeSceneIndex == 0 || activeSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
+        if (activeSceneIndex == 0 || activeSceneIndex == _epilogueLevelIndex)
         {
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
@@ -73,14 +73,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
             MusicPlayer.Instance._beginFadeOutWind = true;
             _cameraScript.SwitchToPlayerCam();
             StartLevel();
         }
-
-        
-
     }
+
     public void AlmostStartLevel()
     {
         MusicPlayer.Instance._beginFadeOutWind = true;
@@ -122,8 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void ReloadLevel()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        LoadLevel(currentSceneIndex);
+        LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Lose()
@@ -232,7 +230,7 @@ public class GameManager : MonoBehaviour
     public void OnAchievementUnlocked(int achievementIndex)
     {
         if (PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked) return;
-        PersistentCanvas.Instance.ShowPopup(PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].Title);
-        PersistentInfo.Instance.UnlockAchievement(achievementIndex);
+        PersistentCanvas.Instance.ShowPopup(PersistentInfo.Instance.AchievementTitles[achievementIndex]);
+        PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;
     }
 }

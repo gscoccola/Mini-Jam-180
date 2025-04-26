@@ -25,9 +25,16 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         _animator = GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        
+    }
+
+
     private void Start()
     {
-         _achievementTitle.text = _achievement.GetName();
+        //PersistentInfo.Instance.AchievementCompletionInfo.Add(GetId(), new AchievementMilestones(GetTitle()));
+        _achievementTitle.text = _achievement.GetName();
         if (_isUnlocked)
         {
             _achievementDescription.text = _achievement.GetDescription();
@@ -36,9 +43,10 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         }
         _achievementDescription.text = "????";
         _achievementDescription.fontSize = 180f;
+        
     }
 
-    private void AdjustPopup()
+    public void AdjustPopup()
     {
         if (transform.position.x > Screen.width /2)
         _popup.transform.localPosition = new Vector3(-_popup.transform.localPosition.x, _popup.transform.localPosition.y, 0f);
@@ -81,6 +89,8 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
     public void Unlock()
     {
         _isUnlocked = true;
+        _achievementDescription.text = _achievement.GetDescription();
+        _achievementDescription.fontSize = 80f;
     }
 
 }

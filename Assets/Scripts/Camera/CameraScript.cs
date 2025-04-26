@@ -11,7 +11,6 @@ public class CameraScript : MonoBehaviour
     [SerializeField] float _cameraMaxSpeed = 25f;
     float _cameraHorizontalSpeed;
     float _cameraVerticalSpeed;
-    //[SerializeField] float _endDelay = 1f;
     [SerializeField] Transform _virtualTarget;
     CinemachineCamera _playerCamera;
     CinemachineCamera _panCamera;
