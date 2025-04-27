@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         else if (!PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasShown)
         {
             PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasShown = true;
-            if (_cameraScript is not null) StartCoroutine(_cameraScript.ICameraPan());
+            if (_cameraScript != null) StartCoroutine(_cameraScript.ICameraPan());
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
         }
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         {
             if (!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
             MusicPlayer.Instance._beginFadeOutWind = true;
-            _cameraScript.SwitchToPlayerCam();
+            if (_cameraScript != null) _cameraScript.SwitchToPlayerCam();
             StartLevel();
         }
     }
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         if(!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
-        _spawner.StartSpawning();
+        if (_spawner != null) _spawner.StartSpawning();
         FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }
 
@@ -229,6 +229,11 @@ public class GameManager : MonoBehaviour
 
     public void OnAchievementUnlocked(int achievementIndex)
     {
+        if (PersistentInfo.Instance.AchievementTitles.ContainsKey(achievementIndex) == false)
+        {
+            Debug.LogError($"Achievement with index {achievementIndex} does not exist.");
+            return;
+        }
         if (PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked) return;
         PersistentCanvas.Instance.ShowPopup(PersistentInfo.Instance.AchievementTitles[achievementIndex]);
         PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;

@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class AchievementButton : MonoBehaviour, IPointerDownHandler
 {
@@ -18,16 +17,9 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
     Animator _animator;
     bool _isOnCooldown;
 
-
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-    }
-
-    private void OnEnable()
-    {
-        
     }
 
 

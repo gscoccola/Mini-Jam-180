@@ -1,7 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerEndlessTeleporter : MonoBehaviour
 {
@@ -57,6 +57,7 @@ public class PlayerEndlessTeleporter : MonoBehaviour
         yield return new WaitForSeconds(period -2f);
         _fireworkSpawner.Begin();
         _gameManager.OnAchievementUnlocked(2);
+        PersistentInfo.Instance.LevelCompletionInfo[SceneManager.GetActiveScene().buildIndex].WasBeaten = true;
 
         yield return new WaitForSeconds(period +2);
         _credits.gameObject.SetActive(true);
