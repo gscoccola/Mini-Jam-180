@@ -204,8 +204,8 @@ MonoBehaviour:
 
     Out of Bounds'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b03db5c39d9b0c4cafc6679190fe025, type: 2}
-  m_sharedMaterial: {fileID: 6767477810016230126, guid: 7b03db5c39d9b0c4cafc6679190fe025, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: df1121373a11681418305365fc4034a8, type: 2}
+  m_sharedMaterial: {fileID: 5862746391149027187, guid: df1121373a11681418305365fc4034a8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -229,8 +229,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 126
+  m_fontSizeBase: 126
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

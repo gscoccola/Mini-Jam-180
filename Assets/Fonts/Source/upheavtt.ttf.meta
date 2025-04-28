@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: bb2d4783dfc22ab4a8d7fca5c56c646d
+guid: fa810e6c00a60d54295baa4815bdfd4b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
+  fontSize: 20
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
@@ -12,7 +12,7 @@ TrueTypeFontImporter:
   - Upheaval TT (BRK)
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

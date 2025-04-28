@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+        PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
         LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
