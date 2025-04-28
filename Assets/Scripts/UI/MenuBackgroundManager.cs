@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 
 public class MenuBackgroundManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MenuBackgroundManager : MonoBehaviour
     [SerializeField] SpriteRenderer _buildings;
     [SerializeField] SpriteRenderer _bushes;
 
+    [SerializeField] TextMeshProUGUI _creditsText;
 
     [SerializeField] List<BackgroundSetSO> backgroundSets;
 
@@ -21,6 +23,7 @@ public class MenuBackgroundManager : MonoBehaviour
         _buildings.sprite = backgroundSets[maxLevelIndex].BuidlingsSprite;
         _sky.sprite = backgroundSets[maxLevelIndex].SkySprite;
         _clouds.sprite = backgroundSets[maxLevelIndex].CloudsSprite;
+        _creditsText.color = backgroundSets[maxLevelIndex].ContrastingColor;
         if (_bushes != null) _bushes.sprite = backgroundSets[maxLevelIndex].BushesSprite;
     }
 }

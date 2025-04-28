@@ -641,7 +641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.625783
+      value: -15.615748
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1054,6 +1054,10 @@ PrefabInstance:
       value: Enemy Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
+      propertyPath: _mapHeight
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
       propertyPath: _spawnXOffset
       value: 30
       objectReference: {fileID: 0}
@@ -1097,7 +1101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 629.90857, y: -69.21103}
+  m_AnchoredPosition: {x: 629.90857, y: -79.4}
   m_SizeDelta: {x: 1213.416, y: 129.822}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1605949573
@@ -1122,8 +1126,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Score 1000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b03db5c39d9b0c4cafc6679190fe025, type: 2}
-  m_sharedMaterial: {fileID: 6767477810016230126, guid: 7b03db5c39d9b0c4cafc6679190fe025, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: df1121373a11681418305365fc4034a8, type: 2}
+  m_sharedMaterial: {fileID: 5862746391149027187, guid: df1121373a11681418305365fc4034a8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1147,8 +1151,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 112.4
-  m_fontSizeBase: 112.4
+  m_fontSize: 125
+  m_fontSizeBase: 125
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

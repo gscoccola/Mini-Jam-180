@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _startMenu;
     [SerializeField] InGameMenu _tutorialMenu;
     [SerializeField] InGameMenu _levelSelectMenu;
+    [SerializeField] InGameMenu _deleteDataMenu;
     [SerializeField] GameObject _confetti;
 
     CameraScript _cameraScript;
@@ -179,8 +180,28 @@ public class GameManager : MonoBehaviour
     
     internal void ToggleAchievements()
     {
+        if (_deleteDataMenu.gameObject.activeSelf)
+        {
+            _deleteDataMenu.gameObject.SetActive(false);
+            _achievementsMenu.gameObject.SetActive(true);
+            return;
+        }
         _achievementsMenu.gameObject.SetActive(!_achievementsMenu.gameObject.activeSelf);
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
+    }
+
+    internal void DeleteData()
+    {
+        if (!_deleteDataMenu.gameObject.activeSelf)
+        {
+            _deleteDataMenu.gameObject.SetActive(true);
+            _achievementsMenu.gameObject.SetActive(false);
+            return;
+        }
+        _achievementsMenu.gameObject.SetActive(true);
+        PersistentInfo.Instance.ResetData();
+        _achievementsMenu.gameObject.SetActive(false);
+        LoadLevel(0);
     }
 
     internal void TutorialOrLevelsMenu()

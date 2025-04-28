@@ -6,6 +6,7 @@ public class AchievementButtonManager : MonoBehaviour
 {
     Dictionary<int, AchievementButton> _achievementButtonsById = new();
     [SerializeField] GameButton _backFromAchievements;
+    [SerializeField] GameButton _deleteData;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class AchievementButtonManager : MonoBehaviour
             button.PopupClose += CloseAllPopups;
         }
         _backFromAchievements.PopupClose += CloseAllPopups;
+        _deleteData.PopupClose += CloseAllPopups;
     }
 
     private void Start()

@@ -83,14 +83,14 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
                 break;
             case ButtonType.BackFromAchievements:
                 _gameManager.ToggleAchievements();
-                PopupClose.Invoke(this, new ClosePopupEventArgs());
+                if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 break;
             case ButtonType.Next: 
                 _gameManager.NextLevel();
                 break;
             case ButtonType.DeleteSavedData:
-                PersistentInfo.Instance.ResetData();
-                _gameManager.LoadLevel(0);
+                if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
+                _gameManager.DeleteData();
                 break;
         }
     }

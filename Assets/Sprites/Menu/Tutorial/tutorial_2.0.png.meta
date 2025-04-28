@@ -149,7 +149,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 100
+        width: 33
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -161,6 +161,28 @@ TextureImporter:
       bones: []
       spriteID: 18a01ea5c0c0fcda0800000000000000
       internalID: -5922501737765074303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_2.0_1
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 0
+        width: 33
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f6e6ce8c75fed94ab62b029c3072ac9
+      internalID: -2023367662
       vertices: []
       indices: 
       edges: []
@@ -180,6 +202,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       tutorial_2.0_0: -5922501737765074303
+      tutorial_2.0_1: -2023367662
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -25,23 +25,22 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
 
     private void Start()
     {
-        //PersistentInfo.Instance.AchievementCompletionInfo.Add(GetId(), new AchievementMilestones(GetTitle()));
         _achievementTitle.text = _achievement.GetName();
         if (_isUnlocked)
         {
             _achievementDescription.text = _achievement.GetDescription();
-            _achievementDescription.fontSize = 80f;
+            _achievementDescription.fontSize = 100f;
             return;
         }
         _achievementDescription.text = "????";
-        _achievementDescription.fontSize = 180f;
+        _achievementDescription.fontSize = 200f;
         
     }
 
     public void AdjustPopup()
     {
         if (transform.position.x > Screen.width /2)
-        _popup.transform.localPosition = new Vector3(-_popup.transform.localPosition.x, _popup.transform.localPosition.y, 0f);
+        _popup.transform.localPosition = new Vector3(- Mathf.Abs(_popup.transform.localPosition.x), _popup.transform.localPosition.y, 0f);
     }
 
     public int GetId()

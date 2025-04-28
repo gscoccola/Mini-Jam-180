@@ -17,7 +17,7 @@ public class PersistentCanvas : Singleton<PersistentCanvas>
         rectTransform.anchorMin = new Vector2(0f, 1f);
         rectTransform.anchoredPosition = new Vector2(300f, 85f);
         popup.GetComponent<Animator>().SetBool("IsActive", true);
-        popup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Achievement"+ Environment.NewLine + "Unlocked: " + Environment.NewLine + text;
+        popup.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = text;
         StartCoroutine(IRemovePopup(popup));
     }
 
