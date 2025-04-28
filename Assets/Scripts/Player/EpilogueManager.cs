@@ -3,11 +3,12 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerEndlessTeleporter : MonoBehaviour
+public class EpilogueManager : MonoBehaviour
 {
     Transform _playerTransform;
     bool _isGameOver;
     [SerializeField] InGameMenu _credits;
+    [SerializeField] InGameMenu _postCreditButtons;
     CinemachineCamera _camera;
     float velocity;
     CinemachineConfiner2D _confiner;
@@ -61,5 +62,8 @@ public class PlayerEndlessTeleporter : MonoBehaviour
 
         yield return new WaitForSeconds(period +2);
         _credits.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(period/2);
+        _postCreditButtons.gameObject.SetActive(true);
     }
 }
