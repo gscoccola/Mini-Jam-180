@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   Name: First Splash
+  NameEsp: Chapuzon
   Description: Complete the first level
+  DescriptionEsp: Completa el primer Nivel

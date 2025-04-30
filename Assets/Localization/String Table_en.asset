@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: String Table_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e172e9420e2c1d54cabc5fe03eb89c24, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 113753739264
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2074662162432
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14374735466496
+    m_Localized: Level Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14444633542656
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14512841314304
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14569669939200
+    m_Localized: Epilogue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14651815383040
+    m_Localized: Endless
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14867863982080
+    m_Localized: 'Game Design:
+
+      E. Pellegrino
+
+      Programming and UI:
+
+      G.
+      Scoccola
+
+      Music and Sound Design: A. Lobos
+
+      Pixel Art: rayryuk'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15143362646016
+    m_Localized: Achievements
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15206864408576
+    m_Localized: 'Delete
+
+      Data'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15345687482368
+    m_Localized: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15377077653504
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15417858871296
+    m_Localized: Delete all game data?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15671370993664
+    m_Localized: Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15721258045440
+    m_Localized: Or
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15742271508480
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21179578470400
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21469794947072
+    m_Localized: Paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21774397886464
+    m_Localized: Next
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _creditsMenu;
     [SerializeField] InGameMenu _achievementsMenu;
     [SerializeField] InGameMenu _startMenu;
+    [SerializeField] InGameMenu _languageMenu;
     [SerializeField] InGameMenu _tutorialMenu;
     [SerializeField] InGameMenu _levelSelectMenu;
     [SerializeField] InGameMenu _deleteDataMenu;
@@ -49,8 +51,10 @@ public class GameManager : MonoBehaviour
     {
         PersistentInfo.Instance.SaveData();
         if (activeSceneIndex == 0 && _achievementsMenu is not null) _achievementsMenu.gameObject.SetActive(false);
-        SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
         MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
+        SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
+
+        
 
 
         if (activeSceneIndex==0) ActivateProperTutorial();
@@ -259,5 +263,18 @@ public class GameManager : MonoBehaviour
         if (PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked) return;
         PersistentCanvas.Instance.ShowPopup(PersistentInfo.Instance.AchievementTitles[achievementIndex]);
         PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;
+    }
+
+    public void SetLocale(string locale)
+    {
+        _languageMenu.gameObject.SetActive(false);
+        _startMenu.gameObject.SetActive(true);
+        StartCoroutine(ISetLocale(locale));
+    }
+
+    public IEnumerator ISetLocale(string locale)
+    {
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales.Find(x => x.Identifier.Code == locale);
     }
 }

@@ -92,6 +92,12 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
                 if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 _gameManager.DeleteData();
                 break;
+            case ButtonType.SetLocaleArg:
+                _gameManager.SetLocale("es");
+                break;
+            case ButtonType.SetLocaleEng:
+                _gameManager.SetLocale("en");
+                break;
         }
     }
 
@@ -110,4 +116,6 @@ public enum ButtonType
     Achievements,
     BackFromAchievements,
     DeleteSavedData,
+    SetLocaleArg,
+    SetLocaleEng,
 }

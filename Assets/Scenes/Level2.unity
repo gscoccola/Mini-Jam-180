@@ -40966,7 +40966,7 @@ PrefabInstance:
     - target: {fileID: 4272824297058417056, guid: 1e46bdda5b7363d459d80331e787ac14, type: 3}
       propertyPath: AchievementPopup
       value: 
-      objectReference: {fileID: 3923181457431929667}
+      objectReference: {fileID: 0}
     - target: {fileID: 4272824297058417056, guid: 1e46bdda5b7363d459d80331e787ac14, type: 3}
       propertyPath: _mobileInputButtons
       value: 
@@ -41459,7 +41459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.825457
+      value: 21.80827
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -46147,6 +46147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6092633833651729649, guid: adb3730febea252498e4509e99b9980c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46172,17 +46176,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e777a604f944aed4d9d7b0a4afcbf2de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3923181457431929667 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1578286625977635259, guid: adb3730febea252498e4509e99b9980c, type: 3}
-  m_PrefabInstance: {fileID: 3923181457431929664}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d351f11a9fe82cb4fa94497dfbe661e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8105271187419113874
