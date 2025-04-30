@@ -22,7 +22,7 @@ public class AchievementInfoSO: ScriptableObject
 
     public string GetName()
     {
-        if (LocalizationSettings.SelectedLocale.Identifier.Code == "es")
+        if (PersistentInfo.Instance.LanguageCode == "es")
         {
             return NameEsp;
         }
@@ -34,7 +34,7 @@ public class AchievementInfoSO: ScriptableObject
 
     public string GetDescription()
     {
-        if (LocalizationSettings.SelectedLocale.Identifier.Code == "es")
+        if (PersistentInfo.Instance.LanguageCode == "es")
         {
             return DescriptionEsp;
         }

@@ -15,84 +15,85 @@ MonoBehaviour:
   m_TableCollectionName: String Table
   m_TableCollectionNameGuidString: e172e9420e2c1d54cabc5fe03eb89c24
   m_Entries:
-  - m_Id: 113753739264
-    m_Key: Start
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2074662162432
-    m_Key: Credits
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14374735466496
-    m_Key: Level Select
+  - m_Id: 15143362646016
+    m_Key: Achievements
     m_Metadata:
       m_Items: []
   - m_Id: 14444633542656
     m_Key: Back
     m_Metadata:
       m_Items: []
-  - m_Id: 14512841314304
-    m_Key: Tutorial
+  - m_Id: 15377077653504
+    m_Key: Cancel
     m_Metadata:
       m_Items: []
-  - m_Id: 14569669939200
-    m_Key: Epilogue
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14651815383040
-    m_Key: Endless
+  - m_Id: 2074662162432
+    m_Key: Credits
     m_Metadata:
       m_Items: []
   - m_Id: 14867863982080
     m_Key: CreditsLong
     m_Metadata:
       m_Items: []
-  - m_Id: 15143362646016
-    m_Key: Achievements
-    m_Metadata:
-      m_Items: []
-  - m_Id: 15206864408576
-    m_Key: DeleteData
-    m_Metadata:
-      m_Items: []
   - m_Id: 15345687482368
     m_Key: Delete
-    m_Metadata:
-      m_Items: []
-  - m_Id: 15377077653504
-    m_Key: Cancel
     m_Metadata:
       m_Items: []
   - m_Id: 15417858871296
     m_Key: DeleteAllGameData?
     m_Metadata:
       m_Items: []
-  - m_Id: 15671370993664
-    m_Key: Move
+  - m_Id: 15206864408576
+    m_Key: DeleteData
     m_Metadata:
       m_Items: []
-  - m_Id: 15721258045440
-    m_Key: Or
+  - m_Id: 14651815383040
+    m_Key: Endless
     m_Metadata:
       m_Items: []
-  - m_Id: 15742271508480
-    m_Key: Reset
+  - m_Id: 14569669939200
+    m_Key: Epilogue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14374735466496
+    m_Key: Level Select
     m_Metadata:
       m_Items: []
   - m_Id: 21179578470400
     m_Key: Menu
     m_Metadata:
       m_Items: []
-  - m_Id: 21469794947072
-    m_Key: Paused
+  - m_Id: 15671370993664
+    m_Key: Move
     m_Metadata:
       m_Items: []
   - m_Id: 21774397886464
     m_Key: Next
     m_Metadata:
       m_Items: []
+  - m_Id: 15721258045440
+    m_Key: Or
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21469794947072
+    m_Key: Paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15742271508480
+    m_Key: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113753739264
+    m_Key: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14512841314304
+    m_Key: Tutorial
+    m_Metadata:
+      m_Items: []
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 2584585279905726746
   m_KeyGenerator:
     rid: 2584585278328144093
   references:
@@ -102,3 +103,7 @@ MonoBehaviour:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
         m_CustomEpoch: 1745967009126
+    - rid: 2584585279905726746
+      type: {class: PreloadAssetTableMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_PreloadBehaviour: 1

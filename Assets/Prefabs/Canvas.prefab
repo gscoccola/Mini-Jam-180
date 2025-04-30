@@ -1819,7 +1819,7 @@ MonoBehaviour:
           value: 400
         - localeIdentifier:
             m_Code: es
-          value: 7353
+          value: 750
 --- !u!224 &8446625760971914998 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3374007649485858958, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}

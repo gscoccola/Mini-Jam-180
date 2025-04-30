@@ -44,13 +44,18 @@ public class GameManager : MonoBehaviour
         _isPlayingOnMobile = Application.isMobilePlatform;
         activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        
     }
 
     private void Start()
     {
+
+        if (activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)
+        {
+            _languageMenu.gameObject.SetActive(false);
+            _startMenu.gameObject.SetActive(true);
+        }
+        
         PersistentInfo.Instance.SaveData();
-        if (activeSceneIndex == 0 && _achievementsMenu is not null) _achievementsMenu.gameObject.SetActive(false);
         MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
         SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
 
@@ -255,7 +260,7 @@ public class GameManager : MonoBehaviour
 
     public void OnAchievementUnlocked(int achievementIndex)
     {
-        if (PersistentInfo.Instance.AchievementTitles.ContainsKey(achievementIndex) == false)
+        if (!PersistentInfo.Instance.AchievementCompletionInfo.ContainsKey(achievementIndex))
         {
             Debug.LogError($"Achievement with index {achievementIndex} does not exist.");
             return;
@@ -267,8 +272,7 @@ public class GameManager : MonoBehaviour
 
     public void SetLocale(string locale)
     {
-        _languageMenu.gameObject.SetActive(false);
-        _startMenu.gameObject.SetActive(true);
+        PersistentInfo.Instance._wasLanguageSet = true;
         StartCoroutine(ISetLocale(locale));
     }
 
@@ -276,5 +280,9 @@ public class GameManager : MonoBehaviour
     {
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales.Find(x => x.Identifier.Code == locale);
+
+        PersistentInfo.Instance.LanguageCode = locale;
+        PersistentInfo.Instance.AchievementNameDictSetup();
+        LoadLevel(0);
     }
 }

@@ -2,8 +2,9 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
 using System;
+using System.Collections;
+using UnityEngine.Localization;
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
@@ -12,14 +13,43 @@ public class PersistentInfo : Singleton<PersistentInfo>
     public Dictionary<int, AchievementMilestones> AchievementCompletionInfo;
     public Dictionary<int, string> AchievementTitles;
 
+    public string LanguageCode;
+
+    [SerializeField] private AchievementInfoSO[] _achievements;
+
+    public bool _wasLanguageSet;
+
     private void OnEnable()
     {
-        LevelDictSetup();
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         AchievementDictSetup();
+        LevelDictSetup();
         LoadData();
     }
 
     private void AchievementDictSetup()
+    {
+        AchievementCompletionInfo = new();
+        foreach (AchievementInfoSO achievement in _achievements)
+        {
+            AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones();
+        }
+    }
+
+    public void AchievementNameDictSetup()
+    {
+        AchievementTitles = new();
+        foreach (AchievementInfoSO achievement in _achievements)
+        {
+            AchievementTitles[achievement.GetId()] = achievement.GetName();
+        }
+    }
+
+    /*private void AchievementDictSetup()
     {
     AchievementCompletionInfo = new();
     AchievementTitles = new();
@@ -29,9 +59,9 @@ public class PersistentInfo : Singleton<PersistentInfo>
             AchievementCompletionInfo[button.GetId()] = new AchievementMilestones();
             AchievementTitles[button.GetId()] = button.GetTitle();
         }
-    }
+    }*/
 
-    private void LevelDictSetup()
+    public void LevelDictSetup()
     {
         LevelCompletionInfo = new();
         int sceneCount = SceneManager.sceneCountInBuildSettings;
@@ -80,6 +110,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
                 AchievementCompletionInfo[(int)Char.GetNumericValue(s[0])] = new AchievementMilestones(BoolFromChar(s[1]), BoolFromChar(s[2]));
             }
         }
+        else    Debug.Log("No achievement data found");
     }
 
     public void ResetData()
@@ -94,4 +125,9 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
 } 
 
+public enum Language
+{
+    English,
+    Spanish,
+}
 
