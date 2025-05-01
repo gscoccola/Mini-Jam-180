@@ -63,6 +63,7 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         SetPopup(!wasPressed);
         StartCoroutine(IButtonCooldown());
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+        VibrationHandler.Instance.LightVibrate();
     }
 
     IEnumerator IButtonCooldown()

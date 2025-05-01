@@ -19,6 +19,9 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Parameters")][SerializeField] private float _droneSpawnChance;
     [FoldoutGroup("Parameters")][SerializeField] private float _balloonSpawnChance;
 
+    [Header("Endless mode?")]
+    [FoldoutGroup("Parameters")][SerializeField] private bool _isEndlessLevel;
+
     [Header("Reference")]
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBird;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabDrone;
@@ -135,5 +138,10 @@ public class Spawner : MonoBehaviour
         }
 
         _worldMax = collider.bounds.max.x + 0.6f;
+    }
+
+    public void SetWorldMax(float worldMax)
+    {
+        _worldMax = worldMax;
     }
 }

@@ -17,7 +17,7 @@ public class AchievementButtonManager : MonoBehaviour
             button.PopupClose += CloseAllPopups;
         }
         _backFromAchievements.PopupClose += CloseAllPopups;
-        _deleteData.PopupClose += CloseAllPopups;
+        if (_deleteData != null) _deleteData.PopupClose += CloseAllPopups;
     }
 
     private void Start()

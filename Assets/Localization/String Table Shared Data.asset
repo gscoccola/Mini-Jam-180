@@ -91,6 +91,10 @@ MonoBehaviour:
     m_Key: Tutorial
     m_Metadata:
       m_Items: []
+  - m_Id: 435229265252352
+    m_Key: Score
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 2584585279905726746

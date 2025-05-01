@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _mobileInputButtons;
     [SerializeField] InGameMenu _creditsMenu;
     [SerializeField] InGameMenu _achievementsMenu;
+    [SerializeField] InGameMenu _achievementsMenuInGame;
     [SerializeField] InGameMenu _startMenu;
     [SerializeField] InGameMenu _languageMenu;
     [SerializeField] InGameMenu _tutorialMenu;
@@ -28,9 +29,14 @@ public class GameManager : MonoBehaviour
 
     LevelLoader _levelLoader;
     Spawner _spawner;
+
+    ScoreKeeper _scoreKeeper;
+
     bool _isPlayingOnMobile;
     int activeSceneIndex;
     bool _isPaused;
+
+    InGameMenu _lastMenu;
 
 
 
@@ -43,7 +49,7 @@ public class GameManager : MonoBehaviour
 
         _isPlayingOnMobile = Application.isMobilePlatform;
         activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
+        _scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
     }
 
     private void Start()
@@ -58,9 +64,6 @@ public class GameManager : MonoBehaviour
         PersistentInfo.Instance.SaveData();
         MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
         SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
-
-        
-
 
         if (activeSceneIndex==0) ActivateProperTutorial();
 
@@ -137,6 +140,7 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
+        if (_scoreKeeper != null) _scoreKeeper.Set(false);
         _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
         StartCoroutine(ILose());
@@ -144,6 +148,7 @@ public class GameManager : MonoBehaviour
 
     public void OutOfBounds()
     {
+        if (_scoreKeeper != null) _scoreKeeper.Set(false);
         _mobileInputButtons.gameObject.SetActive(false);
         OnAchievementUnlocked(3);
         StopAllCoroutines();
@@ -152,6 +157,7 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
+        if (_scoreKeeper != null) _scoreKeeper.Set(false);
         _mobileInputButtons.gameObject.SetActive(false);
         PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
         if (activeSceneIndex == 1) OnAchievementUnlocked(1);
@@ -164,6 +170,7 @@ public class GameManager : MonoBehaviour
         _pauseButton.gameObject.SetActive(false);
         MusicPlayer.Instance.Pause();
         yield return new WaitForSeconds(_endDelay);
+        VibrationHandler.Instance.HeavyVibrate();
         _loseMenu.gameObject.SetActive(true);
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
     }
@@ -173,6 +180,7 @@ public class GameManager : MonoBehaviour
         _pauseButton.gameObject.SetActive(false);
         MusicPlayer.Instance.Pause();
         yield return new WaitForSeconds(_endDelay);
+        VibrationHandler.Instance.HeavyVibrate();
         _winMenu.gameObject.SetActive(true);
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
         yield return new WaitForSeconds(1.2f);
@@ -284,5 +292,22 @@ public class GameManager : MonoBehaviour
         PersistentInfo.Instance.LanguageCode = locale;
         PersistentInfo.Instance.AchievementNameDictSetup();
         LoadLevel(0);
+    }
+
+    public void AchievementMenuInGame()
+    {
+        if (_winMenu.gameObject.activeSelf) _lastMenu = _winMenu;
+        else if (_loseMenu.gameObject.activeSelf) _lastMenu = _loseMenu;
+        else if (_pauseMenu.gameObject.activeSelf) _lastMenu = _pauseMenu;
+        else if (_creditsMenu.gameObject.activeSelf) _lastMenu = _creditsMenu;
+
+        _achievementsMenuInGame.gameObject.SetActive(true);
+        _lastMenu.gameObject.SetActive(false);
+    }
+
+    public void BackFromAchievementMenuInGame()
+    {
+        _achievementsMenuInGame.gameObject.SetActive(false);
+        _lastMenu.gameObject.SetActive(true);
     }
 }

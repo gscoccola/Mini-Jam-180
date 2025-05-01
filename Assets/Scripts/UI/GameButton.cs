@@ -25,9 +25,10 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_isOnCooldown) return;
+        VibrationHandler.Instance.LightVibrate();
         _isOnCooldown = true;
         _animator.SetBool("isPressed", !_animator.GetBool("isPressed")) ;
-        if (!_isInstant) StartCoroutine(ILoadScene());
+        if (!_isInstant) StartCoroutine(IPerformAction());
         else 
         {
             PerfomButtonAction();
@@ -44,7 +45,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
     }
 
 
-    IEnumerator ILoadScene()
+    IEnumerator IPerformAction()
     {
         
         yield return new WaitForSecondsRealtime(_menuClickDelay);
@@ -85,7 +86,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
                 _gameManager.ToggleAchievements();
                 if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 break;
-            case ButtonType.Next: 
+            case ButtonType.Next:
                 _gameManager.NextLevel();
                 break;
             case ButtonType.DeleteSavedData:
@@ -97,6 +98,13 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
                 break;
             case ButtonType.SetLocaleEng:
                 _gameManager.SetLocale("en");
+                break;
+            case ButtonType.AchievementMenuInGame:
+                _gameManager.AchievementMenuInGame();
+                break;
+            case ButtonType.BackFromAchievementMenuInGame:
+                _gameManager.BackFromAchievementMenuInGame();
+                if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 break;
         }
     }
@@ -118,4 +126,6 @@ public enum ButtonType
     DeleteSavedData,
     SetLocaleArg,
     SetLocaleEng,
+    AchievementMenuInGame,
+    BackFromAchievementMenuInGame,
 }

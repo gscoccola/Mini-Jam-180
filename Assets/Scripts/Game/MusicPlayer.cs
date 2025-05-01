@@ -45,16 +45,19 @@ public class MusicPlayer : Singleton<MusicPlayer>
 
         if (_gamePhase == GamePhase.First)
         {
+            _audioSource.volume = 0.265f;
             _audioSource.resource = _firstPhaseTrack;
             _audioSource2.resource = _firstPhaseComboTrack;
         }
         else if (_gamePhase == GamePhase.Second)
         {
+            _audioSource.volume = 0.265f;
             _audioSource.resource = _secondPhaseTrack;
             _audioSource2.resource = _secondPhaseComboTrack;
         }
         else if (_gamePhase == GamePhase.Third)
         {
+            _audioSource.volume = 0.265f;
             _audioSource.resource = _thirdPhaseTrack;
             _audioSource2.resource = _thirdPhaseComboTrack;
         }

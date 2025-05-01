@@ -9,6 +9,8 @@ public class EpilogueManager : MonoBehaviour
     bool _isGameOver;
     [SerializeField] InGameMenu _credits;
     [SerializeField] InGameMenu _postCreditButtons;
+    [SerializeField] InGameMenu _mobileScreenButtons;
+    [SerializeField] GameButton _pauseButton;
     CinemachineCamera _camera;
     float velocity;
     CinemachineConfiner2D _confiner;
@@ -52,6 +54,8 @@ public class EpilogueManager : MonoBehaviour
 
     IEnumerator IGameOver()
     {
+        _mobileScreenButtons.gameObject.SetActive(false);
+        _pauseButton.gameObject.SetActive(false);
         yield return new WaitForSeconds(6f);
         MusicPlayer.Instance.Play();
 

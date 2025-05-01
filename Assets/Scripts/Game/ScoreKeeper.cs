@@ -7,7 +7,7 @@ public class ScoreKeeper : MonoBehaviour
     int _score = 0;
     float _initialXPosition;
     TextMeshProUGUI _scoreDisplay;
-
+    private bool _isEnabled = true;
 
     private void Awake()
     {
@@ -22,7 +22,13 @@ public class ScoreKeeper : MonoBehaviour
 
     private void Update()
     {
+        if (!_isEnabled) return;
         _score = Mathf.FloorToInt(_initialXPosition - _playerTransform.position.x);
-        _scoreDisplay.text = "Score " + _score.ToString();
+        _scoreDisplay.text = _score.ToString();
+    }
+
+    public void Set(bool boolean)
+    {
+        _isEnabled = boolean;
     }
 }

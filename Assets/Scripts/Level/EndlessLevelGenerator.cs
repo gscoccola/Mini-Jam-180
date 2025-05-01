@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class EndlessLevelGenerator : MonoBehaviour
@@ -7,6 +8,8 @@ public class EndlessLevelGenerator : MonoBehaviour
     [SerializeField] GameObject[] _levelChunkPrefabs;
     [SerializeField] GameObject _startPrefab;
     [SerializeField] DynamicBackground dynamicBackground;
+    [SerializeField] float _confinerMinY = -2.3f;
+    [SerializeField] float _mapHeight = 45f;
 
     Transform _playerTransform;
     float _chunkWidth = 50f;
@@ -16,10 +19,19 @@ public class EndlessLevelGenerator : MonoBehaviour
     GameObject _currentChunk;
     GameObject _nextChunk;
 
+    PlayerMovement _playerMovement;
+    PolygonCollider2D _polygonCollider2D;
+    CinemachineConfiner2D _cameraConfiner;
+    Spawner _spawner;
+
     private void Awake()
     {
         _playerTransform = FindAnyObjectByType<PlayerMovement>().transform;
-        FindAnyObjectByType<Spawner>()._mapHeight = 45f;
+        _spawner = FindAnyObjectByType<Spawner>();
+        _spawner._mapHeight = _mapHeight;
+        _playerMovement = FindAnyObjectByType<PlayerMovement>();
+        _polygonCollider2D = FindAnyObjectByType<PolygonCollider2D>();
+        _cameraConfiner = FindAnyObjectByType<CinemachineConfiner2D>();
     }
 
     private void Start()
@@ -55,5 +67,24 @@ public class EndlessLevelGenerator : MonoBehaviour
         _currentChunk = _nextChunk;
         _nextChunk = Instantiate(_levelChunkPrefabs[Random.Range(0, _levelChunkPrefabs.Length)], 
             new Vector3(_currentChunk.transform.position.x - _chunkWidth, 0f, 0f), Quaternion.identity, this.transform);
+        SetNewBounds();
+    }
+
+    private void SetNewBounds()
+    {
+        float yMax = 4000f;
+        float xMin = _currentChunk.transform.position.x - 2 * _chunkWidth;
+        float xMax = _currentChunk.transform.position.x + _chunkWidth;
+        _polygonCollider2D.points = new Vector2[4]
+        {
+            new Vector2(xMin, _confinerMinY),
+            new Vector2(xMax, _confinerMinY),
+            new Vector2(xMax, yMax),
+            new Vector2(xMin, yMax),
+        };
+
+        _playerMovement.CalculateBounds();
+        _cameraConfiner.InvalidateBoundingShapeCache();
+        _spawner.SetWorldMax(xMax);
     }
 }

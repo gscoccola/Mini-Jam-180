@@ -68,6 +68,7 @@ public class FireworkSpawner : MonoBehaviour
         GameObject fireWork = Instantiate(_fireWorkPrefab,
             new Vector3(startPosition.x + Random.Range(-_offset, _offset), startPosition.y + Random.Range(-_offset, _offset), 0f),
             Quaternion.identity);
+        VibrationHandler.Instance.LightVibrate();
         var main = fireWork.GetComponent<ParticleSystem>().main;
         main.startColor = color;        
         _activeFireworkds.Add(fireWork);

@@ -1,7 +1,4 @@
-using Alchemy.Inspector;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 
@@ -9,14 +6,7 @@ public class EnemyBounceable : MonoBehaviour
 {
     [SerializeField] GameObject _explosionPrefab;
     public EnemyType _enemytype;
-    float _maxXValue;
     bool _isDestroyed;
-    Animator _animator;
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {

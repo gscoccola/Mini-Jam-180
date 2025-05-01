@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     bool _isPlayingFootsteps;
     bool _isLeftFootstepNext;
     float _lastX;
+    PolygonCollider2D confiner;
     #endregion
 
     private void Awake()
@@ -74,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _particleSystem = GetComponent<ParticleSystem>();
+        confiner = FindAnyObjectByType<PolygonCollider2D>();
     }
 
     private void Start()
@@ -105,9 +107,8 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    private void CalculateBounds()
+    public void CalculateBounds()
     {
-        PolygonCollider2D confiner = FindAnyObjectByType<PolygonCollider2D>();
         worldMin = confiner.bounds.min.x;
         worldMax = confiner.bounds.max.x;
     }
@@ -231,6 +232,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody.linearVelocityY = _enemyBoosts[type][1];
         IncreaseCombo();
         ChangeStance();
+        VibrationHandler.Instance.LightVibrate();
     }
 
     public void Deviate(EnemyType type, bool appliesBackwardsMomentunm = true)
@@ -245,6 +247,7 @@ public class PlayerMovement : MonoBehaviour
         }   
         ResetCombo();
         ChangeStance();
+        VibrationHandler.Instance.MediumVibrate();
     }
 
     IEnumerator HurtSoundCooldown()
@@ -270,6 +273,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        VibrationHandler.Instance.MediumVibrate();
         _particleSystem.Stop();
         IsDead = true;
         _animator.SetTrigger("_die");
