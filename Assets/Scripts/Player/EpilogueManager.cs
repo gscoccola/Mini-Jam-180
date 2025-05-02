@@ -16,7 +16,6 @@ public class EpilogueManager : MonoBehaviour
     CinemachineConfiner2D _confiner;
     PlayerMovement _playerMovement;
     GameManager _gameManager;
-    [SerializeField] GameObject _confetti;
      FireworkSpawner _fireworkSpawner;
     const float period = 8.64864864865f;
 

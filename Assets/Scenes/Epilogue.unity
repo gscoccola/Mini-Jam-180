@@ -812,7 +812,6 @@ MonoBehaviour:
   _postCreditButtons: {fileID: 1126016661}
   _mobileScreenButtons: {fileID: 353224449}
   _pauseButton: {fileID: 3923181457431929667}
-  _confetti: {fileID: 8512843963887993240, guid: 35470c359b4d6bf4489aac8d8d3da0b6, type: 3}
 --- !u!1001 &884653454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -841,6 +840,10 @@ PrefabInstance:
       propertyPath: _inGameMenu
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4272824297058417056, guid: 1e46bdda5b7363d459d80331e787ac14, type: 3}
+      propertyPath: _creditsMenu
+      value: 
+      objectReference: {fileID: 1617054329}
     - target: {fileID: 4272824297058417056, guid: 1e46bdda5b7363d459d80331e787ac14, type: 3}
       propertyPath: _pauseButton
       value: 
@@ -16982,7 +16985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1126016661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17184,7 +17187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 172.17264
+      value: 172.17935
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17461,7 +17464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1617054329
 MonoBehaviour:
   m_ObjectHideFlags: 0

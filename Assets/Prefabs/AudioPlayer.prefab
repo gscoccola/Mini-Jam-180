@@ -302,6 +302,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
   _buttonVolume:
   - 0.322
+  _achievement:
+  - {fileID: 8300000, guid: 1021814910944e944a337a231f5f8de2, type: 3}
+  _achievementVolume:
+  - 0.245
   _fireworkExplosion:
   - {fileID: 8300000, guid: 1a8893601027e144cabd0e3cf82e4c3c, type: 3}
   - {fileID: 8300000, guid: 685051510cb8f7544aa172cbb1c6b7ef, type: 3}

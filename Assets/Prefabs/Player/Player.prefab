@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultMoveSpeed: 10
   _defaultGroundSpeed: 5
-  _upgradedMoveSpeed: 15
+  _upgradedMoveSpeed: 13.5
   _defaultAirAcceleration: 15
   _upgradedAirAcceleration: 22
   _groundAcceleration: 200

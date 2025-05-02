@@ -20,18 +20,6 @@ public class AchievementButtonManager : MonoBehaviour
         if (_deleteData != null) _deleteData.PopupClose += CloseAllPopups;
     }
 
-    private void Start()
-    {
-        var unlockedAchievements = PersistentInfo.Instance.AchievementCompletionInfo
-            .Where((achievementInfo) => achievementInfo.Value.WasUnlocked)
-            .Select((achievementInfo) => achievementInfo.Key);
-
-        foreach (int achievementId in unlockedAchievements)
-        {
-            _achievementButtonsById[achievementId].Unlock();
-        }
-    }
-
     public void CloseAllPopups(object sender, ClosePopupEventArgs eventArgs)
     {
         foreach (var achievementButton in _achievementButtonsById.Values)

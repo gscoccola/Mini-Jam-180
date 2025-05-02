@@ -22,12 +22,20 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
         _animator = GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        if (_animator != null && (_type == ButtonType.Achievements || _type == ButtonType.AchievementMenuInGame))
+        {
+            _animator.SetBool("isVibrating", PersistentInfo.Instance._newAchievement);
+        }
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_isOnCooldown) return;
         VibrationHandler.Instance.LightVibrate();
         _isOnCooldown = true;
-        _animator.SetBool("isPressed", !_animator.GetBool("isPressed")) ;
+        if (_animator != null) _animator.SetBool("isPressed", !_animator.GetBool("isPressed")) ;
         if (!_isInstant) StartCoroutine(IPerformAction());
         else 
         {
@@ -107,6 +115,11 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
                 if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 break;
         }
+    }
+
+    public void SetPressed()
+    {
+        _animator.SetBool("isPressed", true);
     }
 
 }

@@ -12,30 +12,46 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
     [SerializeField] GameObject _popup;
     [SerializeField] TextMeshProUGUI _achievementTitle;
     [SerializeField] TextMeshProUGUI _achievementDescription;
+    [SerializeField] GameObject _confettiPrefab;
 
-    bool _isUnlocked;
+    Camera _camera;
     Animator _animator;
     bool _isOnCooldown;
+
+    int Id;
+    string Title;
+
+    bool _wasUnlocked;
+    bool _wasShown;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _camera = FindAnyObjectByType<Camera>();
     }
 
-
-    private void Start()
+    private void OnEnable()
     {
-        _achievementTitle.text = _achievement.GetName();
-        if (_isUnlocked)
+        Id = _achievement.GetId();
+        Title = _achievement.GetName();
+
+        _wasUnlocked = PersistentInfo.Instance.AchievementCompletionInfo[Id].WasUnlocked;
+        _wasShown = PersistentInfo.Instance.AchievementCompletionInfo[Id].WasShown;
+
+        _animator.SetBool("wasShown", _wasShown);
+        _animator.SetBool("wasUnlocked", _wasUnlocked);
+
+        _achievementTitle.text = Title;
+        if (_wasUnlocked)
         {
             _achievementDescription.text = _achievement.GetDescription();
-            _achievementDescription.fontSize = 100f;
+            _achievementDescription.fontSize = 62.5f;
             return;
         }
         _achievementDescription.text = "????";
-        _achievementDescription.fontSize = 200f;
-        
+        _achievementDescription.fontSize = 125f;
     }
+
 
     public void AdjustPopup()
     {
@@ -56,12 +72,29 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_isOnCooldown) return;
-        AdjustPopup();
-        _isOnCooldown = true;
         bool wasPressed = _popup.gameObject.activeSelf;
+        StartCoroutine(IButtonCooldown());
+        _isOnCooldown = true;
+
+        AdjustPopup();
         PopupClose.Invoke(this, new ClosePopupEventArgs());
         SetPopup(!wasPressed);
-        StartCoroutine(IButtonCooldown());
+
+        if (_wasUnlocked && !_wasShown)
+        {
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._achievement);
+            VibrationHandler.Instance.HeavyVibrate();
+            Instantiate(_confettiPrefab, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
+
+            _wasShown = true;
+            _animator.SetBool("wasShown", true);
+
+            PersistentInfo.Instance.AchievementCompletionInfo[Id].WasShown = true;
+            PersistentInfo.Instance.CheckUnseenAchievements();
+            PersistentInfo.Instance.SaveData();
+            return;
+        }
+
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
         VibrationHandler.Instance.LightVibrate();
     }
@@ -76,13 +109,6 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
     {
         _animator.SetBool("isPressed", boolean);
         _popup.gameObject.SetActive(boolean);
-    }
-
-    public void Unlock()
-    {
-        _isUnlocked = true;
-        _achievementDescription.text = _achievement.GetDescription();
-        _achievementDescription.fontSize = 80f;
     }
 
 }

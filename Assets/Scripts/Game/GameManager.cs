@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             if (!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
             MusicPlayer.Instance._beginFadeOutWind = true;
             if (_cameraScript != null) _cameraScript.SwitchToPlayerCam();
-            StartLevel();
+            StartLevel(true);
         }
     }
 
@@ -114,10 +114,10 @@ public class GameManager : MonoBehaviour
         if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(false);
     }
 
-    public void StartLevel()
+    public void StartLevel(bool preSpawn)
     {
         if(!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
-        if (_spawner != null) _spawner.StartSpawning();
+        if (_spawner != null) _spawner.StartSpawning(preSpawn); 
         FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }
 
@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
     public void Lose()
     {
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
+        PersistentInfo.Instance.SaveData();
         _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
         StartCoroutine(ILose());
@@ -149,6 +150,7 @@ public class GameManager : MonoBehaviour
     public void OutOfBounds()
     {
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
+        PersistentInfo.Instance.SaveData();
         _mobileInputButtons.gameObject.SetActive(false);
         OnAchievementUnlocked(3);
         StopAllCoroutines();
@@ -158,6 +160,7 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
+        PersistentInfo.Instance.SaveData();
         _mobileInputButtons.gameObject.SetActive(false);
         PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
         if (activeSceneIndex == 1) OnAchievementUnlocked(1);
@@ -275,7 +278,9 @@ public class GameManager : MonoBehaviour
         }
         if (PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked) return;
         PersistentCanvas.Instance.ShowPopup(PersistentInfo.Instance.AchievementTitles[achievementIndex]);
+
         PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;
+        PersistentInfo.Instance._newAchievement = true;
     }
 
     public void SetLocale(string locale)
@@ -296,18 +301,24 @@ public class GameManager : MonoBehaviour
 
     public void AchievementMenuInGame()
     {
-        if (_winMenu.gameObject.activeSelf) _lastMenu = _winMenu;
-        else if (_loseMenu.gameObject.activeSelf) _lastMenu = _loseMenu;
+        if (_winMenu != null &&_winMenu.gameObject.activeSelf) _lastMenu = _winMenu;
+        else if (_loseMenu != null && _loseMenu.gameObject.activeSelf) _lastMenu = _loseMenu;
         else if (_pauseMenu.gameObject.activeSelf) _lastMenu = _pauseMenu;
-        else if (_creditsMenu.gameObject.activeSelf) _lastMenu = _creditsMenu;
+        else if (_creditsMenu != null && _creditsMenu.gameObject.activeSelf) _lastMenu = _creditsMenu;
 
         _achievementsMenuInGame.gameObject.SetActive(true);
         _lastMenu.gameObject.SetActive(false);
+        _pauseButton.gameObject.SetActive(false);
     }
 
     public void BackFromAchievementMenuInGame()
     {
         _achievementsMenuInGame.gameObject.SetActive(false);
         _lastMenu.gameObject.SetActive(true);
+        if (_lastMenu == _pauseMenu)
+        {
+            _pauseButton.gameObject.SetActive(true);
+            _pauseButton.SetPressed();
+        }
     }
 }

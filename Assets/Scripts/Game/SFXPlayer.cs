@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class SFXPlayer : Singleton<SFXPlayer>
 {
-    [Header("EnemyDeath")]
+    [Header("Enemy Death")]
     [FoldoutGroup("Enemy")] public AudioClip[] _birdDeath;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _birdDeathVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _droneDeath;
@@ -51,6 +51,10 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Game misc")] public AudioClip[] _button;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
 
+    [Header("Achievement Click")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _achievement;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _achievementVolume;
+
     [Header("Fireworks")]
     [FoldoutGroup("Game misc")] public AudioClip[] _fireworkExplosion;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkExplosionVolume;
@@ -87,6 +91,7 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_button] = _buttonVolume,
             [_fireworkExplosion] = _fireworkExplosionVolume,
             [_fireworkWhistle] = _fireworkWhistleVolume,
+            [_achievement] = _achievementVolume,
 
         };
     }

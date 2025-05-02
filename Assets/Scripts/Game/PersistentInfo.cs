@@ -12,6 +12,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public Dictionary<int, AchievementMilestones> AchievementCompletionInfo;
     public Dictionary<int, string> AchievementTitles;
+    public bool _newAchievement;
 
     public string LanguageCode;
 
@@ -48,18 +49,6 @@ public class PersistentInfo : Singleton<PersistentInfo>
             AchievementTitles[achievement.GetId()] = achievement.GetName();
         }
     }
-
-    /*private void AchievementDictSetup()
-    {
-    AchievementCompletionInfo = new();
-    AchievementTitles = new();
-    AchievementButton[] achievementButtons = FindObjectsByType<AchievementButton>(FindObjectsSortMode.None);
-        foreach (AchievementButton button in achievementButtons)
-        {
-            AchievementCompletionInfo[button.GetId()] = new AchievementMilestones();
-            AchievementTitles[button.GetId()] = button.GetTitle();
-        }
-    }*/
 
     public void LevelDictSetup()
     {
@@ -108,6 +97,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
             foreach (string s in achievementData)
             {
                 AchievementCompletionInfo[(int)Char.GetNumericValue(s[0])] = new AchievementMilestones(BoolFromChar(s[1]), BoolFromChar(s[2]));
+                if (s[1] != s[2]) _newAchievement = true;
             }
         }
         else    Debug.Log("No achievement data found");
@@ -115,9 +105,23 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public void ResetData()
     {
+        _newAchievement = false;
         PlayerPrefs.DeleteAll();
         LevelDictSetup();
         AchievementDictSetup();
+    }
+
+    public void CheckUnseenAchievements()
+    {
+        foreach (KeyValuePair<int, AchievementMilestones> achievementInfo in AchievementCompletionInfo)
+        {
+            if (achievementInfo.Value.WasUnlocked != achievementInfo.Value.WasShown)
+            {
+                _newAchievement = true;
+                return;
+            }
+        }
+        _newAchievement = false;
     }
 
     private bool BoolFromChar(char c) => c == '1' ? true : false;

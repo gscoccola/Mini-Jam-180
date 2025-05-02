@@ -30,7 +30,6 @@ public class Spawner : MonoBehaviour
     private float _localTime;
     private float _lastX;
     private Transform _player;
-    private System.Random _random;
     private int _laneNumber;
     private bool _hasStarted;
     private float _worldMax;
@@ -40,22 +39,22 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         _player = FindAnyObjectByType<PlayerMovement>().transform;
-        _random = new System.Random();
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
         _enemies = GameObject.Find("Enemies");
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        CalculateBounds();
-        CalculateLanes();
         _lastX = transform.position.x;
     }
 
-    public void StartSpawning()
+    public void StartSpawning(bool preSpawn)
     {
-        SpawnEnemies();
+        CalculateBounds(); /*careful moving the execution order of this function to before height is set by floor.cs or after GameManager start*/
+        CalculateLanes();
+        SpawnEnemyWave(transform.position.x);
         _hasStarted = true;
+        if (preSpawn) InitialBurst();
     }
 
     private void Update()
@@ -70,13 +69,13 @@ public class Spawner : MonoBehaviour
         if (_localTime > _spawnPeriod)
         {
             _localTime = 0f;
-            SpawnEnemies();
+            SpawnEnemyWave(transform.position.x);
         }
     }
 
     private void CalculateLanes()
     {
-        if (_laneHeight <= 0)
+        if (_mapHeight <= _minSpawnHeight + _laneHeight)
         {
             Debug.LogError("Lane height must be greater than zero.");
             _laneNumber = 0;
@@ -86,33 +85,39 @@ public class Spawner : MonoBehaviour
         _laneNumber = Mathf.FloorToInt((_mapHeight - _minSpawnHeight - _laneHeight) / _laneHeight);
     }
 
-    private void SpawnEnemies()
+    public void InitialBurst()
+    {
+        SpawnEnemyWave(_player.position.x - 2 * _spawnXOffset / 3f);
+        SpawnEnemyWave(_player.position.x - _spawnXOffset / 3f);
+    }
+
+    private void SpawnEnemyWave(float x)
     {
         for (int i = 1; i <= _laneNumber; i++)
         {
-            Vector3 spawnPosition = new Vector3(transform.position.x, _minSpawnHeight + _laneHeight * i, 0f);
+            Vector3 spawnPosition = new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f);
             SpawnRandomEnemy(spawnPosition);
         }
     }
 
     private void SpawnRandomEnemy(Vector3 position)
     {
-        double spawnRandomDouble = _random.NextDouble();
+        float randomFloat = UnityEngine.Random.Range(0f, 1f);
         GameObject prefabToSpawn = null;
+        
 
-        if (spawnRandomDouble < _birdSpawnChance)
+        if (randomFloat < _birdSpawnChance)
         {
             prefabToSpawn = _enemyPrefabBird;
         }
-        else if (spawnRandomDouble < _birdSpawnChance + _droneSpawnChance)
+        else if (randomFloat < _birdSpawnChance + _droneSpawnChance)
         {
             prefabToSpawn = _enemyPrefabDrone;
         }
-        else if (spawnRandomDouble < _birdSpawnChance + _droneSpawnChance + _balloonSpawnChance)
+        else if (randomFloat < _birdSpawnChance + _droneSpawnChance + _balloonSpawnChance)
         {
             prefabToSpawn = _enemyPrefabBalloon;
         }
-
         if (prefabToSpawn != null)
         {
             SpawnEnemy(position, prefabToSpawn);
@@ -122,8 +127,8 @@ public class Spawner : MonoBehaviour
     private void SpawnEnemy(Vector3 position, GameObject prefab)
     {
         Instantiate(prefab,
-            position + Vector3.up * (((float)_random.NextDouble() - 0.5f) * _laneHeight)
-            + Vector3.right * (-(float)_random.NextDouble() * _minXSpacing),
+            position + Vector3.up * ((UnityEngine.Random.Range(0f, 1f) - 0.5f) * _laneHeight)
+            + Vector3.right * (-UnityEngine.Random.Range(0f, 1f) * _minXSpacing),
             Quaternion.identity, _enemies.transform).GetComponent<EnemyMovement>()._maxXValue = _worldMax;
     }
 
