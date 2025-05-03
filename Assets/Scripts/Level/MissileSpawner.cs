@@ -13,15 +13,19 @@ public class MissileSpawner : MonoBehaviour
 
     [SerializeField] private float _waveWidth;
     [SerializeField] private float _minSpacing;
+    [SerializeField] private int _missilesPerWave;
 
     List<GameObject> _activeLasers = new List<GameObject>();
+
     private int _laneNumber;
+    int[] _laneArray;
 
     private void Awake()
     {
         _player = FindAnyObjectByType<PlayerMovement>().transform;
         _enemiesFolder = GameObject.Find("Enemies");
         _laneNumber = Mathf.FloorToInt(_waveWidth / _minSpacing);
+        _laneArray = RandomIntArrayGeneration.Generate(_laneNumber);
     }
 
     public void StartSpawning()
@@ -31,11 +35,13 @@ public class MissileSpawner : MonoBehaviour
 
     private IEnumerator ISpawnMissileWave()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
 
-        for (int i=0; i < _laneNumber; i++)
+        _laneArray = RandomIntArrayGeneration.Shuffle(_laneArray);
+
+        for (int i=0; i < _missilesPerWave; i++)
         {
-            float xPosition = _player.transform.position.x - _waveWidth/2 + i * _minSpacing;
+            float xPosition = _player.transform.position.x - _waveWidth/2 + _laneArray[i] * _minSpacing;
             _activeLasers.Add(SpawnLaser(xPosition));
         }
         

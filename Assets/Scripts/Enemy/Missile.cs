@@ -22,7 +22,7 @@ public class Missile : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.y < 0f) Die();
+        if (transform.position.y < 0f && !_isDestroyed) Die();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

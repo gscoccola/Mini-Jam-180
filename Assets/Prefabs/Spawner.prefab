@@ -74,3 +74,4 @@ MonoBehaviour:
   _missilePrefab: {fileID: 7956580788072526025, guid: 45eadb5d627ed744f9a0c257c9888a7a, type: 3}
   _waveWidth: 30
   _minSpacing: 3
+  _missilesPerWave: 6

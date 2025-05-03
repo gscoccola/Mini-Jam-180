@@ -83,6 +83,7 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         if (_wasUnlocked && !_wasShown)
         {
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._achievement);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
             VibrationHandler.Instance.HeavyVibrate();
             Instantiate(_confettiPrefab, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
 

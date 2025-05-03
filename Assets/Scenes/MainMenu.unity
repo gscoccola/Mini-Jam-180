@@ -4481,6 +4481,7 @@ MonoBehaviour:
   - {fileID: 861600760}
   - {fileID: 46418316}
   - {fileID: 1711297767}
+  - {fileID: 2032552109}
   - {fileID: 280675957}
   - {fileID: 2062289189}
 --- !u!1001 &1422683926
@@ -5018,6 +5019,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1496860868317368669, guid: 3dc0a1015b8c30c4d83c9f851b67ce5a, type: 3}
+      propertyPath: '_achievementVolume.Array.data[0]'
+      value: 0.583
+      objectReference: {fileID: 0}
+    - target: {fileID: 1496860868317368669, guid: 3dc0a1015b8c30c4d83c9f851b67ce5a, type: 3}
+      propertyPath: '_achievementVolume.Array.data[1]'
+      value: 0.583
+      objectReference: {fileID: 0}
+    - target: {fileID: 1496860868317368669, guid: 3dc0a1015b8c30c4d83c9f851b67ce5a, type: 3}
+      propertyPath: '_achievementVolume.Array.data[2]'
+      value: 0.583
+      objectReference: {fileID: 0}
+    - target: {fileID: 1496860868317368669, guid: 3dc0a1015b8c30c4d83c9f851b67ce5a, type: 3}
+      propertyPath: '_achievementVolume.Array.data[3]'
+      value: 0.583
+      objectReference: {fileID: 0}
     - target: {fileID: 5011237236054601744, guid: 3dc0a1015b8c30c4d83c9f851b67ce5a, type: 3}
       propertyPath: m_Name
       value: AudioPlayer
@@ -5976,6 +5993,17 @@ MonoBehaviour:
   m_Spacing: {x: 75, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 5
+--- !u!114 &2032552109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6117058736419058413, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
+  m_PrefabInstance: {fileID: 1989602245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e777a604f944aed4d9d7b0a4afcbf2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2034721687
 GameObject:
   m_ObjectHideFlags: 0
