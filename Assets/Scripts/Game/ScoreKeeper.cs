@@ -23,7 +23,7 @@ public class ScoreKeeper : MonoBehaviour
     private void Update()
     {
         if (!_isEnabled) return;
-        _score = Mathf.FloorToInt(_initialXPosition - _playerTransform.position.x);
+        _score = Mathf.FloorToInt(_initialXPosition - _playerTransform.position.x) * 100;
         _scoreDisplay.text = _score.ToString();
     }
 

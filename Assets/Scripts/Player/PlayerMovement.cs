@@ -250,6 +250,23 @@ public class PlayerMovement : MonoBehaviour
         VibrationHandler.Instance.MediumVibrate();
     }
 
+    public void MissileHit(float downwardVelocity)
+    {
+        _rigidBody.linearVelocityX = 0f;
+        _rigidBody.linearVelocityY = -downwardVelocity;
+
+        if (!_isHurtSoundOnCooldown)
+        {
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerHurt);
+            _isHurtSoundOnCooldown = true;
+            StartCoroutine(HurtSoundCooldown());
+        }
+
+        ResetCombo();
+        ChangeStance();
+        VibrationHandler.Instance.MediumVibrate();
+    }
+
     IEnumerator HurtSoundCooldown()
     {
         yield return new WaitForSeconds(1f);

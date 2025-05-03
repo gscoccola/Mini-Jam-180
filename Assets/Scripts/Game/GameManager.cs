@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int _epilogueLevelIndex = 6;
+    int _epilogueLevelIndex = 7;
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
@@ -118,6 +118,9 @@ public class GameManager : MonoBehaviour
     {
         if(!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
         if (_spawner != null) _spawner.StartSpawning(preSpawn); 
+        MissileSpawner _mSpawner = _spawner.GetComponent<MissileSpawner>();
+        if (_mSpawner != null) _mSpawner.StartSpawning();
+
         FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }
 

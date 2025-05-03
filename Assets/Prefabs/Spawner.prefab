@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 766888060524633326}
   - component: {fileID: 5930252065349444769}
+  - component: {fileID: 1240379336772770599}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -52,7 +53,24 @@ MonoBehaviour:
   _birdSpawnChance: 0.2
   _droneSpawnChance: 0.12
   _balloonSpawnChance: 0.09
+  _isEndlessLevel: 0
   _enemyPrefabBird: {fileID: 4174810378592755860, guid: 5f8198dbd79a40d4590f32f31f3e26e3, type: 3}
   _enemyPrefabDrone: {fileID: 4174810378592755860, guid: 20edd7fdf0f0d5046aeb6813dd92cc6c, type: 3}
   _enemyPrefabBalloon: {fileID: 4174810378592755860, guid: 3981391d2f756fd40b41e2e51c172755, type: 3}
   _mapHeight: 0
+--- !u!114 &1240379336772770599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497487039712613672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4044f81a6b486b47bc5d3cb503e6ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laserPrefab: {fileID: 3879355451352795544, guid: 41ded80f851d07c4385dc851b1bc04ca, type: 3}
+  _missilePrefab: {fileID: 7956580788072526025, guid: 45eadb5d627ed744f9a0c257c9888a7a, type: 3}
+  _waveWidth: 30
+  _minSpacing: 3

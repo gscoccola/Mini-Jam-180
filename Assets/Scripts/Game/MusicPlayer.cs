@@ -37,8 +37,8 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _isSecondTrackEnabled = false;
         GamePhase previousPhase = _gamePhase;
         if (new List<int> { 1, 2, 3}.Contains(levelIndex)) _gamePhase = GamePhase.First;
-        else if (new List<int> { 4, 7}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
-        else if (new List<int> { 5}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
+        else if (new List<int> { 4, 5, 7}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
+        else if (new List<int> { 6}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
         else if(new List<int> {6 }.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
 
         if (previousPhase == _gamePhase) return;

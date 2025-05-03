@@ -17,6 +17,7 @@ public class LevelButtonManager : MonoBehaviour
         foreach (KeyValuePair<int, LevelMileStones> levelInfo in beatenLevels)
         {
             EnableButton(_gameButtons[levelInfo.Key]);
+
         }
     }
 
