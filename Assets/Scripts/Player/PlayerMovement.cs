@@ -278,6 +278,11 @@ public class PlayerMovement : MonoBehaviour
         _gameManager.ReloadLevel();
     }
 
+    private void OnPause(InputValue value)
+    {
+        _gameManager.PauseKeyPress();
+    }
+
     private void OnSkipLevel(InputValue value)
     {
         _gameManager.NextLevel();

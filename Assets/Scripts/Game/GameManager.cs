@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
         {
             _languageMenu.gameObject.SetActive(false);
             _startMenu.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
         }
         
         PersistentInfo.Instance.SaveData();
@@ -101,6 +103,10 @@ public class GameManager : MonoBehaviour
         MusicPlayer.Instance._beginFadeOutWind = true;
     }
 
+    public void PauseKeyPress()
+    {
+        _pauseButton.OnClick();
+    }
     public void Pause()
     {
         if (_isPaused)
@@ -109,11 +115,14 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             _pauseMenu.gameObject.SetActive(false);
             if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
             return;
         }
         _isPaused = true;
         Time.timeScale = 0f;
         _pauseMenu.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_pauseMenu.transform.GetChild(1).gameObject);
+
         if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(false);
     }
 
@@ -183,6 +192,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(_endDelay);
         VibrationHandler.Instance.HeavyVibrate();
         _loseMenu.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_loseMenu.transform.GetChild(1).gameObject);
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
     }
 
@@ -193,6 +203,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(_endDelay);
         VibrationHandler.Instance.HeavyVibrate();
         _winMenu.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_winMenu.transform.GetChild(1).gameObject);
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
         yield return new WaitForSeconds(1.2f);
         Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
@@ -204,6 +215,8 @@ public class GameManager : MonoBehaviour
     {
         _creditsMenu.gameObject.SetActive(!_creditsMenu.gameObject.activeSelf);
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
+        if (_creditsMenu.gameObject.activeSelf) EventSystem.current.SetSelectedGameObject(_creditsMenu.transform.GetChild(0).gameObject);
+        else EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
     }
     
     internal void ToggleAchievements()
@@ -212,10 +225,13 @@ public class GameManager : MonoBehaviour
         {
             _deleteDataMenu.gameObject.SetActive(false);
             _achievementsMenu.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(_achievementsMenu.transform.GetChild(0).gameObject);
             return;
         }
         _achievementsMenu.gameObject.SetActive(!_achievementsMenu.gameObject.activeSelf);
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
+        if (_achievementsMenu.gameObject.activeSelf) EventSystem.current.SetSelectedGameObject(_achievementsMenu.transform.GetChild(0).gameObject);
+        else EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
     }
 
     internal void DeleteData()
@@ -224,6 +240,7 @@ public class GameManager : MonoBehaviour
         {
             _deleteDataMenu.gameObject.SetActive(true);
             _achievementsMenu.gameObject.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(_deleteDataMenu.transform.GetChild(0).gameObject);
             return;
         }
         _achievementsMenu.gameObject.SetActive(true);
@@ -240,10 +257,12 @@ public class GameManager : MonoBehaviour
             {
                 _levelSelectMenu.gameObject.SetActive(true);
                 _startMenu.gameObject.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
                 return;
             }
             _levelSelectMenu.gameObject.SetActive(false);
             _startMenu.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
             return;
         }
 
@@ -256,6 +275,7 @@ public class GameManager : MonoBehaviour
         _tutorialMenu.gameObject.SetActive(true);
         _tutorialMenu.transform.GetChild(2).gameObject.SetActive(true);
         _tutorialMenu.transform.GetChild(3).gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(_tutorialMenu.transform.GetChild(2).gameObject);
         _startMenu.gameObject.SetActive(false);
     }
 
@@ -275,6 +295,8 @@ public class GameManager : MonoBehaviour
     {
         _tutorialMenu.gameObject.SetActive(!_tutorialMenu.gameObject.activeSelf);
         _levelSelectMenu.gameObject.SetActive(!_levelSelectMenu.gameObject.activeSelf);
+        if (_tutorialMenu.gameObject.activeSelf) EventSystem.current.SetSelectedGameObject(_tutorialMenu.transform.GetChild(3).gameObject);
+        else EventSystem.current.SetSelectedGameObject(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
     }
 
     public void OnAchievementUnlocked(int achievementIndex)
@@ -317,16 +339,19 @@ public class GameManager : MonoBehaviour
         _achievementsMenuInGame.gameObject.SetActive(true);
         _lastMenu.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(_achievementsMenuInGame.transform.GetChild(0).gameObject);
     }
 
     public void BackFromAchievementMenuInGame()
     {
         _achievementsMenuInGame.gameObject.SetActive(false);
         _lastMenu.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_lastMenu.transform.GetChild(1).gameObject);
         if (_lastMenu == _pauseMenu)
         {
             _pauseButton.gameObject.SetActive(true);
             _pauseButton.SetPressed();
+            EventSystem.current.SetSelectedGameObject(_pauseMenu.transform.GetChild(1).gameObject);
         }
     }
 }

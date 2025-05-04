@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AchievementButton : MonoBehaviour, IPointerDownHandler
+public class AchievementButton : MonoBehaviour
 {
     public event EventHandler<ClosePopupEventArgs> PopupClose;
 
@@ -69,7 +69,7 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         return _achievement.GetName();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnClick()
     {
         if (_isOnCooldown) return;
         bool wasPressed = _popup.gameObject.activeSelf;

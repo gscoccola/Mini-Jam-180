@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameButton : MonoBehaviour, IPointerDownHandler
+public class GameButton : MonoBehaviour
 {
     [SerializeField] ButtonType _type;
     [SerializeField] bool _isInstant;
@@ -30,14 +30,15 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+
+    public void OnClick()
     {
         if (_isOnCooldown) return;
         VibrationHandler.Instance.LightVibrate();
         _isOnCooldown = true;
-        if (_animator != null) _animator.SetBool("isPressed", !_animator.GetBool("isPressed")) ;
+        if (_animator != null) _animator.SetBool("isPressed", !_animator.GetBool("isPressed"));
         if (!_isInstant) StartCoroutine(IPerformAction());
-        else 
+        else
         {
             PerfomButtonAction();
             StartCoroutine(IButtonCooldown());
