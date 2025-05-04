@@ -253,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
     public void MissileHit(float downwardVelocity)
     {
         _rigidBody.linearVelocityX = 0f;
-        _rigidBody.linearVelocityY = -downwardVelocity;
+        _rigidBody.linearVelocityY -= downwardVelocity;
 
         if (!_isHurtSoundOnCooldown)
         {

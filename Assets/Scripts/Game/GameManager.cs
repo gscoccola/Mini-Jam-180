@@ -29,12 +29,14 @@ public class GameManager : MonoBehaviour
 
     LevelLoader _levelLoader;
     Spawner _spawner;
+    MissileSpawner _mSpawner;
 
     ScoreKeeper _scoreKeeper;
 
     bool _isPlayingOnMobile;
     int activeSceneIndex;
     bool _isPaused;
+    bool _wasLevelWon;
 
     InGameMenu _lastMenu;
 
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
         _camera = FindAnyObjectByType<Camera>();
         _levelLoader = FindAnyObjectByType<LevelLoader>();
         _spawner = FindAnyObjectByType<Spawner>();
+        _mSpawner = FindAnyObjectByType<MissileSpawner>();
         _cameraScript = FindAnyObjectByType<CameraScript>();
 
         _isPlayingOnMobile = Application.isMobilePlatform;
@@ -118,8 +121,7 @@ public class GameManager : MonoBehaviour
     {
         if(!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
         if (_spawner != null) _spawner.StartSpawning(preSpawn); 
-        MissileSpawner _mSpawner = _spawner.GetComponent<MissileSpawner>();
-        if (_mSpawner != null) _mSpawner.StartSpawning();
+        //if (_mSpawner != null) _mSpawner.StartSpawning();
 
         FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }
@@ -138,12 +140,13 @@ public class GameManager : MonoBehaviour
 
     public void ReloadLevel()
     {
-        LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        if (!_wasLevelWon) LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Lose()
     {
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
+        if (_mSpawner != null) _mSpawner.StopSpawning();
         PersistentInfo.Instance.SaveData();
         _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
@@ -164,8 +167,10 @@ public class GameManager : MonoBehaviour
     {
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
         PersistentInfo.Instance.SaveData();
+        if (_mSpawner != null) _mSpawner.StopSpawning();
         _mobileInputButtons.gameObject.SetActive(false);
         PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
+        _wasLevelWon = true;
         if (activeSceneIndex == 1) OnAchievementUnlocked(1);
         StopAllCoroutines();
         StartCoroutine(IWin());

@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4266659286891574734}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level Select
+  m_text: achievements
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c6660349a63801445b0c45857ecd2323, type: 2}
   m_sharedMaterial: {fileID: 7033929124354186641, guid: c6660349a63801445b0c45857ecd2323, type: 2}
@@ -151,9 +151,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:e172e9420e2c1d54cabc5fe03eb89c24
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 15143362646016
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

@@ -15,6 +15,9 @@ public class MissileSpawner : MonoBehaviour
     [SerializeField] private float _minSpacing;
     [SerializeField] private int _missilesPerWave;
 
+    [SerializeField] private float _waveCooldown = 3f;
+    [SerializeField] private float _warningTime = 1f;
+
     List<GameObject> _activeLasers = new List<GameObject>();
 
     private int _laneNumber;
@@ -33,23 +36,43 @@ public class MissileSpawner : MonoBehaviour
         StartCoroutine(ISpawnMissileWave());
     }
 
+    public void StopSpawning()
+    {
+        StopAllCoroutines();
+        foreach (GameObject laser in _activeLasers)
+        {
+            Destroy(laser);
+        }
+        _activeLasers.Clear();
+    }
+
     private IEnumerator ISpawnMissileWave()
     {
-        yield return new WaitForSeconds(2f);
+        
 
         _laneArray = RandomIntArrayGeneration.Shuffle(_laneArray);
 
+        /*string lanes = "";
+        for (int i = 0; i < _laneArray.Length; i++)
+        {
+            lanes += " " + _laneArray[i];
+        }
+        Debug.Log(lanes);*/
+        float playerX = _player.transform.position.x;
+
         for (int i=0; i < _missilesPerWave; i++)
         {
-            float xPosition = _player.transform.position.x - _waveWidth/2 + _laneArray[i] * _minSpacing;
+            float xPosition = playerX - _waveWidth/2 + _laneArray[i] * _minSpacing;
             _activeLasers.Add(SpawnLaser(xPosition));
+            yield return new WaitForSeconds(0.05f);
         }
         
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(_warningTime);
         foreach (GameObject laser in _activeLasers)
         {
             Instantiate(_missilePrefab, new Vector3(laser.transform.position.x, _player.transform.position.y + 10f, 0f),
             Quaternion.identity, _enemiesFolder.transform);
+            yield return new WaitForSeconds(0.05f);
         }
 
         yield return new WaitForSeconds(1.5f);
@@ -60,7 +83,7 @@ public class MissileSpawner : MonoBehaviour
         }
         _activeLasers.Clear();
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(_waveCooldown);
         StartCoroutine(ISpawnMissileWave());
     }
 
