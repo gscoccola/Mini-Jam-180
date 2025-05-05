@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Animancer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -109,6 +110,12 @@ public class GameManager : MonoBehaviour
     }
     public void Pause()
     {
+        if (_achievementsMenuInGame.gameObject.activeSelf)
+        {
+            _pauseButton.gameObject.SetActive(true);
+            _achievementsMenuInGame.gameObject.SetActive(false);
+        }
+    
         if (_isPaused)
         {
             _isPaused = false;
@@ -354,4 +361,6 @@ public class GameManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(_pauseMenu.transform.GetChild(1).gameObject);
         }
     }
+
+   
 }

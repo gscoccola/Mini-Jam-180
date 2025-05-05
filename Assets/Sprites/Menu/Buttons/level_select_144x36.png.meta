@@ -222,6 +222,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: level_select_144x36_4
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 4, y: 10, z: 4, w: 4}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eff3dbb64645914eb55a381feec1c64
+      internalID: 1222640613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -240,6 +262,7 @@ TextureImporter:
       level_select_144x36_1: 8553267834609436140
       level_select_144x36_2: -4951239178878472240
       level_select_144x36_3: -4076487741994848815
+      level_select_144x36_4: 1222640613
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

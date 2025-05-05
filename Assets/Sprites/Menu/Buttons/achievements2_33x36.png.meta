@@ -222,6 +222,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: achievements2_33x36_4
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3150ffd037fcaac4f976737258f9ed03
+      internalID: 2086576810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: achievements2_33x36_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d32c22aa514f10042a6641b45557dbc9
+      internalID: -1236686605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -240,6 +284,8 @@ TextureImporter:
       achievements2_33x36_1: -5733826422735859352
       achievements2_33x36_2: -1673005410299366995
       achievements2_33x36_3: 6924082742139307034
+      achievements2_33x36_4: 2086576810
+      achievements2_33x36_5: -1236686605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

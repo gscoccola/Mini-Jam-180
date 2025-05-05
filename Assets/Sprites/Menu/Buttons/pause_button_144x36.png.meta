@@ -222,6 +222,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: pause_button_144x36_4
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 640738132ed0f114e93a82fc5e2dc267
+      internalID: 1431931807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pause_button_144x36_5
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72e34a77fed576542853560f235e1901
+      internalID: 776583036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -240,6 +284,8 @@ TextureImporter:
       pause_button_144x36_1: 3996346517392540342
       pause_button_144x36_2: 8060908736747032675
       pause_button_144x36_3: -6574063811592492316
+      pause_button_144x36_4: 1431931807
+      pause_button_144x36_5: 776583036
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

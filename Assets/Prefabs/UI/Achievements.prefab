@@ -238,8 +238,45 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8032403176368091514}
   m_SourcePrefab: {fileID: 100100000, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+--- !u!1 &2521061405148173033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+  m_PrefabInstance: {fileID: 1158834059423243247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8032403176368091514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521061405148173033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1440034603052264755}
+          m_TargetAssemblyTypeName: AchievementButtonManager, Assembly-CSharp
+          m_MethodName: CloseAllPopups
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &5741187492462303566 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6897767456914948769, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
@@ -352,8 +389,45 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5034663955891968533}
   m_SourcePrefab: {fileID: 100100000, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+--- !u!1 &3439719526526202518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+  m_PrefabInstance: {fileID: 2113820162734406544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5034663955891968533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3439719526526202518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1440034603052264755}
+          m_TargetAssemblyTypeName: AchievementButtonManager, Assembly-CSharp
+          m_MethodName: CloseAllPopups
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &4822236764762405169 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6897767456914948769, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
@@ -450,6 +524,10 @@ PrefabInstance:
     - target: {fileID: 4266659286891574734, guid: 15a336182001bf04ea37873d7d174217, type: 3}
       propertyPath: m_Name
       value: Text (TMP)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
+      propertyPath: m_text
+      value: Logros
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -572,8 +650,45 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5149916346792655301}
   m_SourcePrefab: {fileID: 100100000, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+--- !u!1 &2126228757122182260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+  m_PrefabInstance: {fileID: 3416115936392570226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5149916346792655301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126228757122182260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1440034603052264755}
+          m_TargetAssemblyTypeName: AchievementButtonManager, Assembly-CSharp
+          m_MethodName: CloseAllPopups
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &8129474156829910995 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6897767456914948769, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
@@ -594,6 +709,10 @@ PrefabInstance:
     - target: {fileID: 548809897951248773, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
       value: GUID:e172e9420e2c1d54cabc5fe03eb89c24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632088684215749095, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
+      propertyPath: m_text
+      value: Atras
       objectReference: {fileID: 0}
     - target: {fileID: 1674233849453714883, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_Controller
@@ -694,14 +813,51 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4908996042354860345, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8008352648825563052}
   m_SourcePrefab: {fileID: 100100000, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
+--- !u!1 &380271108556231427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4908996042354860345, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
+  m_PrefabInstance: {fileID: 4712664525492105786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8008352648825563052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380271108556231427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1440034603052264755}
+          m_TargetAssemblyTypeName: AchievementButtonManager, Assembly-CSharp
+          m_MethodName: CloseAllPopups
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &4504107878397079612 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9216459590364807686, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
   m_PrefabInstance: {fileID: 4712664525492105786}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 380271108556231427}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e777a604f944aed4d9d7b0a4afcbf2de, type: 3}
@@ -811,13 +967,50 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1537036063214858379}
   m_SourcePrefab: {fileID: 100100000, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
 --- !u!224 &1457536773267443076 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6897767456914948769, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
   m_PrefabInstance: {fileID: 5441473209667325733}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8748916961880081955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3668633324790089990, guid: 1e085d140508a1e4db2dd058a9db71a4, type: 3}
+  m_PrefabInstance: {fileID: 5441473209667325733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1537036063214858379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8748916961880081955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1440034603052264755}
+          m_TargetAssemblyTypeName: AchievementButtonManager, Assembly-CSharp
+          m_MethodName: CloseAllPopups
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &8106834090334521957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -924,7 +1117,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8098905381055520300, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
       propertyPath: m_text
-      value: Delete data
+      value: 'Borrar
+
+        Datos'
       objectReference: {fileID: 0}
     - target: {fileID: 8098905381055520300, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
       propertyPath: m_fontSize
@@ -970,6 +1165,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8051844893041023848, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5908032873572759819}
     - targetCorrespondingSourceObject: {fileID: 2589498925849700298, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 100750956831070935}
@@ -985,12 +1183,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2250855205206380813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8051844893041023848, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
+  m_PrefabInstance: {fileID: 8106834090334521957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5908032873572759819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250855205206380813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1440034603052264755}
+          m_TargetAssemblyTypeName: AchievementButtonManager, Assembly-CSharp
+          m_MethodName: CloseAllPopups
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2622619068936468616 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6117058736419058413, guid: 20e9c5a1e98932a4db7889ece396b65f, type: 3}
   m_PrefabInstance: {fileID: 8106834090334521957}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2250855205206380813}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e777a604f944aed4d9d7b0a4afcbf2de, type: 3}

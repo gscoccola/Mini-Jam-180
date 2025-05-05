@@ -42350,7 +42350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.813478
+      value: 21.820961
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -46736,6 +46736,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 636592542}
     m_Modifications:
+    - target: {fileID: 2748669042865368266, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5645529416132895096, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
       propertyPath: m_LocalPosition.x
       value: 103.63
