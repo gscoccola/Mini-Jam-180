@@ -257,8 +257,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280966894
+  m_fontColor: {r: 0.93333334, g: 0.36862746, b: 0.16470589, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_DeselectOnBackgroundClick: 1
+  m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
@@ -668,6 +668,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b503accc27f4be943a06306a845ca28e, type: 2}
   - {fileID: 11400000, guid: c87646a584e2b2a4895c0d897116c1dd, type: 2}
   - {fileID: 11400000, guid: 7d8fdbdab72ae414d83fef9183cdd5bc, type: 2}
+  _scoreText: {fileID: 1605949573}
+  _scoreText2: {fileID: 515731904}
 --- !u!1001 &1134472711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -822,7 +824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.615111
+      value: -15.623513
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1321,8 +1323,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280966894
+  m_fontColor: {r: 0.93333334, g: 0.36862746, b: 0.16470589, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

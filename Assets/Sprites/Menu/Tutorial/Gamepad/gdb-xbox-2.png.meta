@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: 6858cd63a204eb540b2c59101edb74fc
+guid: c0f4f27b7db3d014094d66b67c82b45e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7015164298151817017
-    second: tutorial_mark_0
+      213: 1846609925357766088
+    second: gdb-xbox-2_0
+  - first:
+      213: 1600024424983213657
+    second: gdb-xbox-2_1
+  - first:
+      213: 5058327583426915412
+    second: gdb-xbox-2_2
+  - first:
+      213: 6813467902719626489
+    second: gdb-xbox-2_3
+  - first:
+      213: -7897814468227917007
+    second: gdb-xbox-2_4
+  - first:
+      213: 2776002159267864411
+    second: gdb-xbox-2_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +87,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,23 +141,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tutorial_mark_0
+      name: gdb-xbox-2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 34
-        height: 24
+        x: 12
+        y: 40
+        width: 16
+        height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c098af1d3125ae90800000000000000
-      internalID: -7015164298151817017
+      spriteID: 8c509af71f970a910800000000000000
+      internalID: 1846609925357766088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gdb-xbox-2_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 53
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 956b21bbcbd643610800000000000000
+      internalID: 1600024424983213657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gdb-xbox-2_2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 24
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45ca8bf032ac23640800000000000000
+      internalID: 5058327583426915412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gdb-xbox-2_3
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 37
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fc012e45fc4e8e50800000000000000
+      internalID: 6813467902719626489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gdb-xbox-2_4
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 15
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13b9557e593556290800000000000000
+      internalID: -7897814468227917007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gdb-xbox-2_5
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 9
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5fd0e68147568620800000000000000
+      internalID: 2776002159267864411
       vertices: []
       indices: 
       edges: []
@@ -151,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8fc3383a58aa2e5429e953b0e7549389
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +286,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tutorial_mark_0: -7015164298151817017
+      gdb-xbox-2_0: 1846609925357766088
+      gdb-xbox-2_1: 1600024424983213657
+      gdb-xbox-2_2: 5058327583426915412
+      gdb-xbox-2_3: 6813467902719626489
+      gdb-xbox-2_4: -7897814468227917007
+      gdb-xbox-2_5: 2776002159267864411
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

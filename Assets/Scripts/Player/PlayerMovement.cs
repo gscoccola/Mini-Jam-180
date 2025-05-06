@@ -212,13 +212,15 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = value.Get<Vector2>();
     }
 
-    public void Jump()
+    public bool Jump()
     {
-        if (!IsOnFloor) return;
+        if (!IsOnFloor) return false;
         _rigidBody.linearVelocityY += _jumpSpeed;
         _fallingStance = 0;
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerJump);
+        VibrationHandler.Instance.LightVibrate();
         if (_isEpilogue) IsHorizonalInputDisabled = true;
+        return true;
     }
 
     void ChangeStance()

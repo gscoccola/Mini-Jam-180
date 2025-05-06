@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DynamicBackground : MonoBehaviour
@@ -16,6 +17,8 @@ public class DynamicBackground : MonoBehaviour
     [SerializeField] SpriteRenderer _bushes2;
 
     [SerializeField] List<BackgroundSetSO> backgroundSets;
+    [SerializeField] TextMeshProUGUI _scoreText;
+    [SerializeField] TextMeshProUGUI _scoreText2;
 
     SpriteRenderer[] _activeBackground;
     SpriteRenderer[] _standByBackground;
@@ -36,6 +39,8 @@ public class DynamicBackground : MonoBehaviour
         _isBackgroundFading = true;
         _alpha = 1f;
         SwapSprites(currentSetIndex);
+        _scoreText.color = backgroundSets[currentSetIndex].ContrastingColor;
+        _scoreText2.color = backgroundSets[currentSetIndex].ContrastingColor;
     }
 
     private void SwapSprites(int index)

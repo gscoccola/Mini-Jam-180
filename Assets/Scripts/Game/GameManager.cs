@@ -4,6 +4,7 @@ using Animancer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _tutorialMenu;
     [SerializeField] InGameMenu _levelSelectMenu;
     [SerializeField] InGameMenu _deleteDataMenu;
+    [SerializeField] InGameMenu _postCreditButtons;
     [SerializeField] GameObject _confetti;
+    [SerializeField] GameObject _argFlag;
 
     CameraScript _cameraScript;
     Camera _camera;
@@ -59,14 +62,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        if (activeSceneIndex == 0 && !PersistentInfo.Instance._wasLanguageSet) SelectDefaultButton(_argFlag);
         if (activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)
         {
             _languageMenu.gameObject.SetActive(false);
             _startMenu.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
+            SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
         }
-        
+
+
         PersistentInfo.Instance.SaveData();
         MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
         SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
@@ -106,7 +110,8 @@ public class GameManager : MonoBehaviour
 
     public void PauseKeyPress()
     {
-        _pauseButton.OnClick();
+        if (_pauseButton.gameObject.activeSelf) _pauseButton.OnClick();
+
     }
     public void Pause()
     {
@@ -122,13 +127,13 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             _pauseMenu.gameObject.SetActive(false);
             if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(null);
+            SelectDefaultButton(null);
             return;
         }
         _isPaused = true;
         Time.timeScale = 0f;
         _pauseMenu.gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(_pauseMenu.transform.GetChild(1).gameObject);
+        SelectDefaultButton(_pauseMenu.transform.GetChild(1).gameObject);
 
         if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(false);
     }
@@ -137,7 +142,6 @@ public class GameManager : MonoBehaviour
     {
         if(!MusicPlayer.Instance._isPlayingMusic) MusicPlayer.Instance.Play();
         if (_spawner != null) _spawner.StartSpawning(preSpawn); 
-        //if (_mSpawner != null) _mSpawner.StartSpawning();
 
         FindAnyObjectByType<PlayerMovement>().IsHorizonalMovementDisabled = false;
     }
@@ -199,7 +203,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(_endDelay);
         VibrationHandler.Instance.HeavyVibrate();
         _loseMenu.gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(_loseMenu.transform.GetChild(1).gameObject);
+        SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
     }
 
@@ -210,7 +214,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(_endDelay);
         VibrationHandler.Instance.HeavyVibrate();
         _winMenu.gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(_winMenu.transform.GetChild(1).gameObject);
+        SelectDefaultButton(_winMenu.transform.GetChild(1).gameObject);
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
         yield return new WaitForSeconds(1.2f);
         Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
@@ -222,8 +226,8 @@ public class GameManager : MonoBehaviour
     {
         _creditsMenu.gameObject.SetActive(!_creditsMenu.gameObject.activeSelf);
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
-        if (_creditsMenu.gameObject.activeSelf) EventSystem.current.SetSelectedGameObject(_creditsMenu.transform.GetChild(0).gameObject);
-        else EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
+        if (_creditsMenu.gameObject.activeSelf) SelectDefaultButton(_creditsMenu.transform.GetChild(0).gameObject);
+        else SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
     }
     
     internal void ToggleAchievements()
@@ -232,13 +236,13 @@ public class GameManager : MonoBehaviour
         {
             _deleteDataMenu.gameObject.SetActive(false);
             _achievementsMenu.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(_achievementsMenu.transform.GetChild(0).gameObject);
+            SelectDefaultButton(_achievementsMenu.transform.GetChild(0).gameObject);
             return;
         }
         _achievementsMenu.gameObject.SetActive(!_achievementsMenu.gameObject.activeSelf);
         _startMenu.gameObject.SetActive(!_startMenu.gameObject.activeSelf);
-        if (_achievementsMenu.gameObject.activeSelf) EventSystem.current.SetSelectedGameObject(_achievementsMenu.transform.GetChild(0).gameObject);
-        else EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
+        if (_achievementsMenu.gameObject.activeSelf) SelectDefaultButton(_achievementsMenu.transform.GetChild(0).gameObject);
+        else SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
     }
 
     internal void DeleteData()
@@ -247,7 +251,7 @@ public class GameManager : MonoBehaviour
         {
             _deleteDataMenu.gameObject.SetActive(true);
             _achievementsMenu.gameObject.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(_deleteDataMenu.transform.GetChild(0).gameObject);
+            SelectDefaultButton(_deleteDataMenu.transform.GetChild(0).gameObject);
             return;
         }
         _achievementsMenu.gameObject.SetActive(true);
@@ -264,12 +268,12 @@ public class GameManager : MonoBehaviour
             {
                 _levelSelectMenu.gameObject.SetActive(true);
                 _startMenu.gameObject.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+                SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
                 return;
             }
             _levelSelectMenu.gameObject.SetActive(false);
             _startMenu.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(_startMenu.transform.GetChild(0).gameObject);
+            SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
             return;
         }
 
@@ -282,14 +286,15 @@ public class GameManager : MonoBehaviour
         _tutorialMenu.gameObject.SetActive(true);
         _tutorialMenu.transform.GetChild(2).gameObject.SetActive(true);
         _tutorialMenu.transform.GetChild(3).gameObject.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(_tutorialMenu.transform.GetChild(2).gameObject);
+        SelectDefaultButton(_tutorialMenu.transform.GetChild(2).gameObject);
         _startMenu.gameObject.SetActive(false);
     }
 
     private void ActivateProperTutorial()
     {
-        if (!_isPlayingOnMobile) _tutorialMenu.transform.GetChild(0).gameObject.SetActive(true);
-        else _tutorialMenu.transform.GetChild(1).gameObject.SetActive(true);
+        if (_isPlayingOnMobile) _tutorialMenu.transform.GetChild(1).gameObject.SetActive(true);
+        else if (Gamepad.current != null) _tutorialMenu.transform.GetChild(4).gameObject.SetActive(true);
+        else _tutorialMenu.transform.GetChild(0).gameObject.SetActive(true); 
     }
 
     public void ExitLevel()
@@ -302,8 +307,8 @@ public class GameManager : MonoBehaviour
     {
         _tutorialMenu.gameObject.SetActive(!_tutorialMenu.gameObject.activeSelf);
         _levelSelectMenu.gameObject.SetActive(!_levelSelectMenu.gameObject.activeSelf);
-        if (_tutorialMenu.gameObject.activeSelf) EventSystem.current.SetSelectedGameObject(_tutorialMenu.transform.GetChild(3).gameObject);
-        else EventSystem.current.SetSelectedGameObject(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+        if (_tutorialMenu.gameObject.activeSelf) SelectDefaultButton(_tutorialMenu.transform.GetChild(3).gameObject);
+        else SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
     }
 
     public void OnAchievementUnlocked(int achievementIndex)
@@ -342,25 +347,33 @@ public class GameManager : MonoBehaviour
         else if (_loseMenu != null && _loseMenu.gameObject.activeSelf) _lastMenu = _loseMenu;
         else if (_pauseMenu.gameObject.activeSelf) _lastMenu = _pauseMenu;
         else if (_creditsMenu != null && _creditsMenu.gameObject.activeSelf) _lastMenu = _creditsMenu;
-
+       
         _achievementsMenuInGame.gameObject.SetActive(true);
         _lastMenu.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(_achievementsMenuInGame.transform.GetChild(0).gameObject);
+        SelectDefaultButton(_achievementsMenuInGame.transform.GetChild(0).gameObject);
     }
 
     public void BackFromAchievementMenuInGame()
     {
         _achievementsMenuInGame.gameObject.SetActive(false);
         _lastMenu.gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(_lastMenu.transform.GetChild(1).gameObject);
+        SelectDefaultButton(_lastMenu.transform.GetChild(1).gameObject);
         if (_lastMenu == _pauseMenu)
         {
             _pauseButton.gameObject.SetActive(true);
             _pauseButton.SetPressed();
-            EventSystem.current.SetSelectedGameObject(_pauseMenu.transform.GetChild(1).gameObject);
+            SelectDefaultButton(_pauseMenu.transform.GetChild(1).gameObject);
+        }
+        if (_lastMenu == _creditsMenu)
+        {
+            SelectDefaultButton(_creditsMenu.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject);
         }
     }
 
-   
+   public void SelectDefaultButton(GameObject gameObject)
+    {
+        if (_isPlayingOnMobile) return;
+        EventSystem.current.SetSelectedGameObject(gameObject);
+    }
 }

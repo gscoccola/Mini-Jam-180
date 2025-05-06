@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class EpilogueManager : MonoBehaviour
 {
@@ -65,8 +66,12 @@ public class EpilogueManager : MonoBehaviour
 
         yield return new WaitForSeconds(period +2);
         _credits.gameObject.SetActive(true);
+        VibrationHandler.Instance.HeavyVibrate();
 
         yield return new WaitForSeconds(period/2);
         _postCreditButtons.gameObject.SetActive(true);
+        _gameManager.SelectDefaultButton(_postCreditButtons.transform.GetChild(1).gameObject);
+        VibrationHandler.Instance.MediumVibrate();
     }
+
 }

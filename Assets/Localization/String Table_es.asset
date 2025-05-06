@@ -47,18 +47,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14867863982080
-    m_Localized: 'Diseno de juego:
-
-      E. Pellegrino
-
-      Programacion y UI:
-
-      G.
-      Scoccola
-
-      Musica y Sonido: A. Lobos
-
-      Pixel Art: rayryuk'
+    m_Localized: "Dise\xF1o de juego:\nE. Pellegrino\nProgramaci\xF3n y UI:\nG. Scoccola\nM\xFAsica
+      y Sonido: \nA. Lobos\nPixel Art: rayryuk"
     m_Metadata:
       m_Items: []
   - m_Id: 15143362646016

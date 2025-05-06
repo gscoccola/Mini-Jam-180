@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Runtime.InteropServices;
+using UnityEngine.InputSystem;
+using System.Collections;
+using Unity.VisualScripting;
 
 
 public class VibrationHandler : Singleton<VibrationHandler>
@@ -7,14 +10,17 @@ public class VibrationHandler : Singleton<VibrationHandler>
     [DllImport("__Internal")]
     private static extern void Vibrate(int ms);
 
+
     public void LightVibrate()
     {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            Vibrate(50);
+            Vibrate(80);
 #else
-            //Debug.Log("Simulate vibration");
+        if (Gamepad.current == null) return;
+        Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
+        StartCoroutine(IStopVibrating(0.08f));
 #endif
-        
+
     }
 
     public void MediumVibrate()
@@ -22,7 +28,9 @@ public class VibrationHandler : Singleton<VibrationHandler>
 #if !UNITY_EDITOR && UNITY_WEBGL
             Vibrate(150);
 #else
-        //Debug.Log("Simulate vibration");
+        if (Gamepad.current == null) return;
+        Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
+        StartCoroutine(IStopVibrating(0.15f));
 #endif
 
     }
@@ -32,9 +40,16 @@ public class VibrationHandler : Singleton<VibrationHandler>
 #if !UNITY_EDITOR && UNITY_WEBGL
             Vibrate(250);
 #else
-        //Debug.Log("Simulate vibration");
+        if (Gamepad.current == null) return;
+        Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
+        StartCoroutine(IStopVibrating(0.25f));
 #endif
+    }
 
+    private IEnumerator IStopVibrating(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
     }
 }
 

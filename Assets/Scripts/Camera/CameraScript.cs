@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class CameraScript : MonoBehaviour
     [SerializeField] float _startDelay = 2f;
     [SerializeField] float _panDuration = 5f;
     [SerializeField] float _cameraMaxSpeed = 25f;
+    [SerializeField] Transform[] _pointsOfInterest;
+    private int _currentTarget = 0;
     float _cameraHorizontalSpeed;
     float _cameraVerticalSpeed;
     [SerializeField] Transform _virtualTarget;
@@ -18,8 +21,9 @@ public class CameraScript : MonoBehaviour
     bool _isPanningVertically;
     PlayerMovement _playerMovement;
     GameManager _gameManager;
-
     Vector3 _startPosition;
+
+
 
     private void Awake()
     {
@@ -42,17 +46,23 @@ public class CameraScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_pointsOfInterest.Length > 0) CustomPan();
+        else DefaultPan();
+    }
+
+    private void DefaultPan()
+    {
         if (_isPanningHorizontally) _virtualTarget.position =
         Vector2.MoveTowards(_virtualTarget.position,
-        new Vector3(_playerMovement.transform.position.x, _virtualTarget.position.y, 0f), 
+        new Vector3(_playerMovement.transform.position.x, _virtualTarget.position.y, 0f),
         _cameraHorizontalSpeed * Time.deltaTime);
 
-        else if (_isPanningVertically) _virtualTarget.position =
-        Vector2.MoveTowards(_virtualTarget.position,
-        _playerMovement.transform.position,
-        _cameraVerticalSpeed * Time.deltaTime);
+       else if (_isPanningVertically) _virtualTarget.position =
+            Vector2.MoveTowards(_virtualTarget.position,
+            _playerMovement.transform.position,
+            _cameraVerticalSpeed * Time.deltaTime);
 
-        if ((_isPanningHorizontally || _isPanningVertically) && (_virtualTarget.position - _playerMovement.transform.position).magnitude < 8f )
+        if ((_isPanningHorizontally || _isPanningVertically) && (_virtualTarget.position - _playerMovement.transform.position).magnitude < 8f)
         {
             _gameManager.AlmostStartLevel();
         }
@@ -68,6 +78,31 @@ public class CameraScript : MonoBehaviour
             _isPanningVertically = false;
             _gameManager.StartLevel(false);
             SwitchToPlayerCam();
+        }
+    }
+
+    private void CustomPan()
+    {
+        if (_currentTarget < _pointsOfInterest.Length) _virtualTarget.position =
+        Vector2.MoveTowards(_virtualTarget.position,
+        _pointsOfInterest[_currentTarget].position,
+        _cameraHorizontalSpeed * Time.deltaTime);
+        else return;
+
+        if ((_virtualTarget.position - _playerMovement.transform.position).magnitude < 1f)
+        {
+            _gameManager.StartLevel(false);
+            SwitchToPlayerCam();
+        }
+
+        else if ((_virtualTarget.position - _playerMovement.transform.position).magnitude < 8f)
+        {
+            _gameManager.AlmostStartLevel();
+        }
+
+        if ((_virtualTarget.position - _pointsOfInterest[_currentTarget].position).magnitude < 0.1f)
+        {
+            _currentTarget++;
         }
     }
 

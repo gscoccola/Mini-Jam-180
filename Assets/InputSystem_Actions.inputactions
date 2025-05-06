@@ -15,24 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "852140f2-7766-474d-8707-702459ba45f3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ReloadLevel",
                     "type": "Button",
                     "id": "3bfe767a-196c-47f5-8bf4-db2b0bdc2e3f",
@@ -182,47 +164,80 @@
                 },
                 {
                     "name": "",
-                    "id": "eb40bb66-4559-4dfa-9a2f-820438abb426",
-                    "path": "<Keyboard>/space",
+                    "id": "458ef25c-4725-4808-8b84-4e01ab78ae06",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Jump",
+                    "groups": ";Gamepad",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "19e3b521-50d4-458c-afa4-0752f42e90da",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "f0e8ae75-60eb-4188-9d9c-a160f799cc56",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Touch;Gamepad",
-                    "action": "Jump",
+                    "groups": ";Gamepad",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "2d641f96-dc3c-4926-925d-717632758c2d",
-                    "path": "<Touchscreen>/touch1/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad;Touch",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d947d505-adb0-40ee-9e33-f4eb10f1271f",
-                    "path": "<Keyboard>/e",
+                    "name": "2D Vector",
+                    "id": "e0b6a845-e44b-4961-a013-00dd870114e6",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
+                    "action": "Move",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "86d01759-508f-425d-96fe-930e1a344ca6",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "89c72e02-380a-4700-831b-2c7fa6a4938a",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "83561a27-5a19-4762-a7ee-cb26063cb7a1",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "a404eb90-0b0e-4b48-9673-b35aafcce2a8",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -231,6 +246,28 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "ReloadLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a96f25e-f35e-4e69-b484-9432e1b3c6aa",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ReloadLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c86cdc9-a8ff-4c8a-8b93-4db78afdf286",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "ReloadLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -264,6 +301,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "caa5a5cd-346c-40c1-9f4b-d6a589cc8972",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false

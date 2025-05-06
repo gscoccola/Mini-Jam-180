@@ -10,8 +10,8 @@ public class JumpPad : MonoBehaviour
     {
         if (collider.tag == "Player" && !_isOnCooldown)
         {
-            collider.GetComponent<PlayerMovement>().Jump();
             StartCoroutine(IJumpCooldown());
+            if (!collider.GetComponent<PlayerMovement>().Jump()) return;
             Rigidbody2D rigidbody2D = collider.transform.GetComponent<Rigidbody2D>();
             rigidbody2D.linearVelocityX = Mathf.Sign(rigidbody2D.linearVelocityX) * _boostAmount;
         }
