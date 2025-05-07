@@ -23,11 +23,11 @@ public class Floor : MonoBehaviour
         _tilemapCollider2D = GetComponent<TilemapCollider2D>();
         _tilemap = GetComponent<Tilemap>();
         SetConfiner();
+        DefineBoundaries();
     }
     private void Start()
     {
         if (_floorType == FloorType.Ground)  _tilemapCollider2D.offset = new Vector2(0f, - _groundOffset);
-        DefineBoundaries();
     }
 
     private void SetConfiner()

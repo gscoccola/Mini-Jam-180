@@ -83,6 +83,7 @@ public class CameraScript : MonoBehaviour
 
     private void CustomPan()
     {
+        if (!_isPanningHorizontally) return;
         if (_currentTarget < _pointsOfInterest.Length) _virtualTarget.position =
         Vector2.MoveTowards(_virtualTarget.position,
         _pointsOfInterest[_currentTarget].position,
@@ -93,6 +94,7 @@ public class CameraScript : MonoBehaviour
         {
             _gameManager.StartLevel(false);
             SwitchToPlayerCam();
+            _isPanningHorizontally = false;
         }
 
         else if ((_virtualTarget.position - _playerMovement.transform.position).magnitude < 8f)

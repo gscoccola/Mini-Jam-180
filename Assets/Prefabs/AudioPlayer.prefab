@@ -224,6 +224,26 @@ MonoBehaviour:
   _balloonDeathVolume:
   - 0.5
   - 0.5
+  _missileWarning:
+  - {fileID: 8300000, guid: 0d17822d8b8c8a7459d0cfe5fdbebe13, type: 3}
+  - {fileID: 8300000, guid: 28a4f12b373c6e54aac64266e2e0705b, type: 3}
+  _missileWarningVolume:
+  - 0.417
+  - 0.423
+  _missileFall:
+  - {fileID: 8300000, guid: ee9bfc5f175ee42498ca97da9c47011f, type: 3}
+  _missileFallVolume:
+  - 0.321
+  _missileHit:
+  - {fileID: 8300000, guid: 1a8893601027e144cabd0e3cf82e4c3c, type: 3}
+  - {fileID: 8300000, guid: 685051510cb8f7544aa172cbb1c6b7ef, type: 3}
+  - {fileID: 8300000, guid: af62c504e651c6f4cb2df06bb0cd3b99, type: 3}
+  - {fileID: 8300000, guid: f2c8b045b4259ef4a8155409a0b06bbc, type: 3}
+  _missileHitVolume:
+  - 1
+  - 1
+  - 1
+  - 1
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
   _playerSplashVolume:

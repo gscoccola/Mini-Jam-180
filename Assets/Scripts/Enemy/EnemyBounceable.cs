@@ -68,4 +68,5 @@ public enum EnemyType
     Bird,
     Drone,
     Balloon,
+    GoldenBalloon,
 }

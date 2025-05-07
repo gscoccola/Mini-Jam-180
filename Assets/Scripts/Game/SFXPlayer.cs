@@ -12,6 +12,12 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _droneDeathVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _balloonDeath;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _balloonDeathVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _missileWarning;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileWarningVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _missileFall;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileFallVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _missileHit;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileHitVolume;
 
     [Header("Player Fall")]
     [FoldoutGroup("Player")] public AudioClip[] _playerSplash;
@@ -92,6 +98,9 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_fireworkExplosion] = _fireworkExplosionVolume,
             [_fireworkWhistle] = _fireworkWhistleVolume,
             [_achievement] = _achievementVolume,
+            [_missileWarning] = _missileWarningVolume,
+            [_missileFall] = _missileFallVolume,
+            [_missileHit] = _missileHitVolume,
 
         };
     }

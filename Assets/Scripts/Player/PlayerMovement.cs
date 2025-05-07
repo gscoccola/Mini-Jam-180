@@ -28,13 +28,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Horizontal")]
     [FoldoutGroup("Boost Parameters")][SerializeField] float _birdDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneDeviation;
-    [FoldoutGroup("Boost Parameters")][SerializeField] float _tenderDeviation;
+    [FoldoutGroup("Boost Parameters")][SerializeField] float _balloonDeviation;
+    [FoldoutGroup("Boost Parameters")][SerializeField] float _goldenBalloonDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _footstepsDelay;
 
     [Header("Vertical")]
     [FoldoutGroup("Boost Parameters")][SerializeField] float _birdBoost;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneBoost;
-    [FoldoutGroup("Boost Parameters")][SerializeField] float _tenderBoost;
+    [FoldoutGroup("Boost Parameters")][SerializeField] float _balloonBoost;
+    [FoldoutGroup("Boost Parameters")][SerializeField] float _goldenBalloonBoost;
 
     [Header("Is this the epilogue?")]
     [FoldoutGroup("Epilogue")][SerializeField] bool _isEpilogue;
@@ -66,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
     bool _isLeftFootstepNext;
     float _lastX;
     PolygonCollider2D confiner;
+    bool _isFlying;
+    float _currentGravity;
     #endregion
 
     private void Awake()
@@ -82,12 +86,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _currentAirAcceleration = _defaultAirAcceleration;
         _currentMoveSpeed = _defaultMoveSpeed;
+        _currentGravity = _gravityAcceleration;
 
         _enemyBoosts = new Dictionary<EnemyType, float[]>
         {
             [EnemyType.Bird] = new float[2]{ _birdDeviation, _birdBoost },
             [EnemyType.Drone] = new float[2]{ _droneDeviation, _droneBoost },
-            [EnemyType.Balloon] = new float[2]{ _tenderDeviation, _tenderBoost },
+            [EnemyType.Balloon] = new float[2]{ _balloonDeviation, _balloonBoost },
+            [EnemyType.GoldenBalloon] = new float[2]{ _goldenBalloonDeviation, _goldenBalloonBoost },
         };
 
         CalculateBounds();
@@ -194,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetBool("_isFalling", !IsOnFloor);
         if (IsOnFloor) return;
-        _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _gravityAcceleration * Time.deltaTime).y;
+        _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _currentGravity * Time.deltaTime).y;
     }
 
     void CalculateIsOnFloor()
@@ -232,6 +238,17 @@ public class PlayerMovement : MonoBehaviour
     public void Boost(EnemyType type)
     {
         _rigidBody.linearVelocityY = _enemyBoosts[type][1];
+
+        if (type == EnemyType.GoldenBalloon)
+        {
+            PlayerCombo = 3;
+            IncreaseCombo();
+            SetFly(true);
+            VibrationHandler.Instance.HeavyVibrate();
+            return;
+        }
+
+        if (_isFlying) SetFly(false);
         IncreaseCombo();
         ChangeStance();
         VibrationHandler.Instance.LightVibrate();
@@ -249,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
         }   
         ResetCombo();
         ChangeStance();
+        if (_isFlying) SetFly(false);
         VibrationHandler.Instance.MediumVibrate();
     }
 
@@ -264,6 +282,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(HurtSoundCooldown());
         }
 
+        if (_isFlying) SetFly(false);
         ResetCombo();
         ChangeStance();
         VibrationHandler.Instance.MediumVibrate();
@@ -335,5 +354,12 @@ public class PlayerMovement : MonoBehaviour
         _currentMoveSpeed = _defaultMoveSpeed;
         _particleSystem.Stop();
         MusicPlayer.Instance._isSecondTrackEnabled = false;
+    }
+
+    private void SetFly(bool boolean)
+    {
+        _animator.SetBool("_fly", boolean);
+        _isFlying = boolean;
+        _currentGravity = boolean ? _gravityAcceleration/2 : _gravityAcceleration;
     }
 }

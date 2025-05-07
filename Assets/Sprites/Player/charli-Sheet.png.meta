@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 15c6f0f747fa93a49b08370fc6859f8c
+guid: 9f65ece32817a2145bec24396fe93153
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7267032716344258950
-    second: balloon_10x22_0
+      213: -2066701269389664932
+    second: charli-Sheet_0
+  - first:
+      213: 8805785771382904853
+    second: charli-Sheet_1
+  - first:
+      213: 5862275757566122536
+    second: charli-Sheet_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +115,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: balloon_10x22_0
+      name: charli-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 10
-        height: 22
+        y: 6
+        width: 27
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,162 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7e88233f30562b90800000000000000
-      internalID: -7267032716344258950
+      spriteID: c5d1e25352a9153e0800000000000000
+      internalID: -2066701269389664932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: balloon_10x22_1
+      name: charli-Sheet_1
       rect:
         serializedVersion: 2
-        x: 10
-        y: 0
-        width: 10
-        height: 22
+        x: 26
+        y: 5
+        width: 27
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 6a6efeba3e68e0d43a9b31dff3c8e5d5
-      internalID: 865755581
+      spriteID: 5189777018f643a70800000000000000
+      internalID: 8805785771382904853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: balloon_10x22_2
+      name: charli-Sheet_2
       rect:
         serializedVersion: 2
-        x: 20
-        y: 0
-        width: 10
-        height: 22
+        x: 52
+        y: 5
+        width: 26
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bf838d9d28d3d644690addad2e35087b
-      internalID: 1590357281
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: balloon_10x22_3
-      rect:
-        serializedVersion: 2
-        x: 30
-        y: 0
-        width: 10
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e20d0a416a1cb934996965dc36cd6bc1
-      internalID: 1396434550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: balloon_10x22_4
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 0
-        width: 10
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4dba39d51595c1046a4c4e5a79825bef
-      internalID: -1580111780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: balloon_10x22_5
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 0
-        width: 10
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65ada96076505e24fbfefa033a6230b4
-      internalID: 633617841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: balloon_10x22_6
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 0
-        width: 10
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e29a0faab1dd8914889961f127c11339
-      internalID: -1188607585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: balloon_10x22_7
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 0
-        width: 10
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef0db577e7d8078498409fbf968fb588
-      internalID: -1230912876
+      spriteID: 82adc19edbcfa5150800000000000000
+      internalID: 5862275757566122536
       vertices: []
       indices: 
       edges: []
@@ -292,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d708de8a093053543b7e8bc470f98eda
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -302,14 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      balloon_10x22_0: -7267032716344258950
-      balloon_10x22_1: 865755581
-      balloon_10x22_2: 1590357281
-      balloon_10x22_3: 1396434550
-      balloon_10x22_4: -1580111780
-      balloon_10x22_5: 633617841
-      balloon_10x22_6: -1188607585
-      balloon_10x22_7: -1230912876
+      charli-Sheet_0: -2066701269389664932
+      charli-Sheet_1: 8805785771382904853
+      charli-Sheet_2: 5862275757566122536
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

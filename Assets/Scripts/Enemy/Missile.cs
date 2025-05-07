@@ -30,7 +30,7 @@ public class Missile : MonoBehaviour
         if (!_isDestroyed && !collider.GetComponent<PlayerMovement>().IsDead)
         {
             collider.gameObject.GetComponent<PlayerMovement>().MissileHit(_downwardVelocity);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneDeath);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._missileHit);
             VibrationHandler.Instance.MediumVibrate();
             Die();
         }
@@ -40,6 +40,7 @@ public class Missile : MonoBehaviour
     {
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         _isDestroyed = true;
+        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._fireworkExplosion);
         Destroy(gameObject, 0.01f);
     }
 }

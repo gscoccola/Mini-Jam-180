@@ -85,7 +85,8 @@ public class AchievementButton : MonoBehaviour
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._achievement);
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
             VibrationHandler.Instance.HeavyVibrate();
-            Instantiate(_confettiPrefab, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
+            Instantiate(_confettiPrefab, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity)
+                .transform.localScale = 2.8296f *(_camera.orthographicSize / 5) * Vector3.one;
 
             _wasShown = true;
             _animator.SetBool("wasShown", true);
