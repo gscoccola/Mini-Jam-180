@@ -18,6 +18,8 @@ public class MusicPlayer : Singleton<MusicPlayer>
     [SerializeField] AudioResource _thirdPhaseTrack;
     [SerializeField] AudioResource _thirdPhaseComboTrack;
     [SerializeField] AudioResource _EpilogueTrack;
+    [SerializeField] AudioResource _endlessTrack;
+    [SerializeField] AudioResource _endlessComboTrack;
     public bool _isSecondTrackEnabled;
     public bool _beginFadeOutWind;
     public bool _isPlayingWind;
@@ -37,9 +39,10 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _isSecondTrackEnabled = false;
         GamePhase previousPhase = _gamePhase;
         if (new List<int> { 1, 2, 3}.Contains(levelIndex)) _gamePhase = GamePhase.First;
-        else if (new List<int> { 4, 5, 8}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
+        else if (new List<int> { 4, 5}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
         else if (new List<int> { 6}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
         else if(new List<int> {7 }.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
+        else if(new List<int> {8 }.Contains(levelIndex)) _gamePhase = GamePhase.Endless;
 
         if (previousPhase == _gamePhase) return;
 
@@ -66,6 +69,13 @@ public class MusicPlayer : Singleton<MusicPlayer>
         {
             _audioSource.resource = _EpilogueTrack;
             _audioSource.volume = 0.6f;
+        }
+
+        else if (_gamePhase == GamePhase.Endless)
+        {
+            _audioSource.volume = 0.265f;
+            _audioSource.resource = _endlessTrack;
+            _audioSource2.resource = _endlessComboTrack;
         }
         _isPlayingMusic = false;
     }
@@ -116,4 +126,5 @@ public enum GamePhase
     Second,
     Third,
     Epilogue,
+    Endless,
 }

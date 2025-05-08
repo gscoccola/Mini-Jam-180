@@ -42,7 +42,7 @@ public class EpilogueManager : MonoBehaviour
         if (_isGameOver)
         {
             _confiner.InvalidateBoundingShapeCache();
-            _camera.Lens.OrthographicSize = Mathf.SmoothDamp(_camera.Lens.OrthographicSize, 3f, ref velocity, 5f);
+            _camera.Lens.OrthographicSize = Mathf.SmoothDamp(_camera.Lens.OrthographicSize, 4f, ref velocity, 10f);
         }
 
         if (_playerTransform.position.y < -2000f)

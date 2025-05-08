@@ -52,23 +52,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc5aeca61b445d4b86b71f297a13b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultMoveSpeed: 10
   _defaultGroundSpeed: 5
+  _defaultMoveSpeed: 10
   _upgradedMoveSpeed: 13.5
+  _flyingMoveSpeed: 14
+  _minimumFlyingSpeed: 3
+  _groundAcceleration: 200
   _defaultAirAcceleration: 18
   _upgradedAirAcceleration: 22
-  _groundAcceleration: 200
+  _flyingAirAcceleration: 10
   _jumpSpeed: 7
   _fallSpeed: 10
   _gravityAcceleration: 10
   _birdDeviation: 10
   _droneDeviation: 15
   _balloonDeviation: 20
-  _goldenBalloonDeviation: 25
+  _goldenBalloonDeviation: 20
   _footstepsDelay: 0.3
   _birdBoost: 10
   _droneBoost: 12
-  _balloonBoost: 15
+  _balloonBoost: 14
   _goldenBalloonBoost: 13
   _isEpilogue: 0
   IsHorizonalMovementDisabled: 0

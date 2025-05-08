@@ -188,6 +188,8 @@ MonoBehaviour:
   _thirdPhaseTrack: {fileID: 8300000, guid: 205c513df5300f848b5c5f3a4ee38e84, type: 3}
   _thirdPhaseComboTrack: {fileID: 8300000, guid: d50337f82a72d9240ab501031a541ef1, type: 3}
   _EpilogueTrack: {fileID: 8300000, guid: a9e26535a45708843ba34f2ff1916fd2, type: 3}
+  _endlessTrack: {fileID: 8300000, guid: 9d09be12d6b038c4b95cfd0b7740fb95, type: 3}
+  _endlessComboTrack: {fileID: 8300000, guid: bc643980de9256049b872f5254b0b04b, type: 3}
   _isSecondTrackEnabled: 0
   _beginFadeOutWind: 0
   _isPlayingWind: 0
@@ -314,9 +316,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 64c9825153d3a0b42a011111c897ae01, type: 3}
   - {fileID: 8300000, guid: 71df3584c1f74a846ad1cefdbce04bcc, type: 3}
   - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
+  - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
+  - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
   _comboLostVolume:
   - 0.211
   - 0.264
+  - 0.211
+  - 0.211
   - 0.211
   _button:
   - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}

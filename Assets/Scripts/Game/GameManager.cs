@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     ScoreKeeper _scoreKeeper;
 
     bool _isPlayingOnMobile;
-    int activeSceneIndex;
+    int _activeSceneIndex;
     bool _isPaused;
     bool _wasLevelWon;
 
@@ -56,14 +56,14 @@ public class GameManager : MonoBehaviour
         _cameraScript = FindAnyObjectByType<CameraScript>();
 
         _isPlayingOnMobile = Application.isMobilePlatform;
-        activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        _activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         _scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
     }
 
     private void Start()
     {
-        if (activeSceneIndex == 0 && !PersistentInfo.Instance._wasLanguageSet) SelectDefaultButton(_argFlag);
-        if (activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)
+        if (_activeSceneIndex == 0 && !PersistentInfo.Instance._wasLanguageSet) SelectDefaultButton(_argFlag);
+        if (_activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)
         {
             _languageMenu.gameObject.SetActive(false);
             _startMenu.gameObject.SetActive(true);
@@ -72,24 +72,24 @@ public class GameManager : MonoBehaviour
 
 
         PersistentInfo.Instance.SaveData();
-        MusicPlayer.Instance.OnLevelLoad(activeSceneIndex);
-        SFXPlayer.Instance.OnLevelLoad(activeSceneIndex);
+        MusicPlayer.Instance.OnLevelLoad(_activeSceneIndex);
+        SFXPlayer.Instance.OnLevelLoad(_activeSceneIndex);
 
-        if (activeSceneIndex==0) ActivateProperTutorial();
+        if (_activeSceneIndex==0) ActivateProperTutorial();
 
-        if (activeSceneIndex != 0 && _isPlayingOnMobile)
+        if (_activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
 
-        if (activeSceneIndex == 0 || activeSceneIndex == _epilogueLevelIndex)
+        if (_activeSceneIndex == 0 || _activeSceneIndex == _epilogueLevelIndex)
         {
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
             return;
         }
 
-        else if (!PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasShown)
+        else if (!PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown)
         {
-            PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasShown = true;
+            PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown = true;
             if (_cameraScript != null) StartCoroutine(_cameraScript.ICameraPan());
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
+        PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasBeaten = true;
         LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -189,9 +189,9 @@ public class GameManager : MonoBehaviour
         PersistentInfo.Instance.SaveData();
         if (_mSpawner != null) _mSpawner.StopSpawning();
         _mobileInputButtons.gameObject.SetActive(false);
-        PersistentInfo.Instance.LevelCompletionInfo[activeSceneIndex].WasBeaten = true;
+        PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasBeaten = true;
         _wasLevelWon = true;
-        if (activeSceneIndex == 1) OnAchievementUnlocked(1);
+        if (_activeSceneIndex == 1) OnAchievementUnlocked(1);
         StopAllCoroutines();
         StartCoroutine(IWin());
     }
@@ -299,7 +299,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitLevel()
     {
-        if (activeSceneIndex != 0)
+        if (_activeSceneIndex != 0)
         LoadLevel(0);
     }
 

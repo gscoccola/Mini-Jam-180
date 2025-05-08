@@ -12,12 +12,18 @@ public class PlayerMovement : MonoBehaviour
     #region Parameters
 
     [Header("Horizontal")]
-    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultMoveSpeed;
+
     [FoldoutGroup("Player Parameters")][SerializeField] float _defaultGroundSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _defaultMoveSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedMoveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _flyingMoveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _minimumFlyingSpeed;
+
+    [FoldoutGroup("Player Parameters")][SerializeField] float _groundAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _defaultAirAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedAirAcceleration;
-    [FoldoutGroup("Player Parameters")][SerializeField] float _groundAcceleration;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _flyingAirAcceleration;
+
     
 
     [Header("Vertical")]
@@ -154,17 +160,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Vector2 playerVelocity = IsHorizonalInputDisabled ? Vector2.zero : new Vector2(_moveInput.x, 0f);
+        Vector2 inputDirection = IsHorizonalInputDisabled ? Vector2.zero : new Vector2(_moveInput.x, 0f);
 
-
-        if (!IsOnFloor)
+        if (IsOnFloor)
         {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _currentMoveSpeed, _currentAirAcceleration * Time.deltaTime).x;
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        else
-        {
-            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, playerVelocity * _defaultGroundSpeed, _groundAcceleration * Time.deltaTime).x;
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, inputDirection * _defaultGroundSpeed, _groundAcceleration * Time.deltaTime).x;
             bool playerHasHorizontalSpeed = Mathf.Abs(_moveInput.x) > Mathf.Epsilon;
             if (playerHasHorizontalSpeed)
             {
@@ -174,8 +174,19 @@ public class PlayerMovement : MonoBehaviour
             _isRunning = playerHasHorizontalSpeed;
             _animator.SetBool("_isRunning", playerHasHorizontalSpeed);
             _lastX = transform.position.x;
+            HandleFootsteps();
+            return;
         }
-        HandleFootsteps();
+        transform.localScale = new Vector3(1f, 1f, 1f);
+
+        if (!_isFlying)
+        {
+            _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, inputDirection * _currentMoveSpeed, _currentAirAcceleration * Time.deltaTime).x;
+            return;
+        }
+
+        _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, inputDirection * _flyingMoveSpeed, _flyingAirAcceleration * Time.deltaTime).x;
+        if (_rigidBody.linearVelocityX > -_minimumFlyingSpeed) SetFly(false);
     }
 
     private void HandleFootsteps()
@@ -241,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (type == EnemyType.GoldenBalloon)
         {
+            _rigidBody.linearVelocityX = -_goldenBalloonDeviation;
             PlayerCombo = 3;
             IncreaseCombo();
             SetFly(true);
@@ -361,5 +373,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("_fly", boolean);
         _isFlying = boolean;
         _currentGravity = boolean ? _gravityAcceleration/2 : _gravityAcceleration;
+        if (boolean) MusicPlayer.Instance.PlayWind();
+        else MusicPlayer.Instance._beginFadeOutWind = true;
     }
 }

@@ -22,6 +22,7 @@ public class MissileSpawner : MonoBehaviour
 
     private int _laneNumber;
     int[] _laneArray;
+    bool _isSpawning;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class MissileSpawner : MonoBehaviour
     public void StartSpawning()
     {
         StartCoroutine(ISpawnMissileWave());
+        _isSpawning = true;
     }
 
     public void StopSpawning()
@@ -86,5 +88,11 @@ public class MissileSpawner : MonoBehaviour
     {
         return Instantiate(_laserPrefab, new Vector3(xPosition, 0f, 0f),
             Quaternion.identity, _enemiesFolder.transform);
+    }
+
+    public void SetMissileNumber(int number)
+    {
+        _missilesPerWave = number;
+        if (number!=0 && !_isSpawning) StartSpawning();
     }
 }

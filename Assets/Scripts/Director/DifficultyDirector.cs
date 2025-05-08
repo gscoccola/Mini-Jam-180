@@ -1,12 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DifficultyDirector : MonoBehaviour
 {
+    [SerializeField] DifficultyMilestoneSO[] _difficultyMilestones;
+    int currentMilestoneIndex = 0;
+    private float _nextMilestoneDistance;
+
     Spawner _spawner;
     MissileSpawner _mSpawner;
     private Transform _player;
     private float _initialPlayerX;
-    bool _isMissileSpawning = false;
 
     private void Awake()
     {
@@ -14,14 +18,26 @@ public class DifficultyDirector : MonoBehaviour
         _mSpawner = FindAnyObjectByType<MissileSpawner>();
         _player = FindAnyObjectByType<PlayerMovement>().transform;
         _initialPlayerX = _player.position.x;
+        _nextMilestoneDistance = (_difficultyMilestones.Length != currentMilestoneIndex) ?
+            _difficultyMilestones[0].GetDistance() :
+            Mathf.Infinity;
     }
 
     private void Update()
     {
-        if (!_isMissileSpawning && _player.position.x < _initialPlayerX - 10)
+        if (_player.position.x - _initialPlayerX < -_nextMilestoneDistance)
         {
-            _mSpawner.StartSpawning();
-            _isMissileSpawning = true;
+            ChangeDifficultySettings();
         }
+    }
+
+    private void ChangeDifficultySettings()
+    {
+        _mSpawner.SetMissileNumber(_difficultyMilestones[currentMilestoneIndex].GetMissileNumber());
+        _spawner.SetSpecialWaveChance(_difficultyMilestones[currentMilestoneIndex].GetSpecialWaveChance());
+        currentMilestoneIndex++;
+        _nextMilestoneDistance = (_difficultyMilestones.Length != currentMilestoneIndex) ?
+            _difficultyMilestones[currentMilestoneIndex].GetDistance() :
+            Mathf.Infinity;
     }
 }
