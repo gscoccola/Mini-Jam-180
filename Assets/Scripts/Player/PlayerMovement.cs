@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _balloonDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _goldenBalloonDeviation;
+
     [FoldoutGroup("Boost Parameters")][SerializeField] float _footstepsDelay;
 
     [Header("Vertical")]
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneBoost;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _balloonBoost;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _goldenBalloonBoost;
+    [FoldoutGroup("Boost Parameters")][SerializeField] float _stunDuration;
 
     [Header("Is this the epilogue?")]
     [FoldoutGroup("Epilogue")][SerializeField] bool _isEpilogue;
@@ -76,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
     PolygonCollider2D confiner;
     bool _isFlying;
     float _currentGravity;
+    bool _isStunned;
+    GameObject _stunVFX;
     #endregion
 
     private void Awake()
@@ -93,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         _currentAirAcceleration = _defaultAirAcceleration;
         _currentMoveSpeed = _defaultMoveSpeed;
         _currentGravity = _gravityAcceleration;
+        _stunVFX = transform.GetChild(0).gameObject;
 
         _enemyBoosts = new Dictionary<EnemyType, float[]>
         {
@@ -154,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveHorizontally()
     {
-        if (IsHorizonalMovementDisabled)
+        if (IsHorizonalMovementDisabled || _isStunned)
         {
             _rigidBody.linearVelocityX = 0f;
             return;
@@ -291,6 +296,7 @@ public class PlayerMovement : MonoBehaviour
         {
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerHurt);
             _isHurtSoundOnCooldown = true;
+            StartCoroutine(IStun() );
             StartCoroutine(HurtSoundCooldown());
         }
 
@@ -298,6 +304,16 @@ public class PlayerMovement : MonoBehaviour
         ResetCombo();
         ChangeStance();
         VibrationHandler.Instance.MediumVibrate();
+    }
+
+    IEnumerator IStun()
+    {
+        _isStunned = true;
+        _stunVFX.SetActive(true);
+        yield return new WaitForSeconds(_stunDuration);
+        _isStunned = false;
+        _stunVFX.SetActive(false);
+
     }
 
     IEnumerator HurtSoundCooldown()

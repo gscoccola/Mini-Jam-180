@@ -49,7 +49,7 @@ MonoBehaviour:
   _minXSpacing: 4
   _spawnPeriod: 1.5
   _minSpawnHeight: 2
-  _spawnXOffset: 40
+  _spawnXOffset: 43
   _birdSpawnChance: 0.2
   _droneSpawnChance: 0.12
   _balloonSpawnChance: 0.09

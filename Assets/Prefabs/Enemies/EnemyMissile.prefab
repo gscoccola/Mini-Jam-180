@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 25
   _explosionPrefab: {fileID: 3467801179110129099, guid: 554681dba0ac69744a769ed11ffd4fcb, type: 3}
-  _downwardVelocity: 8
+  _downwardVelocity: 4
 --- !u!61 &1877145540030158953
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,15 +166,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.011246681, y: 0}
+  m_Offset: {x: -0.011246681, y: 0.009459496}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3125, y: 1.125}
+    oldSize: {x: 0.4375, y: 1.3125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5486927, y: 1.125}
+  m_Size: {x: 0.5486927, y: 1.2877026}
   m_EdgeRadius: 0
