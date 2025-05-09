@@ -290,8 +290,8 @@ MonoBehaviour:
 
     Pixel Art: rayryuk'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: df1121373a11681418305365fc4034a8, type: 2}
-  m_sharedMaterial: {fileID: 5862746391149027187, guid: df1121373a11681418305365fc4034a8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d9c1849bef6822a4b9d45fb24ab4e4f6, type: 2}
+  m_sharedMaterial: {fileID: -6088511205945589829, guid: d9c1849bef6822a4b9d45fb24ab4e4f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17350,7 +17350,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 178.77296
+      value: 178.7764
       objectReference: {fileID: 0}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17426,7 +17426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 164.44319
+      value: 164.45468
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y

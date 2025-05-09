@@ -1267,15 +1267,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
       propertyPath: m_fontSize
-      value: 187.5
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d9c1849bef6822a4b9d45fb24ab4e4f6, type: 2}
+    - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
       propertyPath: m_fontSizeBase
-      value: 187.5
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6088511205945589829, guid: d9c1849bef6822a4b9d45fb24ab4e4f6, type: 2}
+    - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
+      propertyPath: m_characterSpacing
+      value: -0.625
       objectReference: {fileID: 0}
     - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363299025397771170, guid: 15a336182001bf04ea37873d7d174217, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
