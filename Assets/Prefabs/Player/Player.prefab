@@ -166,12 +166,12 @@ MonoBehaviour:
   _defaultGroundSpeed: 5
   _defaultMoveSpeed: 10
   _upgradedMoveSpeed: 13.5
-  _flyingMoveSpeed: 14
-  _minimumFlyingSpeed: 3
+  _minimumFlyingSpeed: 5
   _groundAcceleration: 200
   _defaultAirAcceleration: 18
   _upgradedAirAcceleration: 22
-  _flyingAirAcceleration: 10
+  _flyingDeceleration: 7
+  _flyingDecelerationDifference: 4
   _jumpSpeed: 7
   _fallSpeed: 10
   _gravityAcceleration: 10

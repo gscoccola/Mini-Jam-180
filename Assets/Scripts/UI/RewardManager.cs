@@ -10,6 +10,7 @@ public class RewardManager : MonoBehaviour
 
 
     [SerializeField] GameObject _padlockGrid;
+    [SerializeField] GameObject _popup;
     [SerializeField] Animator[] _padlocksAnim;
     [SerializeField] Animator _chestAnim;
     [SerializeField] UIBalloons _UIBalloons;
@@ -29,6 +30,7 @@ public class RewardManager : MonoBehaviour
         {
             _chestAnim.SetTrigger("WasOpened");
             _padlockGrid.SetActive(false);
+            _popup.SetActive(true);
             return;
         }
         for (int i= 0; i < shownCount; i++)
@@ -74,7 +76,9 @@ public class RewardManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(_balloonDelay);
             _UIBalloons.gameObject.SetActive(true);
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonRelease);
-            yield return new WaitForSecondsRealtime(_chestInputDisable- _balloonDelay);
+            yield return new WaitForSecondsRealtime(_balloonDelay);
+            _popup.SetActive(true);
+            yield return new WaitForSecondsRealtime(_chestInputDisable- 2*_balloonDelay);
         }
 
         foreach (var button in _buttons1)

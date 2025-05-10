@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Alchemy.Inspector;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Parameters")][SerializeField] private float _birdSpawnChance;
     [FoldoutGroup("Parameters")][SerializeField] private float _droneSpawnChance;
     [FoldoutGroup("Parameters")][SerializeField] private float _balloonSpawnChance;
+    [FoldoutGroup("Parameters")][SerializeField] private float _goldenBalloonSpawnChance;
     [FoldoutGroup("Parameters")][SerializeField] private float _specialWaveChance;
 
     [Header("Endless mode?")]
@@ -27,6 +29,7 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBird;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabDrone;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBalloon;
+    [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabGoldenBalloon;
 
     private float _localTime;
     private float _lastX;
@@ -39,6 +42,7 @@ public class Spawner : MonoBehaviour
     public bool _spawnsSpecialWaves;
     public bool _isTopSparser;
     private float _attenuationPerLane;
+    private bool _spawnGoldenBallons;
 
     private void Awake()
     {
@@ -50,6 +54,8 @@ public class Spawner : MonoBehaviour
     private void OnEnable()
     {
         _lastX = transform.position.x;
+        if (PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count() ==
+            PersistentInfo.Instance.AchievementCompletionInfo.Count()) _spawnGoldenBallons = true;
     }
 
     public void StartSpawning(bool preSpawn)
@@ -137,7 +143,8 @@ public class Spawner : MonoBehaviour
         }
         else if (randomFloat < _birdSpawnChance + _droneSpawnChance + _balloonSpawnChance)
         {
-            prefabToSpawn = _enemyPrefabBalloon;
+            prefabToSpawn = (_spawnGoldenBallons && UnityEngine.Random.Range(0f, 1f) < _goldenBalloonSpawnChance)
+                ? _enemyPrefabGoldenBalloon : _enemyPrefabBalloon;
         }
         else return;
         SpawnEnemy(position, prefabToSpawn);

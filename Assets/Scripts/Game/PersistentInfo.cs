@@ -37,11 +37,12 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     private void TestChestDELETEAFTERTEST()
     {
+        
         foreach (AchievementInfoSO achievement in _achievements)
         {
             AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, false);
         }
-        AchievementCompletionInfo[0] = new AchievementMilestones(true, false);
+        Debug.Log("REMEMBER TO DELETE TEST");
         SaveData();
     }
 

@@ -371,6 +371,11 @@ public class GameManager : MonoBehaviour
         {
             SelectDefaultButton(_creditsMenu.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject);
         }
+
+        if (_lastMenu == _winMenu)
+        {
+            _winMenu.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Idle");
+        }
     }
 
    public void SelectDefaultButton(GameObject gameObject)

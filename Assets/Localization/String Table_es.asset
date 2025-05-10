@@ -105,6 +105,10 @@ MonoBehaviour:
     m_Localized: Pausa
     m_Metadata:
       m_Items: []
+  - m_Id: 3743158487764992
+    m_Localized: "\xA1Globos Dorados Desbloqueados!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

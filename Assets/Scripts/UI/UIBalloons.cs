@@ -20,7 +20,7 @@ public class UIBalloons : MonoBehaviour
 
     private IEnumerator IBalloons()
     {
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSecondsRealtime(0.45f);
         _activeBallons.Add(_balloons[3]);
         _activeBallons.Add(_balloons[4]);
     }

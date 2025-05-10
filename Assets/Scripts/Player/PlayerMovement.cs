@@ -16,13 +16,13 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Player Parameters")][SerializeField] float _defaultGroundSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _defaultMoveSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedMoveSpeed;
-    [FoldoutGroup("Player Parameters")][SerializeField] float _flyingMoveSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _minimumFlyingSpeed;
 
     [FoldoutGroup("Player Parameters")][SerializeField] float _groundAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _defaultAirAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _upgradedAirAcceleration;
-    [FoldoutGroup("Player Parameters")][SerializeField] float _flyingAirAcceleration;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _flyingDeceleration;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _flyingDecelerationDifference;
 
     
 
@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
     float _currentGravity;
     bool _isStunned;
     GameObject _stunVFX;
+    bool _belowFlyingSpeed;
     #endregion
 
     private void Awake()
@@ -120,8 +121,7 @@ public class PlayerMovement : MonoBehaviour
             if (!_isOutOfBounds)_rigidBody.linearVelocityX = 0f;
             return;
         }  
-        MoveHorizontally();
-        
+        MoveHorizontally(); 
     }
 
     public void CalculateBounds()
@@ -190,8 +190,19 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, inputDirection * _flyingMoveSpeed, _flyingAirAcceleration * Time.deltaTime).x;
+        /*_rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, inputDirection * _flyingMoveSpeed, _flyingAirAcceleration * Time.deltaTime).x;
+        if (_rigidBody.linearVelocityX > -_minimumFlyingSpeed) SetFly(false);*/
+
+        _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector3.zero,
+            (_flyingDeceleration + inputDirection.x * _flyingDecelerationDifference) * Time.deltaTime).x;
+
         if (_rigidBody.linearVelocityX > -_minimumFlyingSpeed) SetFly(false);
+        /*
+        if (_rigidBody.linearVelocityX > -_minimumFlyingSpeed)
+        {
+            if (_belowFlyingSpeed) SetFly(false);
+            else _belowFlyingSpeed = true;
+        }*/
     }
 
     private void HandleFootsteps()
@@ -389,6 +400,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("_fly", boolean);
         _isFlying = boolean;
         _currentGravity = boolean ? _gravityAcceleration/2 : _gravityAcceleration;
+        _belowFlyingSpeed = false;
         if (boolean) MusicPlayer.Instance.PlayWind();
         else MusicPlayer.Instance._beginFadeOutWind = true;
     }
