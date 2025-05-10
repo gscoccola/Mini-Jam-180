@@ -67,6 +67,14 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Game misc")] public AudioClip[] _fireworkWhistle;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkWhistleVolume;
 
+    [Header("Rewards")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _padlock;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _padlockVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _chestOpen;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _chestOpenVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _balloonRelease;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _balloonReleaseVolume;
+
     Vector3 _cameraPosition;
     PlayerMovement _playerMovement;
     Dictionary<AudioClip[], float[]> _volumeDictionary = new();
@@ -101,6 +109,9 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_missileWarning] = _missileWarningVolume,
             [_missileFall] = _missileFallVolume,
             [_missileHit] = _missileHitVolume,
+            [_padlock] = _padlockVolume,
+            [_chestOpen] = _chestOpenVolume,
+            [_balloonRelease] = _balloonReleaseVolume,
 
         };
     }

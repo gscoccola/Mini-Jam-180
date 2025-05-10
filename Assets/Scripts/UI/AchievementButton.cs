@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AchievementButton : MonoBehaviour
+public class AchievementButton : MonoBehaviour, IButton
 {
     public event EventHandler<ClosePopupEventArgs> PopupClose;
 
@@ -13,10 +13,12 @@ public class AchievementButton : MonoBehaviour
     [SerializeField] TextMeshProUGUI _achievementTitle;
     [SerializeField] TextMeshProUGUI _achievementDescription;
     [SerializeField] GameObject _confettiPrefab;
+    [SerializeField] RewardManager _rewardManager;
 
     Camera _camera;
     Animator _animator;
     bool _isOnCooldown;
+    private bool _isDisabled;
 
     int Id;
     string Title;
@@ -71,15 +73,15 @@ public class AchievementButton : MonoBehaviour
 
     public void OnClick()
     {
-        if (_isOnCooldown) return;
+        if (_isOnCooldown || _isDisabled) return;
         bool wasPressed = _popup.gameObject.activeSelf;
         StartCoroutine(IButtonCooldown());
         _isOnCooldown = true;
 
         AdjustPopup();
         PopupClose.Invoke(this, new ClosePopupEventArgs());
-        SetPopup(!wasPressed);
 
+        if (_rewardManager.DropNextPadlock()) return;
         if (_wasUnlocked && !_wasShown)
         {
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._achievement);
@@ -94,11 +96,13 @@ public class AchievementButton : MonoBehaviour
             PersistentInfo.Instance.AchievementCompletionInfo[Id].WasShown = true;
             PersistentInfo.Instance.CheckUnseenAchievements();
             PersistentInfo.Instance.SaveData();
-            return;
         }
-
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
-        VibrationHandler.Instance.LightVibrate();
+        else
+        {
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+            VibrationHandler.Instance.LightVibrate();
+        }
+        SetPopup(!wasPressed);
     }
 
     IEnumerator IButtonCooldown()
@@ -111,6 +115,16 @@ public class AchievementButton : MonoBehaviour
     {
         _animator.SetBool("isPressed", boolean);
         _popup.gameObject.SetActive(boolean);
+    }
+
+    public void Enable()
+    {
+        _isDisabled = false;
+    }
+
+    public void Disable()
+    {
+        _isDisabled = true;
     }
 
 }

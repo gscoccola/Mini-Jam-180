@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 9f65ece32817a2145bec24396fe93153
+guid: a9973e3f3ac444740b813259bd9d77d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2066701269389664932
-    second: charli-Sheet_0
+      213: 777883487690000463
+    second: back_69x36_0
   - first:
-      213: 8805785771382904853
-    second: charli-Sheet_1
+      213: -7109815969036114928
+    second: back_69x36_1
   - first:
-      213: 5862275757566122536
-    second: charli-Sheet_2
+      213: -6186823862920262590
+    second: back_69x36_2
+  - first:
+      213: -1056229328814902475
+    second: back_69x36_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +81,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -132,67 +135,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: charli-Sheet_0
+      name: RewardBox_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 6
-        width: 27
-        height: 16
+        y: 0
+        width: 74
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c5d1e25352a9153e0800000000000000
-      internalID: -2066701269389664932
+      spriteID: 6255043d120266945a331b8a6f129c6c
+      internalID: -918402664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: charli-Sheet_1
+      name: RewardBox_1
       rect:
         serializedVersion: 2
-        x: 26
-        y: 5
-        width: 27
-        height: 16
+        x: 74
+        y: 0
+        width: 74
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5189777018f643a70800000000000000
-      internalID: 8805785771382904853
+      spriteID: b8cb7559d1d1e7a4baa99dc81bff6031
+      internalID: 741878524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: charli-Sheet_2
+      name: RewardBox_2
       rect:
         serializedVersion: 2
-        x: 52
-        y: 5
-        width: 26
-        height: 17
+        x: 148
+        y: 0
+        width: 74
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 82adc19edbcfa5150800000000000000
-      internalID: 5862275757566122536
+      spriteID: 30a1802fdb2c4fa43a315ad3e9197c91
+      internalID: -1743636189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RewardBox_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 74
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df3ed728b57b1744bb918f31cb447884
+      internalID: -69101807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RewardBox_4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 0
+        width: 74
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0762d0f1ab2f4674dba9388b80aa1579
+      internalID: 1017212347
       vertices: []
       indices: 
       edges: []
@@ -201,7 +248,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 05c08581ecfbe36479d9e6fac8903f16
     internalID: 0
     vertices: []
     indices: 
@@ -211,9 +258,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      charli-Sheet_0: -2066701269389664932
-      charli-Sheet_1: 8805785771382904853
-      charli-Sheet_2: 5862275757566122536
+      RewardBox_0: -918402664
+      RewardBox_1: 741878524
+      RewardBox_2: -1743636189
+      RewardBox_3: -69101807
+      RewardBox_4: 1017212347
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

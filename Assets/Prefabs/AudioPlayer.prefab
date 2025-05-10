@@ -354,6 +354,18 @@ MonoBehaviour:
   _fireworkWhistleVolume:
   - 0.189
   - 0.151
+  _padlock:
+  - {fileID: 8300000, guid: f0c57c84a8a9e9e4998d6ce0a8232d38, type: 3}
+  _padlockVolume:
+  - 1
+  _chestOpen:
+  - {fileID: 8300000, guid: 8793a170ced7c5543af36f5a290f928e, type: 3}
+  _chestOpenVolume:
+  - 0.73
+  _balloonRelease:
+  - {fileID: 8300000, guid: a3bfc5d8cec544c48bead744455b835e, type: 3}
+  _balloonReleaseVolume:
+  - 0.5
 --- !u!82 &2565876176405641814
 AudioSource:
   m_ObjectHideFlags: 0

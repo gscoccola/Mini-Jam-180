@@ -80,6 +80,18 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _isPlayingMusic = false;
     }
 
+    public void LowerVolume()
+    {
+        _audioSource.volume = _audioSource.volume / 4;
+        _audioSource2.volume = _audioSource2.volume / 4;
+    }
+
+    public void RaiseVolume()
+    {
+        _audioSource.volume = _audioSource.volume * 4;
+        _audioSource2.volume = _audioSource2.volume * 4;
+    }
+
     private void Update()
     {
         if (_beginFadeOutWind)

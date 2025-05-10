@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: bc909b9a509fb2347a01918af2d0c879
+guid: 71a4f5cb81fb9f84ca77a52a38a5bc40
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 777883487690000463
-    second: back_69x36_0
+      213: -8860678358272613640
+    second: chest-ss_0
   - first:
-      213: -7109815969036114928
-    second: back_69x36_1
+      213: 4489940731450446225
+    second: chest-ss_1
   - first:
-      213: -6186823862920262590
-    second: back_69x36_2
+      213: -263472498045824072
+    second: chest-ss_2
   - first:
-      213: -1056229328814902475
-    second: back_69x36_3
+      213: -444203970853789325
+    second: chest-ss_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -81,7 +81,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -135,23 +135,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: back_69x36_0
+      name: chest-ss_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 69
-        height: 36
+        x: 8
+        y: 1
+        width: 32
+        height: 23
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 11, z: 4, w: 4}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f48876029e89bca00800000000000000
-      internalID: 777883487690000463
+      spriteID: 8f26b22aafb880580800000000000000
+      internalID: -8860678358272613640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest-ss_1
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 1
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19159a87e497f4e30800000000000000
+      internalID: 4489940731450446225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest-ss_2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 1
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b3d4e1b825f75cf0800000000000000
+      internalID: -263472498045824072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest-ss_3
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 1
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 371217d87ded5d9f0800000000000000
+      internalID: -444203970853789325
       vertices: []
       indices: 
       edges: []
@@ -160,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 05c08581ecfbe36479d9e6fac8903f16
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -170,10 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      back_69x36_0: 777883487690000463
-      back_69x36_1: -7109815969036114928
-      back_69x36_2: -6186823862920262590
-      back_69x36_3: -1056229328814902475
+      chest-ss_0: -8860678358272613640
+      chest-ss_1: 4489940731450446225
+      chest-ss_2: -263472498045824072
+      chest-ss_3: -444203970853789325
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using UnityEngine.Localization;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
@@ -19,10 +20,11 @@ public class PersistentInfo : Singleton<PersistentInfo>
     [SerializeField] private AchievementInfoSO[] _achievements;
 
     public bool _wasLanguageSet;
-
+    
     private void OnEnable()
     {
         Initialize();
+
     }
 
     public void Initialize()
@@ -30,6 +32,17 @@ public class PersistentInfo : Singleton<PersistentInfo>
         AchievementDictSetup();
         LevelDictSetup();
         LoadData();
+        TestChestDELETEAFTERTEST();
+    }
+
+    private void TestChestDELETEAFTERTEST()
+    {
+        foreach (AchievementInfoSO achievement in _achievements)
+        {
+            AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, false);
+        }
+        AchievementCompletionInfo[0] = new AchievementMilestones(true, false);
+        SaveData();
     }
 
     private void AchievementDictSetup()

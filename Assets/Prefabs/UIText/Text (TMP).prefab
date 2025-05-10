@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: achievements
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c6660349a63801445b0c45857ecd2323, type: 2}
-  m_sharedMaterial: {fileID: 7033929124354186641, guid: c6660349a63801445b0c45857ecd2323, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d9c1849bef6822a4b9d45fb24ab4e4f6, type: 2}
+  m_sharedMaterial: {fileID: -6088511205945589829, guid: d9c1849bef6822a4b9d45fb24ab4e4f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 189
-  m_fontSizeBase: 189
+  m_fontSize: 250
+  m_fontSizeBase: 250
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -0.625
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

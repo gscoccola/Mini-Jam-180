@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameButton : MonoBehaviour
+public class GameButton : MonoBehaviour, IButton
 {
     [SerializeField] ButtonType _type;
     [SerializeField] bool _isInstant;
@@ -15,6 +15,7 @@ public class GameButton : MonoBehaviour
     Animator _animator;
     bool _isOnCooldown;
     public event EventHandler<ClosePopupEventArgs> PopupClose;
+    private bool _isDisabled;
 
     private void Awake()
     {
@@ -33,7 +34,12 @@ public class GameButton : MonoBehaviour
 
     public void OnClick()
     {
-        if (_isOnCooldown) return;
+        if (_isOnCooldown || _isDisabled) return;
+        if (_type == ButtonType.BackFromAchievements || _type == ButtonType.BackFromAchievementMenuInGame|| _type == ButtonType.DeleteSavedData)
+        {
+            RewardManager rewardManager = FindAnyObjectByType<RewardManager>();
+            if (rewardManager != null && rewardManager.DropNextPadlock()) return;
+        }
         VibrationHandler.Instance.LightVibrate();
         _isOnCooldown = true;
         if (_animator != null) _animator.SetBool("isPressed", !_animator.GetBool("isPressed"));
@@ -123,6 +129,15 @@ public class GameButton : MonoBehaviour
         _animator.SetBool("isPressed", true);
     }
 
+    public void Enable()
+    {
+        _isDisabled = false;
+    }
+
+    public void Disable()
+    {
+        _isDisabled = true;
+    }
 }
 
 public enum ButtonType

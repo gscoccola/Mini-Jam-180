@@ -348,6 +348,7 @@ public class GameManager : MonoBehaviour
         else if (_pauseMenu.gameObject.activeSelf) _lastMenu = _pauseMenu;
         else if (_creditsMenu != null && _creditsMenu.gameObject.activeSelf) _lastMenu = _creditsMenu;
        
+        MusicPlayer.Instance.LowerVolume();
         _achievementsMenuInGame.gameObject.SetActive(true);
         _lastMenu.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
@@ -359,6 +360,7 @@ public class GameManager : MonoBehaviour
         _achievementsMenuInGame.gameObject.SetActive(false);
         _lastMenu.gameObject.SetActive(true);
         SelectDefaultButton(_lastMenu.transform.GetChild(1).gameObject);
+        MusicPlayer.Instance.RaiseVolume();
         if (_lastMenu == _pauseMenu)
         {
             _pauseButton.gameObject.SetActive(true);
