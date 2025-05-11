@@ -28,6 +28,11 @@ public class MissileSpawner : MonoBehaviour
     {
         _player = FindAnyObjectByType<PlayerMovement>().transform;
         _enemiesFolder = GameObject.Find("Enemies");
+        GenerateLanes();
+    }
+
+    private void GenerateLanes()
+    {
         _laneNumber = Mathf.FloorToInt(_waveWidth / _minSpacing);
         _laneArray = RandomIntArrayGeneration.Generate(_laneNumber);
     }
@@ -90,9 +95,12 @@ public class MissileSpawner : MonoBehaviour
             Quaternion.identity, _enemiesFolder.transform);
     }
 
-    public void SetMissileNumber(int number)
+    public void SetWaveStats(int number, float waveCooldown, float minSpacing)
     {
         _missilesPerWave = number;
+        _waveCooldown = waveCooldown;
+        _minSpacing = minSpacing;
+        GenerateLanes();
         if (number!=0 && !_isSpawning) StartSpawning();
     }
 }

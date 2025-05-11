@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ea0ff2387ee0e46ac1ac9da5bd0572, type: 3}
   m_Name: 5Death
   m_EditorClassIdentifier: 
-  Distance: 1500
+  Distance: 1200
   SpecialWaveChance: 0.1
-  MissileNumber: 12
+  MissileNumber: 22
+  MissileCooldown: 0
   SpawnBuildings: 0
+  MinSpacing: 2

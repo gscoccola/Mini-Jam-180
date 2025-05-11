@@ -36,7 +36,10 @@ public class DifficultyDirector : MonoBehaviour
 
     private void ChangeDifficultySettings()
     {
-        _mSpawner.SetMissileNumber(_difficultyMilestones[currentMilestoneIndex].GetMissileNumber());
+        _mSpawner.SetWaveStats(_difficultyMilestones[currentMilestoneIndex].GetMissileNumber(),
+            _difficultyMilestones[currentMilestoneIndex].GetMissileCooldown(),
+           _difficultyMilestones[currentMilestoneIndex].GetMinSpacing());
+
         _spawner.SetSpecialWaveChance(_difficultyMilestones[currentMilestoneIndex].GetSpecialWaveChance());
         if (_endlessLevelGenerator!= null) _endlessLevelGenerator._spawnBuildings = _difficultyMilestones[currentMilestoneIndex].GetSpawnBuildings();
         currentMilestoneIndex++;

@@ -24,6 +24,7 @@ public class ScoreKeeper : MonoBehaviour
     private void Update()
     {
         if (!_isEnabled) return;
+        // 200 000 en 1500 hacerlo imposible
         _score = Mathf.FloorToInt(_initialXPosition - _playerTransform.position.x) * 100;
         if (_score > _maxScore)_maxScore = _score;
         _scoreDisplay.text = _maxScore.ToString();

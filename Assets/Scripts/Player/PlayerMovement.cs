@@ -283,6 +283,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (type == EnemyType.GoldenBalloon)
         {
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerBounce);
             _rigidBody.linearVelocityY = _enemyBoosts[type][1];
             _rigidBody.linearVelocityX = -_goldenBalloonDeviation;
             PlayerCombo = 3;
