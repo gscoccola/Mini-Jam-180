@@ -139,6 +139,11 @@ public class SFXPlayer : Singleton<SFXPlayer>
         PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
     }
 
+    public void PlayClipFromArrayAtIndex(AudioClip[] clipArray, int index)
+    {
+        PlayClipAtPoint(clipArray[index], _cameraPosition, _volumeDictionary[clipArray][index]);
+    }
+
     public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, float pitch = 1, bool dontDestroyOnLoad = false)
     {
         GameObject tempGO = new GameObject("TempAudio"); // create the temp object

@@ -23,6 +23,7 @@ public class EndlessLevelGenerator : MonoBehaviour
     PolygonCollider2D _polygonCollider2D;
     CinemachineConfiner2D _cameraConfiner;
     Spawner _spawner;
+    public bool _spawnBuildings = true;
 
     private void Awake()
     {
@@ -65,7 +66,10 @@ public class EndlessLevelGenerator : MonoBehaviour
         if (_previousChunk!= null) Destroy(_previousChunk);
         _previousChunk = _currentChunk;
         _currentChunk = _nextChunk;
-        _nextChunk = Instantiate(_levelChunkPrefabs[Random.Range(0, _levelChunkPrefabs.Length)], 
+        _nextChunk = _spawnBuildings 
+            ? Instantiate(_levelChunkPrefabs[Random.Range(0, _levelChunkPrefabs.Length)], 
+            new Vector3(_currentChunk.transform.position.x - _chunkWidth, 0f, 0f), Quaternion.identity, this.transform)
+            : Instantiate(_levelChunkPrefabs[0],
             new Vector3(_currentChunk.transform.position.x - _chunkWidth, 0f, 0f), Quaternion.identity, this.transform);
         SetNewBounds();
     }
@@ -73,7 +77,7 @@ public class EndlessLevelGenerator : MonoBehaviour
     private void SetNewBounds()
     {
         float yMax = 4000f;
-        float xMin = _currentChunk.transform.position.x - 2 * _chunkWidth;
+        float xMin = _currentChunk.transform.position.x - 50f * _chunkWidth;
         float xMax = _currentChunk.transform.position.x + _chunkWidth;
         _polygonCollider2D.points = new Vector2[4]
         {

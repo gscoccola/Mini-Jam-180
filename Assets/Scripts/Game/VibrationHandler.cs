@@ -14,7 +14,7 @@ public class VibrationHandler : Singleton<VibrationHandler>
     public void LightVibrate()
     {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            Vibrate(80);
+            Vibrate(100);
 #else
         if (Gamepad.current == null) return;
         Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
@@ -38,7 +38,7 @@ public class VibrationHandler : Singleton<VibrationHandler>
     public void HeavyVibrate()
     {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            Vibrate(250);
+            Vibrate(300);
 #else
         if (Gamepad.current == null) return;
         Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);

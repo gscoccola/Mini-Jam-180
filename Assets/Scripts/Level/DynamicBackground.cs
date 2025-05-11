@@ -22,6 +22,8 @@ public class DynamicBackground : MonoBehaviour
 
     SpriteRenderer[] _activeBackground;
     SpriteRenderer[] _standByBackground;
+
+
     bool _isBackgroundFading = false;
     float _alpha = 1f;
     int currentSetIndex = 0;
@@ -34,7 +36,7 @@ public class DynamicBackground : MonoBehaviour
 
     public void TransitionBackgrounds()
     {
-        currentSetIndex++;
+       currentSetIndex++;
         currentSetIndex = currentSetIndex % backgroundSets.Count;
         _isBackgroundFading = true;
         _alpha = 1f;

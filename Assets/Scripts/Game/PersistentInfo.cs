@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using UnityEngine.Localization;
-using UnityEngine.SocialPlatforms.Impl;
+
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
@@ -32,10 +32,10 @@ public class PersistentInfo : Singleton<PersistentInfo>
         AchievementDictSetup();
         LevelDictSetup();
         LoadData();
-        TestChestDELETEAFTERTEST();
+        /*TestChestDELETEAFTERTEST();*/
     }
 
-    private void TestChestDELETEAFTERTEST()
+   /* private void TestChestDELETEAFTERTEST()
     {
         
         foreach (AchievementInfoSO achievement in _achievements)
@@ -44,7 +44,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
         }
         Debug.Log("REMEMBER TO DELETE TEST");
         SaveData();
-    }
+    }*/
 
     private void AchievementDictSetup()
     {

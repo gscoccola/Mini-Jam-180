@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
     float _currentGravity;
     bool _isStunned;
     GameObject _stunVFX;
-    bool _belowFlyingSpeed;
     #endregion
 
     private void Awake()
@@ -245,6 +244,12 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = value.Get<Vector2>();
     }
 
+    public void TouchMove(TouchScreenButtonType direction)
+    {
+        if (direction == TouchScreenButtonType.None) { _moveInput = Vector2.zero; return; }
+        _moveInput = (direction == TouchScreenButtonType.Left) ? Vector2.left : Vector2.right;
+    }
+
     public bool Jump()
     {
         if (!IsOnFloor) return false;
@@ -266,16 +271,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidBody.linearVelocityY = _enemyBoosts[type][1];
 
-        if (type == EnemyType.GoldenBalloon)
-        {
-            _rigidBody.linearVelocityX = -_goldenBalloonDeviation;
-            PlayerCombo = 3;
-            IncreaseCombo();
-            SetFly(true);
-            VibrationHandler.Instance.HeavyVibrate();
-            return;
-        }
-
         if (_isFlying) SetFly(false);
         IncreaseCombo();
         ChangeStance();
@@ -284,6 +279,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void Deviate(EnemyType type, bool appliesBackwardsMomentunm = true)
     {
+        
+
+        if (type == EnemyType.GoldenBalloon)
+        {
+            _rigidBody.linearVelocityY = _enemyBoosts[type][1];
+            _rigidBody.linearVelocityX = -_goldenBalloonDeviation;
+            PlayerCombo = 3;
+            IncreaseCombo();
+            SetFly(true);
+            VibrationHandler.Instance.HeavyVibrate();
+            return;
+        }
+
+
         if (appliesBackwardsMomentunm) _rigidBody.linearVelocityX += _enemyBoosts[type][0];
         else _rigidBody.linearVelocityX = 0f;
         if (!_isHurtSoundOnCooldown)
@@ -400,7 +409,6 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("_fly", boolean);
         _isFlying = boolean;
         _currentGravity = boolean ? _gravityAcceleration/2 : _gravityAcceleration;
-        _belowFlyingSpeed = false;
         if (boolean) MusicPlayer.Instance.PlayWind();
         else MusicPlayer.Instance._beginFadeOutWind = true;
     }

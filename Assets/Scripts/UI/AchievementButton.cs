@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AchievementButton : MonoBehaviour, IButton
+public class AchievementButton : MonoBehaviour
 {
     public event EventHandler<ClosePopupEventArgs> PopupClose;
 
@@ -42,7 +42,7 @@ public class AchievementButton : MonoBehaviour, IButton
 
         _animator.SetBool("wasShown", _wasShown);
         _animator.SetBool("wasUnlocked", _wasUnlocked);
-
+        if (_wasUnlocked && !_wasShown) _animator.Play("Vibrating Yellow", 0, UnityEngine.Random.Range(0f, 1f));
         _achievementTitle.text = Title;
         if (_wasUnlocked)
         {

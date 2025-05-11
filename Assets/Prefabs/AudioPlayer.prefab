@@ -355,11 +355,17 @@ MonoBehaviour:
   - 0.189
   - 0.151
   _padlock:
-  - {fileID: 8300000, guid: f0c57c84a8a9e9e4998d6ce0a8232d38, type: 3}
+  - {fileID: 8300000, guid: bd745fa4a227db643899c2a6879f29c6, type: 3}
+  - {fileID: 8300000, guid: d89955636c12683449a97f3c3ab9565e, type: 3}
+  - {fileID: 8300000, guid: 2458ce6ac811ecf4f9cfc74f14f155cb, type: 3}
+  - {fileID: 8300000, guid: efddda8b6cfff134d9e6d91006f714ab, type: 3}
   _padlockVolume:
   - 1
+  - 1
+  - 1
+  - 1
   _chestOpen:
-  - {fileID: 8300000, guid: 8793a170ced7c5543af36f5a290f928e, type: 3}
+  - {fileID: 8300000, guid: 367ca1516a5251d4b8b6e943651264e4, type: 3}
   _chestOpenVolume:
   - 0.73
   _balloonRelease:

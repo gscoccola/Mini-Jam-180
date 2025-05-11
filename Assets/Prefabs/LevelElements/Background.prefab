@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displacementRatio: 0.1
-  offset: {x: 58.25, y: -2.62, z: 0}
+  offset: {x: 58.25, y: -3, z: 0}
 --- !u!1 &7403280851507546867
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displacementRatio: 0.5
-  offset: {x: 0, y: -1.6, z: 0}
+  offset: {x: 0, y: -3, z: 0}
 --- !u!1 &7873068741536633430
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displacementRatio: 0.05
-  offset: {x: 54.97, y: -4.7, z: 0}
+  offset: {x: 54.97, y: -5.7, z: 0}
 --- !u!1 &9214011045349799474
 GameObject:
   m_ObjectHideFlags: 0

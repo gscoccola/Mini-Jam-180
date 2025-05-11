@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameButton : MonoBehaviour, IButton
+public class GameButton : MonoBehaviour
 {
     [SerializeField] ButtonType _type;
     [SerializeField] bool _isInstant;

@@ -8,6 +8,7 @@ public class DifficultyMilestoneSO : ScriptableObject
     [SerializeField] float Distance;
     [SerializeField] float SpecialWaveChance;
     [SerializeField] int MissileNumber;
+    [SerializeField] bool SpawnBuildings = true;
 
     public float GetDistance()
     {
@@ -20,6 +21,10 @@ public class DifficultyMilestoneSO : ScriptableObject
     public int GetMissileNumber()
     {
         return MissileNumber;
+    }
+    public bool GetSpawnBuildings()
+    {
+        return SpawnBuildings;
     }
 
 }

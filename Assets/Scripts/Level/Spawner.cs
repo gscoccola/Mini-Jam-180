@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using Alchemy.Inspector;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Spawner : MonoBehaviour
 {
@@ -119,12 +120,14 @@ public class Spawner : MonoBehaviour
     private void SpawnSpecialWave(float x, int i)
     {
         Vector3 spawnPosition = new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f);
-        SpawnEnemy(spawnPosition, _enemyPrefabDrone, false);
-        SpawnEnemy(spawnPosition + 2.5f * Vector3.down, _enemyPrefabDrone, false);
-        SpawnEnemy(spawnPosition + 5f * Vector3.down, _enemyPrefabDrone, false);
+        float ySpeed = Mathf.Clamp( 9 * (_player.position.y  - spawnPosition.y) / _spawnXOffset , -9f, 9f);
 
-        SpawnEnemy(spawnPosition + 1.25f * Vector3.down + 2f * Vector3.left, _enemyPrefabDrone, false);
-        SpawnEnemy(spawnPosition + 3.75f * Vector3.down + 2f * Vector3.left, _enemyPrefabDrone, false);
+        SpawnEnemy(spawnPosition, _enemyPrefabDrone, false, true, ySpeed);
+        SpawnEnemy(spawnPosition + 2.5f * Vector3.down, _enemyPrefabDrone, false, true, ySpeed);
+        SpawnEnemy(spawnPosition + 5f * Vector3.down, _enemyPrefabDrone, false, true, ySpeed);
+
+        SpawnEnemy(spawnPosition + 1.25f * Vector3.down + 2f * Vector3.left, _enemyPrefabDrone, false, true, ySpeed);
+        SpawnEnemy(spawnPosition + 3.75f * Vector3.down + 2f * Vector3.left, _enemyPrefabDrone, false, true, ySpeed);
     }
 
     private void SpawnRandomEnemy(Vector3 position, int i)
@@ -150,9 +153,15 @@ public class Spawner : MonoBehaviour
         SpawnEnemy(position, prefabToSpawn);
     }
 
-    private void SpawnEnemy(Vector3 position, GameObject prefab, bool randomPosition = true)
+    private void SpawnEnemy(Vector3 position, GameObject prefab, bool randomPosition = true, bool trackingPlayer = false, float ySpeed = 0f)
     {
-        if (randomPosition)
+        if (trackingPlayer)
+        {
+            GameObject enemy = Instantiate(prefab, position, Quaternion.identity, _enemies.transform);
+            enemy.GetComponent<EnemyMovement>()._maxXValue = _worldMax;
+            enemy.GetComponent<Rigidbody2D>().linearVelocityY = ySpeed;
+        }
+        else if (randomPosition)
         Instantiate(prefab,
             position + Vector3.up * ((UnityEngine.Random.Range(0f, 1f) - 0.5f) * _laneHeight)
             + Vector3.right * (-UnityEngine.Random.Range(0f, 1f) * _minXSpacing),

@@ -16,24 +16,22 @@ public class EnemyMovement : MonoBehaviour
     public float _maxXValue;
 
     Rigidbody2D _rigidBody2D;
-    Vector3 _speed;
 
     private void Awake()
     {
         _rigidBody2D = GetComponent<Rigidbody2D>();
+        _rigidBody2D.linearVelocityX = _horizontalSpeed;
+        _rigidBody2D.linearVelocityY = _verticalSpeed;  /*Don't move to Start, this needs to be set here so it's overriden by Spawner if necessary*/
     }
 
     private void Start()
     {
-        _speed = new Vector3(_horizontalSpeed, _verticalSpeed, 0);
-        
+
         if (_oscilates)
         {
             _angularFrequency = (2 * Mathf.PI) / _oscilationPeriod;
             _phase = Random.Range(0, (2 * Mathf.PI));
         }
-
-        _rigidBody2D.linearVelocity = _speed;
 
     }
 
@@ -48,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
         if (_oscilates)
         {
             _phase += Time.deltaTime * _angularFrequency;
-            _rigidBody2D.linearVelocity = _speed + Vector3.up * _oscilationAmplitude * Mathf.Sin(_phase);
+            _rigidBody2D.linearVelocityY = _verticalSpeed + _oscilationAmplitude * Mathf.Sin(_phase);
         }
     }
 }

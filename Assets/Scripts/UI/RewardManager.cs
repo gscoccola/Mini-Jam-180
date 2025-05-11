@@ -44,6 +44,7 @@ public class RewardManager : MonoBehaviour
         shownCount = PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count();
         if (nextPadlock == shownCount) return false;
         _padlocksAnim[nextPadlock].SetTrigger("Open");
+        VibrationHandler.Instance.MediumVibrate();
         StartCoroutine(IDisableControls(_padlockInputDisable));
         nextPadlock++;
         return true;
@@ -52,13 +53,13 @@ public class RewardManager : MonoBehaviour
     private void OpenChest()
     {
         _chestAnim.SetTrigger("Open");
-        _padlockGrid.SetActive(false);
+        VibrationHandler.Instance.MediumVibrate();
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._chestOpen);
     }
 
     private IEnumerator IDisableControls(float delay)
     {
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._padlock);
+        SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._padlock, nextPadlock);
         foreach (var button in _buttons1)
         {
             button.Disable();
@@ -76,6 +77,7 @@ public class RewardManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(_balloonDelay);
             _UIBalloons.gameObject.SetActive(true);
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonRelease);
+            VibrationHandler.Instance.HeavyVibrate();
             yield return new WaitForSecondsRealtime(_balloonDelay);
             _popup.SetActive(true);
             yield return new WaitForSecondsRealtime(_chestInputDisable- 2*_balloonDelay);
