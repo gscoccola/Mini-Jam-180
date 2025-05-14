@@ -140,8 +140,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: pause_button_144x36_1
       rect:
         serializedVersion: 2
-        x: 36
+        x: 38
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: pause_button_144x36_2
       rect:
         serializedVersion: 2
-        x: 72
+        x: 76
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: pause_button_144x36_3
       rect:
         serializedVersion: 2
-        x: 108
+        x: 114
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: pause_button_144x36_4
       rect:
         serializedVersion: 2
-        x: 144
+        x: 152
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,10 +248,10 @@ TextureImporter:
       name: pause_button_144x36_5
       rect:
         serializedVersion: 2
-        x: 180
+        x: 190
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,7 +260,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72e34a77fed576542853560f235e1901
+      spriteID: a28af1d1e59836b4e869cd800c486558
       internalID: 776583036
       vertices: []
       indices: 

@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     LevelLoader _levelLoader;
     Spawner _spawner;
     MissileSpawner _mSpawner;
-
+    TargetIndicator _indicator;
     ScoreKeeper _scoreKeeper;
 
     bool _isPlayingOnMobile;
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         _spawner = FindAnyObjectByType<Spawner>();
         _mSpawner = FindAnyObjectByType<MissileSpawner>();
         _cameraScript = FindAnyObjectByType<CameraScript>();
-
+        _indicator = FindAnyObjectByType<TargetIndicator>();
         _isPlayingOnMobile = Application.isMobilePlatform;
         _activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         _scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
         if (_mSpawner != null) _mSpawner.StopSpawning();
         PersistentInfo.Instance.SaveData();
+        _indicator.gameObject.SetActive(false);
         _mobileInputButtons.gameObject.SetActive(false);
         StopAllCoroutines();
         StartCoroutine(ILose());
@@ -177,6 +178,7 @@ public class GameManager : MonoBehaviour
     {
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
         PersistentInfo.Instance.SaveData();
+        _indicator.gameObject.SetActive(false);
         _mobileInputButtons.gameObject.SetActive(false);
         OnAchievementUnlocked(3);
         StopAllCoroutines();
@@ -187,6 +189,7 @@ public class GameManager : MonoBehaviour
     {
         if (_scoreKeeper != null) _scoreKeeper.Set(false);
         PersistentInfo.Instance.SaveData();
+        _indicator.gameObject.SetActive(false);
         if (_mSpawner != null) _mSpawner.StopSpawning();
         _mobileInputButtons.gameObject.SetActive(false);
         PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasBeaten = true;
@@ -380,7 +383,7 @@ public class GameManager : MonoBehaviour
 
    public void SelectDefaultButton(GameObject gameObject)
     {
-        if (_isPlayingOnMobile) return;
+        if (_isPlayingOnMobile) EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(gameObject);
     }
 }

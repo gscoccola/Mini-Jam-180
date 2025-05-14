@@ -73,6 +73,7 @@ public class AchievementButton : MonoBehaviour
 
     public void OnClick()
     {
+        if (Application.isMobilePlatform) EventSystem.current.SetSelectedGameObject(null);
         if (_isOnCooldown || _isDisabled) return;
         bool wasPressed = _popup.gameObject.activeSelf;
         StartCoroutine(IButtonCooldown());

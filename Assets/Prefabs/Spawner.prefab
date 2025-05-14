@@ -48,7 +48,7 @@ MonoBehaviour:
   _laneHeight: 5
   _minXSpacing: 4
   _spawnPeriod: 1.5
-  _minSpawnHeight: 2
+  _minSpawnHeight: 3.5
   _spawnXOffset: 43
   _birdSpawnChance: 0.2
   _droneSpawnChance: 0.12

@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     Animator _animator;
     BoxCollider2D _feetCollider;
     public bool IsOnFloor {  get; private set; }
-    Vector2 _moveInput;
+    float _horizontalInput;
     Rigidbody2D _rigidBody;
     int _fallingStance;
     GameManager _gameManager;
@@ -164,15 +164,15 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Vector2 inputDirection = IsHorizonalInputDisabled ? Vector2.zero : new Vector2(_moveInput.x, 0f);
+        Vector2 inputDirection = IsHorizonalInputDisabled ? Vector2.zero : new Vector2(_horizontalInput, 0f);
 
         if (IsOnFloor)
         {
             _rigidBody.linearVelocityX = Vector2.MoveTowards(_rigidBody.linearVelocity, inputDirection * _defaultGroundSpeed, _groundAcceleration * Time.deltaTime).x;
-            bool playerHasHorizontalSpeed = Mathf.Abs(_moveInput.x) > Mathf.Epsilon;
+            bool playerHasHorizontalSpeed = _horizontalInput != 0f;
             if (playerHasHorizontalSpeed)
             {
-                transform.localScale = new Vector3(MathF.Sign(_moveInput.x), 1f, 1f);
+                transform.localScale = new Vector3(MathF.Sign(_horizontalInput), 1f, 1f);
             }
             playerHasHorizontalSpeed = (playerHasHorizontalSpeed && Mathf.Abs(transform.position.x - _lastX) > Mathf.Epsilon);
             _isRunning = playerHasHorizontalSpeed;
@@ -241,13 +241,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        _moveInput = value.Get<Vector2>();
+        _horizontalInput = Mathf.Abs(value.Get<Vector2>().x) > 0.1f ? Mathf.Sign(value.Get<Vector2>().x) : 0f;
     }
 
     public void TouchMove(TouchScreenButtonType direction)
     {
-        if (direction == TouchScreenButtonType.None) { _moveInput = Vector2.zero; return; }
-        _moveInput = (direction == TouchScreenButtonType.Left) ? Vector2.left : Vector2.right;
+        if (direction == TouchScreenButtonType.None) { _horizontalInput = 0f; return; }
+        _horizontalInput = (direction == TouchScreenButtonType.Left) ? -1f : 1f;
     }
 
     public bool Jump()

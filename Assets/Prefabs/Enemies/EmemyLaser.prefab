@@ -112,7 +112,7 @@ LineRenderer:
   m_SortingOrder: 30
   m_Positions:
   - {x: 0, y: -10, z: 0}
-  - {x: 0, y: 100, z: 0}
+  - {x: 0, y: 1000, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.0625
@@ -251,7 +251,7 @@ LineRenderer:
   m_SortingOrder: 30
   m_Positions:
   - {x: 0, y: -10, z: 0}
-  - {x: 0, y: 100, z: 0}
+  - {x: 0, y: 1000, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.0625

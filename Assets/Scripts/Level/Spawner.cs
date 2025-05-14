@@ -52,11 +52,17 @@ public class Spawner : MonoBehaviour
         _enemies = GameObject.Find("Enemies");
     }
 
+    private void Start()
+    {
+        if (PersistentInfo.Instance.AchievementCompletionInfo == null) return;
+        if (PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count() ==
+            PersistentInfo.Instance.AchievementCompletionInfo.Count()) _spawnGoldenBallons = true;
+    }
+
     private void OnEnable()
     {
         _lastX = transform.position.x;
-        if (PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count() ==
-            PersistentInfo.Instance.AchievementCompletionInfo.Count()) _spawnGoldenBallons = true;
+       
     }
 
     public void StartSpawning(bool preSpawn)
@@ -74,7 +80,7 @@ public class Spawner : MonoBehaviour
 
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
         float deltaX = transform.position.x - _lastX;
-        _localTime += Mathf.Max(Time.deltaTime * (1 - deltaX / (Time.deltaTime * 3)), 0f);
+        _localTime += Mathf.Max(Time.deltaTime * (1 - deltaX / (Time.deltaTime * 3f)), 0f);
         _lastX = transform.position.x;
 
         if (_localTime > _spawnPeriod)
@@ -94,18 +100,20 @@ public class Spawner : MonoBehaviour
         }
 
         _laneNumber = Mathf.FloorToInt((_mapHeight - _minSpawnHeight - _laneHeight) / _laneHeight);
-        _attenuationPerLane = 1f / (_laneNumber);
+        _attenuationPerLane = _isTopSparser ? 1f / (_laneNumber) : 0f;
     }
 
     public void InitialBurst()
     {
-        SpawnWave(_player.position.x - 2 * _spawnXOffset / 3f);
-        SpawnWave(_player.position.x - _spawnXOffset / 3f);
+        for (int i = 0; i < (_spawnXOffset - 6f) / 4f ; i++)
+        {
+            SpawnWave(_player.position.x - _spawnXOffset  + 4f*i);
+        }
     }
 
     private void SpawnWave(float x)
     {
-        for (int i = 1; i <= _laneNumber; i++)
+        for (int i = 0; i <= _laneNumber; i++)
         {
             if (_spawnsSpecialWaves && UnityEngine.Random.Range(0f, 1f) < _specialWaveChance)
             {
@@ -132,7 +140,7 @@ public class Spawner : MonoBehaviour
 
     private void SpawnRandomEnemy(Vector3 position, int i)
     {
-        float randomFloat = _isTopSparser ? UnityEngine.Random.Range(0f, 1f + i * _attenuationPerLane) : UnityEngine.Random.Range(0f, 1f);
+        float randomFloat = i==0 ? UnityEngine.Random.Range(0f, 0.65f) : UnityEngine.Random.Range(0f, 1f + i * _attenuationPerLane);
         GameObject prefabToSpawn = null;
 
 

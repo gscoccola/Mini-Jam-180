@@ -140,11 +140,11 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 69
-        height: 36
+        width: 75
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 11, z: 4, w: 4}
+      pivot: {x: 0, y: 0}
+      border: {x: 7, y: 14, z: 7, w: 7}
       customData: 
       outline: []
       physicsShape: []
@@ -160,13 +160,13 @@ TextureImporter:
       name: blue_button_1
       rect:
         serializedVersion: 2
-        x: 69
+        x: 75
         y: 0
-        width: 69
-        height: 36
+        width: 75
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 11, z: 4, w: 4}
+      pivot: {x: 0, y: 0}
+      border: {x: 7, y: 14, z: 7, w: 7}
       customData: 
       outline: []
       physicsShape: []
@@ -182,13 +182,13 @@ TextureImporter:
       name: blue_button_2
       rect:
         serializedVersion: 2
-        x: 138
+        x: 150
         y: 0
-        width: 69
-        height: 36
+        width: 75
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 9, z: 4, w: 6}
+      pivot: {x: 0, y: 0}
+      border: {x: 7, y: 12, z: 7, w: 9}
       customData: 
       outline: []
       physicsShape: []
@@ -204,13 +204,13 @@ TextureImporter:
       name: blue_button_3
       rect:
         serializedVersion: 2
-        x: 207
+        x: 225
         y: 0
-        width: 69
-        height: 36
+        width: 75
+        height: 42
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 5, z: 4, w: 10}
+      pivot: {x: 0, y: 0}
+      border: {x: 7, y: 8, z: 7, w: 13}
       customData: 
       outline: []
       physicsShape: []
@@ -226,13 +226,13 @@ TextureImporter:
       name: blue_button_4
       rect:
         serializedVersion: 2
-        x: 276
+        x: 300
         y: 0
-        width: 69
-        height: 36
+        width: 75
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 4, y: 11, z: 4, w: 4}
+      border: {x: 7, y: 14, z: 6, w: 7}
       customData: 
       outline: []
       physicsShape: []

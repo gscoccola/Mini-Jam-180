@@ -34,6 +34,7 @@ public class GameButton : MonoBehaviour
 
     public void OnClick()
     {
+        if (Application.isMobilePlatform) EventSystem.current.SetSelectedGameObject(null);
         if (_isOnCooldown || _isDisabled) return;
         if (_type == ButtonType.BackFromAchievements || _type == ButtonType.BackFromAchievementMenuInGame|| _type == ButtonType.DeleteSavedData)
         {

@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 7188089525762957974}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.12, y: 2.117, z: 0}
+  m_LocalPosition: {x: -4, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,7 +100,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.3091545, y: -0.108382225}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -110,7 +110,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.47711754, y: 0.12823296}
+  m_Size: {x: 0.3, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &8252998183889411041
 MonoBehaviour:
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4cff059231c234ca5e570bdb64de45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boostAmount: 18
+  _boostAmount: 12
 --- !u!1 &9047408102067419584
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 9047408102067419584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.12, y: 2.117, z: 0}
+  m_LocalPosition: {x: 4, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -192,7 +192,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.3091545, y: -0.037279963}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -202,7 +202,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.47711754, y: 0.27043748}
+  m_Size: {x: 0.3, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &5551170720666855936
 MonoBehaviour:
@@ -216,4 +216,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4cff059231c234ca5e570bdb64de45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boostAmount: 18
+  _boostAmount: 12

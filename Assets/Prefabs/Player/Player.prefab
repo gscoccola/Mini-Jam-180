@@ -172,7 +172,7 @@ MonoBehaviour:
   _upgradedAirAcceleration: 22
   _flyingDeceleration: 7
   _flyingDecelerationDifference: 4
-  _jumpSpeed: 7
+  _jumpSpeed: 4
   _fallSpeed: 10
   _gravityAcceleration: 10
   _birdDeviation: 10
@@ -5014,7 +5014,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 21706a550046085468342c06e590ee37, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5081,7 +5081,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015125275, y: -0.73376703}
+  m_Offset: {x: 0, y: -0.73376703}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5091,7 +5091,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5206528, y: 0.120007515}
+  m_Size: {x: 0.4, y: 0.120007515}
   m_EdgeRadius: 0
 --- !u!70 &5855246699414869843
 CapsuleCollider2D:
