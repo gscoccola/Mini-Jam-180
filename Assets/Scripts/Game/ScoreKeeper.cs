@@ -34,4 +34,9 @@ public class ScoreKeeper : MonoBehaviour
     {
         _isEnabled = boolean;
     }
+
+    public int GetScore()
+    {
+        return _score;
+    }
 }

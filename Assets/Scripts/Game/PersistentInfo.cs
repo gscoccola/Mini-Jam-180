@@ -1,18 +1,25 @@
-using System.IO;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
-using System.Collections;
-using UnityEngine.Localization;
+
 
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
+    /* Fields to be saved locally */
     public Dictionary<int, LevelMileStones> LevelCompletionInfo;
 
     public Dictionary<int, AchievementMilestones> AchievementCompletionInfo;
+
+    public int HighScore;
+
+
+    /* other fields */
+
     public Dictionary<int, string> AchievementTitles;
+
     public bool _newAchievement;
 
     public string LanguageCode;
@@ -24,7 +31,6 @@ public class PersistentInfo : Singleton<PersistentInfo>
     private void OnEnable()
     {
         Initialize();
-
     }
 
     public void Initialize()

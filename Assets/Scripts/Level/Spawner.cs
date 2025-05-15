@@ -203,4 +203,6 @@ public class Spawner : MonoBehaviour
         _specialWaveChance = specialWaveChance;
         if (!_spawnsSpecialWaves) _spawnsSpecialWaves = true;
     }
+
+   
 }

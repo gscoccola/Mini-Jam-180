@@ -53,7 +53,7 @@ MonoBehaviour:
   _birdSpawnChance: 0.2
   _droneSpawnChance: 0.12
   _balloonSpawnChance: 0.09
-  _goldenBalloonSpawnChance: 0.4
+  _goldenBalloonSpawnChance: 0.25
   _specialWaveChance: 0.03
   _isEndlessLevel: 0
   _enemyPrefabBird: {fileID: 4174810378592755860, guid: 5f8198dbd79a40d4590f32f31f3e26e3, type: 3}

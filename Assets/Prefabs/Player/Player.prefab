@@ -175,6 +175,7 @@ MonoBehaviour:
   _jumpSpeed: 4
   _fallSpeed: 10
   _gravityAcceleration: 10
+  _invulnerabilityDuration: 2
   _birdDeviation: 10
   _droneDeviation: 15
   _balloonDeviation: 20

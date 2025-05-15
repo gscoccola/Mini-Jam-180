@@ -1,0 +1,22 @@
+using System.Collections.Generic;
+using UnityEngine;
+using PlayFab;
+using PlayFab.ClientModels;
+
+public class LeaderboardManager : Singleton<LeaderboardManager>
+{
+    private List<PlayerLeaderboardEntry> HighScores;
+
+    public void PopulateLeaderBoard(List<PlayerLeaderboardEntry> highScores)
+    {
+        HighScores = highScores;
+    }
+
+    public void DisplayLeaderBoard()
+    {
+        foreach (var entry in HighScores)
+        {
+            Debug.Log($"Name: {entry.DisplayName} , Score: {entry.StatValue}");
+        }
+    }
+}

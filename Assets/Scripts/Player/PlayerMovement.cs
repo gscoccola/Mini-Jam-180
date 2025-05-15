@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Player Parameters")][SerializeField] float _fallSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _gravityAcceleration;
 
+
+    [Header("PowerUP")]
+    [FoldoutGroup("Player Parameters")][SerializeField] float _invulnerabilityDuration;
+
+
     [Header("Horizontal")]
     [FoldoutGroup("Boost Parameters")][SerializeField] float _birdDeviation;
     [FoldoutGroup("Boost Parameters")][SerializeField] float _droneDeviation;
@@ -410,7 +415,18 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("_fly", boolean);
         _isFlying = boolean;
         _currentGravity = boolean ? _gravityAcceleration/2 : _gravityAcceleration;
-        if (boolean) MusicPlayer.Instance.PlayWind();
+        if (boolean)
+        {
+            StartCoroutine(IFlyInvulnerability());
+            MusicPlayer.Instance.PlayWind();
+        }    
         else MusicPlayer.Instance._beginFadeOutWind = true;
+    }
+
+    IEnumerator IFlyInvulnerability()
+    {
+        gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
+        yield return new WaitForSeconds(_invulnerabilityDuration);
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 }

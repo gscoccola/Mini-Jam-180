@@ -164,65 +164,58 @@ public class GameManager : MonoBehaviour
     }
 
     public void Lose()
-    {
-        if (_scoreKeeper != null) _scoreKeeper.Set(false);
-        if (_mSpawner != null) _mSpawner.StopSpawning();
-        PersistentInfo.Instance.SaveData();
-        _indicator.gameObject.SetActive(false);
-        _mobileInputButtons.gameObject.SetActive(false);
+    {        
         StopAllCoroutines();
-        StartCoroutine(ILose());
+        StartCoroutine(ILevelEnd(false));
     }
 
     public void OutOfBounds()
     {
-        if (_scoreKeeper != null) _scoreKeeper.Set(false);
-        PersistentInfo.Instance.SaveData();
-        _indicator.gameObject.SetActive(false);
-        _mobileInputButtons.gameObject.SetActive(false);
         OnAchievementUnlocked(3);
         StopAllCoroutines();
-        StartCoroutine(ILose());
+        StartCoroutine(ILevelEnd(false));
     }
 
     public void Win()
     {
-        if (_scoreKeeper != null) _scoreKeeper.Set(false);
-        PersistentInfo.Instance.SaveData();
-        _indicator.gameObject.SetActive(false);
-        if (_mSpawner != null) _mSpawner.StopSpawning();
-        _mobileInputButtons.gameObject.SetActive(false);
         PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasBeaten = true;
         _wasLevelWon = true;
         if (_activeSceneIndex == 1) OnAchievementUnlocked(1);
         StopAllCoroutines();
-        StartCoroutine(IWin());
+        StartCoroutine(ILevelEnd(true));
     }
 
-    IEnumerator ILose()
+
+    IEnumerator ILevelEnd(bool hasWon)
     {
+        if (_scoreKeeper != null)
+        {
+            _scoreKeeper.Set(false);
+            PlayfabManager.Instance.SendLeaderboard(_scoreKeeper.GetScore());
+        }
+        PersistentInfo.Instance.SaveData();
+        if (_indicator != null) _indicator.gameObject.SetActive(false);
+        _mobileInputButtons.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
         MusicPlayer.Instance.Pause();
         yield return new WaitForSeconds(_endDelay);
         VibrationHandler.Instance.HeavyVibrate();
-        _loseMenu.gameObject.SetActive(true);
-        SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
-    }
-
-    IEnumerator IWin()
-    {
-        _pauseButton.gameObject.SetActive(false);
-        MusicPlayer.Instance.Pause();
-        yield return new WaitForSeconds(_endDelay);
-        VibrationHandler.Instance.HeavyVibrate();
-        _winMenu.gameObject.SetActive(true);
-        SelectDefaultButton(_winMenu.transform.GetChild(1).gameObject);
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
-        yield return new WaitForSeconds(1.2f);
-        Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
-        yield return new WaitForSeconds(1.8f);
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._winDialog);
+        if (hasWon)
+        {
+            _winMenu.gameObject.SetActive(true);
+            SelectDefaultButton(_winMenu.transform.GetChild(1).gameObject);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
+            yield return new WaitForSeconds(1.2f);
+            Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
+            yield return new WaitForSeconds(1.8f);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._winDialog);
+        }
+        else
+        {
+            _loseMenu.gameObject.SetActive(true);
+            SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
+        }
     }
 
     internal void ToggleCredits()
@@ -384,6 +377,6 @@ public class GameManager : MonoBehaviour
    public void SelectDefaultButton(GameObject gameObject)
     {
         if (_isPlayingOnMobile) EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(gameObject);
+        else EventSystem.current.SetSelectedGameObject(gameObject);
     }
 }
