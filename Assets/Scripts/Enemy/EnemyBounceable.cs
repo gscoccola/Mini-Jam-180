@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-
+// This class handles the interaction between enemy and the player
 public class EnemyBounceable : MonoBehaviour
 {
     [SerializeField] GameObject _explosionPrefab;
@@ -55,6 +55,10 @@ public class EnemyBounceable : MonoBehaviour
                 SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneDeath);
                 break;
 
+            case EnemyType.DronePink:
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneShock);
+                break;
+
             case EnemyType.Balloon:
                 SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonDeath);
                 break;
@@ -67,6 +71,7 @@ public enum EnemyType
 {
     Bird,
     Drone,
+    DronePink,
     Balloon,
     GoldenBalloon,
 }

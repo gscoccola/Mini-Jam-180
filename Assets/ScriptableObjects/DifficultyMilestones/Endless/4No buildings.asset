@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4No buildings
   m_EditorClassIdentifier: 
   Distance: 900
-  SpecialWaveChance: 0.06
+  SpecialWaveChance: 0.05
   MissileNumber: 12
   MissileCooldown: 3
   SpawnBuildings: 0

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: 1StartMissiles
   m_EditorClassIdentifier: 
   Distance: 250
-  SpecialWaveChance: 0.04
+  SpecialWaveChance: 0.03
   MissileNumber: 3
+  MissileCooldown: 3
+  SpawnBuildings: 1
+  MinSpacing: 4

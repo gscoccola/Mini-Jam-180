@@ -29,6 +29,7 @@ public class Spawner : MonoBehaviour
     [Header("Reference")]
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBird;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabDrone;
+    [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabDronePink;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBalloon;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabGoldenBalloon;
 
@@ -130,12 +131,12 @@ public class Spawner : MonoBehaviour
         Vector3 spawnPosition = new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f);
         float ySpeed = Mathf.Clamp( 9 * (_player.position.y  - spawnPosition.y) / _spawnXOffset , -9f, 9f);
 
-        SpawnEnemy(spawnPosition, _enemyPrefabDrone, false, true, ySpeed);
-        SpawnEnemy(spawnPosition + 2.5f * Vector3.down, _enemyPrefabDrone, false, true, ySpeed);
-        SpawnEnemy(spawnPosition + 5f * Vector3.down, _enemyPrefabDrone, false, true, ySpeed);
+        SpawnEnemy(spawnPosition, _enemyPrefabDronePink, false, true, ySpeed);
+        SpawnEnemy(spawnPosition + 2.5f * Vector3.down, _enemyPrefabDronePink, false, true, ySpeed);
+        //SpawnEnemy(spawnPosition + 5f * Vector3.down, _enemyPrefabDronePink, false, true, ySpeed);
 
-        SpawnEnemy(spawnPosition + 1.25f * Vector3.down + 2f * Vector3.left, _enemyPrefabDrone, false, true, ySpeed);
-        SpawnEnemy(spawnPosition + 3.75f * Vector3.down + 2f * Vector3.left, _enemyPrefabDrone, false, true, ySpeed);
+        SpawnEnemy(spawnPosition + 1.25f * Vector3.down + 2f * Vector3.left, _enemyPrefabDronePink, false, true, ySpeed);
+        //SpawnEnemy(spawnPosition + 3.75f * Vector3.down + 2f * Vector3.left, _enemyPrefabDronePink, false, true, ySpeed);
     }
 
     private void SpawnRandomEnemy(Vector3 position, int i)

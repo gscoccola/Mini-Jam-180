@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3SpecialWavesIncrease
   m_EditorClassIdentifier: 
   Distance: 650
-  SpecialWaveChance: 0.06
+  SpecialWaveChance: 0.05
   MissileNumber: 8
   MissileCooldown: 3
   SpawnBuildings: 1

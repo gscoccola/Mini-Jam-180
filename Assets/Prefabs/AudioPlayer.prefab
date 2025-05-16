@@ -226,6 +226,14 @@ MonoBehaviour:
   _balloonDeathVolume:
   - 0.5
   - 0.5
+  _droneShock:
+  - {fileID: 8300000, guid: 1f9ba637c17442744a3ff9042cd55382, type: 3}
+  - {fileID: 8300000, guid: fec9d849bcfb2d141a8b87fa65171e61, type: 3}
+  - {fileID: 8300000, guid: b7e92da30421f894a907a182ea0cf56c, type: 3}
+  _droneShockVolume:
+  - 0.79
+  - 0.75
+  - 0.79
   _missileWarning:
   - {fileID: 8300000, guid: 0d17822d8b8c8a7459d0cfe5fdbebe13, type: 3}
   - {fileID: 8300000, guid: 28a4f12b373c6e54aac64266e2e0705b, type: 3}

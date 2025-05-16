@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5Death
   m_EditorClassIdentifier: 
   Distance: 1200
-  SpecialWaveChance: 0.1
+  SpecialWaveChance: 0.9
   MissileNumber: 22
   MissileCooldown: 0
   SpawnBuildings: 0

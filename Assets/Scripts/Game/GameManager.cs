@@ -188,11 +188,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ILevelEnd(bool hasWon)
     {
+        PlayfabManager.Instance.SendAllStatistics();
         if (_scoreKeeper != null)
         {
             _scoreKeeper.Set(false);
-            PlayfabManager.Instance.SendLeaderboard(_scoreKeeper.GetScore());
+            PlayfabManager.Instance.SendHighscore(_scoreKeeper.GetScore());
         }
+        if (_mSpawner != null) _mSpawner.StopSpawning();
         PersistentInfo.Instance.SaveData();
         if (_indicator != null) _indicator.gameObject.SetActive(false);
         _mobileInputButtons.gameObject.SetActive(false);
@@ -315,7 +317,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         if (PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked) return;
-        PersistentCanvas.Instance.ShowPopup(PersistentInfo.Instance.AchievementTitles[achievementIndex]);
+        PersistentCanvas.Instance.ShowPopup();
 
         PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;
         PersistentInfo.Instance._newAchievement = true;
@@ -333,7 +335,6 @@ public class GameManager : MonoBehaviour
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales.Find(x => x.Identifier.Code == locale);
 
         PersistentInfo.Instance.LanguageCode = locale;
-        PersistentInfo.Instance.AchievementNameDictSetup();
         LoadLevel(0);
     }
 

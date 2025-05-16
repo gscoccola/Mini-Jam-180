@@ -73,7 +73,7 @@ public class AchievementButton : MonoBehaviour
 
     public void OnClick()
     {
-        if (Application.isMobilePlatform) EventSystem.current.SetSelectedGameObject(null);
+        
         if (_isOnCooldown || _isDisabled) return;
         bool wasPressed = _popup.gameObject.activeSelf;
         StartCoroutine(IButtonCooldown());
@@ -104,11 +104,12 @@ public class AchievementButton : MonoBehaviour
             VibrationHandler.Instance.LightVibrate();
         }
         SetPopup(!wasPressed);
+        if (Application.isMobilePlatform && wasPressed) EventSystem.current.SetSelectedGameObject(null);
     }
 
     IEnumerator IButtonCooldown()
     {
-        yield return new WaitForSecondsRealtime(0.15f);
+        yield return new WaitForSecondsRealtime(0.25f);
         _isOnCooldown = false;
     }
 

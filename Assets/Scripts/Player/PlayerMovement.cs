@@ -108,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         {
             [EnemyType.Bird] = new float[2]{ _birdDeviation, _birdBoost },
             [EnemyType.Drone] = new float[2]{ _droneDeviation, _droneBoost },
+            [EnemyType.DronePink] = new float[2]{ _droneDeviation, _droneBoost },
             [EnemyType.Balloon] = new float[2]{ _balloonDeviation, _balloonBoost },
             [EnemyType.GoldenBalloon] = new float[2]{ _goldenBalloonDeviation, _goldenBalloonBoost },
         };
@@ -163,13 +164,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveHorizontally()
     {
-        if (IsHorizonalMovementDisabled || _isStunned)
+        if (IsHorizonalMovementDisabled )
         {
             _rigidBody.linearVelocityX = 0f;
             return;
         }
 
-        Vector2 inputDirection = IsHorizonalInputDisabled ? Vector2.zero : new Vector2(_horizontalInput, 0f);
+        Vector2 inputDirection = IsHorizonalInputDisabled || _isStunned ? Vector2.zero : new Vector2(_horizontalInput, 0f);
 
         if (IsOnFloor)
         {
@@ -297,7 +298,7 @@ public class PlayerMovement : MonoBehaviour
             VibrationHandler.Instance.HeavyVibrate();
             return;
         }
-
+        if (type == EnemyType.DronePink) StartCoroutine(IStun());
 
         if (appliesBackwardsMomentunm) _rigidBody.linearVelocityX += _enemyBoosts[type][0];
         else _rigidBody.linearVelocityX = 0f;
@@ -317,12 +318,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidBody.linearVelocityX = 0f;
         _rigidBody.linearVelocityY -= downwardVelocity;
+        StartCoroutine(IStun());
 
         if (!_isHurtSoundOnCooldown)
         {
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerHurt);
             _isHurtSoundOnCooldown = true;
-            StartCoroutine(IStun() );
             StartCoroutine(HurtSoundCooldown());
         }
 

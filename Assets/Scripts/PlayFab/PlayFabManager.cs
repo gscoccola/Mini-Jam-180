@@ -3,6 +3,9 @@ using PlayFab;
 using PlayFab.ClientModels;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+
+// This Singleton class handles all the requests to the playfab server
 
 public class PlayfabManager : Singleton<PlayfabManager>
 {
@@ -21,16 +24,39 @@ public class PlayfabManager : Singleton<PlayfabManager>
         PlayFabClientAPI.LoginWithCustomID(request, OnLogin, OnError);
     }
 
-    public void SendLeaderboard(int score)
+    public void SendAllStatistics()
+    {
+        MaximumLevelReached();
+        AchievementCount();
+
+    }
+
+    public void SendHighscore(int score)
         {
-            PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
-            {
-                Statistics = new List<StatisticUpdate> {
-            new StatisticUpdate { StatisticName = "Highscore", Value = score }
-            }
-            },
-            OnLeaderBoardUpdate, OnError);
+            SendStatistic("Highscore", score);
         }
+
+    private void MaximumLevelReached()
+    {
+        SendStatistic("Maximum Level Reached", PersistentInfo.Instance.MaxLevelBeatenIndex());
+    }
+
+    private void AchievementCount()
+    {
+        SendStatistic("Achievements Found", PersistentInfo.Instance.AchievementCount());
+    }
+
+
+    private void SendStatistic(string name, int value)
+    {
+        PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate> {
+            new StatisticUpdate { StatisticName = name, Value = value }
+            }
+        },
+        OnStatisticUpdated, OnError);
+    }
 
 
 
@@ -100,15 +126,16 @@ public class PlayfabManager : Singleton<PlayfabManager>
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
-    private void OnLeaderBoardUpdate(UpdatePlayerStatisticsResult result)
+    private void OnStatisticUpdated(UpdatePlayerStatisticsResult result)
     {
-        Debug.Log("Successful highscore Sent");
+        //Debug.Log("Statistic Updated");
     }
 
     private void OnLogin(LoginResult result)
     {
         Debug.Log("Successful Login");
         GetStatistics();
+        PlayfabManager.Instance.SendAllStatistics();
     }
 
     private void OnError(PlayFabError error)

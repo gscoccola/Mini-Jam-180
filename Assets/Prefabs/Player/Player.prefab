@@ -185,7 +185,7 @@ MonoBehaviour:
   _droneBoost: 12
   _balloonBoost: 14
   _goldenBalloonBoost: 13
-  _stunDuration: 0.6
+  _stunDuration: 0.85
   _isEpilogue: 0
   IsHorizonalMovementDisabled: 0
   IsHorizonalInputDisabled: 0

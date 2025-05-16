@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionPrefab: {fileID: 3467801179110129099, guid: c8787dccbed7949489de727454d935ab, type: 3}
-  _enemytype: 2
+  _enemytype: 3
 --- !u!212 &6003322094492297565
 SpriteRenderer:
   m_ObjectHideFlags: 0

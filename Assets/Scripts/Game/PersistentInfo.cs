@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
 
-
+// This Singleton class stores all the information that is persistent throughout the session
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
-    /* Fields to be saved locally */
+    /* Fields to be saved to file */
     public Dictionary<int, LevelMileStones> LevelCompletionInfo;
 
     public Dictionary<int, AchievementMilestones> AchievementCompletionInfo;
@@ -17,8 +18,6 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
 
     /* other fields */
-
-    public Dictionary<int, string> AchievementTitles;
 
     public bool _newAchievement;
 
@@ -61,14 +60,6 @@ public class PersistentInfo : Singleton<PersistentInfo>
         }
     }
 
-    public void AchievementNameDictSetup()
-    {
-        AchievementTitles = new();
-        foreach (AchievementInfoSO achievement in _achievements)
-        {
-            AchievementTitles[achievement.GetId()] = achievement.GetName();
-        }
-    }
 
     public void LevelDictSetup()
     {
@@ -129,6 +120,16 @@ public class PersistentInfo : Singleton<PersistentInfo>
         PlayerPrefs.DeleteAll();
         LevelDictSetup();
         AchievementDictSetup();
+    }
+
+    public int MaxLevelBeatenIndex()
+    {
+        return LevelCompletionInfo.Where(level => level.Value.WasBeaten).Max(level => level.Key);
+    }
+
+    public int AchievementCount()
+    {
+        return AchievementCompletionInfo.Where(achievement => achievement.Value.WasUnlocked).Count();
     }
 
     public void CheckUnseenAchievements()
