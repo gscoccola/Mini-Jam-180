@@ -32,7 +32,7 @@ public class EpilogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_isGameOver  && _playerMovement.IsHorizonalInputDisabled)
+        if (!_isGameOver  && _playerMovement._isInputDisabled)
         {
             _isGameOver = true;
             StartCoroutine(IGameOver());

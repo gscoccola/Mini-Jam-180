@@ -175,6 +175,9 @@ MonoBehaviour:
   _jumpSpeed: 4
   _fallSpeed: 10
   _gravityAcceleration: 10
+  _diveSpeed: 14
+  _diveAcceleration: 50
+  _diveCooldown: 0.25
   _invulnerabilityDuration: 2
   _birdDeviation: 10
   _droneDeviation: 15
@@ -188,7 +191,7 @@ MonoBehaviour:
   _stunDuration: 0.85
   _isEpilogue: 0
   IsHorizonalMovementDisabled: 0
-  IsHorizonalInputDisabled: 0
+  _isInputDisabled: 0
 --- !u!114 &2748669042865368266
 MonoBehaviour:
   m_ObjectHideFlags: 0

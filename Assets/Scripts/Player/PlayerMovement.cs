@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Player Parameters")][SerializeField] float _jumpSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _fallSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _gravityAcceleration;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _diveSpeed;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _diveAcceleration;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _diveCooldown;
 
 
     [Header("PowerUP")]
@@ -67,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsDead { get; private set; }
     bool _isHurtSoundOnCooldown;
     public bool IsHorizonalMovementDisabled = false;
-    public bool IsHorizonalInputDisabled = false;
+    public bool _isInputDisabled = false;
     float _currentMoveSpeed;
     float _currentAirAcceleration;
     float worldMin;
@@ -85,6 +88,9 @@ public class PlayerMovement : MonoBehaviour
     float _currentGravity;
     bool _isStunned;
     GameObject _stunVFX;
+    bool _verticalInput;
+    bool _diveAvailable = true;
+    bool _isPressingTouchScreenRight;
     #endregion
 
     private void Awake()
@@ -170,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Vector2 inputDirection = IsHorizonalInputDisabled || _isStunned ? Vector2.zero : new Vector2(_horizontalInput, 0f);
+        Vector2 inputDirection = _isInputDisabled || _isStunned ? Vector2.zero : new Vector2(_horizontalInput, 0f);
 
         if (IsOnFloor)
         {
@@ -232,7 +238,11 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetBool("_isFalling", !IsOnFloor);
         if (IsOnFloor) return;
-        _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _currentGravity * Time.deltaTime).y;
+        bool isDiving = (_verticalInput && !_isInputDisabled && !_isFlying && _diveAvailable);
+        _rigidBody.linearVelocityY = isDiving
+            ? _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _diveSpeed, _diveAcceleration * Time.deltaTime).y
+            : _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _currentGravity * Time.deltaTime).y;
+        _animator.SetBool("_isDiving", isDiving && _rigidBody.linearVelocityY < -5f );
     }
 
     void CalculateIsOnFloor()
@@ -247,13 +257,28 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        _horizontalInput = Mathf.Abs(value.Get<Vector2>().x) > 0.1f ? Mathf.Sign(value.Get<Vector2>().x) : 0f;
+        _horizontalInput = Mathf.Abs(value.Get<Vector2>().x) > 0.8f ? Mathf.Sign(value.Get<Vector2>().x) : 0f;
+        _verticalInput = Mathf.Abs(value.Get<Vector2>().y) > 0.2f;
+        
     }
 
     public void TouchMove(TouchScreenButtonType direction)
     {
-        if (direction == TouchScreenButtonType.None) { _horizontalInput = 0f; return; }
-        _horizontalInput = (direction == TouchScreenButtonType.Left) ? -1f : 1f;
+        if (direction == TouchScreenButtonType.None) { _isPressingTouchScreenRight = false; _horizontalInput = 0f;  _verticalInput = false; return;}
+        if (direction == TouchScreenButtonType.Left)
+        {
+            _horizontalInput = -1f;
+            if (_isPressingTouchScreenRight)
+            {
+                _horizontalInput = 0f;
+                _verticalInput = true;
+            }
+        }
+        else
+        {
+            if (!_verticalInput) _horizontalInput = 1f;
+            _isPressingTouchScreenRight = true;
+        }
     }
 
     public bool Jump()
@@ -263,7 +288,7 @@ public class PlayerMovement : MonoBehaviour
         _fallingStance = 0;
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerJump);
         VibrationHandler.Instance.LightVibrate();
-        if (_isEpilogue) IsHorizonalInputDisabled = true;
+        if (_isEpilogue) _isInputDisabled = true;
         return true;
     }
 
@@ -280,6 +305,7 @@ public class PlayerMovement : MonoBehaviour
         if (_isFlying) SetFly(false);
         IncreaseCombo();
         ChangeStance();
+        StartCoroutine(IDiveInterruption());
         VibrationHandler.Instance.LightVibrate();
     }
 
@@ -310,6 +336,7 @@ public class PlayerMovement : MonoBehaviour
         }   
         ResetCombo();
         ChangeStance();
+        StartCoroutine(IDiveInterruption());
         if (_isFlying) SetFly(false);
         VibrationHandler.Instance.MediumVibrate();
     }
@@ -340,6 +367,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(_stunDuration);
         _isStunned = false;
         _stunVFX.SetActive(false);
+        StartCoroutine(IDiveInterruption());
 
     }
 
@@ -430,4 +458,12 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(_invulnerabilityDuration);
         gameObject.layer = LayerMask.NameToLayer("Player");
     }
+
+    IEnumerator IDiveInterruption()
+    {
+        _diveAvailable = false;
+        yield return new WaitForSeconds(_diveCooldown);
+        _diveAvailable = true;
+    }
+
 }
