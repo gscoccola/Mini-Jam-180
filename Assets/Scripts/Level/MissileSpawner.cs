@@ -55,8 +55,6 @@ public class MissileSpawner : MonoBehaviour
 
     private IEnumerator ISpawnMissileWave()
     {
-        
-
         _laneArray = RandomIntArrayGeneration.Shuffle(_laneArray);
         
         float playerX = _player.transform.position.x;

@@ -88,6 +88,7 @@ public class Spawner : MonoBehaviour
         {
             _localTime = 0f;
             SpawnWave(transform.position.x);
+            if (_spawnsSpecialWaves) SpawnSquadWave(transform.position.x);
         }
     }
 
@@ -116,19 +117,27 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i <= _laneNumber; i++)
         {
-            if (_spawnsSpecialWaves && UnityEngine.Random.Range(0f, 1f) < _specialWaveChance)
-            {
-                SpawnSpecialWave(x, i);
-                i++;
-                break;
-            }
             SpawnRandomEnemy(new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f), i);
         }
     }
 
-    private void SpawnSpecialWave(float x, int i)
+    private void SpawnSquadWave(float x)
     {
-        Vector3 spawnPosition = new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f);
+        float yMin = Mathf.Max(_player.position.y - 25f, 0f);
+
+        for (int i = 0; i <= _laneNumber; i++)
+        {
+            if (UnityEngine.Random.Range(0f, 1f) < _specialWaveChance)
+            {
+                Vector3 spawnPosition = new Vector3(x, yMin + (50f/ _laneNumber) * i, 0f);
+                SpawnSquad(spawnPosition);
+                i++;
+            }
+        }
+    }
+
+    private void SpawnSquad(Vector3 spawnPosition)
+    {
         float ySpeed = Mathf.Clamp( 9 * (_player.position.y  - spawnPosition.y) / _spawnXOffset , -9f, 9f);
 
         SpawnEnemy(spawnPosition, _enemyPrefabDronePink, false, true, ySpeed);

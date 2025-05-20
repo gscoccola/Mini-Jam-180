@@ -124,6 +124,10 @@ MonoBehaviour:
     m_Localized: New Achievement
     m_Metadata:
       m_Items: []
+  - m_Id: 6132005293019136
+    m_Localized: Loading...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -47,8 +47,8 @@ public class GameButton : MonoBehaviour
         if (!_isInstant) StartCoroutine(IPerformAction());
         else
         {
-            PerfomButtonAction();
             StartCoroutine(IButtonCooldown());
+            PerfomButtonAction();
         }
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
     }

@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _postCreditButtons;
     [SerializeField] GameObject _confetti;
     [SerializeField] GameObject _argFlag;
+    [SerializeField] GameObject _usaFlag;
+    [SerializeField] GameObject _loadingTextEsp;
+    [SerializeField] GameObject _loadingTextEng;
 
     CameraScript _cameraScript;
     Camera _camera;
@@ -325,7 +328,13 @@ public class GameManager : MonoBehaviour
 
     public void SetLocale(string locale)
     {
+        
         PersistentInfo.Instance._wasLanguageSet = true;
+        _argFlag.SetActive(false);
+        _usaFlag.SetActive(false);
+        if (locale == "es") _loadingTextEsp.gameObject.SetActive(true);
+        else if (locale == "en") _loadingTextEng.gameObject.SetActive(true);
+
         StartCoroutine(ISetLocale(locale));
     }
 

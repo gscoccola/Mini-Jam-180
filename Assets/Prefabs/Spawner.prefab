@@ -48,7 +48,7 @@ MonoBehaviour:
   _laneHeight: 5
   _minXSpacing: 4
   _spawnPeriod: 1.5
-  _minSpawnHeight: 3.5
+  _minSpawnHeight: 4
   _spawnXOffset: 43
   _birdSpawnChance: 0.2
   _droneSpawnChance: 0.12
@@ -78,8 +78,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _laserPrefab: {fileID: 3879355451352795544, guid: 41ded80f851d07c4385dc851b1bc04ca, type: 3}
   _missilePrefab: {fileID: 7956580788072526025, guid: 45eadb5d627ed744f9a0c257c9888a7a, type: 3}
-  _waveWidth: 42
+  _waveWidth: 55
   _minSpacing: 4
-  _missilesPerWave: 6
+  _missilesPerWave: 7
   _waveCooldown: 3
   _warningTime: 1
