@@ -16,6 +16,8 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public int HighScore;
 
+    public string PlayerId;
+
 
     /* other fields */
 
@@ -50,6 +52,13 @@ public class PersistentInfo : Singleton<PersistentInfo>
         Debug.Log("REMEMBER TO DELETE TEST");
         SaveData();
     }*/
+
+    private void PlayerIdSetup()
+    {
+        Hash128 playerHash = new();
+        playerHash.Append(SystemInfo.deviceName + SystemInfo.deviceModel + SystemInfo.deviceType + SystemInfo.graphicsDeviceType + SystemInfo.graphicsDeviceID);
+        PlayerId = playerHash.ToString();
+    }
 
     private void AchievementDictSetup()
     {
@@ -89,6 +98,8 @@ public class PersistentInfo : Singleton<PersistentInfo>
                 CharFromBool(achievementInfo.Value.WasShown) + ",";
         }
         PlayerPrefs.SetString("AchievementData", achievementData);
+
+        PlayerPrefs.SetString("PlayerId", PlayerId);
     }
 
     private void LoadData()
@@ -112,18 +123,32 @@ public class PersistentInfo : Singleton<PersistentInfo>
             }
         }
         else    Debug.Log("No achievement data found");
+
+        if (PlayerPrefs.HasKey("PlayerId"))
+        {
+            PlayerId = PlayerPrefs.GetString("PlayerId");
+        }
+        else
+        {
+            PlayerIdSetup();
+            Debug.Log("No PlayerId data found, creating new ID");
+            Debug.Log(PlayerId);
+        }     
     }
 
     public void ResetData()
     {
         _newAchievement = false;
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("AchievementData");
+        PlayerPrefs.DeleteKey("LevelData");
         LevelDictSetup();
         AchievementDictSetup();
     }
 
     public int MaxLevelBeatenIndex()
     {
+        if (LevelCompletionInfo.Where(level => level.Value.WasBeaten).Count() == 0) return 0;
         return LevelCompletionInfo.Where(level => level.Value.WasBeaten).Max(level => level.Key);
     }
 

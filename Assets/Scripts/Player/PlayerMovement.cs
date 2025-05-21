@@ -90,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
     GameObject _stunVFX;
     bool _verticalInput;
     bool _diveAvailable = true;
-    bool _isPressingTouchScreenRight;
+    bool _touchScreenRight;
+    bool _touchScreenLeft;
     #endregion
 
     private void Awake()
@@ -236,6 +237,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveVertically()
     {
+        if (Application.isMobilePlatform) CombinationInput();
         _animator.SetBool("_isFalling", !IsOnFloor);
         if (IsOnFloor) return;
         bool isDiving = (_verticalInput && !_isInputDisabled && !_isFlying && _diveAvailable);
@@ -259,26 +261,26 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalInput = Mathf.Abs(value.Get<Vector2>().x) > 0.8f ? Mathf.Sign(value.Get<Vector2>().x) : 0f;
         _verticalInput = Mathf.Abs(value.Get<Vector2>().y) > 0.2f;
-        
     }
 
-    public void TouchMove(TouchScreenButtonType direction)
+    public void TouchMove(TouchScreenButtonType direction, bool state)
     {
-        if (direction == TouchScreenButtonType.None) { _isPressingTouchScreenRight = false; _horizontalInput = 0f;  _verticalInput = false; return;}
         if (direction == TouchScreenButtonType.Left)
         {
-            _horizontalInput = -1f;
-            if (_isPressingTouchScreenRight)
-            {
-                _horizontalInput = 0f;
-                _verticalInput = true;
-            }
+            _touchScreenLeft = state;
         }
         else
         {
-            if (!_verticalInput) _horizontalInput = 1f;
-            _isPressingTouchScreenRight = true;
+            _touchScreenRight = state;
         }
+    }
+
+    public void CombinationInput()
+    {
+        _verticalInput = _touchScreenLeft && _touchScreenRight;
+        if (_touchScreenLeft && !_touchScreenRight) _horizontalInput = -1f;
+        else if (!_touchScreenLeft && _touchScreenRight) _horizontalInput = 1f;
+        else _horizontalInput = 0f;
     }
 
     public bool Jump()

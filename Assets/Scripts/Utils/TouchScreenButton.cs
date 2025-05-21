@@ -14,12 +14,12 @@ public class TouchScreenButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _playerMovement.TouchMove(Direction);
+        _playerMovement.TouchMove(Direction, true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _playerMovement.TouchMove(TouchScreenButtonType.None);
+        _playerMovement.TouchMove(Direction, false);
     }
 }
 
@@ -27,5 +27,4 @@ public enum TouchScreenButtonType
 {
     Left,
     Right,
-    None,
 }

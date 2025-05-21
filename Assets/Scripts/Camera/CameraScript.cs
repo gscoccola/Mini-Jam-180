@@ -76,7 +76,7 @@ public class CameraScript : MonoBehaviour
         else if (_isPanningVertically && Mathf.Abs(_virtualTarget.position.y - _playerMovement.transform.position.y) < 1f)
         {
             _isPanningVertically = false;
-            _gameManager.StartLevel(false);
+            _gameManager.ReloadLevel();
             SwitchToPlayerCam();
         }
     }
@@ -92,7 +92,7 @@ public class CameraScript : MonoBehaviour
 
         if ((_virtualTarget.position - _playerMovement.transform.position).magnitude < 1f)
         {
-            _gameManager.StartLevel(false);
+            _gameManager.ReloadLevel();
             SwitchToPlayerCam();
             _isPanningHorizontally = false;
         }

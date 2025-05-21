@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e431c539d895e3a4885cbb7470645db9
+guid: 251ec981f1a7e024f989ad163a9ba260
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -144,34 +144,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tutorial_2.0_0
+      name: tutorial_2.0 3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 18a01ea5c0c0fcda0800000000000000
-      internalID: -5922501737765074303
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tutorial_2.0_1
-      rect:
-        serializedVersion: 2
-        x: 77
-        y: 0
-        width: 33
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -181,8 +159,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f6e6ce8c75fed94ab62b029c3072ac9
-      internalID: -2023367662
+      spriteID: 7b3ee407d7e93e54bb158b010ec635a8
+      internalID: -1359170143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_2.0 3_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4edcd9a3c9b649048a059ea7ee52fdb9
+      internalID: 1672403758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tutorial_2.0 3_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 834bd385f9a218149b8280031d94b20a
+      internalID: 1642598635
       vertices: []
       indices: 
       edges: []
@@ -201,8 +223,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tutorial_2.0_0: -5922501737765074303
-      tutorial_2.0_1: -2023367662
+      tutorial_2.0 3_0: -1359170143
+      tutorial_2.0 3_1: 1672403758
+      tutorial_2.0 3_2: 1642598635
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,7 +18,7 @@ public class PlayfabManager : Singleton<PlayfabManager>
     {
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
+            CustomId = PersistentInfo.Instance.PlayerId,
             CreateAccount = true,
         };
         PlayFabClientAPI.LoginWithCustomID(request, OnLogin, OnError);

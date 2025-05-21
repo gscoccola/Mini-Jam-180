@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     bool _isPlayingOnMobile;
     int _activeSceneIndex;
     bool _isPaused;
-    bool _wasLevelWon;
+    bool _wasLevelJustWon;
 
     InGameMenu _lastMenu;
 
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
 
     public void ReloadLevel()
     {
-        if (!_wasLevelWon) LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        if (!_wasLevelJustWon) LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Lose()
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasBeaten = true;
-        _wasLevelWon = true;
+        _wasLevelJustWon = true;
         if (_activeSceneIndex == 1) OnAchievementUnlocked(1);
         StopAllCoroutines();
         StartCoroutine(ILevelEnd(true));

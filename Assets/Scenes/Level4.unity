@@ -42372,7 +42372,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 95.223335
+      value: 95.22268
       objectReference: {fileID: 0}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42400,7 +42400,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 4434011431033260198, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.666666
+      value: -6.6673217
       objectReference: {fileID: 0}
     - target: {fileID: 5395978055780557568, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: Composition.ScreenPosition.y
@@ -42436,7 +42436,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.93138
+      value: 27.933561
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -43023,6 +43023,18 @@ PrefabInstance:
     - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
       propertyPath: _spawnXOffset
       value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
+      propertyPath: _birdSpawnChance
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
+      propertyPath: _droneSpawnChance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
+      propertyPath: _balloonSpawnChance
+      value: 0.12
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1240379336772770599, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
