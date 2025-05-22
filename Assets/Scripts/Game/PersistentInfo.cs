@@ -14,12 +14,18 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public Dictionary<int, AchievementMilestones> AchievementCompletionInfo;
 
-    public int HighScore;
+    public int PersonalHighScore;
 
-    public string PlayerId;
+    public int PlayerId;
+
+    public string DisplayName;
 
 
     /* other fields */
+
+    public int GlobalHighScore;
+
+    public int LastScore;
 
     public bool _newAchievement;
 
@@ -36,28 +42,34 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public void Initialize()
     {
+        
         AchievementDictSetup();
         LevelDictSetup();
-        LoadData();
+        LoadAllData();
+        
         /*TestChestDELETEAFTERTEST();*/
     }
 
-   /* private void TestChestDELETEAFTERTEST()
+    private void Start()
     {
-        
-        foreach (AchievementInfoSO achievement in _achievements)
-        {
-            AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, false);
-        }
-        Debug.Log("REMEMBER TO DELETE TEST");
-        SaveData();
-    }*/
+        PlayfabManager.Instance.Login(PlayerId);
+    }
+
+    /* private void TestChestDELETEAFTERTEST()
+     {
+
+         foreach (AchievementInfoSO achievement in _achievements)
+         {
+             AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, false);
+         }
+         Debug.Log("REMEMBER TO DELETE TEST");
+         SaveData();
+     }*/
 
     private void PlayerIdSetup()
     {
-        Hash128 playerHash = new();
-        playerHash.Append(SystemInfo.deviceName + SystemInfo.deviceModel + SystemInfo.deviceType + SystemInfo.graphicsDeviceType + SystemInfo.graphicsDeviceID);
-        PlayerId = playerHash.ToString();
+        PlayerId = UnityEngine.Random.Range(0, 2147483647);
+        PlayerPrefs.SetInt("PlayerId", PlayerId);
     }
 
     private void AchievementDictSetup()
@@ -82,7 +94,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
         }
     }
 
-    public void SaveData()
+    public void SaveCompletionData()
     {
         string levelData = "";
         foreach (KeyValuePair<int, LevelMileStones> levelInfo in LevelCompletionInfo)
@@ -98,11 +110,20 @@ public class PersistentInfo : Singleton<PersistentInfo>
                 CharFromBool(achievementInfo.Value.WasShown) + ",";
         }
         PlayerPrefs.SetString("AchievementData", achievementData);
-
-        PlayerPrefs.SetString("PlayerId", PlayerId);
     }
 
-    private void LoadData()
+    public void SaveHighScoreData()
+    {
+        PlayerPrefs.SetInt("HighScore", PersonalHighScore);
+    }
+
+    public void SaveDisplayName()
+    {
+        PlayerPrefs.SetString("DisplayName", DisplayName);
+    }
+
+
+    private void LoadAllData()
     {
         if ( PlayerPrefs.HasKey("LevelData"))
         {
@@ -126,14 +147,26 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
         if (PlayerPrefs.HasKey("PlayerId"))
         {
-            PlayerId = PlayerPrefs.GetString("PlayerId");
+            PlayerId = PlayerPrefs.GetInt("PlayerId");
         }
         else
         {
             PlayerIdSetup();
             Debug.Log("No PlayerId data found, creating new ID");
             Debug.Log(PlayerId);
-        }     
+        }
+
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            PersonalHighScore = PlayerPrefs.GetInt("HighScore");
+        }
+        else PersonalHighScore = 0;
+
+        if (PlayerPrefs.HasKey("DisplayName"))
+        {
+            DisplayName = PlayerPrefs.GetString("DisplayName");
+        }
+        else DisplayName = "AAA";
     }
 
     public void ResetData()
@@ -142,8 +175,11 @@ public class PersistentInfo : Singleton<PersistentInfo>
         //PlayerPrefs.DeleteAll();
         PlayerPrefs.DeleteKey("AchievementData");
         PlayerPrefs.DeleteKey("LevelData");
+        PlayerPrefs.DeleteKey("HighScore");
+        PlayerPrefs.DeleteKey("DisplayName");
         LevelDictSetup();
         AchievementDictSetup();
+        LoadAllData();
     }
 
     public int MaxLevelBeatenIndex()

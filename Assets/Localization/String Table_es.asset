@@ -113,8 +113,24 @@ MonoBehaviour:
     m_Localized: Nuevo Logro
     m_Metadata:
       m_Items: []
-  - m_Id: 6132005293019136
-    m_Localized: Cargando...
+  - m_Id: 7937814482145280
+    m_Localized: Record Personal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7937866927722496
+    m_Localized: Record Global
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8071988631326720
+    m_Localized: "\xA1Nuevo Record Personal!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8076959133224960
+    m_Localized: Listo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8112459583868928
+    m_Localized: Cargando Puntajes...
     m_Metadata:
       m_Items: []
   references:

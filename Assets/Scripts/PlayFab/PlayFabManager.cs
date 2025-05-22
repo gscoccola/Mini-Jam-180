@@ -1,51 +1,71 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
-using Unity.VisualScripting;
+using PlayFab.SharedModels;
+using PlayFab.AuthenticationModels;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+using System;
 
 // This Singleton class handles all the requests to the playfab server
 
 public class PlayfabManager : Singleton<PlayfabManager>
 {
-    private void Start()
-    {
-        Login();
-    }
 
-    private void Login()
+    public void Login(int playerID)
     {
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = PersistentInfo.Instance.PlayerId,
+            CustomId = playerID.ToString(),
             CreateAccount = true,
         };
         PlayFabClientAPI.LoginWithCustomID(request, OnLogin, OnError);
     }
 
-    public void SendAllStatistics()
+    /*private static Task<PlayFabAuthenticationContext> LoginAsPlayer(string customId)
     {
-        MaximumLevelReached();
-        AchievementCount();
+        LoginWithCustomIDRequest request = new LoginWithCustomIDRequest { CustomId = customId, CreateAccount = true };
 
+        PlayFabResult<LoginResult> loginResult = PlayFabClientAPI.LoginWithCustomID(request, null, null);
+
+        return loginResult.Result.AuthenticationContext;
+    }*/
+
+    /*private static async Task<PlayFabAuthenticationContext> LoginAsPlayer(string customId = "GettingStartedGuide")
+    {
+        LoginWithCustomIDRequest request = new LoginWithCustomIDRequest { CustomId = customId, CreateAccount = true };
+
+        PlayFabResult<LoginResult> loginResult = await PlayFabClientAPI.LoginWithCustomIDAsync(request);
+
+        return loginResult.Result.AuthenticationContext; 
+    }*/
+
+    public void SendCompletionStatistics()
+    {
+        SendMaximumLevelReached();
+        SendAchievementCount();
     }
 
     public void SendHighscore(int score)
-        {
-            SendStatistic("Highscore", score);
-        }
+    {
+        SendStatistic("Highscore", score);
+    }
 
-    private void MaximumLevelReached()
+    private void SendMaximumLevelReached()
     {
         SendStatistic("Maximum Level Reached", PersistentInfo.Instance.MaxLevelBeatenIndex());
     }
 
-    private void AchievementCount()
+    private void SendAchievementCount()
     {
         SendStatistic("Achievements Found", PersistentInfo.Instance.AchievementCount());
     }
 
+    public void SendMobile()
+    {
+        if (Application.isMobilePlatform) SendStatistic("Is Device Mobile", 1);
+        else SendStatistic("Is Device Mobile", 0);
+    }
 
     private void SendStatistic(string name, int value)
     {
@@ -60,7 +80,7 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
 
 
-    private void GetStatistics()
+    public void GetGlobalStatistics(bool openLeaderboardWhenDone)
     {
         PlayFabClientAPI.GetLeaderboard(
             new GetLeaderboardRequest()
@@ -73,9 +93,8 @@ public class PlayfabManager : Singleton<PlayfabManager>
             {
                 if (response.Leaderboard != null)
                 {
-                    Dictionary<string, int> highscores = new Dictionary<string, int>();
                     LeaderboardManager.Instance.PopulateLeaderBoard(response.Leaderboard);
-                    LeaderboardManager.Instance.DisplayLeaderBoard();
+                    if (openLeaderboardWhenDone) FindAnyObjectByType<GameManager>().OpenLeaderBoard();
                     Debug.Log("Leaderboard loaded");
                 }
                 
@@ -116,7 +135,7 @@ public class PlayfabManager : Singleton<PlayfabManager>
             
     }*/
 
-    private void UpdateDisplayName(string name)
+    public void UpdateDisplayName(string name)
     {
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
         {
@@ -133,9 +152,10 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
     private void OnLogin(LoginResult result)
     {
-        Debug.Log("Successful Login");
-        GetStatistics();
-        PlayfabManager.Instance.SendAllStatistics();
+        Debug.Log("Successful Login as " + PersistentInfo.Instance.PlayerId);
+        SendMobile();
+        GetGlobalStatistics(false);
+        SendCompletionStatistics();
     }
 
     private void OnError(PlayFabError error)

@@ -12,13 +12,7 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
     public void PopulateLeaderBoard(List<PlayerLeaderboardEntry> highScores)
     {
         HighScores = highScores;
-    }
-
-    public void DisplayLeaderBoard()
-    {
-        foreach (var entry in HighScores)
-        {
-            //Debug.Log($"Name: {entry.DisplayName} , Score: {entry.StatValue}");
-        }
+        if (HighScores.Count > 0) { PersistentInfo.Instance.GlobalHighScore = HighScores[0].StatValue; }
+        else PersistentInfo.Instance.GlobalHighScore = 0;
     }
 }

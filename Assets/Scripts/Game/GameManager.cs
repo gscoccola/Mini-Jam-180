@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using Animancer;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -31,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _usaFlag;
     [SerializeField] GameObject _loadingTextEsp;
     [SerializeField] GameObject _loadingTextEng;
+    [SerializeField] HighscoreSubmitter _highscoreSumbitter;
+    [SerializeField] GameObject _loadingScreen;
 
     CameraScript _cameraScript;
     Camera _camera;
@@ -74,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        PersistentInfo.Instance.SaveData();
+        PersistentInfo.Instance.SaveCompletionData();
         MusicPlayer.Instance.OnLevelLoad(_activeSceneIndex);
         SFXPlayer.Instance.OnLevelLoad(_activeSceneIndex);
 
@@ -191,18 +190,28 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ILevelEnd(bool hasWon)
     {
-        PlayfabManager.Instance.SendAllStatistics();
-        if (_scoreKeeper != null)
-        {
-            _scoreKeeper.Set(false);
-            PlayfabManager.Instance.SendHighscore(_scoreKeeper.GetScore());
-        }
-        if (_mSpawner != null) _mSpawner.StopSpawning();
-        PersistentInfo.Instance.SaveData();
-        if (_indicator != null) _indicator.gameObject.SetActive(false);
         _mobileInputButtons.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
+
+        yield return new WaitForEndOfFrame();
+
+        if (_indicator != null) _indicator.gameObject.SetActive(false);
+        if (_mSpawner != null) _mSpawner.StopSpawning();
+
+        yield return new WaitForEndOfFrame();
+
+        bool newHighscore = false;
+        if (_scoreKeeper != null) newHighscore = AssessHighscore();
+            
+        yield return new WaitForEndOfFrame();
+
+        PersistentInfo.Instance.SaveCompletionData();
+
+        yield return new WaitForEndOfFrame();
+
+        PlayfabManager.Instance.SendCompletionStatistics();
         MusicPlayer.Instance.Pause();
+
         yield return new WaitForSeconds(_endDelay);
         VibrationHandler.Instance.HeavyVibrate();
         if (hasWon)
@@ -215,12 +224,64 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.8f);
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._winDialog);
         }
+        else if (newHighscore)
+        {
+            _highscoreSumbitter.gameObject.SetActive(true);
+            _highscoreSumbitter.SetName(PersistentInfo.Instance.DisplayName);
+            _highscoreSumbitter.SetScore(PersistentInfo.Instance.LastScore);
+            SelectDefaultButton(_highscoreSumbitter.transform.GetChild(0).GetChild(0).gameObject);
+        }
         else
         {
             _loseMenu.gameObject.SetActive(true);
             SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
         }
+    }
+
+    private bool AssessHighscore()
+    {
+        int score = _scoreKeeper.GetScore();
+        _scoreKeeper.gameObject.SetActive(false);
+        PlayfabManager.Instance.SendHighscore(score);
+        PersistentInfo.Instance.LastScore = score;
+
+        if (score > PersistentInfo.Instance.GlobalHighScore)
+        {
+            PersistentInfo.Instance.GlobalHighScore = score;
+            PersistentInfo.Instance.PersonalHighScore = score;
+            PersistentInfo.Instance.SaveHighScoreData();
+        }
+        else if (score > PersistentInfo.Instance.PersonalHighScore)
+        {
+            PersistentInfo.Instance.PersonalHighScore = score;
+            PersistentInfo.Instance.SaveHighScoreData();
+        }
+        else return false;
+        return true;
+        //_scoreKeeper.Set(false); disable scorekeeper counting
+        
+    }
+
+    public void SubmitHighScore()
+    {
+        string name = _highscoreSumbitter.GetName();
+        PersistentInfo.Instance.DisplayName = name;
+        PlayfabManager.Instance.UpdateDisplayName(name);
+        PersistentInfo.Instance.SaveDisplayName();
+        _highscoreSumbitter.gameObject.SetActive(false);
+        _loseMenu.gameObject.SetActive(true);
+        SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
+    }
+
+    public void LoadLeaderboard()
+    {
+        PlayfabManager.Instance.GetGlobalStatistics(true);
+    }
+
+    public void OpenLeaderBoard()
+    {
+
     }
 
     internal void ToggleCredits()

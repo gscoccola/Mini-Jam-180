@@ -122,6 +122,12 @@ public class GameButton : MonoBehaviour
                 _gameManager.BackFromAchievementMenuInGame();
                 if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 break;
+            case ButtonType.SubmitHighScore:
+                _gameManager.SubmitHighScore();
+                break;
+            case ButtonType.Leaderboard:
+                _gameManager.LoadLeaderboard();
+                break;
         }
     }
 
@@ -158,4 +164,6 @@ public enum ButtonType
     SetLocaleEng,
     AchievementMenuInGame,
     BackFromAchievementMenuInGame,
+    SubmitHighScore,
+    Leaderboard,
 }

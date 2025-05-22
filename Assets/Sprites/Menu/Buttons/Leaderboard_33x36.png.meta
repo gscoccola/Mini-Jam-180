@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 09ec3f7bc645eea45a943c0443d4776b
+guid: b95a6c0f46e029c4183815d05d9a9705
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8863887667978633272
-    second: X_mark_0
+      213: 2324624007087851254
+    second: achievements_33x36_0
+  - first:
+      213: 96967959848522666
+    second: achievements_33x36_1
+  - first:
+      213: -45148751094946517
+    second: achievements_33x36_2
+  - first:
+      213: -3855741662095149694
+    second: achievements_33x36_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -53,7 +62,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -72,7 +81,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,23 +135,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: X_mark_0
+      name: Leaderboard_33x36_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 39
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 83005d20fdad20b70800000000000000
-      internalID: 8863887667978633272
+      spriteID: 97ef8ee7d09c17741bc4487ebc34113b
+      internalID: 2098731950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leaderboard_33x36_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 0
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d45ab6b22c3c28c488725e6235c4ee4b
+      internalID: 1818282408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leaderboard_33x36_2
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f7fdc07eac0de245a759268116a4349
+      internalID: -1045079776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leaderboard_33x36_3
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 0
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f012dfdec7339a8438c59c1d0ae0ccd5
+      internalID: 74265808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leaderboard_33x36_4
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 0
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789c2ea7ad6be044787725ce9984cf4f
+      internalID: 1916801435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leaderboard_33x36_5
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fee651d269f53314499e13ef1d5c1268
+      internalID: -1799092688
       vertices: []
       indices: 
       edges: []
@@ -151,7 +270,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 62a8a64bd17a36e48a686dbaa0e3cbc1
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +280,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      X_mark_0: 8863887667978633272
+      Leaderboard_33x36_0: 2098731950
+      Leaderboard_33x36_1: 1818282408
+      Leaderboard_33x36_2: -1045079776
+      Leaderboard_33x36_3: 74265808
+      Leaderboard_33x36_4: 1916801435
+      Leaderboard_33x36_5: -1799092688
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

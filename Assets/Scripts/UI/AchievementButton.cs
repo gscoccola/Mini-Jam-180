@@ -96,7 +96,7 @@ public class AchievementButton : MonoBehaviour
 
             PersistentInfo.Instance.AchievementCompletionInfo[Id].WasShown = true;
             PersistentInfo.Instance.CheckUnseenAchievements();
-            PersistentInfo.Instance.SaveData();
+            PersistentInfo.Instance.SaveCompletionData();
         }
         else
         {
