@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 4
   Name: Full Combo
-  Description: Reach charlie's full potential
+  NameEsp: Combo Completo
+  Description: Reach Charlie's full potential
+  DescriptionEsp: Alcanza el verdadero potencial de Charlie

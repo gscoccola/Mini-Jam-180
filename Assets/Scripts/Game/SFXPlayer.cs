@@ -5,13 +5,23 @@ using UnityEngine.UIElements;
 
 public class SFXPlayer : Singleton<SFXPlayer>
 {
-    [Header("EnemyDeath")]
+    [Header("Enemy Death")]
     [FoldoutGroup("Enemy")] public AudioClip[] _birdDeath;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _birdDeathVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _droneDeath;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _droneDeathVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _balloonDeath;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _balloonDeathVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _droneShock;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _droneShockVolume;
+
+    [Header("Missiles")]
+    [FoldoutGroup("Enemy")] public AudioClip[] _missileWarning;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileWarningVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _missileFall;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileFallVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _missileHit;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileHitVolume;
 
     [Header("Player Fall")]
     [FoldoutGroup("Player")] public AudioClip[] _playerSplash;
@@ -51,11 +61,23 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Game misc")] public AudioClip[] _button;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
 
+    [Header("Achievement Click")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _achievement;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _achievementVolume;
+
     [Header("Fireworks")]
     [FoldoutGroup("Game misc")] public AudioClip[] _fireworkExplosion;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkExplosionVolume;
     [FoldoutGroup("Game misc")] public AudioClip[] _fireworkWhistle;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _fireworkWhistleVolume;
+
+    [Header("Rewards")]
+    [FoldoutGroup("Game misc")] public AudioClip[] _padlock;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _padlockVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _chestOpen;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _chestOpenVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _balloonRelease;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _balloonReleaseVolume;
 
     Vector3 _cameraPosition;
     PlayerMovement _playerMovement;
@@ -87,6 +109,14 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_button] = _buttonVolume,
             [_fireworkExplosion] = _fireworkExplosionVolume,
             [_fireworkWhistle] = _fireworkWhistleVolume,
+            [_achievement] = _achievementVolume,
+            [_missileWarning] = _missileWarningVolume,
+            [_missileFall] = _missileFallVolume,
+            [_missileHit] = _missileHitVolume,
+            [_padlock] = _padlockVolume,
+            [_chestOpen] = _chestOpenVolume,
+            [_balloonRelease] = _balloonReleaseVolume,
+            [_droneShock] = _droneShockVolume,
 
         };
     }
@@ -112,6 +142,11 @@ public class SFXPlayer : Singleton<SFXPlayer>
             indexToPlay = Random.Range(0, clipArray.Length);
         }
         PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
+    }
+
+    public void PlayClipFromArrayAtIndex(AudioClip[] clipArray, int index)
+    {
+        PlayClipAtPoint(clipArray[index], _cameraPosition, _volumeDictionary[clipArray][index]);
     }
 
     public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, float pitch = 1, bool dontDestroyOnLoad = false)

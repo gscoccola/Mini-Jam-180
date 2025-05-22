@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 3
   Name: Out Of Bounds
+  NameEsp: Fuera del Mapa
   Description: Exit the map
+  DescriptionEsp: Sal del mapa

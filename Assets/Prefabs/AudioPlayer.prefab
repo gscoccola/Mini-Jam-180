@@ -140,8 +140,8 @@ GameObject:
   - component: {fileID: 7151640412744923075}
   - component: {fileID: 3602665203335607043}
   - component: {fileID: 1496860868317368669}
-  - component: {fileID: 8782741816491427133}
   - component: {fileID: 2565876176405641814}
+  - component: {fileID: 260312106830066570}
   m_Layer: 0
   m_Name: AudioPlayer
   m_TagString: Untagged
@@ -184,10 +184,12 @@ MonoBehaviour:
   _firstPhaseTrack: {fileID: 8300000, guid: 49eb32727dc60eb419a5cc4a06772b2b, type: 3}
   _firstPhaseComboTrack: {fileID: 8300000, guid: 3b4ec2518f6c5864b935736b0fd42796, type: 3}
   _secondPhaseTrack: {fileID: 8300000, guid: 7a34bad7705ea23439ed5e8c5a39cf5e, type: 3}
-  _secondPhaseComboTrack: {fileID: 8300000, guid: e9e404406acc4054886925918fe65b91, type: 3}
+  _secondPhaseComboTrack: {fileID: 8300000, guid: 86367508a08238941b56d4b30dbbb28f, type: 3}
   _thirdPhaseTrack: {fileID: 8300000, guid: 205c513df5300f848b5c5f3a4ee38e84, type: 3}
   _thirdPhaseComboTrack: {fileID: 8300000, guid: d50337f82a72d9240ab501031a541ef1, type: 3}
   _EpilogueTrack: {fileID: 8300000, guid: a9e26535a45708843ba34f2ff1916fd2, type: 3}
+  _endlessTrack: {fileID: 8300000, guid: 9d09be12d6b038c4b95cfd0b7740fb95, type: 3}
+  _endlessComboTrack: {fileID: 8300000, guid: bc643980de9256049b872f5254b0b04b, type: 3}
   _isSecondTrackEnabled: 0
   _beginFadeOutWind: 0
   _isPlayingWind: 0
@@ -224,6 +226,34 @@ MonoBehaviour:
   _balloonDeathVolume:
   - 0.5
   - 0.5
+  _droneShock:
+  - {fileID: 8300000, guid: 1f9ba637c17442744a3ff9042cd55382, type: 3}
+  - {fileID: 8300000, guid: fec9d849bcfb2d141a8b87fa65171e61, type: 3}
+  - {fileID: 8300000, guid: b7e92da30421f894a907a182ea0cf56c, type: 3}
+  _droneShockVolume:
+  - 0.79
+  - 0.75
+  - 0.79
+  _missileWarning:
+  - {fileID: 8300000, guid: 0d17822d8b8c8a7459d0cfe5fdbebe13, type: 3}
+  - {fileID: 8300000, guid: 28a4f12b373c6e54aac64266e2e0705b, type: 3}
+  _missileWarningVolume:
+  - 0.417
+  - 0.423
+  _missileFall:
+  - {fileID: 8300000, guid: ee9bfc5f175ee42498ca97da9c47011f, type: 3}
+  _missileFallVolume:
+  - 0.321
+  _missileHit:
+  - {fileID: 8300000, guid: 1a8893601027e144cabd0e3cf82e4c3c, type: 3}
+  - {fileID: 8300000, guid: 685051510cb8f7544aa172cbb1c6b7ef, type: 3}
+  - {fileID: 8300000, guid: af62c504e651c6f4cb2df06bb0cd3b99, type: 3}
+  - {fileID: 8300000, guid: f2c8b045b4259ef4a8155409a0b06bbc, type: 3}
+  _missileHitVolume:
+  - 1
+  - 1
+  - 1
+  - 1
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
   _playerSplashVolume:
@@ -294,14 +324,28 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 64c9825153d3a0b42a011111c897ae01, type: 3}
   - {fileID: 8300000, guid: 71df3584c1f74a846ad1cefdbce04bcc, type: 3}
   - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
+  - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
+  - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
   _comboLostVolume:
   - 0.211
   - 0.264
+  - 0.211
+  - 0.211
   - 0.211
   _button:
   - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
   _buttonVolume:
   - 0.322
+  _achievement:
+  - {fileID: 8300000, guid: ef3c30b46cfb4be4db98343ddeb90c7d, type: 3}
+  - {fileID: 8300000, guid: 388c025e977995b46aa4d70f0d6001d3, type: 3}
+  - {fileID: 8300000, guid: 1b8535e8ac71409459d1969d5e110c1c, type: 3}
+  - {fileID: 8300000, guid: 5e07c751205defc4c85ef043fd80ed75, type: 3}
+  _achievementVolume:
+  - 0.438
+  - 0.431
+  - 0.438
+  - 0.438
   _fireworkExplosion:
   - {fileID: 8300000, guid: 1a8893601027e144cabd0e3cf82e4c3c, type: 3}
   - {fileID: 8300000, guid: 685051510cb8f7544aa172cbb1c6b7ef, type: 3}
@@ -318,18 +362,24 @@ MonoBehaviour:
   _fireworkWhistleVolume:
   - 0.189
   - 0.151
---- !u!114 &8782741816491427133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5011237236054601744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69cc4df3a744a71459b60853aab44742, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _padlock:
+  - {fileID: 8300000, guid: bd745fa4a227db643899c2a6879f29c6, type: 3}
+  - {fileID: 8300000, guid: d89955636c12683449a97f3c3ab9565e, type: 3}
+  - {fileID: 8300000, guid: 2458ce6ac811ecf4f9cfc74f14f155cb, type: 3}
+  - {fileID: 8300000, guid: efddda8b6cfff134d9e6d91006f714ab, type: 3}
+  _padlockVolume:
+  - 1
+  - 1
+  - 1
+  - 1
+  _chestOpen:
+  - {fileID: 8300000, guid: 367ca1516a5251d4b8b6e943651264e4, type: 3}
+  _chestOpenVolume:
+  - 0.73
+  _balloonRelease:
+  - {fileID: 8300000, guid: a3bfc5d8cec544c48bead744455b835e, type: 3}
+  _balloonReleaseVolume:
+  - 0.5
 --- !u!82 &2565876176405641814
 AudioSource:
   m_ObjectHideFlags: 0
@@ -427,6 +477,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &260312106830066570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011237236054601744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ddf49524df9b643a289ea33fbfcc39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8930754558145927141
 GameObject:
   m_ObjectHideFlags: 0

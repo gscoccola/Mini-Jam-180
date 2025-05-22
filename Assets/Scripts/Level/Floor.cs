@@ -8,6 +8,7 @@ public class Floor : MonoBehaviour
     GameManager _gameManager;
     PlayerMovement _playerMovement;
     [SerializeField] FloorType _floorType;
+    [SerializeField] bool _isEndlessLevel;
     [SerializeField] float _groundOffset;
     [SerializeField] GameObject _bloodSplatter;
     [SerializeField] GameObject _waterSplash;
@@ -22,20 +23,22 @@ public class Floor : MonoBehaviour
         _tilemapCollider2D = GetComponent<TilemapCollider2D>();
         _tilemap = GetComponent<Tilemap>();
         SetConfiner();
+        DefineBoundaries();
     }
     private void Start()
     {
         if (_floorType == FloorType.Ground)  _tilemapCollider2D.offset = new Vector2(0f, - _groundOffset);
-        DefineBoundaries();
     }
 
     private void SetConfiner()
     {
+        if (_isEndlessLevel) return;
         if (_floorType != FloorType.Ground) return;
         Bounds bounds = _tilemapCollider2D.bounds;
-        float xMin = _tilemap.transform.TransformPoint(bounds.min).x;
-        float xMax = _tilemap.transform.TransformPoint(bounds.max).x;
-        float yMin = _tilemap.transform.TransformPoint(bounds.min).y + _groundOffset;
+        float xMin = bounds.min.x;
+        float xMax = bounds.max.x;
+        float yMin = bounds.min.y + _groundOffset;
+
         float yMax = 4000f;
         FindAnyObjectByType<PolygonCollider2D>().points = new Vector2[4]
         {

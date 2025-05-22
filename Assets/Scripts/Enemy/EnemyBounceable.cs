@@ -1,22 +1,12 @@
-using Alchemy.Inspector;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
-
+// This class handles the interaction between enemy and the player
 public class EnemyBounceable : MonoBehaviour
 {
     [SerializeField] GameObject _explosionPrefab;
     public EnemyType _enemytype;
-    float _maxXValue;
     bool _isDestroyed;
-    Animator _animator;
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -65,6 +55,10 @@ public class EnemyBounceable : MonoBehaviour
                 SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneDeath);
                 break;
 
+            case EnemyType.DronePink:
+                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneShock);
+                break;
+
             case EnemyType.Balloon:
                 SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonDeath);
                 break;
@@ -77,5 +71,7 @@ public enum EnemyType
 {
     Bird,
     Drone,
+    DronePink,
     Balloon,
+    GoldenBalloon,
 }

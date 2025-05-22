@@ -55,6 +55,7 @@ MonoBehaviour:
   _oscilates: 0
   _oscilationAmplitude: 0
   _oscilationPeriod: 1
+  _maxXValue: 0
 --- !u!114 &5181539860035519098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionPrefab: {fileID: 3467801179110129099, guid: c8787dccbed7949489de727454d935ab, type: 3}
-  _enemytype: 2
+  _enemytype: 3
 --- !u!212 &6003322094492297565
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -185,7 +186,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.02166766, y: 0.62778413}
+  m_Offset: {x: -0.021667719, y: 0.62778413}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -195,7 +196,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7166647, y: 0.14109778}
+  m_Size: {x: 0.8285599, y: 0.14109778}
   m_EdgeRadius: 0
 --- !u!95 &1925391003768292856
 Animator:

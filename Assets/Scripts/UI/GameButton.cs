@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameButton : MonoBehaviour, IPointerDownHandler
+public class GameButton : MonoBehaviour
 {
     [SerializeField] ButtonType _type;
     [SerializeField] bool _isInstant;
@@ -15,6 +15,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
     Animator _animator;
     bool _isOnCooldown;
     public event EventHandler<ClosePopupEventArgs> PopupClose;
+    private bool _isDisabled;
 
     private void Awake()
     {
@@ -22,16 +23,32 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
         _animator = GetComponent<Animator>();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    private void OnEnable()
     {
-        if (_isOnCooldown) return;
-        _isOnCooldown = true;
-        _animator.SetBool("isPressed", !_animator.GetBool("isPressed")) ;
-        if (!_isInstant) StartCoroutine(ILoadScene());
-        else 
+        if (_animator != null && (_type == ButtonType.Achievements || _type == ButtonType.AchievementMenuInGame))
         {
-            PerfomButtonAction();
+            _animator.SetBool("isVibrating", PersistentInfo.Instance._newAchievement);
+        }
+    }
+
+
+    public void OnClick()
+    {
+        if (Application.isMobilePlatform) EventSystem.current.SetSelectedGameObject(null);
+        if (_isOnCooldown || _isDisabled) return;
+        if (_type == ButtonType.BackFromAchievements || _type == ButtonType.BackFromAchievementMenuInGame|| _type == ButtonType.DeleteSavedData)
+        {
+            RewardManager rewardManager = FindAnyObjectByType<RewardManager>();
+            if (rewardManager != null && rewardManager.DropNextPadlock()) return;
+        }
+        VibrationHandler.Instance.LightVibrate();
+        _isOnCooldown = true;
+        if (_animator != null) _animator.SetBool("isPressed", !_animator.GetBool("isPressed"));
+        if (!_isInstant) StartCoroutine(IPerformAction());
+        else
+        {
             StartCoroutine(IButtonCooldown());
+            PerfomButtonAction();
         }
         SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
     }
@@ -44,7 +61,7 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
     }
 
 
-    IEnumerator ILoadScene()
+    IEnumerator IPerformAction()
     {
         
         yield return new WaitForSecondsRealtime(_menuClickDelay);
@@ -83,18 +100,51 @@ public class GameButton : MonoBehaviour, IPointerDownHandler
                 break;
             case ButtonType.BackFromAchievements:
                 _gameManager.ToggleAchievements();
-                PopupClose.Invoke(this, new ClosePopupEventArgs());
+                if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 break;
-            case ButtonType.Next: 
+            case ButtonType.Next:
                 _gameManager.NextLevel();
                 break;
             case ButtonType.DeleteSavedData:
-                PersistentInfo.Instance.ResetData();
-                _gameManager.LoadLevel(0);
+                if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
+                _gameManager.DeleteData();
+                break;
+            case ButtonType.SetLocaleArg:
+                _gameManager.SetLocale("es");
+                break;
+            case ButtonType.SetLocaleEng:
+                _gameManager.SetLocale("en");
+                break;
+            case ButtonType.AchievementMenuInGame:
+                _gameManager.AchievementMenuInGame();
+                break;
+            case ButtonType.BackFromAchievementMenuInGame:
+                _gameManager.BackFromAchievementMenuInGame();
+                if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
+                break;
+            case ButtonType.SubmitHighScore:
+                _gameManager.SubmitHighScore();
+                break;
+            case ButtonType.Leaderboard:
+                _gameManager.LoadLeaderboard();
                 break;
         }
     }
 
+    public void SetPressed()
+    {
+        _animator.SetBool("isPressed", true);
+    }
+
+    public void Enable()
+    {
+        _isDisabled = false;
+    }
+
+    public void Disable()
+    {
+        _isDisabled = true;
+    }
 }
 
 public enum ButtonType
@@ -110,4 +160,10 @@ public enum ButtonType
     Achievements,
     BackFromAchievements,
     DeleteSavedData,
+    SetLocaleArg,
+    SetLocaleEng,
+    AchievementMenuInGame,
+    BackFromAchievementMenuInGame,
+    SubmitHighScore,
+    Leaderboard,
 }

@@ -3,9 +3,8 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class AchievementButton : MonoBehaviour, IPointerDownHandler
+public class AchievementButton : MonoBehaviour
 {
     public event EventHandler<ClosePopupEventArgs> PopupClose;
 
@@ -13,43 +12,53 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
     [SerializeField] GameObject _popup;
     [SerializeField] TextMeshProUGUI _achievementTitle;
     [SerializeField] TextMeshProUGUI _achievementDescription;
+    [SerializeField] GameObject _confettiPrefab;
+    [SerializeField] RewardManager _rewardManager;
 
-    bool _isUnlocked;
+    Camera _camera;
     Animator _animator;
     bool _isOnCooldown;
+    private bool _isDisabled;
 
+    int Id;
+    string Title;
 
+    bool _wasUnlocked;
+    bool _wasShown;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _camera = FindAnyObjectByType<Camera>();
     }
 
     private void OnEnable()
     {
-        
-    }
+        Id = _achievement.GetId();
+        Title = _achievement.GetName();
 
+        _wasUnlocked = PersistentInfo.Instance.AchievementCompletionInfo[Id].WasUnlocked;
+        _wasShown = PersistentInfo.Instance.AchievementCompletionInfo[Id].WasShown;
 
-    private void Start()
-    {
-        //PersistentInfo.Instance.AchievementCompletionInfo.Add(GetId(), new AchievementMilestones(GetTitle()));
-        _achievementTitle.text = _achievement.GetName();
-        if (_isUnlocked)
+        _animator.SetBool("wasShown", _wasShown);
+        _animator.SetBool("wasUnlocked", _wasUnlocked);
+        if (_wasUnlocked && !_wasShown) _animator.Play("Vibrating Yellow", 0, UnityEngine.Random.Range(0f, 1f));
+        _achievementTitle.text = Title;
+        if (_wasUnlocked)
         {
             _achievementDescription.text = _achievement.GetDescription();
-            _achievementDescription.fontSize = 80f;
+            _achievementDescription.fontSize = 62.5f;
             return;
         }
         _achievementDescription.text = "????";
-        _achievementDescription.fontSize = 180f;
-        
+        _achievementDescription.fontSize = 125f;
     }
+
 
     public void AdjustPopup()
     {
         if (transform.position.x > Screen.width /2)
-        _popup.transform.localPosition = new Vector3(-_popup.transform.localPosition.x, _popup.transform.localPosition.y, 0f);
+        _popup.transform.localPosition = new Vector3(- Mathf.Abs(_popup.transform.localPosition.x), _popup.transform.localPosition.y, 0f);
     }
 
     public int GetId()
@@ -62,21 +71,45 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         return _achievement.GetName();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnClick()
     {
-        if (_isOnCooldown) return;
-        AdjustPopup();
-        _isOnCooldown = true;
+        
+        if (_isOnCooldown || _isDisabled) return;
         bool wasPressed = _popup.gameObject.activeSelf;
-        PopupClose.Invoke(this, new ClosePopupEventArgs());
-        SetPopup(!wasPressed);
         StartCoroutine(IButtonCooldown());
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+        _isOnCooldown = true;
+
+        AdjustPopup();
+        PopupClose.Invoke(this, new ClosePopupEventArgs());
+
+        if (_rewardManager.DropNextPadlock()) return;
+        if (_wasUnlocked && !_wasShown)
+        {
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._achievement);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+            VibrationHandler.Instance.HeavyVibrate();
+            Instantiate(_confettiPrefab, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity)
+                .transform.localScale = 2.8296f *(_camera.orthographicSize / 5) * Vector3.one;
+
+            _wasShown = true;
+            _animator.SetBool("wasShown", true);
+
+            PersistentInfo.Instance.AchievementCompletionInfo[Id].WasShown = true;
+            PersistentInfo.Instance.CheckUnseenAchievements();
+            PersistentInfo.Instance.SaveCompletionData();
+        }
+        else
+        {
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+            VibrationHandler.Instance.LightVibrate();
+        }
+        SetPopup(!wasPressed);
+        if (Application.isMobilePlatform && wasPressed) EventSystem.current.SetSelectedGameObject(null);
     }
 
     IEnumerator IButtonCooldown()
     {
-        yield return new WaitForSecondsRealtime(0.15f);
+        yield return new WaitForSecondsRealtime(0.25f);
         _isOnCooldown = false;
     }
 
@@ -86,11 +119,14 @@ public class AchievementButton : MonoBehaviour, IPointerDownHandler
         _popup.gameObject.SetActive(boolean);
     }
 
-    public void Unlock()
+    public void Enable()
     {
-        _isUnlocked = true;
-        _achievementDescription.text = _achievement.GetDescription();
-        _achievementDescription.fontSize = 80f;
+        _isDisabled = false;
+    }
+
+    public void Disable()
+    {
+        _isDisabled = true;
     }
 
 }

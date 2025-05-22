@@ -6,6 +6,7 @@ public class AchievementButtonManager : MonoBehaviour
 {
     Dictionary<int, AchievementButton> _achievementButtonsById = new();
     [SerializeField] GameButton _backFromAchievements;
+    [SerializeField] GameButton _deleteData;
 
     private void Awake()
     {
@@ -16,19 +17,9 @@ public class AchievementButtonManager : MonoBehaviour
             button.PopupClose += CloseAllPopups;
         }
         _backFromAchievements.PopupClose += CloseAllPopups;
+        if (_deleteData != null) _deleteData.PopupClose += CloseAllPopups;
     }
 
-    private void Start()
-    {
-        var unlockedAchievements = PersistentInfo.Instance.AchievementCompletionInfo
-            .Where((achievementInfo) => achievementInfo.Value.WasUnlocked)
-            .Select((achievementInfo) => achievementInfo.Key);
-
-        foreach (int achievementId in unlockedAchievements)
-        {
-            _achievementButtonsById[achievementId].Unlock();
-        }
-    }
 
     public void CloseAllPopups(object sender, ClosePopupEventArgs eventArgs)
     {
@@ -36,6 +27,11 @@ public class AchievementButtonManager : MonoBehaviour
         {
             achievementButton.SetPopup(false);
         }
+    }
+
+    public void CloseAllPopups()
+    {
+        CloseAllPopups(this, new ClosePopupEventArgs());
     }
 
 }

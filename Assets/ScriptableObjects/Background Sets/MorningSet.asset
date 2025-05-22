@@ -17,3 +17,4 @@ MonoBehaviour:
   MountainsSprite: {fileID: 7745840689195864237, guid: 5c625eb1f06c6da4dbe7aa0a3095ac1e, type: 3}
   BuidlingsSprite: {fileID: 340198482, guid: 5dfe4244c7ce6724280924dc743ae78f, type: 3}
   BushesSprite: {fileID: 2395028364090877961, guid: 24e077671ab05994eaab32769e6846e2, type: 3}
+  ContrastingColor: {r: 0.93333334, g: 0.36862746, b: 0.16470589, a: 1}

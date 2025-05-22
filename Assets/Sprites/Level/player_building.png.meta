@@ -174,7 +174,11 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 66, y: 32}
+        - {x: -66, y: 32}
+        - {x: -66, y: -32}
+        - {x: 66, y: -32}
       tessellationDetail: 0
       bones: []
       spriteID: 8cea5fbe6ca85ec80800000000000000
@@ -196,11 +200,41 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 66, y: 32}
+        - {x: -66, y: 32}
+        - {x: -66, y: -32}
+        - {x: 66, y: -32}
       tessellationDetail: 0
       bones: []
       spriteID: c2ddff7540685c900800000000000000
       internalID: 704116269967727916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_building_3
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 7
+        width: 132
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 66, y: -32}
+        - {x: 66, y: 32}
+        - {x: -66, y: 32}
+        - {x: -66, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f92972ea298c8e743b37b4fa3c860593
+      internalID: 103381733
       vertices: []
       indices: 
       edges: []
@@ -222,6 +256,7 @@ TextureImporter:
       player_building_0: -8803628890846049118
       player_building_1: -8294070551765995832
       player_building_2: 704116269967727916
+      player_building_3: 103381733
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

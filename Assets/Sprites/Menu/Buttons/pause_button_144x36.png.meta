@@ -140,8 +140,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: pause_button_144x36_1
       rect:
         serializedVersion: 2
-        x: 36
+        x: 38
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: pause_button_144x36_2
       rect:
         serializedVersion: 2
-        x: 72
+        x: 76
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: pause_button_144x36_3
       rect:
         serializedVersion: 2
-        x: 108
+        x: 114
         y: 0
-        width: 36
-        height: 36
+        width: 38
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,6 +218,50 @@ TextureImporter:
       bones: []
       spriteID: 4ea67435bcb34c4a0800000000000000
       internalID: -6574063811592492316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pause_button_144x36_4
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 0
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 640738132ed0f114e93a82fc5e2dc267
+      internalID: 1431931807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pause_button_144x36_5
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 0
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a28af1d1e59836b4e869cd800c486558
+      internalID: 776583036
       vertices: []
       indices: 
       edges: []
@@ -240,6 +284,8 @@ TextureImporter:
       pause_button_144x36_1: 3996346517392540342
       pause_button_144x36_2: 8060908736747032675
       pause_button_144x36_3: -6574063811592492316
+      pause_button_144x36_4: 1431931807
+      pause_button_144x36_5: 776583036
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

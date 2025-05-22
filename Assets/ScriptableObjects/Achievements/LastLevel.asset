@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 2
   Name: Jump No More
+  NameEsp: Jump No More
   Description: Complete the Epilogue
+  DescriptionEsp: Completa el Epilogo

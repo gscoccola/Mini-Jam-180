@@ -92,7 +92,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: -0.13}
+    ScreenPosition: {x: 0.15, y: -0.2}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -177,9 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00665137980ffd459c91c66a89b0037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startDelay: 0.3
+  _startDelay: 1
   _panDuration: 3
   _cameraMaxSpeed: 35
+  _pointsOfInterest: []
   _virtualTarget: {fileID: 7315976808203175649}
 --- !u!1 &3525313338217764298
 GameObject:
@@ -210,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 3525313338217764298}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.04604, z: -10}
+  m_LocalPosition: {x: 23.55045, y: 7.7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,7 +291,7 @@ Camera:
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 82.6
-  orthographic: 0
+  orthographic: 1
   orthographic size: 10
   m_Depth: 0
   m_CullingMask:
@@ -379,7 +380,7 @@ Transform:
   m_GameObject: {fileID: 3847667415802792232}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.2841556, z: -10}
+  m_LocalPosition: {x: -5.3288126, y: -3.9999998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -443,7 +444,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: -0.13}
+    ScreenPosition: {x: 0.15, y: -0.2}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
