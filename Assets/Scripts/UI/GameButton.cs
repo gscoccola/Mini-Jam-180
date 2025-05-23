@@ -128,6 +128,9 @@ public class GameButton : MonoBehaviour
             case ButtonType.Leaderboard:
                 _gameManager.LoadLeaderboard();
                 break;
+            case ButtonType.CloseLeaderboard:
+                _gameManager.CloseLeaderboard();
+                break;
         }
     }
 
@@ -166,4 +169,5 @@ public enum ButtonType
     BackFromAchievementMenuInGame,
     SubmitHighScore,
     Leaderboard,
+    CloseLeaderboard,
 }

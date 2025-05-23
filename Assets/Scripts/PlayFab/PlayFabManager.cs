@@ -97,11 +97,17 @@ public class PlayfabManager : Singleton<PlayfabManager>
                     if (openLeaderboardWhenDone) FindAnyObjectByType<GameManager>().OpenLeaderBoard();
                     Debug.Log("Leaderboard loaded");
                 }
-                
-                else Debug.Log("No leaderboard found");
+
+                else
+                {
+                    if (openLeaderboardWhenDone) FindAnyObjectByType<GameManager>().CancelOpenLeaderBoard();
+                    Debug.Log("No leaderboard found");
+                }
+                    
             },
             error =>
             {
+                if (openLeaderboardWhenDone) FindAnyObjectByType<GameManager>().CancelOpenLeaderBoard();
                 Debug.Log(error.GenerateErrorReport());
             }
             );

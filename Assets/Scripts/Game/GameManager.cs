@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _loadingTextEsp;
     [SerializeField] GameObject _loadingTextEng;
     [SerializeField] HighscoreSubmitter _highscoreSumbitter;
-    [SerializeField] GameObject _loadingScreen;
+    [SerializeField] InGameMenu _loadingScreen;
+    [SerializeField] InGameMenu _leaderboardMenu;
 
     CameraScript _cameraScript;
     Camera _camera;
@@ -229,6 +230,7 @@ public class GameManager : MonoBehaviour
             _highscoreSumbitter.gameObject.SetActive(true);
             _highscoreSumbitter.SetName(PersistentInfo.Instance.DisplayName);
             _highscoreSumbitter.SetScore(PersistentInfo.Instance.LastScore);
+            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
             SelectDefaultButton(_highscoreSumbitter.transform.GetChild(0).GetChild(0).gameObject);
         }
         else
@@ -266,20 +268,64 @@ public class GameManager : MonoBehaviour
     public void SubmitHighScore()
     {
         string name = _highscoreSumbitter.GetName();
-        PersistentInfo.Instance.DisplayName = name;
-        PlayfabManager.Instance.UpdateDisplayName(name);
-        PersistentInfo.Instance.SaveDisplayName();
+        if (name != PersistentInfo.Instance.DisplayName)
+        {
+            PersistentInfo.Instance.DisplayName = name;
+            PlayfabManager.Instance.UpdateDisplayName(name);
+            PersistentInfo.Instance.SaveDisplayName();
+        }
         _highscoreSumbitter.gameObject.SetActive(false);
         _loseMenu.gameObject.SetActive(true);
         SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
     }
 
+    public void CloseLeaderboard()
+    {
+        /*string name = _highscoreSumbitter.GetName();
+        if (name != PersistentInfo.Instance.DisplayName)
+        {
+            PersistentInfo.Instance.DisplayName = name;
+            PlayfabManager.Instance.UpdateDisplayName(name);
+            PersistentInfo.Instance.SaveDisplayName();
+        }*/
+
+        _leaderboardMenu.gameObject.SetActive(false);
+        if (_activeSceneIndex == 0)
+        {
+            _levelSelectMenu.gameObject.SetActive(true);
+            SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject);
+        }
+        else
+        {
+            _loseMenu.gameObject.SetActive(true);
+            SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
+        }
+    }
+
     public void LoadLeaderboard()
     {
         PlayfabManager.Instance.GetGlobalStatistics(true);
+
+        if (_activeSceneIndex == 0)
+        {
+            _levelSelectMenu.gameObject.SetActive(false);
+            _loadingScreen.gameObject.SetActive(true);
+        }
+        else
+        {
+            _loseMenu.gameObject.SetActive(false);
+            _loadingScreen.gameObject.SetActive(true);
+        }  
     }
 
     public void OpenLeaderBoard()
+    {
+        _loadingScreen.gameObject.SetActive(false);
+        _leaderboardMenu.gameObject.SetActive(true);
+        SelectDefaultButton(_leaderboardMenu.transform.GetChild(0).GetChild(4).gameObject);
+    }
+
+    public void CancelOpenLeaderBoard()
     {
 
     }
@@ -330,7 +376,7 @@ public class GameManager : MonoBehaviour
             {
                 _levelSelectMenu.gameObject.SetActive(true);
                 _startMenu.gameObject.SetActive(false);
-                SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+                SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject);
                 return;
             }
             _levelSelectMenu.gameObject.SetActive(false);
