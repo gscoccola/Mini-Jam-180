@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _loadingTextEng;
     [SerializeField] HighscoreSubmitter _highscoreSumbitter;
     [SerializeField] InGameMenu _loadingScreen;
-    [SerializeField] InGameMenu _leaderboardMenu;
+    [SerializeField] LeaderboardDisplay _leaderboardMenu;
 
     CameraScript _cameraScript;
     Camera _camera;
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
         _isPaused = true;
         Time.timeScale = 0f;
         _pauseMenu.gameObject.SetActive(true);
-        SelectDefaultButton(_pauseMenu.transform.GetChild(1).gameObject);
+        SelectDefaultButton(_pauseMenu.transform.GetChild(0).gameObject);
 
         if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(false);
     }
@@ -281,13 +281,13 @@ public class GameManager : MonoBehaviour
 
     public void CloseLeaderboard()
     {
-        /*string name = _highscoreSumbitter.GetName();
+        string name = _leaderboardMenu.GetName();
         if (name != PersistentInfo.Instance.DisplayName)
         {
             PersistentInfo.Instance.DisplayName = name;
             PlayfabManager.Instance.UpdateDisplayName(name);
             PersistentInfo.Instance.SaveDisplayName();
-        }*/
+        }
 
         _leaderboardMenu.gameObject.SetActive(false);
         if (_activeSceneIndex == 0)
@@ -300,11 +300,12 @@ public class GameManager : MonoBehaviour
             _loseMenu.gameObject.SetActive(true);
             SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
         }
+        LeaderboardManager.Instance.HighScores = null;
     }
 
     public void LoadLeaderboard()
     {
-        PlayfabManager.Instance.GetGlobalStatistics(true);
+        PlayfabManager.Instance.GetGlobalStatistics(true, 100);
 
         if (_activeSceneIndex == 0)
         {
@@ -430,7 +431,7 @@ public class GameManager : MonoBehaviour
         PersistentCanvas.Instance.ShowPopup();
 
         PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;
-        PersistentInfo.Instance._newAchievement = true;
+        PersistentInfo.Instance._isThereNewAchievement = true;
     }
 
     public void SetLocale(string locale)
@@ -478,7 +479,7 @@ public class GameManager : MonoBehaviour
         {
             _pauseButton.gameObject.SetActive(true);
             _pauseButton.SetPressed();
-            SelectDefaultButton(_pauseMenu.transform.GetChild(1).gameObject);
+            SelectDefaultButton(_pauseMenu.transform.GetChild(0).gameObject);
         }
         if (_lastMenu == _creditsMenu)
         {
@@ -495,5 +496,11 @@ public class GameManager : MonoBehaviour
     {
         if (_isPlayingOnMobile) EventSystem.current.SetSelectedGameObject(null);
         else EventSystem.current.SetSelectedGameObject(gameObject);
+    }
+
+    public void UnlockEverything()
+    {
+        PersistentInfo.Instance.UnlockAllLevelsAndAchievements();
+        ReloadLevel();
     }
 }

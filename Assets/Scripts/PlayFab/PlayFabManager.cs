@@ -80,12 +80,12 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
 
 
-    public void GetGlobalStatistics(bool openLeaderboardWhenDone)
+    public void GetGlobalStatistics(bool openLeaderboardWhenDone, int maxResultsCount)
     {
         PlayFabClientAPI.GetLeaderboard(
             new GetLeaderboardRequest()
             {
-                MaxResultsCount = 10,
+                MaxResultsCount = maxResultsCount,
                 StartPosition = 0,
                 StatisticName = "Highscore",
             },
@@ -116,8 +116,8 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
 
 
-    /*
-    private void GetStatistics()
+    
+    /*private void GetStatistics()
     {
         PlayFabClientAPI.GetPlayerStatistics(
             new GetPlayerStatisticsRequest(),
@@ -126,8 +126,6 @@ public class PlayfabManager : Singleton<PlayfabManager>
         );
     }
 
-
-    
     private void OnGetStatistics(GetPlayerStatisticsResult result)
     {
         Dictionary<string, int> highScores;
@@ -137,8 +135,7 @@ public class PlayfabManager : Singleton<PlayfabManager>
             if (eachStat.StatisticName != "Highscore") return;
             highScores[eachStat.]
             Debug.Log("Statistic (" + eachStat.StatisticName + "): " + eachStat.Value);
-        }
-            
+        }    
     }*/
 
     public void UpdateDisplayName(string name)
@@ -158,10 +155,12 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
     private void OnLogin(LoginResult result)
     {
-        Debug.Log("Successful Login as " + PersistentInfo.Instance.PlayerId);
+        Debug.Log("Successful Login as " + PersistentInfo.Instance.CustomPlayerId);
         SendMobile();
-        GetGlobalStatistics(false);
+        GetGlobalStatistics(false, 1);
         SendCompletionStatistics();
+
+        PersistentInfo.Instance.PlayfabId = result.PlayFabId;
     }
 
     private void OnError(PlayFabError error)

@@ -7,7 +7,7 @@ using PlayFab.ClientModels;
 
 public class LeaderboardManager : Singleton<LeaderboardManager>
 {
-    private List<PlayerLeaderboardEntry> HighScores;
+    public List<PlayerLeaderboardEntry> HighScores;
 
     public void PopulateLeaderBoard(List<PlayerLeaderboardEntry> highScores)
     {

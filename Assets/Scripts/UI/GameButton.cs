@@ -27,7 +27,7 @@ public class GameButton : MonoBehaviour
     {
         if (_animator != null && (_type == ButtonType.Achievements || _type == ButtonType.AchievementMenuInGame))
         {
-            _animator.SetBool("isVibrating", PersistentInfo.Instance._newAchievement);
+            _animator.SetBool("isVibrating", PersistentInfo.Instance._isThereNewAchievement);
         }
     }
 
@@ -131,6 +131,9 @@ public class GameButton : MonoBehaviour
             case ButtonType.CloseLeaderboard:
                 _gameManager.CloseLeaderboard();
                 break;
+            case ButtonType.UnlockEverything:
+                _gameManager.UnlockEverything();
+                break;
         }
     }
 
@@ -170,4 +173,5 @@ public enum ButtonType
     SubmitHighScore,
     Leaderboard,
     CloseLeaderboard,
+    UnlockEverything,
 }

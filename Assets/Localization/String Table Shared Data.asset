@@ -127,6 +127,14 @@ MonoBehaviour:
     m_Key: Loading Leaderboard
     m_Metadata:
       m_Items: []
+  - m_Id: 8433617101410304
+    m_Key: Rank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8434362043355136
+    m_Key: Profile
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 2584585279905726746

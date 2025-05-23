@@ -56,7 +56,8 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         if (PersistentInfo.Instance.AchievementCompletionInfo == null) return;
-        if (PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count() ==
+        if (FindAnyObjectByType<EndlessLevelGenerator>() != null &&
+            PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count() ==
             PersistentInfo.Instance.AchievementCompletionInfo.Count()) _spawnGoldenBallons = true;
     }
 
