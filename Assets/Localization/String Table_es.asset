@@ -48,7 +48,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14867863982080
     m_Localized: "Dise\xF1o de juego:\nE. Pellegrino\nProgramaci\xF3n y UI:\nG. Scoccola\nM\xFAsica
-      y Sonido: A. Lobos\nPixel Art: rayryuk, shokodibuja"
+      y Sonido: A. Lobos\nPixel Art: rayryuk, Monzonito, shokodibuja"
     m_Metadata:
       m_Items: []
   - m_Id: 15143362646016
@@ -139,6 +139,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8434362043355136
     m_Localized: Perfil
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8811159788474368
+    m_Localized: "Sin conexi\xF3n a internet"
     m_Metadata:
       m_Items: []
   references:

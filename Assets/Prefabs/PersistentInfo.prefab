@@ -44,6 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cacc1515dbeeb94cad3e6759efc60ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PersonalHighScore: 0
+  CustomPlayerId: 0
+  DisplayName: 
+  PlayfabId: 
+  GlobalHighScore: 0
+  LastScore: 0
+  _isThereNewAchievement: 0
+  LanguageCode: 
   _achievements:
   - {fileID: 11400000, guid: 85674f4d9bc905b45bd91b545f03ae47, type: 2}
   - {fileID: 11400000, guid: c80c7ec65b4b1a641a8bfa53d91843d9, type: 2}

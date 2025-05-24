@@ -48,7 +48,6 @@ public class PersistentInfo : Singleton<PersistentInfo>
         AchievementDictSetup();
         LevelDictSetup();
         LoadAllData();
-        
         /*TestChestDELETEAFTERTEST();*/
     }
 

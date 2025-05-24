@@ -240,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
         if (Application.isMobilePlatform) CombinationInput();
         _animator.SetBool("_isFalling", !IsOnFloor);
         if (IsOnFloor) return;
-        bool isDiving = (_verticalInput && !_isInputDisabled && !_isFlying && _diveAvailable);
+        bool isDiving = (_verticalInput && !_isInputDisabled &&  !_isStunned &&  !_isFlying && _diveAvailable);
         _rigidBody.linearVelocityY = isDiving
             ? _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _diveSpeed, _diveAcceleration * Time.deltaTime).y
             : _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _currentGravity * Time.deltaTime).y;
@@ -348,6 +348,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody.linearVelocityX = 0f;
         _rigidBody.linearVelocityY -= downwardVelocity;
         StartCoroutine(IStun());
+        StartCoroutine(IDiveInterruption());
 
         if (!_isHurtSoundOnCooldown)
         {
@@ -458,6 +459,7 @@ public class PlayerMovement : MonoBehaviour
     {
         gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
         yield return new WaitForSeconds(_invulnerabilityDuration);
+        _animator.SetTrigger("_invulnerabilityEnd");
         gameObject.layer = LayerMask.NameToLayer("Player");
     }
 

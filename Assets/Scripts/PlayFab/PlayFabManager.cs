@@ -150,7 +150,7 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
     private void OnStatisticUpdated(UpdatePlayerStatisticsResult result)
     {
-        //Debug.Log("Statistic Updated");
+        //Debug.Log("Statistic Updated " + result );
     }
 
     private void OnLogin(LoginResult result)
@@ -159,7 +159,7 @@ public class PlayfabManager : Singleton<PlayfabManager>
         SendMobile();
         GetGlobalStatistics(false, 1);
         SendCompletionStatistics();
-
+        SendHighscore(PersistentInfo.Instance.PersonalHighScore);
         PersistentInfo.Instance.PlayfabId = result.PlayFabId;
     }
 

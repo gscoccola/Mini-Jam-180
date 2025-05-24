@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] HighscoreSubmitter _highscoreSumbitter;
     [SerializeField] InGameMenu _loadingScreen;
     [SerializeField] LeaderboardDisplay _leaderboardMenu;
+    [SerializeField] InGameMenu _noNetworkMenu;
 
     CameraScript _cameraScript;
     Camera _camera;
@@ -281,15 +282,22 @@ public class GameManager : MonoBehaviour
 
     public void CloseLeaderboard()
     {
-        string name = _leaderboardMenu.GetName();
-        if (name != PersistentInfo.Instance.DisplayName)
+        if (_noNetworkMenu.gameObject.activeSelf)
         {
-            PersistentInfo.Instance.DisplayName = name;
-            PlayfabManager.Instance.UpdateDisplayName(name);
-            PersistentInfo.Instance.SaveDisplayName();
+            _noNetworkMenu.gameObject.SetActive(false);
+        }
+        else
+        {
+            string name = _leaderboardMenu.GetName();
+            if (name != PersistentInfo.Instance.DisplayName)
+            {
+                PersistentInfo.Instance.DisplayName = name;
+                PlayfabManager.Instance.UpdateDisplayName(name);
+                PersistentInfo.Instance.SaveDisplayName();
+            }
+            _leaderboardMenu.gameObject.SetActive(false);
         }
 
-        _leaderboardMenu.gameObject.SetActive(false);
         if (_activeSceneIndex == 0)
         {
             _levelSelectMenu.gameObject.SetActive(true);
@@ -328,7 +336,10 @@ public class GameManager : MonoBehaviour
 
     public void CancelOpenLeaderBoard()
     {
-
+        
+        _loadingScreen.gameObject.SetActive(false);
+        _noNetworkMenu.gameObject.SetActive(true);
+        SelectDefaultButton(_noNetworkMenu.transform.GetChild(0).gameObject);
     }
 
     internal void ToggleCredits()

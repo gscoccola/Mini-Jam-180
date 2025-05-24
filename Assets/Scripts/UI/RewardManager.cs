@@ -78,7 +78,7 @@ public class RewardManager : MonoBehaviour
             _UIBalloons.gameObject.SetActive(true);
             SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonRelease);
             VibrationHandler.Instance.HeavyVibrate();
-            yield return new WaitForSecondsRealtime(_balloonDelay);
+            yield return new WaitForSecondsRealtime(_balloonDelay + 1f);
             _popup.SetActive(true);
             yield return new WaitForSecondsRealtime(_chestInputDisable- 2*_balloonDelay);
         }
