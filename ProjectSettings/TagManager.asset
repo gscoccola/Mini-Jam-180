@@ -66,5 +66,14 @@ TagManager:
   - name: Popup
     uniqueID: 3374126975
     locked: 0
+  - name: BossBack
+    uniqueID: 4100020513
+    locked: 0
+  - name: BossMissiles
+    uniqueID: 1770813741
+    locked: 0
+  - name: BossFront
+    uniqueID: 84890587
+    locked: 0
   m_RenderingLayers:
   - Default

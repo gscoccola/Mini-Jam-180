@@ -11,12 +11,14 @@ public class SelectableCharacter : MonoBehaviour
     {
         Character = NextLetter(Character);
         CharDisplay.text = Character.ToString();
+        VibrationHandler.Instance.LightVibrate();
     }
 
     public void PreviousChar()
     {
         Character = PreviousLetter(Character);
         CharDisplay.text = Character.ToString();
+        VibrationHandler.Instance.LightVibrate();
     }
 
     public void SetChar(char c)
