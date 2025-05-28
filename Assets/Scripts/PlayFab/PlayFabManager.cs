@@ -11,7 +11,8 @@ using System;
 
 public class PlayfabManager : Singleton<PlayfabManager>
 {
-    public bool _nameBeingChanged;
+    public bool _nameChangeBeingProcessed;
+    public bool _openLeaderBoardAfterNameChange;
 
     public void Login(int playerID)
     {
@@ -139,15 +140,16 @@ public class PlayfabManager : Singleton<PlayfabManager>
         }    
     }*/
 
-    public void UpdateDisplayName(string name)
+    public void UpdateDisplayName(string name, bool openLeaderBoardAfterwards = false)
     {
-        _nameBeingChanged = true;
+        _nameChangeBeingProcessed = true;
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
         {
             DisplayName = name
         }, result => {
             Debug.Log("The player's display name is now: " + result.DisplayName);
-            _nameBeingChanged = false;
+            _nameChangeBeingProcessed = false;
+            if (_openLeaderBoardAfterNameChange) FindAnyObjectByType<GameManager>().StartLoadingLeaderboard();
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 

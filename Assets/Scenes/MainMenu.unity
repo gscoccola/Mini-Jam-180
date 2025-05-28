@@ -337,6 +337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text Blue Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4908996042354860345, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9216459590364807686, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: _type
       value: 18
@@ -2278,6 +2282,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -812.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3510846052670110569, guid: 2e0a18b7aca1d4c43b8d66a58314ed9e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 14.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774023224371391986, guid: 2e0a18b7aca1d4c43b8d66a58314ed9e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 14.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4248393825093983229, guid: 2e0a18b7aca1d4c43b8d66a58314ed9e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2357,6 +2369,10 @@ PrefabInstance:
     - target: {fileID: 6865743361355636536, guid: 2e0a18b7aca1d4c43b8d66a58314ed9e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -687.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111654111461267843, guid: 2e0a18b7aca1d4c43b8d66a58314ed9e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 14.1
       objectReference: {fileID: 0}
     - target: {fileID: 7298287900895346579, guid: 2e0a18b7aca1d4c43b8d66a58314ed9e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4400,6 +4416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafb9571087f6ca4aafb05737659c1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nameChangeBeingProcessed: 0
+  _openLeaderBoardAfterNameChange: 0
 --- !u!4 &952634706
 Transform:
   m_ObjectHideFlags: 0

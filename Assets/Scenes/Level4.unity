@@ -42372,7 +42372,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.55587
+      value: 96.55892
       objectReference: {fileID: 0}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42400,7 +42400,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 4434011431033260198, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.334128
+      value: -5.33108
       objectReference: {fileID: 0}
     - target: {fileID: 5395978055780557568, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: Composition.ScreenPosition.y
@@ -42436,7 +42436,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.567772
+      value: 23.557827
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -46302,14 +46302,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 636592542}
     m_Modifications:
-    - target: {fileID: 3920717967585266227, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: m_Size.x
-      value: 0.9309006
-      objectReference: {fileID: 0}
-    - target: {fileID: 3920717967585266227, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.043914795
-      objectReference: {fileID: 0}
     - target: {fileID: 5645529416132895096, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
       propertyPath: m_LocalPosition.x
       value: 101.89
@@ -46350,82 +46342,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: _defeat.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: _victory.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_defeat.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 6645f0aa095d8b149a813875b98cd2d6, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: _winDialog.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: _droneDeath.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: _playerJump.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_victory.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: a3bfc5d8cec544c48bead744455b835e, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: _balloonDeath.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_winDialog.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 3f0134e8841b7684fa738343e6b3d73f, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_winDialog.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: b39f76b9f546fbe458e3a5ae3f3a8448, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_droneDeath.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: e90de12e2ab6dd24bb14e6f8a8f26733, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_droneDeath.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 8fcfb79828a9bf1428af5adf1ba7a519, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_droneDeath.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 8fcfb79828a9bf1428af5adf1ba7a519, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_droneDeath.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 8fcfb79828a9bf1428af5adf1ba7a519, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_playerJump.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 04eadf6f779f67a4b9baf9f20c63096d, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_playerJump.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: b2c34416f1a829f46a0187428e5d8117, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_playerJump.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 6c9933cf59b9058479f2d950cfb31e4a, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_balloonDeath.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 560a7ad091b2f10488e8047b9f03a460, type: 3}
-    - target: {fileID: 5683657900095994645, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
-      propertyPath: '_balloonDeath.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 1ffc0ca4d5019db4abffd257e7fecaef, type: 3}
     - target: {fileID: 7949803413985941516, guid: fbe786245785b804a8fcb0f7be066805, type: 3}
       propertyPath: m_Name
       value: Player

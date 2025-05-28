@@ -3,29 +3,67 @@ using UnityEngine;
 
 public class BossBehavior : MonoBehaviour
 {
+    [SerializeField] float MoveSpeed;
+    [SerializeField] float Acceleration;
+    [SerializeField] float TargetXOffset;
+
     [SerializeField] float AttackDelay;
+    [SerializeField] float AttackMovementPause;
+
+
     [SerializeField] float xOffset;
     [SerializeField] float yOffset;
     [SerializeField] GameObject Projectile;
+
     Animator _animator;
+    Transform _playerTransform;
+    Rigidbody2D _rigidbody;
+    GameObject _enemies;
+
+    public bool _isActive;
+    bool _isShooting;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _playerTransform = FindAnyObjectByType<PlayerMovement>().transform;
+        _enemies = GameObject.Find("Enemies");
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
+        //StartCoroutine(IAttack());
+    }
+
+    public IEnumerator IAttack()
+    {
+        _animator.SetTrigger("Shoot");
+        _isShooting = true;
+        yield return new WaitForSeconds(0.2f);
+        Instantiate(Projectile, transform.position + new Vector3(-xOffset, -yOffset, 0f), Quaternion.identity, _enemies.transform);
+        yield return new WaitForSeconds(AttackMovementPause - 0.2f);
+        _isShooting = false;
+        yield return new WaitForSeconds(AttackDelay - AttackMovementPause - 0.2f);
         StartCoroutine(IAttack());
     }
 
-    IEnumerator IAttack()
+    private void Update()
     {
-        _animator.SetTrigger("Shoot");
-        yield return new WaitForSeconds(0.2f);
-        Instantiate(Projectile, transform.position + new Vector3(-xOffset, -yOffset, 0f), Quaternion.identity, transform);
-        yield return new WaitForSeconds(AttackDelay);
-        StartCoroutine(IAttack());
+        if (_isActive) Move();
+    }
+
+    private void Move()
+    {
+        if (_isShooting)
+        {
+            _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
+            Vector3.zero, 6f * Acceleration * Time.deltaTime);
+            return;
+        }
+        _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
+            (_playerTransform.position + TargetXOffset * Vector3.left - transform.position)
+            * MoveSpeed, Acceleration * Time.deltaTime);
     }
 
 }

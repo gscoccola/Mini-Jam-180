@@ -5095,7 +5095,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.4, y: 0.120007515}
+  m_Size: {x: 0.22, y: 0.120007515}
   m_EdgeRadius: 0
 --- !u!70 &5855246699414869843
 CapsuleCollider2D:
@@ -5131,7 +5131,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.011230469, y: -0.056135178}
+  m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.8828583, y: 1.3555489}
   m_Direction: 0
 --- !u!199 &5198506600535921773

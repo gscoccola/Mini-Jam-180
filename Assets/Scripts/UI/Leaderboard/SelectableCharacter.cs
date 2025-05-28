@@ -11,14 +11,20 @@ public class SelectableCharacter : MonoBehaviour
     {
         Character = NextLetter(Character);
         CharDisplay.text = Character.ToString();
-        VibrationHandler.Instance.LightVibrate();
+        ButtonFX();
     }
 
     public void PreviousChar()
     {
         Character = PreviousLetter(Character);
         CharDisplay.text = Character.ToString();
+        ButtonFX();
+    }
+
+    private void ButtonFX()
+    {
         VibrationHandler.Instance.LightVibrate();
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._buttonSmall);
     }
 
     public void SetChar(char c)

@@ -336,6 +336,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
   _buttonVolume:
   - 0.322
+  _buttonSmall:
+  - {fileID: 8300000, guid: d46c2d420f856d446a94d2018c0884da, type: 3}
+  - {fileID: 8300000, guid: 67c2a3c97f587724282fab12ea948b5a, type: 3}
+  - {fileID: 8300000, guid: 59dfb1d61cae30d47b441c231e2bda14, type: 3}
+  - {fileID: 8300000, guid: 7f6b993e5830745459339052e82b5f45, type: 3}
+  - {fileID: 8300000, guid: c68ab1c63883ef24a9858a68ccd20847, type: 3}
+  _buttonSmallVolume:
+  - 0.3
+  - 0.3
+  - 0.3
+  - 0.3
+  - 0.3
   _achievement:
   - {fileID: 8300000, guid: ef3c30b46cfb4be4db98343ddeb90c7d, type: 3}
   - {fileID: 8300000, guid: 388c025e977995b46aa4d70f0d6001d3, type: 3}

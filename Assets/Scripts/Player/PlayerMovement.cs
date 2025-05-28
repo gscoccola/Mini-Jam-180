@@ -92,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
     bool _diveAvailable = true;
     bool _touchScreenRight;
     bool _touchScreenLeft;
+
+    public bool _allowHorizontalSpeed;
     #endregion
 
     private void Awake()
@@ -118,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
             [EnemyType.DronePink] = new float[2]{ _droneDeviation, _droneBoost },
             [EnemyType.Balloon] = new float[2]{ _balloonDeviation, _balloonBoost },
             [EnemyType.GoldenBalloon] = new float[2]{ _goldenBalloonDeviation, _goldenBalloonBoost },
+            [EnemyType.Cigarette] = new float[2]{ _droneDeviation, _birdBoost },
         };
 
         CalculateBounds();
@@ -126,13 +129,13 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         CalculateIsOnFloor();
-        MoveVertically();
         HandleOutOfBounds();
         if (IsDead)
         {
-            if (!_isOutOfBounds)_rigidBody.linearVelocityX = 0f;
+            if (!_isOutOfBounds && !_allowHorizontalSpeed) _rigidBody.linearVelocityX = 0f;
             return;
-        }  
+        }
+        MoveVertically();
         MoveHorizontally(); 
     }
 
@@ -228,8 +231,8 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator PlayFootsteps()
     {
         _isPlayingFootsteps = true;
-        if (_isLeftFootstepNext) SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerLeftFootsteps);
-        else SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerRightFootsteps);
+        if (_isLeftFootstepNext) SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerLeftFootsteps);
+        else SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerRightFootsteps);
         _isLeftFootstepNext = !_isLeftFootstepNext;
         yield return new WaitForSeconds(_footstepsDelay);
         _isPlayingFootsteps = false;
@@ -288,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
         if (!IsOnFloor) return false;
         _rigidBody.linearVelocityY += _jumpSpeed;
         _fallingStance = 0;
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerJump);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerJump);
         VibrationHandler.Instance.LightVibrate();
         if (_isEpilogue) _isInputDisabled = true;
         return true;
@@ -317,7 +320,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (type == EnemyType.GoldenBalloon)
         {
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerBounce);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerBounce);
             _rigidBody.linearVelocityY = _enemyBoosts[type][1];
             _rigidBody.linearVelocityX = -_goldenBalloonDeviation;
             PlayerCombo = 3;
@@ -332,7 +335,7 @@ public class PlayerMovement : MonoBehaviour
         else _rigidBody.linearVelocityX = 0f;
         if (!_isHurtSoundOnCooldown)
         {
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerHurt);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerHurt);
             _isHurtSoundOnCooldown = true;
             StartCoroutine(HurtSoundCooldown());
         }   
@@ -352,7 +355,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!_isHurtSoundOnCooldown)
         {
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerHurt);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerHurt);
             _isHurtSoundOnCooldown = true;
             StartCoroutine(HurtSoundCooldown());
         }
@@ -415,6 +418,8 @@ public class PlayerMovement : MonoBehaviour
         _particleSystem.Stop();
         IsDead = true;
         _fallingStance = 2;
+        _animator.SetBool("_isDiving", false);
+        _animator.SetBool("_isFalling", !IsOnFloor);
         _animator.SetInteger("_fallingStance", _fallingStance);
     }
 
@@ -434,7 +439,7 @@ public class PlayerMovement : MonoBehaviour
 
     void ResetCombo()
     {
-        if (PlayerCombo == 3) SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._comboLost);
+        if (PlayerCombo == 3) SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._comboLost);
         PlayerCombo = 0;
         _currentAirAcceleration = _defaultAirAcceleration;
         _currentMoveSpeed = _defaultMoveSpeed;

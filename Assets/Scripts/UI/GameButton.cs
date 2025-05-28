@@ -50,7 +50,7 @@ public class GameButton : MonoBehaviour
             StartCoroutine(IButtonCooldown());
             PerfomButtonAction();
         }
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._button);
     }
 
     IEnumerator IButtonCooldown()
@@ -126,7 +126,7 @@ public class GameButton : MonoBehaviour
                 _gameManager.SubmitHighScore();
                 break;
             case ButtonType.Leaderboard:
-                _gameManager.LoadLeaderboard();
+                _gameManager.StartLoadingLeaderboard();
                 break;
             case ButtonType.CloseLeaderboard:
                 _gameManager.CloseLeaderboard();

@@ -60,6 +60,8 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [Header("Button")]
     [FoldoutGroup("Game misc")] public AudioClip[] _button;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _buttonSmall;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonSmallVolume;
 
     [Header("Achievement Click")]
     [FoldoutGroup("Game misc")] public AudioClip[] _achievement;
@@ -117,11 +119,12 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_chestOpen] = _chestOpenVolume,
             [_balloonRelease] = _balloonReleaseVolume,
             [_droneShock] = _droneShockVolume,
+            [_buttonSmall] = _buttonSmallVolume,
 
         };
     }
 
-    public void PlayClipFromArray(AudioClip[] clipArray)
+    public void PlayRandomClipFromArray(AudioClip[] clipArray)
     {
         
         int indexToPlay;

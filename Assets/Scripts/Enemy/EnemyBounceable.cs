@@ -31,13 +31,20 @@ public class EnemyBounceable : MonoBehaviour
         {
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
             PlayDeathSFX();
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerBounce);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerBounce);
             Die();
         }
     }
 
-    void Die()
+    void Die() 
     {
+        if (_enemytype == EnemyType.Cigarette)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            GetComponent<Rigidbody2D>().linearVelocity *= -1f;
+            _isDestroyed = true;
+            return;
+        }
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         _isDestroyed = true;
         Destroy(gameObject, 0.01f);
@@ -48,19 +55,22 @@ public class EnemyBounceable : MonoBehaviour
         switch (_enemytype)
         {
             case EnemyType.Bird:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._birdDeath);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._birdDeath);
                 break;
 
             case EnemyType.Drone:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneDeath);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._droneDeath);
                 break;
 
             case EnemyType.DronePink:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneShock);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._droneShock);
                 break;
 
             case EnemyType.Balloon:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonDeath);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._balloonDeath);
+                break;
+            case EnemyType.Cigarette:
+                
                 break;
         }
     }
@@ -74,4 +84,5 @@ public enum EnemyType
     DronePink,
     Balloon,
     GoldenBalloon,
+    Cigarette,
 }

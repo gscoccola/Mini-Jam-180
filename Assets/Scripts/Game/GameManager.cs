@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    int _epilogueLevelIndex = 7;
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
@@ -84,7 +83,7 @@ public class GameManager : MonoBehaviour
         if (_activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
 
-        if (_activeSceneIndex == 0 || _activeSceneIndex == _epilogueLevelIndex)
+        if (_activeSceneIndex == 0 || FindAnyObjectByType<EpilogueManager>() != null)
         {
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
@@ -220,25 +219,25 @@ public class GameManager : MonoBehaviour
         {
             _winMenu.gameObject.SetActive(true);
             SelectDefaultButton(_winMenu.transform.GetChild(1).gameObject);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._victory);
             yield return new WaitForSeconds(1.2f);
             Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
             yield return new WaitForSeconds(1.8f);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._winDialog);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._winDialog);
         }
         else if (newHighscore)
         {
             _highscoreSumbitter.gameObject.SetActive(true);
             _highscoreSumbitter.SetName(PersistentInfo.Instance.DisplayName);
             _highscoreSumbitter.SetScore(PersistentInfo.Instance.LastScore);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._victory);
             SelectDefaultButton(_highscoreSumbitter.transform.GetChild(0).GetChild(0).gameObject);
         }
         else
         {
             _loseMenu.gameObject.SetActive(true);
             SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._defeat);
         }
     }
 
@@ -311,8 +310,14 @@ public class GameManager : MonoBehaviour
         LeaderboardManager.Instance.HighScores = null;
     }
 
-    public void LoadLeaderboard()
+    public void StartLoadingLeaderboard()
     {
+        if (PlayfabManager.Instance._nameChangeBeingProcessed)
+        {
+            PlayfabManager.Instance._openLeaderBoardAfterNameChange = true;
+            return;
+        }
+
         PlayfabManager.Instance.GetGlobalStatistics(true, 100);
 
         if (_activeSceneIndex == 0)

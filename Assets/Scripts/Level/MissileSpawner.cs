@@ -58,7 +58,7 @@ public class MissileSpawner : MonoBehaviour
         _laneArray = RandomIntArrayGeneration.Shuffle(_laneArray);
         
         float playerX = _player.transform.position.x;
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._missileWarning);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._missileWarning);
         for (int i=0; i < _missilesPerWave; i++)
         {
             float xPosition = playerX - _waveWidth/2 + _laneArray[i] * _minSpacing;
@@ -67,7 +67,7 @@ public class MissileSpawner : MonoBehaviour
         }
         
         yield return new WaitForSeconds(_warningTime);
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._missileFall);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._missileFall);
         foreach (GameObject laser in _activeLasers)
         {
             Instantiate(_missilePrefab, new Vector3(laser.transform.position.x, _player.transform.position.y + 10f, 0f),
