@@ -133,6 +133,7 @@ public class GameButton : MonoBehaviour
                 break;
             case ButtonType.UnlockEverything:
                 _gameManager.UnlockEverything();
+                PlayfabManager.Instance.SendCheatStatus();
                 break;
         }
     }

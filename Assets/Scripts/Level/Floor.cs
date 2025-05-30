@@ -80,7 +80,10 @@ public class Floor : MonoBehaviour
 
             if (_floorType == FloorType.BossTrigger)
             {
-                FindAnyObjectByType<BossfIntroManager>().OnLevelEnd();
+                FindAnyObjectByType<BossIntroManager>().OnLevelEnd();
+                FindAnyObjectByType<TargetIndicator>().gameObject.SetActive(false);
+                FindAnyObjectByType<MissileSpawner>().StopSpawning();
+                MusicPlayer.Instance.Pause();
                 return;
             }
             _gameManager.Win();

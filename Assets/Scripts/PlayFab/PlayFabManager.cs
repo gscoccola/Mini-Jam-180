@@ -48,6 +48,11 @@ public class PlayfabManager : Singleton<PlayfabManager>
         SendAchievementCount();
     }
 
+    public void SendCheatStatus()
+    {
+        SendStatistic("Has Used Cheats", 1);
+    }
+
     public void SendHighscore(int score)
     {
         SendStatistic("Highscore", score);

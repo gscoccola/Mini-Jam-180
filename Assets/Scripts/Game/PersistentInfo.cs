@@ -44,7 +44,6 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public void Initialize()
     {
-        
         AchievementDictSetup();
         LevelDictSetup();
         LoadAllData();

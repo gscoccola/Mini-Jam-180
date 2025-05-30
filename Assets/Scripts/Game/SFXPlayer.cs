@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Alchemy.Inspector;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SFXPlayer : Singleton<SFXPlayer>
 {
@@ -22,6 +22,13 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileFallVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _missileHit;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileHitVolume;
+
+    [Header("Boss")]
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossScream;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossScreamVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossEarthquake;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossEarthquakeVolume;
+
 
     [Header("Player Fall")]
     [FoldoutGroup("Player")] public AudioClip[] _playerSplash;
@@ -120,6 +127,8 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_balloonRelease] = _balloonReleaseVolume,
             [_droneShock] = _droneShockVolume,
             [_buttonSmall] = _buttonSmallVolume,
+            [_bossScream] = _bossScreamVolume,
+            [_bossEarthquake] = _bossEarthquakeVolume,
 
         };
     }
@@ -127,22 +136,12 @@ public class SFXPlayer : Singleton<SFXPlayer>
     public void PlayRandomClipFromArray(AudioClip[] clipArray)
     {
         
-        int indexToPlay;
-        if (clipArray== _playerBounce)
+        int indexToPlay = 0;
+        if (clipArray.Length > 1)
         {
-            indexToPlay = _playerMovement.PlayerCombo;
-        }
-        else if (clipArray == _playerHurt)
-        {
-            indexToPlay = Random.Range(0, clipArray.Length);
-        }
-        else if (clipArray == _comboLost)
-        {
-            indexToPlay = (int)_gamePhase;
-        }
-        else
-        {
-            indexToPlay = Random.Range(0, clipArray.Length);
+            if (clipArray == _playerBounce) indexToPlay = _playerMovement.PlayerCombo;
+            else if (clipArray == _comboLost) indexToPlay = (int)_gamePhase;
+            else indexToPlay = UnityEngine.Random.Range(0, clipArray.Length);
         }
         PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
     }

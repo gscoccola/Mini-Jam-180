@@ -32,13 +32,13 @@ public class EnemyBounceable : MonoBehaviour
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
             PlayDeathSFX();
             SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerBounce);
-            Die();
+            Die(true);
         }
     }
 
-    void Die() 
+    void Die(bool redirect = false) 
     {
-        if (_enemytype == EnemyType.Cigarette)
+        if (_enemytype == EnemyType.Cigarette && redirect)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
             GetComponent<Rigidbody2D>().linearVelocity *= -1f;

@@ -40,9 +40,9 @@ public class MusicPlayer : Singleton<MusicPlayer>
         GamePhase previousPhase = _gamePhase;
         if (new List<int> { 1, 2, 3}.Contains(levelIndex)) _gamePhase = GamePhase.First;
         else if (new List<int> { 4, 5}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
-        else if (new List<int> { 6}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
-        else if(new List<int> {7 }.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
-        else if(new List<int> {8 }.Contains(levelIndex)) _gamePhase = GamePhase.Endless;
+        else if (new List<int> { 6, 7}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
+        else if(new List<int> {8 }.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
+        else if(new List<int> {9 }.Contains(levelIndex)) _gamePhase = GamePhase.Endless;
 
         if (previousPhase == _gamePhase) return;
 

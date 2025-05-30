@@ -254,6 +254,14 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  _bossScream:
+  - {fileID: 8300000, guid: 36d70e758594bcd4fa2f7aa4967070e3, type: 3}
+  _bossScreamVolume:
+  - 0.5
+  _bossEarthquake:
+  - {fileID: 8300000, guid: e788dcc0283519e45b4fb941ead10390, type: 3}
+  _bossEarthquakeVolume:
+  - 0.5
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
   _playerSplashVolume:

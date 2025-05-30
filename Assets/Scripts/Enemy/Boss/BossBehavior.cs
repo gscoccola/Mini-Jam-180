@@ -9,6 +9,7 @@ public class BossBehavior : MonoBehaviour
 
     [SerializeField] float AttackDelay;
     [SerializeField] float AttackMovementPause;
+    [SerializeField] float MaxYOffsetToAttack;
 
 
     [SerializeField] float xOffset;
@@ -19,6 +20,7 @@ public class BossBehavior : MonoBehaviour
     Transform _playerTransform;
     Rigidbody2D _rigidbody;
     GameObject _enemies;
+    bool _attackOnCooldown;
 
     public bool _isActive;
     bool _isShooting;
@@ -31,26 +33,26 @@ public class BossBehavior : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
-    {
-        //StartCoroutine(IAttack());
-    }
-
     public IEnumerator IAttack()
     {
         _animator.SetTrigger("Shoot");
         _isShooting = true;
+        _attackOnCooldown = true;
         yield return new WaitForSeconds(0.2f);
         Instantiate(Projectile, transform.position + new Vector3(-xOffset, -yOffset, 0f), Quaternion.identity, _enemies.transform);
         yield return new WaitForSeconds(AttackMovementPause - 0.2f);
         _isShooting = false;
         yield return new WaitForSeconds(AttackDelay - AttackMovementPause - 0.2f);
-        StartCoroutine(IAttack());
+        _attackOnCooldown = false;
     }
 
     private void Update()
     {
-        if (_isActive) Move();
+        if (!_isActive) return;
+        if (!_attackOnCooldown &&
+            Mathf.Abs(transform.position.y - yOffset - _playerTransform.position.y) <= MaxYOffsetToAttack)
+            StartCoroutine(IAttack());
+        Move();
     }
 
     private void Move()
