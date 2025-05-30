@@ -41,11 +41,11 @@ public class BossIntroManager : MonoBehaviour
         _amplitudeIncreasing = true;
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossEarthquake);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.8f);
 
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossScream);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.2f);
 
         Boss.StartMovement();
 
