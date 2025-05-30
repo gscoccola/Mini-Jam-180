@@ -4,7 +4,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CameraScript : MonoBehaviour
+public class CameraPan : MonoBehaviour
 {
 
     [SerializeField] float _startDelay = 2f;

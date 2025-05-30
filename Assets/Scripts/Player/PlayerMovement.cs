@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
             [EnemyType.DronePink] = new float[2]{ _droneDeviation, _droneBoost },
             [EnemyType.Balloon] = new float[2]{ _balloonDeviation, _balloonBoost },
             [EnemyType.GoldenBalloon] = new float[2]{ _goldenBalloonDeviation, _goldenBalloonBoost },
-            [EnemyType.Cigarette] = new float[2]{ _droneDeviation, _birdBoost },
+            [EnemyType.Cigarette] = new float[2]{ _birdDeviation, _birdBoost },
         };
 
         CalculateBounds();
@@ -158,6 +158,12 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidBody.linearVelocityY = 0f;
             _rigidBody.linearVelocityX = 3f;
+            if (!_isOutOfBounds) GoOutOfBounds();
+
+        }
+        else if (transform.position.y < 0f)
+        {
+            _rigidBody.linearVelocityY = -3f;
             if (!_isOutOfBounds) GoOutOfBounds();
 
         }

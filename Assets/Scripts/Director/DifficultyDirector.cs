@@ -11,14 +11,14 @@ public class DifficultyDirector : MonoBehaviour
     MissileSpawner _mSpawner;
     private Transform _player;
     private float _initialPlayerX;
-    private EndlessLevelGenerator _endlessLevelGenerator;
+    private EndlessLevelManager _endlessLevelGenerator;
 
     private void Awake()
     {
         _spawner = FindAnyObjectByType<Spawner>();
         _mSpawner = FindAnyObjectByType<MissileSpawner>();
         _player = FindAnyObjectByType<PlayerMovement>().transform;
-        _endlessLevelGenerator = FindAnyObjectByType<EndlessLevelGenerator>();
+        _endlessLevelGenerator = FindAnyObjectByType<EndlessLevelManager>();
 
         _initialPlayerX = _player.position.x;
         _nextMilestoneDistance = (_difficultyMilestones.Length != currentMilestoneIndex) ?

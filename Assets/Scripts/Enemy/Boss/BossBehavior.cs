@@ -11,6 +11,8 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] float AttackDelay;
     [SerializeField] float AttackMovementPause;
     [SerializeField] float MaxYOffsetToAttack;
+    [SerializeField] float MaxXOffsetToCigaretteAttack;
+    [SerializeField] float MaxXOffsetToPunchAttack;
 
 
     [SerializeField] float hoverXOffset;
@@ -34,10 +36,7 @@ public class BossBehavior : MonoBehaviour
     GameObject _enemies;
     bool _attackOnCooldown;
 
-    public bool _isActive;
-    bool _isShooting;
-
-    int a = 0;
+    BossState _bossState;
 
     private void Awake()
     {
@@ -49,59 +48,88 @@ public class BossBehavior : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(IRandomizeCenters());
+        StartCoroutine(IRandomizeHandTarget());
+        _bossState = BossState.Idle;
     }
 
-    public IEnumerator ICigaretteAttack()
+    private IEnumerator ICigaretteAttack()
     {
+
+        _bossState = BossState.CigarAttack;
         _animator.SetTrigger("Shoot");
-        _isShooting = true;
         _attackOnCooldown = true;
         yield return new WaitForSeconds(0.2f);
         Instantiate(Projectile, transform.position + new Vector3(-hoverXOffset, -hoverYOffset, 0f), Quaternion.identity, _enemies.transform);
         yield return new WaitForSeconds(AttackMovementPause - 0.2f);
-        _isShooting = false;
+        _bossState = BossState.Idle;
+        yield return new WaitForSeconds(AttackDelay - AttackMovementPause - 0.2f);
+        _attackOnCooldown = false;
+    }
+
+    private IEnumerator IPunchAttack()
+    {
+        Debug.Log("punch");
+        _bossState = BossState.PunchAttack;
+        //_animator.SetTrigger("PunchFace");
+        _attackOnCooldown = true;
+        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(AttackMovementPause + 3f - 0.2f);
+        _bossState = BossState.Idle;
         yield return new WaitForSeconds(AttackDelay - AttackMovementPause - 0.2f);
         _attackOnCooldown = false;
     }
 
     private void Update()
     {
-        HandFollowBody(ref RightHand, _rightHandTarget);
-        HandFollowBody(ref LeftHand, _leftHandTarget);
+        HandFollowTarget(ref RightHand, _rightHandTarget);
+        HandFollowTarget(ref LeftHand, _leftHandTarget);
 
-        if (!_isActive) return;
-        if (!_attackOnCooldown &&
-            Mathf.Abs(transform.position.y - hoverYOffset - _playerTransform.position.y) <= MaxYOffsetToAttack)
-            StartCoroutine(ICigaretteAttack());
+        if (_bossState == BossState.Dead) return;
+
+        Attack();
+
         Move();
+    }
+
+    private void Attack()
+    {
+        Vector2 distanceToPlayer = new Vector2(_playerTransform.position.x - transform.position.x,
+                    Mathf.Abs(transform.position.y - hoverYOffset - _playerTransform.position.y));
+
+        if (!_attackOnCooldown && _bossState == BossState.Idle && distanceToPlayer.y <= MaxYOffsetToAttack &&
+            Mathf.Abs(distanceToPlayer.x) <= MaxXOffsetToPunchAttack)
+            StartCoroutine(IPunchAttack());
+
+        else if (!_attackOnCooldown && _bossState == BossState.Idle && distanceToPlayer.y <= MaxYOffsetToAttack &&
+            distanceToPlayer.x > 0 && distanceToPlayer.x <= MaxXOffsetToCigaretteAttack)
+            StartCoroutine(ICigaretteAttack());
     }
 
     private void Move()
     {
-        if (_isShooting)
+        if (_bossState == BossState.CigarAttack || _bossState == BossState.PunchAttack)
         {
             _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
             Vector3.zero, 6f * Acceleration * Time.deltaTime);
             return;
         }
-        _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
+        else if (_bossState == BossState.Idle)
+        {
+            _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
             (_playerTransform.position + TargetXOffset * Vector3.left - transform.position)
             * MoveSpeed, Acceleration * Time.deltaTime);
+        }
+        
     }
 
-    private void HandFollowBody(ref Rigidbody2D hand, Vector3 center)
+    private void HandFollowTarget(ref Rigidbody2D hand, Vector3 center)
     {
-        /*hand.transform.position = transform.position + center 
-            + _swayAmplitude * Mathf.Cos( 2 * Mathf.PI * _swayFrequency * Time.time) * Vector3.left  ;*/
-
-        /*Vector3 target = Random.insideUnitSphere * _swayAmplitude;*/
-
+        if (_bossState == BossState.PunchAttack) center += 8f * Vector3.right;
         Vector3 forceVector = center + transform.position - hand.transform.position;
-        hand.AddForce( /*forceVector.magnitude * */forceVector * _elasticConstant);
+        hand.AddForce(forceVector * _elasticConstant);
     }
 
-    private IEnumerator IRandomizeCenters()
+    private IEnumerator IRandomizeHandTarget()
     {
         while (true)
         {
@@ -117,4 +145,14 @@ public class BossBehavior : MonoBehaviour
         return center + new Vector3(newCenter.x, newCenter.y, 0f);
     }
 
+}
+
+
+public enum BossState
+{
+    Idle,
+    CigarAttack,
+    PunchAttack,
+    Stunned,
+    Dead,
 }

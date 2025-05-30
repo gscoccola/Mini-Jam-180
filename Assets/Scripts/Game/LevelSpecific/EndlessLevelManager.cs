@@ -2,7 +2,7 @@ using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class EndlessLevelGenerator : MonoBehaviour
+public class EndlessLevelManager : MonoBehaviour
 {
     [SerializeField] int _chunksToTransitionBackground = 2;
     [SerializeField] GameObject[] _levelChunkPrefabs;

@@ -57,7 +57,7 @@ public class Floor : MonoBehaviour
         float worldMin = _tilemap.transform.TransformPoint(bounds.min).x;
         float worldMax = _tilemap.transform.TransformPoint(bounds.max).x;
         FindAnyObjectByType<TargetIndicator>().SetBounds(worldMin, worldMax);
-        FindAnyObjectByType<CameraScript>().SetStartPosition(worldMax);
+        FindAnyObjectByType<CameraPan>().SetStartPosition(worldMax);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

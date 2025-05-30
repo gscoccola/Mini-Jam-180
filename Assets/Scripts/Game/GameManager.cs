@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] LeaderboardDisplay _leaderboardMenu;
     [SerializeField] InGameMenu _noNetworkMenu;
 
-    CameraScript _cameraScript;
+    CameraPan _cameraScript;
     Camera _camera;
 
     LevelLoader _levelLoader;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         _levelLoader = FindAnyObjectByType<LevelLoader>();
         _spawner = FindAnyObjectByType<Spawner>();
         _mSpawner = FindAnyObjectByType<MissileSpawner>();
-        _cameraScript = FindAnyObjectByType<CameraScript>();
+        _cameraScript = FindAnyObjectByType<CameraPan>();
         _indicator = FindAnyObjectByType<TargetIndicator>();
         _isPlayingOnMobile = Application.isMobilePlatform;
         _activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
