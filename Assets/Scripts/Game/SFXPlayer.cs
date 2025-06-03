@@ -28,6 +28,10 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossScreamVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _bossEarthquake;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossEarthquakeVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossCigarAttack;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossCigarAttackVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossCigarHit;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossCigarHitVolume;
 
 
     [Header("Player Fall")]
@@ -129,6 +133,8 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_buttonSmall] = _buttonSmallVolume,
             [_bossScream] = _bossScreamVolume,
             [_bossEarthquake] = _bossEarthquakeVolume,
+            [_bossCigarAttack] = _bossCigarAttackVolume,
+            [_bossCigarHit] = _bossCigarHitVolume,
 
         };
     }

@@ -23,8 +23,9 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Parameters")][SerializeField] private float _goldenBalloonSpawnChance;
     [FoldoutGroup("Parameters")][SerializeField] private float _specialWaveChance;
 
-    [Header("Endless mode?")]
+    [Header("Soecial Level")]
     [FoldoutGroup("Parameters")][SerializeField] private bool _isEndlessLevel;
+    [FoldoutGroup("Parameters")][SerializeField] private bool _isBossFight;
 
     [Header("Reference")]
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBird;
@@ -108,7 +109,8 @@ public class Spawner : MonoBehaviour
 
     public void InitialBurst()
     {
-        for (int i = 0; i < (_spawnXOffset - 6f) / 4f ; i++)
+        float minDistance = _isBossFight ? 20f : 6f;
+        for (int i = 0; i < (_spawnXOffset - minDistance) / 4f ; i++)
         {
             SpawnWave(_player.position.x - _spawnXOffset  + 4f*i);
         }

@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [FoldoutGroup("Player Parameters")][SerializeField] float _diveSpeed;
     [FoldoutGroup("Player Parameters")][SerializeField] float _diveAcceleration;
     [FoldoutGroup("Player Parameters")][SerializeField] float _diveCooldown;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _maxHeight = 200f;
+    [FoldoutGroup("Player Parameters")][SerializeField] float _minHeight = - 200f;
 
 
     [Header("PowerUP")]
@@ -92,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
     bool _diveAvailable = true;
     bool _touchScreenRight;
     bool _touchScreenLeft;
-
+    public bool _isDiving;
     public bool _allowHorizontalSpeed;
     #endregion
 
@@ -147,23 +149,30 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleOutOfBounds()
     {
-        if ( !IsOnFloor && transform.position.x < worldMin )
+        if (_isEpilogue) return;
+        if ( !IsOnFloor && transform.position.x < worldMin - 1f )
         {
             _rigidBody.linearVelocityY = 0f;
             _rigidBody.linearVelocityX = -3f;
             if (!_isOutOfBounds) GoOutOfBounds();
 
         }
-        else if (!IsOnFloor && transform.position.x > worldMax)
+        else if (!IsOnFloor && transform.position.x > worldMax +1f )
         {
             _rigidBody.linearVelocityY = 0f;
             _rigidBody.linearVelocityX = 3f;
             if (!_isOutOfBounds) GoOutOfBounds();
 
         }
-        else if (transform.position.y < 0f)
+        else if (transform.position.y < _minHeight)
         {
             _rigidBody.linearVelocityY = -3f;
+            if (!_isOutOfBounds) GoOutOfBounds();
+
+        }
+        else if (transform.position.y > _maxHeight + 3f)
+        {
+            _rigidBody.linearVelocityY = 3f;
             if (!_isOutOfBounds) GoOutOfBounds();
 
         }
@@ -249,11 +258,11 @@ public class PlayerMovement : MonoBehaviour
         if (Application.isMobilePlatform) CombinationInput();
         _animator.SetBool("_isFalling", !IsOnFloor);
         if (IsOnFloor) return;
-        bool isDiving = (_verticalInput && !_isInputDisabled &&  !_isStunned &&  !_isFlying && _diveAvailable);
-        _rigidBody.linearVelocityY = isDiving
+        _isDiving = (_verticalInput && !_isInputDisabled &&  !_isStunned &&  !_isFlying && _diveAvailable);
+        _rigidBody.linearVelocityY = _isDiving
             ? _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _diveSpeed, _diveAcceleration * Time.deltaTime).y
             : _rigidBody.linearVelocityY = Vector2.MoveTowards(_rigidBody.linearVelocity, Vector2.down * _fallSpeed, _currentGravity * Time.deltaTime).y;
-        _animator.SetBool("_isDiving", isDiving && _rigidBody.linearVelocityY < -5f );
+        _animator.SetBool("_isDiving", _isDiving && _rigidBody.linearVelocityY < -5f );
     }
 
     void CalculateIsOnFloor()
@@ -312,7 +321,7 @@ public class PlayerMovement : MonoBehaviour
     public void Boost(EnemyType type)
     {
         _rigidBody.linearVelocityY = _enemyBoosts[type][1];
-
+        if (_isInputDisabled && type == EnemyType.Cigarette) _isInputDisabled = false;
         if (_isFlying) SetFly(false);
         IncreaseCombo();
         ChangeStance();

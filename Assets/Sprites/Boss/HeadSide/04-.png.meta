@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1affba3d747ab824a988cced8f30351a
+guid: c755419946536fc48baae1ff00b7f584
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6315507319790023045
-    second: Captura de pantalla 2025-05-30 021937_0
+      213: -6384971429853848592
+    second: 04-_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Captura de pantalla 2025-05-30 021937_0
+      name: 04-_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 25
-        width: 681
-        height: 487
+        x: 0
+        y: 0
+        width: 59
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7e498bbd8fca58a0800000000000000
-      internalID: -6315507319790023045
+      spriteID: 0fb1b8640560467a0800000000000000
+      internalID: -6384971429853848592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04-_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 0
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49313613c76750d40973804bf02ced75
+      internalID: -1147674777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04-_2
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 0
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42bf997f0a6199349af37afebca36a6c
+      internalID: 534514082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04-_3
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 0
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46bf776d4774a554fb50d0b5e6066490
+      internalID: -1538417859
       vertices: []
       indices: 
       edges: []
@@ -151,7 +217,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b43631882e638b5449d489bd39aa1901
+    spriteID: 65512fad42a51bd4d85f331bf04fd8a7
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +227,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Captura de pantalla 2025-05-30 021937_0: -6315507319790023045
+      04-_0: -6384971429853848592
+      04-_1: -1147674777
+      04-_2: 534514082
+      04-_3: -1538417859
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

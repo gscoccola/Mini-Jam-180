@@ -262,6 +262,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 476f19ae74206e043816c8d232dca341, type: 3}
   _bossEarthquakeVolume:
   - 1
+  _bossCigarAttack:
+  - {fileID: 8300000, guid: 708614c16ec821141b5232376e6d8f36, type: 3}
+  - {fileID: 8300000, guid: d70001d1703e5cb4f8f0a711c3ebb15e, type: 3}
+  _bossCigarAttackVolume:
+  - 1
+  - 1
+  _bossCigarHit:
+  - {fileID: 8300000, guid: a1fa893061a63a948af6ef3faef7a959, type: 3}
+  - {fileID: 8300000, guid: afff55c6978650d49b827b34cf4a25f4, type: 3}
+  _bossCigarHitVolume:
+  - 1
+  - 1
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
   _playerSplashVolume:
