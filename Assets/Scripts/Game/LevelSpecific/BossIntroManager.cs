@@ -44,10 +44,15 @@ public class BossIntroManager : MonoBehaviour
         yield return new WaitForSeconds(2.8f);
 
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossScream);
+        
 
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.6f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossSplash);
+
+        yield return new WaitForSeconds(0.6f);
 
         Boss.StartMovement();
+        
 
         yield return new WaitForSeconds(ShakeDuration - 1f);
 

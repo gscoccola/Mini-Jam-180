@@ -420,6 +420,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
         VibrationHandler.Instance.MediumVibrate();
         _particleSystem.Stop();
         IsDead = true;
@@ -430,6 +431,7 @@ public class PlayerMovement : MonoBehaviour
  
     public void Win()
     {
+        gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
         _particleSystem.Stop();
         IsDead = true;
         _fallingStance = 2;

@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossProper
       objectReference: {fileID: 0}
+    - target: {fileID: 2716350025524128895, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.07
+      objectReference: {fileID: 0}
     - target: {fileID: 7685892764481119777, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29.74
@@ -181,9 +185,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
+      propertyPath: _totalPhases
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
       propertyPath: BossStateText
       value: 
       objectReference: {fileID: 508127500}
+    - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
+      propertyPath: _totalHitsToStun
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -858,6 +870,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7403280851507546867, guid: a7fb2c71c5445e64292aa4327c3001fd, type: 3}
+    - {fileID: 9214011045349799474, guid: a7fb2c71c5445e64292aa4327c3001fd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7fb2c71c5445e64292aa4327c3001fd, type: 3}
@@ -916,6 +929,8 @@ MonoBehaviour:
   maxDistanceFromEdge: 15
   _yMin: 0
   _yMax: 35
+  ShakeAmplitude: 5
+  ShakeDuration: 0.65
   _cameraEdgeX: 0
 --- !u!1001 &1134472711
 PrefabInstance:
@@ -1092,7 +1107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.784807
+      value: -23.341404
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1343,11 +1358,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
       propertyPath: _mapHeight
-      value: 30
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
+      propertyPath: _laneHeight
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
       propertyPath: _isBossFight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
+      propertyPath: _minXSpacing
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
+      propertyPath: _spawnPeriod
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
       propertyPath: _isTopSparser
@@ -1355,7 +1382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
       propertyPath: _spawnXOffset
-      value: 43
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 5930252065349444769, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
       propertyPath: _birdSpawnChance

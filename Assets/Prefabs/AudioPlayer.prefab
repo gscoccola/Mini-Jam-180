@@ -265,7 +265,11 @@ MonoBehaviour:
   _bossCigarAttack:
   - {fileID: 8300000, guid: 708614c16ec821141b5232376e6d8f36, type: 3}
   - {fileID: 8300000, guid: d70001d1703e5cb4f8f0a711c3ebb15e, type: 3}
+  - {fileID: 8300000, guid: ed1d7038374243943928b8ee4f7ab54c, type: 3}
+  - {fileID: 8300000, guid: 446180495111a30439f13fc9aaa705ab, type: 3}
   _bossCigarAttackVolume:
+  - 1
+  - 1
   - 1
   - 1
   _bossCigarHit:
@@ -274,6 +278,32 @@ MonoBehaviour:
   _bossCigarHitVolume:
   - 1
   - 1
+  _bossSplash:
+  - {fileID: 8300000, guid: 0990bb070fe70f6488a78b18432f6083, type: 3}
+  _bossSplashVolume:
+  - 0.576
+  _bossHurtShort:
+  - {fileID: 8300000, guid: 9ede4d01da196be428b94d925923cb31, type: 3}
+  - {fileID: 8300000, guid: 051a4130dce15e64a826b9934fca7242, type: 3}
+  - {fileID: 8300000, guid: 47991a7195333ef4693b03d077a9c4d2, type: 3}
+  - {fileID: 8300000, guid: 5741f6178c919a8468af64af452132e3, type: 3}
+  _bossHurtShortVolume:
+  - 0.712
+  - 0.7
+  - 0.706
+  - 0.735
+  _bossHurtLong:
+  - {fileID: 8300000, guid: cc31940bce1ec5648a84872f053f1823, type: 3}
+  - {fileID: 8300000, guid: 854b0c24b392a524d9b1d43052ef2d7b, type: 3}
+  _bossHurtLongVolume:
+  - 0.735
+  - 0.735
+  _bossStun:
+  - {fileID: 8300000, guid: b75da53f5bdcc614a9a4eef527a75814, type: 3}
+  - {fileID: 8300000, guid: a80b47662a476ab45a843797520d45f3, type: 3}
+  _bossStunVolume:
+  - 0.735
+  - 0.735
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
   _playerSplashVolume:

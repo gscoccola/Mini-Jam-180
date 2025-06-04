@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossBehavior : MonoBehaviour
 {
     [SerializeField] int _totalHitsToStun;
+    [SerializeField] int _totalPhases;
 
     [SerializeField] float MoveSpeedSlow;
     [SerializeField] float MoveSpeedFast;
@@ -47,9 +48,11 @@ public class BossBehavior : MonoBehaviour
     Rigidbody2D _rigidbody;
     GameObject _enemies;
     BossFightManager  _manager;
+    SemiRandomIntGenerator _intGenerator;
     bool _cigarAttackOnCooldown;
     bool _punchAttackOnCooldown;
     int _hitsLeftToStun;
+    int _currentPhase = 0;
     public float _stunnedXSpeed;
 
     BossState _bossState;
@@ -68,6 +71,7 @@ public class BossBehavior : MonoBehaviour
         StartCoroutine(IRandomizeHandTarget());
         _bossState = BossState.StandBy;
         _hitsLeftToStun = _totalHitsToStun;
+        _intGenerator = new SemiRandomIntGenerator(new float[1]{ 0.5f ,});
     }
 
 
@@ -106,6 +110,7 @@ public class BossBehavior : MonoBehaviour
 
     private IEnumerator IPunchAttack(Vector3 relativePlayerPos)
     {
+        _animator.SetTrigger("Frown");
         _bossState = BossState.PunchAttack;
         _rightHandTarget = relativePlayerPos.normalized * MaxDistanceToPunchAttack;
         _punchAttackOnCooldown = true;
@@ -136,7 +141,11 @@ public class BossBehavior : MonoBehaviour
 
         else if (!_cigarAttackOnCooldown && Mathf.Abs(relativePlayerPos.y) <= MaxYOffsetToAttack &&
             relativePlayerPos.x > 0 && relativePlayerPos.x <= MaxXOffsetToCigaretteAttack)
+        {
             StartCoroutine(ICigaretteAttack());
+            _intGenerator.GetInt();
+        }
+            
     }
 
     private void Move(BossState bossState, Vector3 relativePlayerPos)
@@ -172,7 +181,7 @@ public class BossBehavior : MonoBehaviour
             _rigidbody.linearVelocityY = Vector2.MoveTowards(_rigidbody.linearVelocity,
             (transform.position.y - 6f ) * Vector3.down
             * MoveSpeedSlow/5f, Acceleration  * Time.deltaTime / 2f).y;
-            _rigidbody.linearVelocityX = -_stunnedXSpeed;
+            _rigidbody.linearVelocityX = -_stunnedXSpeed/2f;
         }
 
     }
@@ -180,11 +189,6 @@ public class BossBehavior : MonoBehaviour
     private void MoveHandToTarget(ref Rigidbody2D hand, Vector3 center)
     {
         Vector3 direction = center + transform.position - hand.transform.position;
-        /*if (_bossState == BossState.PunchAttack && direction.magnitude > 0.5f)
-        {
-            hand.linearVelocity = _punchFixedSpeed * direction.normalized;
-            return;
-        } */
         hand.AddForce(direction * _elasticConstant * hand.mass);
     }
 
@@ -212,36 +216,56 @@ public class BossBehavior : MonoBehaviour
 
     public void TakeDamage()
     {
+        
         _rigidbody.linearVelocityX += -7f;
         Interrupt();
-        if (_hitsLeftToStun == 1) Stun();
-        else StartCoroutine(ITakeDamage());
+        StartCoroutine(ITakeDamage());
     }
 
     private void Interrupt()
     {
         StopAllCoroutines();
+        _rightHandTarget = RandomizeHandTarget(_rightHandCenter);
         _cigarAttackOnCooldown = false;
         _punchAttackOnCooldown = false;
     }
 
     private IEnumerator ITakeDamage()
     {
-        _hitsLeftToStun--;
         _animator.SetTrigger("TakeDamage");
         _bossState = BossState.Damaged;
-        yield return new WaitForSeconds(_swayRandomizePeriod);
-        _bossState = BossState.Idle;
+        
+        
+        if (_hitsLeftToStun == 1) 
+        {
+            yield return new WaitForSeconds(0.4f);
+            Stun();
+            VibrationHandler.Instance.MediumVibrate();
+        }
+        else
+        {
+            VibrationHandler.Instance.LightVibrate();
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtShort);
+            yield return new WaitForSeconds(_swayRandomizePeriod);
+            _hitsLeftToStun--;
+            _bossState = BossState.Idle;
+        }
     }
 
     private void Stun()
     {
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossStun);
         _animator.SetTrigger("Stunned");
         _bossState = BossState.Stunned;
     }
 
     private void TriggerPhaseChange()
     {
+        _currentPhase++;
+        //_intGenerator.IncreaseChoiceNumber();
+        StartCoroutine(_manager.IVibrateScreen());
+        VibrationHandler.Instance.HeavyVibrate();
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
         _animator.SetTrigger("TakeDamage");
         _hitsLeftToStun = _totalHitsToStun;
         StartCoroutine(IPhaseChange());
@@ -262,9 +286,6 @@ public class BossBehavior : MonoBehaviour
         RightHand.transform.position = newPos;
         _bossState = BossState.Idle;
         _animator.SetTrigger("BackToIdle");
-        _animator.ResetTrigger("Stunned");
-        _animator.ResetTrigger("TakeDamage");
-        _animator.ResetTrigger("BackToIdle");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -272,7 +293,7 @@ public class BossBehavior : MonoBehaviour
         if (collision.collider.tag == "Player" && _bossState == BossState.Stunned &&
             collision.collider.GetComponent<PlayerMovement>()._isDiving)
         {
-            collision.collider.GetComponent<Rigidbody2D>().linearVelocityY += 6f;
+            collision.collider.GetComponent<Rigidbody2D>().linearVelocityY += 8f;
             TriggerPhaseChange();
         }       
     }
@@ -292,4 +313,63 @@ public enum BossState
     Damaged,
     PhaseChange,
     Dead,
+}
+
+public class SemiRandomIntGenerator
+{
+    private float[] _initialProbabilities;
+    private float[] _currentProbabilities;
+    private int _choiceNumber;
+
+    public SemiRandomIntGenerator(float[] probabilities, int choiceNumber = 0)
+    {
+        _initialProbabilities = probabilities;
+        _currentProbabilities = probabilities;
+        _choiceNumber = choiceNumber;
+
+        if (_choiceNumber > probabilities.Length) Debug.LogError("Not enough probabilities given");
+        foreach (float probability in probabilities)
+        {
+            if (probability > 1f || probability < 0f) Debug.LogError("Invalid Probabilities");
+        }
+    }
+
+    public void IncreaseChoiceNumber()
+    {
+        _choiceNumber++;
+        _currentProbabilities = _initialProbabilities;
+        if (_choiceNumber > _initialProbabilities.Length) Debug.LogError("Not enough probabilities given");
+    }
+
+    public int GetInt()
+    {
+        if (_choiceNumber == 0) return 0;
+
+        int result = 0;
+        float randFloat = Random.Range(0f, 1f);
+        float aggregatedProb = 0f;
+
+        for (int i = 0; i < _choiceNumber; i++)
+        {
+            aggregatedProb += _currentProbabilities[i];
+            if (randFloat < aggregatedProb) result = i + 1;                
+        }
+        AdjustProbabilities(result);
+
+        Debug.Log("Result is " + result);
+        for (int i = 0; i < _choiceNumber; i++)
+        {
+            Debug.Log((i+1).ToString() + " " + _currentProbabilities[i]);
+        }
+        
+        return result;
+    }
+
+    private void AdjustProbabilities(int result)
+    {
+        /*for (int i = 0; i < _choiceNumber; i++)
+        {
+            if (i == result) _currentProbabilities[i] -=
+        }*/
+    }
 }

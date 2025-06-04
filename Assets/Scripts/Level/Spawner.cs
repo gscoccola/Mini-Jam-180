@@ -33,6 +33,7 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabDronePink;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBalloon;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabGoldenBalloon;
+    [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabCloud;
 
     private float _localTime;
     private float _lastX;
@@ -46,6 +47,7 @@ public class Spawner : MonoBehaviour
     public bool _isTopSparser;
     private float _attenuationPerLane;
     private bool _spawnGoldenBallons;
+    private int _bossWaveType;
 
     private void Awake()
     {
@@ -83,7 +85,8 @@ public class Spawner : MonoBehaviour
 
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
         float deltaX = transform.position.x - _lastX;
-        _localTime += Mathf.Max(Time.deltaTime * (1 - deltaX / (Time.deltaTime * 3f)), 0f);
+        float dopplerVelocity = _isBossFight ? 5f : 3f;
+        _localTime += Time.deltaTime * (1 - deltaX / (Time.deltaTime * dopplerVelocity));
         _lastX = transform.position.x;
 
         if (_localTime > _spawnPeriod)
@@ -109,20 +112,34 @@ public class Spawner : MonoBehaviour
 
     public void InitialBurst()
     {
-        float minDistance = _isBossFight ? 20f : 6f;
-        for (int i = 0; i < (_spawnXOffset - minDistance) / 4f ; i++)
+        float minDistance = _isBossFight ? 10f : 6f;
+        float spacing = _isBossFight ? _spawnPeriod * 5f : _minXSpacing;
+        for (int i = 1; i < (_spawnXOffset - minDistance) / spacing; i++)
         {
-            SpawnWave(_player.position.x - _spawnXOffset  + 4f*i);
+            SpawnWave(_player.position.x - _spawnXOffset  + spacing * i);
         }
     }
 
     private void SpawnWave(float x)
     {
+        if (_isBossFight) 
+        {
+
+            for (int i = _bossWaveType; i <= _laneNumber; i+=2)
+            {
+                SpawnEnemy(new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f), _enemyPrefabCloud, false);
+            }
+            _bossWaveType = (_bossWaveType + 1) % 2;
+            return;
+        }
+
+
         for (int i = 0; i <= _laneNumber; i++)
         {
             SpawnRandomEnemy(new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f), i);
         }
     }
+
 
     private void SpawnSquadWave(float x)
     {

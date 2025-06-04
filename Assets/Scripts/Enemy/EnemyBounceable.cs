@@ -38,7 +38,6 @@ public class EnemyBounceable : MonoBehaviour
         {
             
             collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
-            PlayDeathSFX();
             SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerBounce);
             Die(true);
         }
@@ -62,9 +61,11 @@ public class EnemyBounceable : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<Collider2D>().enabled = false;
             GetComponent<ParticleSystem>().Stop();
+            PlayDeathSFX();
             Destroy(gameObject, 5f);
             return;
         }
+        PlayDeathSFX();
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         _isDestroyed = true;
         Destroy(gameObject, 0.01f);

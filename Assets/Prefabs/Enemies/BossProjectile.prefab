@@ -155,7 +155,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.012845516, y: -0.17475843}
+  m_Offset: {x: 0.029386044, y: -0.17475843}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -165,7 +165,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.4632483, y: 0.19605923}
+  m_Size: {x: 2.5477114, y: 0.19605923}
   m_EdgeRadius: 0
 --- !u!114 &8358802711310866436
 MonoBehaviour:
@@ -233,8 +233,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.000000010647307, y: 0.08931609}
-  m_Size: {x: 2.3750002, y: 0.19636855}
+  m_Offset: {x: -0.014906159, y: 0.0893161}
+  m_Size: {x: 2.5339901, y: 0.19637033}
   m_Direction: 1
 --- !u!199 &246753497169106943
 ParticleSystemRenderer:
