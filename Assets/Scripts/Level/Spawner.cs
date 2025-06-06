@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabGoldenBalloon;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabCloud;
 
-    private float _localTime;
+    private float _spawnPhase;
     private float _lastX;
     private Transform _player;
     private int _laneNumber;
@@ -85,13 +85,13 @@ public class Spawner : MonoBehaviour
 
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
         float deltaX = transform.position.x - _lastX;
-        float dopplerVelocity = _isBossFight ? 5f : 3f;
-        _localTime += Time.deltaTime * (1 - deltaX / (Time.deltaTime * dopplerVelocity));
+        float waveVelocity = _isBossFight ? 5f : 3f;
+        _spawnPhase += Time.deltaTime - deltaX / waveVelocity ;
         _lastX = transform.position.x;
-
-        if (_localTime > _spawnPeriod)
+        Debug.Log(_spawnPhase);
+        if (_spawnPhase > _spawnPeriod)
         {
-            _localTime = 0f;
+            _spawnPhase = 0f;
             SpawnWave(transform.position.x);
             if (_spawnsSpecialWaves) SpawnSquadWave(transform.position.x);
         }

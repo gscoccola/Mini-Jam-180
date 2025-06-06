@@ -519,4 +519,6 @@ public class GameManager : MonoBehaviour
         PersistentInfo.Instance.UnlockAllLevelsAndAchievements();
         ReloadLevel();
     }
+
+    
 }

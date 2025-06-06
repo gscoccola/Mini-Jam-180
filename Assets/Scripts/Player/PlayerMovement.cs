@@ -381,6 +381,11 @@ public class PlayerMovement : MonoBehaviour
         VibrationHandler.Instance.MediumVibrate();
     }
 
+    public void Stun()
+    {
+        StartCoroutine(IStun());
+    }
+
     IEnumerator IStun()
     {
         _isStunned = true;
@@ -416,6 +421,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnExitLevel(InputValue value)
     {
         _gameManager.ExitLevel();
+    }
+
+    private void OnTogglePostProcessing(InputValue value)
+    {
+        PostProcessing.Instance.Toggle();
     }
 
     public void Die()

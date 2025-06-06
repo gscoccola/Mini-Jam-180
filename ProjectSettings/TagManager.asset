@@ -76,5 +76,8 @@ TagManager:
   - name: BossFront
     uniqueID: 84890587
     locked: 0
+  - name: Canvas
+    uniqueID: 2813312067
+    locked: 0
   m_RenderingLayers:
   - Default

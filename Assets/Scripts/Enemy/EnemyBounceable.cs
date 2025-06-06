@@ -36,10 +36,17 @@ public class EnemyBounceable : MonoBehaviour
     {
         if (!_isDestroyed)
         {
+            if (_enemytype == EnemyType.Rock)
+            {
+                collision.collider.gameObject.GetComponent<PlayerMovement>().Stun();
+            }
+            else
+            {
+                collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerBounce);
+                Die(true);
+            }
             
-            collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
-            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerBounce);
-            Die(true);
         }
     }
 
@@ -106,4 +113,5 @@ public enum EnemyType
     Balloon,
     GoldenBalloon,
     Cigarette,
+    Rock,
 }

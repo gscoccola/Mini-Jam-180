@@ -304,6 +304,20 @@ MonoBehaviour:
   _bossStunVolume:
   - 0.735
   - 0.735
+  _bossFistConnect:
+  - {fileID: 8300000, guid: d26fbf48d7a0f2543af253b33acd554f, type: 3}
+  - {fileID: 8300000, guid: 418ebf505dfbde34d84e0391cf668842, type: 3}
+  - {fileID: 8300000, guid: 5111cfec422055e48971e9931c7e98bf, type: 3}
+  _bossFistConnectVolume:
+  - 0.735
+  - 0.735
+  - 0.735
+  _bossDived:
+  - {fileID: 8300000, guid: 7ef69db7770c5e74e8375c5b834f5e0c, type: 3}
+  - {fileID: 8300000, guid: 4389a2d6c00ba1d44ab70560058dbce5, type: 3}
+  _bossDivedVolume:
+  - 0.735
+  - 0.735
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
   _playerSplashVolume:

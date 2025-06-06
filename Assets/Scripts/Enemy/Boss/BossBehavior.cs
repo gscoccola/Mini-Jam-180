@@ -19,6 +19,7 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] float AttackMovementPause;
     [SerializeField] float MaxYOffsetToAttack;
     [SerializeField] float MaxXOffsetToCigaretteAttack;
+    [SerializeField] float _rockMinVelocity;
 
 
     [SerializeField] float MaxDistanceToPunchAttack;
@@ -38,7 +39,8 @@ public class BossBehavior : MonoBehaviour
     Vector3 _leftHandTarget;
     Vector3 _rightHandTarget;
 
-    [SerializeField] GameObject Projectile;
+    [SerializeField] GameObject Cigarette;
+    [SerializeField] GameObject Rock;
     [SerializeField] Rigidbody2D RightHand;
     [SerializeField] Rigidbody2D LeftHand;
     [SerializeField] TextMeshProUGUI BossStateText;
@@ -49,11 +51,12 @@ public class BossBehavior : MonoBehaviour
     GameObject _enemies;
     BossFightManager  _manager;
     SemiRandomIntGenerator _intGenerator;
-    bool _cigarAttackOnCooldown;
+    bool _rangedAttackOnCooldown;
     bool _punchAttackOnCooldown;
     int _hitsLeftToStun;
     int _currentPhase = 0;
     public float _stunnedXSpeed;
+    bool _normalMovement = true;
 
     BossState _bossState;
 
@@ -71,7 +74,7 @@ public class BossBehavior : MonoBehaviour
         StartCoroutine(IRandomizeHandTarget());
         _bossState = BossState.StandBy;
         _hitsLeftToStun = _totalHitsToStun;
-        _intGenerator = new SemiRandomIntGenerator(new float[1]{ 0.5f ,});
+        _intGenerator = new SemiRandomIntGenerator(new float[1]{ 0.5f ,}, 1);
     }
 
 
@@ -87,40 +90,13 @@ public class BossBehavior : MonoBehaviour
         Vector3 relativePlayerPos = _playerTransform.position - transform.position;
 
         if (_bossState == BossState.Idle) Attack(relativePlayerPos);
-        if (_bossState == BossState.PunchAttack) _rightHandTarget = ReturnTargetToCenter(_rightHandTarget, _rightHandCenter);
+        if (_bossState == BossState.PunchAttack || _bossState == BossState.ThrowAttack) 
+            _rightHandTarget = ReturnTargetToCenter(_rightHandTarget, _rightHandCenter);
         if (_bossState == BossState.Stunned && transform.position.x > _manager._cameraEdgeX + 5f) TeleportAndReset();
 
         AdjustPosition(_bossState, relativePlayerPos);
         Move(_bossState, relativePlayerPos);
     }
-
-    public IEnumerator ICigaretteAttack(bool pauseAfterShot = false)
-    {
-        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossCigarAttack);
-        _bossState = BossState.CigarAttack;
-        _animator.SetTrigger("Shoot");
-        _cigarAttackOnCooldown = true;
-        yield return new WaitForSeconds(0.2f);
-        Instantiate(Projectile, transform.position + new Vector3(-hoverXOffset, -hoverYOffset, 0f), Quaternion.identity, _enemies.transform);
-        yield return new WaitForSeconds(AttackMovementPause - 0.2f);
-        _bossState = pauseAfterShot ? BossState.StandBy : BossState.Idle;
-        yield return new WaitForSeconds(AttackDelay - AttackMovementPause - 0.2f);
-        _cigarAttackOnCooldown = false;
-    }
-
-    private IEnumerator IPunchAttack(Vector3 relativePlayerPos)
-    {
-        _animator.SetTrigger("Frown");
-        _bossState = BossState.PunchAttack;
-        _rightHandTarget = relativePlayerPos.normalized * MaxDistanceToPunchAttack;
-        _punchAttackOnCooldown = true;
-        yield return new WaitForSeconds(_fistReturnTime);
-        _bossState = BossState.Idle;
-        yield return new WaitForSeconds(AttackDelay - _fistReturnTime);
-        _punchAttackOnCooldown = false;
-    }
-
-  
 
     private void AdjustPosition(BossState bossState, Vector3 relativePlayerPos)
     {
@@ -136,28 +112,78 @@ public class BossBehavior : MonoBehaviour
     private void Attack(Vector3 relativePlayerPos)
     {
 
-        if (!_punchAttackOnCooldown && relativePlayerPos.magnitude <= MaxDistanceToPunchAttack)
+        if (!_punchAttackOnCooldown && _bossState == BossState.Idle && relativePlayerPos.magnitude <= MaxDistanceToPunchAttack)
             StartCoroutine(IPunchAttack(relativePlayerPos));
 
-        else if (!_cigarAttackOnCooldown && Mathf.Abs(relativePlayerPos.y) <= MaxYOffsetToAttack &&
+        else if (!_rangedAttackOnCooldown && _bossState == BossState.Idle && Mathf.Abs(relativePlayerPos.y) <= MaxYOffsetToAttack &&
             relativePlayerPos.x > 0 && relativePlayerPos.x <= MaxXOffsetToCigaretteAttack)
         {
-            StartCoroutine(ICigaretteAttack());
-            _intGenerator.GetInt();
+            
+            switch (_intGenerator.GetInt())
+            {
+                case 0:
+                    StartCoroutine(ICigaretteAttack());
+                    break;
+                case 1:
+                    StartCoroutine(IThrowAttack());
+                    break;
+            }
         }
             
     }
+
+    public IEnumerator ICigaretteAttack(bool pauseAfterShot = false)
+    {
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossCigarAttack);
+        _bossState = BossState.CigarAttack;
+        _normalMovement = false;
+        _animator.SetTrigger("Shoot");
+        _rangedAttackOnCooldown = true;
+        yield return new WaitForSeconds(0.2f);
+        Instantiate(Cigarette, transform.position + new Vector3(-hoverXOffset, -hoverYOffset, 0f), Quaternion.identity, _enemies.transform);
+        yield return new WaitForSeconds(AttackMovementPause - 0.2f);
+        _bossState = pauseAfterShot ? BossState.StandBy : BossState.Idle;
+        _normalMovement = true;
+        yield return new WaitForSeconds(AttackDelay - AttackMovementPause - 0.2f);
+        _rangedAttackOnCooldown = false;
+    }
+
+    private IEnumerator IThrowAttack()
+    {
+        _bossState = BossState.ThrowAttack;
+        _normalMovement = false;
+        _animator.SetTrigger("Frown");
+        _rangedAttackOnCooldown = true;
+        _rightHandTarget = new Vector3(1f, 0.5f, 0f);
+        yield return new WaitForSeconds(_fistReturnTime / 4f);
+        SpawnRockWave();
+        _normalMovement = true;
+        yield return new WaitForSeconds(_fistReturnTime * 3f / 4f);
+        _bossState = BossState.Idle;
+        yield return new WaitForSeconds(AttackDelay - _fistReturnTime - 0.2f);
+        _rangedAttackOnCooldown = false;
+    }
+
+    private IEnumerator IPunchAttack(Vector3 relativePlayerPos)
+    {
+        _animator.SetTrigger("Frown");
+        _bossState = BossState.PunchAttack;
+        RightHand.GetComponent<Fist>()._SFXAvailable = true;
+        _rightHandTarget = relativePlayerPos.normalized * MaxDistanceToPunchAttack;
+        _punchAttackOnCooldown = true;
+        yield return new WaitForSeconds(_fistReturnTime);
+        _bossState = BossState.Idle;
+        RightHand.GetComponent<Fist>()._SFXAvailable = false;
+        yield return new WaitForSeconds(AttackDelay - _fistReturnTime);
+        _punchAttackOnCooldown = false;
+    }
+
 
     private void Move(BossState bossState, Vector3 relativePlayerPos)
     {
         if (_bossState == BossState.StandBy) return;
 
-        if (_bossState == BossState.CigarAttack )
-        {
-            _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
-            Vector3.zero, 6f * Acceleration * Time.deltaTime);
-            return;
-        }
+        
 
         if (_bossState == BossState.AdjustingPosition)
         {
@@ -165,7 +191,8 @@ public class BossBehavior : MonoBehaviour
             (relativePlayerPos + TargetXOffset * Vector3.left).normalized
             * MoveSpeedFast, 3f * Acceleration * Time.deltaTime);
         }
-        else if (_bossState == BossState.Idle || _bossState == BossState.PunchAttack)
+        else if (_bossState == BossState.Idle || _bossState == BossState.PunchAttack
+            || (_normalMovement ==true && (_bossState == BossState.CigarAttack || _bossState == BossState.ThrowAttack)))
         {
             _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
             (relativePlayerPos + TargetXOffset * Vector3.left).normalized
@@ -183,13 +210,18 @@ public class BossBehavior : MonoBehaviour
             * MoveSpeedSlow/5f, Acceleration  * Time.deltaTime / 2f).y;
             _rigidbody.linearVelocityX = -_stunnedXSpeed/2f;
         }
+        else if(_bossState == BossState.CigarAttack || _bossState == BossState.ThrowAttack)
+        {
+            _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
+            Vector3.zero, 6f * Acceleration * Time.deltaTime);
+        }
 
     }
 
     private void MoveHandToTarget(ref Rigidbody2D hand, Vector3 center)
     {
         Vector3 direction = center + transform.position - hand.transform.position;
-        hand.AddForce(direction * _elasticConstant * hand.mass);
+        hand.AddForce(direction * _elasticConstant * hand.mass * Time.deltaTime);
     }
 
     private IEnumerator IRandomizeHandTarget()
@@ -226,7 +258,7 @@ public class BossBehavior : MonoBehaviour
     {
         StopAllCoroutines();
         _rightHandTarget = RandomizeHandTarget(_rightHandCenter);
-        _cigarAttackOnCooldown = false;
+        _rangedAttackOnCooldown = false;
         _punchAttackOnCooldown = false;
     }
 
@@ -264,6 +296,7 @@ public class BossBehavior : MonoBehaviour
         _currentPhase++;
         //_intGenerator.IncreaseChoiceNumber();
         StartCoroutine(_manager.IVibrateScreen());
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossFistConnect);
         VibrationHandler.Instance.HeavyVibrate();
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
         _animator.SetTrigger("TakeDamage");
@@ -293,9 +326,26 @@ public class BossBehavior : MonoBehaviour
         if (collision.collider.tag == "Player" && _bossState == BossState.Stunned &&
             collision.collider.GetComponent<PlayerMovement>()._isDiving)
         {
-            collision.collider.GetComponent<Rigidbody2D>().linearVelocityY += 8f;
+            collision.collider.GetComponent<Rigidbody2D>().linearVelocityY = 18f;
             TriggerPhaseChange();
         }       
+    }
+
+    private void SpawnRockWave()
+    {
+        float angle1 = 25f * Mathf.Deg2Rad;
+        float angle3 = 45f * Mathf.Deg2Rad;
+
+
+        ThrowAtAngle(angle1, _rockMinVelocity * Random.Range(1f, 1.5f));
+        ThrowAtAngle(angle3, _rockMinVelocity * Random.Range(1f, 1.5f));
+
+    }
+
+    private void ThrowAtAngle(float angle, float speed)
+    {
+        Instantiate(Rock, RightHand.transform.position, Quaternion.identity, _enemies.transform)
+            .GetComponent<Rigidbody2D>().linearVelocity = speed * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 }
 
@@ -307,6 +357,7 @@ public enum BossState
     AdjustingPosition,
     CigarAttack,
     PunchAttack,
+    ThrowAttack,
 
     StandBy,
     Stunned,
