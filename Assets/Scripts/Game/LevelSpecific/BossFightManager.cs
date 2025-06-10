@@ -17,26 +17,33 @@ public class BossFightManager : MonoBehaviour
 
     public float _cameraEdgeX = 0f;
     PolygonCollider2D _polygonCollider2D;
-    CinemachineConfiner2D _cameraConfiner;
     PlayerMovement _playerMovement;
     BossBehavior _behavior;
     private bool _levelStarted;
-    CinemachineBasicMultiChannelPerlin _playerCameraShake;
+    [SerializeField] CinemachineCamera _playerCamera;
+    [SerializeField] GameObject _pauseButton;
+    [SerializeField] GameObject _finalTarget;
+    [SerializeField] GameObject _dynamicBackground;
+    LevelLoader _levelLoader;
+    CinemachineBasicMultiChannelPerlin _cameraShake;
+    CinemachineConfiner2D _confiner;
     bool _amplitudeIncreasing;
     bool _amplitudeDecreasing;
-
+    bool _isGameOver;
+    float velocity;
 
     private void Awake()
     {
         _polygonCollider2D = FindAnyObjectByType<PolygonCollider2D>();
-        _cameraConfiner = FindAnyObjectByType<CinemachineConfiner2D>();
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
         _behavior = FindAnyObjectByType<BossBehavior>();
-        _playerCameraShake = FindAnyObjectByType<CinemachineCamera>().GetComponent<CinemachineBasicMultiChannelPerlin>();
+        _levelLoader = FindAnyObjectByType<LevelLoader>();
     }
 
     private void Start()
     {
+        _cameraShake = _playerCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
+        _confiner = _playerCamera.GetComponent<CinemachineConfiner2D>();
         _behavior._stunnedXSpeed = minScreenSpeed;
         _playerMovement._isInputDisabled = true;
         StartCoroutine(IBossStandBy());
@@ -46,10 +53,17 @@ public class BossFightManager : MonoBehaviour
     {
         if (!_levelStarted) return;
         _cameraEdgeX = CameraEdgeX(_cameraEdgeX);
-        UpdateBoundary(_cameraEdgeX);
+        if (!_isGameOver) UpdateBoundary(_cameraEdgeX, _yMax, _yMin);
 
-        if (_amplitudeDecreasing) _playerCameraShake.AmplitudeGain = Mathf.Lerp(_playerCameraShake.AmplitudeGain, 0f, ShakeDuration / 2f);
-        else if (_amplitudeIncreasing) _playerCameraShake.AmplitudeGain = Mathf.Lerp(_playerCameraShake.AmplitudeGain, ShakeAmplitude, ShakeDuration / 2f);
+        if (_amplitudeDecreasing) _cameraShake.AmplitudeGain = Mathf.Lerp(_cameraShake.AmplitudeGain, 0f, ShakeDuration / 2f);
+        else if (_amplitudeIncreasing) _cameraShake.AmplitudeGain = Mathf.Lerp(_cameraShake.AmplitudeGain, ShakeAmplitude, ShakeDuration / 2f);
+
+        if (_isGameOver)
+        {
+            _confiner.InvalidateBoundingShapeCache();
+            _playerCamera.Lens.OrthographicSize = Mathf.SmoothDamp(_playerCamera.Lens.OrthographicSize, 9f, ref velocity, 3f);
+            _confiner.InvalidateBoundingShapeCache();
+        }
     }
 
     private IEnumerator IBossStandBy()
@@ -61,18 +75,18 @@ public class BossFightManager : MonoBehaviour
     }
 
 
-    private void UpdateBoundary(float xMax)
+    private void UpdateBoundary(float xMax, float yMax, float yMin)
     {
         float xMin = xMax - 100f;
 
         _polygonCollider2D.points = new Vector2[4]
         {
-            new Vector2(xMin, _yMin),
-            new Vector2(xMax, _yMin),
-            new Vector2(xMax, _yMax),
-            new Vector2(xMin, _yMax),
+            new Vector2(xMin, yMin),
+            new Vector2(xMax, yMin),
+            new Vector2(xMax, yMax),
+            new Vector2(xMin, yMax),
         };
-        _cameraConfiner.InvalidateBoundingShapeCache();
+        _confiner.InvalidateBoundingShapeCache();
         _playerMovement.CalculateBounds();
     }
 
@@ -89,5 +103,38 @@ public class BossFightManager : MonoBehaviour
         _amplitudeDecreasing = true;
         yield return new WaitForSeconds(ShakeDuration / 2f);
         _amplitudeDecreasing = false;
+    }
+
+    public void OnBossDying()
+    {
+        MusicPlayer.Instance.Pause();
+        _pauseButton.gameObject.SetActive(false);
+        _playerCamera.Target.TrackingTarget = _behavior.transform;
+        StartCoroutine(IVibrateScreen());
+
+        
+        _isGameOver = true;
+        _playerMovement._isInputDisabled = true;
+        _playerMovement.ToggleGravity();
+    }
+
+    public void OnBossDead()
+    {
+        StartCoroutine(ISetupEnding());
+    }
+
+    private IEnumerator ISetupEnding()
+    {
+        yield return new WaitForSeconds(3f);
+        _levelLoader.Transition();
+        yield return new WaitForSeconds(_levelLoader.GetAnimationDuration());
+        _behavior.gameObject.SetActive(false);
+        _dynamicBackground.gameObject.SetActive(false);
+        _playerCamera.CancelDamping();
+        _playerMovement.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        _playerMovement.transform.position = new Vector3(-9.54f, -70f, 0f);
+        _playerMovement.ToggleGravity();
+        _playerCamera.Target.TrackingTarget = _finalTarget.transform;
+        UpdateBoundary(0f, 200f , -103.3f);
     }
 }

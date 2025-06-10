@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleOutOfBounds()
     {
-        if (_isEpilogue) return;
+        if (_isEpilogue || _isInputDisabled) return;
         if ( !IsOnFloor && transform.position.x < worldMin - 1f )
         {
             _rigidBody.linearVelocityY = 0f;
@@ -500,6 +500,11 @@ public class PlayerMovement : MonoBehaviour
         _diveAvailable = false;
         yield return new WaitForSeconds(_diveCooldown);
         _diveAvailable = true;
+    }
+
+    public void ToggleGravity()
+    {
+        _currentGravity = _currentGravity == 0f ? _gravityAcceleration : 0f;
     }
 
 }

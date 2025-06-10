@@ -88,7 +88,6 @@ public class Spawner : MonoBehaviour
         float waveVelocity = _isBossFight ? 5f : 3f;
         _spawnPhase += Time.deltaTime - deltaX / waveVelocity ;
         _lastX = transform.position.x;
-        Debug.Log(_spawnPhase);
         if (_spawnPhase > _spawnPeriod)
         {
             _spawnPhase = 0f;

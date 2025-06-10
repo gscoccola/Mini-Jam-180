@@ -13,10 +13,27 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(ILoadLevel(levelIndex));
     }
 
+    public void Transition()
+    {
+        StartCoroutine(ITransition());
+    }
+
+    public float GetAnimationDuration()
+    {
+        return _animationDuration;
+    }
+
     IEnumerator ILoadLevel(int levelIndex)
     {
         _animator.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(_animationDuration);
         SceneManager.LoadScene(levelIndex);
+    }
+
+    IEnumerator ITransition()
+    {
+        _animator.SetTrigger("Start");
+        yield return new WaitForSecondsRealtime(_animationDuration);
+        _animator.SetTrigger("End");
     }
 }

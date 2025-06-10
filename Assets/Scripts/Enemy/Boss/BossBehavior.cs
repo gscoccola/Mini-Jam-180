@@ -41,6 +41,8 @@ public class BossBehavior : MonoBehaviour
 
     [SerializeField] GameObject Cigarette;
     [SerializeField] GameObject Rock;
+    [SerializeField] GameObject Explosion1;
+    [SerializeField] GameObject Explosion2;
     [SerializeField] Rigidbody2D RightHand;
     [SerializeField] Rigidbody2D LeftHand;
     [SerializeField] TextMeshProUGUI BossStateText;
@@ -51,12 +53,16 @@ public class BossBehavior : MonoBehaviour
     GameObject _enemies;
     BossFightManager  _manager;
     SemiRandomIntGenerator _intGenerator;
+    Animator _rightHandAnimator;
+
+
     bool _rangedAttackOnCooldown;
     bool _punchAttackOnCooldown;
     int _hitsLeftToStun;
     int _currentPhase = 0;
     public float _stunnedXSpeed;
     bool _normalMovement = true;
+    bool _returnHand = false;
 
     BossState _bossState;
 
@@ -67,6 +73,7 @@ public class BossBehavior : MonoBehaviour
         _enemies = GameObject.Find("Enemies");
         _rigidbody = GetComponent<Rigidbody2D>();
         _manager = FindAnyObjectByType<BossFightManager>();
+        _rightHandAnimator = RightHand.GetComponent<Animator>();
     }
 
     private void Start()
@@ -85,12 +92,17 @@ public class BossBehavior : MonoBehaviour
         MoveHandToTarget(ref RightHand, _rightHandTarget);
         MoveHandToTarget(ref LeftHand, _leftHandTarget);
 
-        if (_bossState == BossState.Dead) return;
+        if (_bossState == BossState.Dead)
+        {
+            _rigidbody.linearVelocity = new Vector2(0f, -MoveSpeedSlow/5f);
+            return;
+        }
+            
 
         Vector3 relativePlayerPos = _playerTransform.position - transform.position;
 
         if (_bossState == BossState.Idle) Attack(relativePlayerPos);
-        if (_bossState == BossState.PunchAttack || _bossState == BossState.ThrowAttack) 
+        if (_bossState == BossState.PunchAttack || (_bossState == BossState.ThrowAttack && _returnHand == true)) 
             _rightHandTarget = ReturnTargetToCenter(_rightHandTarget, _rightHandCenter);
         if (_bossState == BossState.Stunned && transform.position.x > _manager._cameraEdgeX + 5f) TeleportAndReset();
 
@@ -151,14 +163,23 @@ public class BossBehavior : MonoBehaviour
     private IEnumerator IThrowAttack()
     {
         _bossState = BossState.ThrowAttack;
+        _rightHandAnimator.SetBool("Open", true);
+        _returnHand = false;
         _normalMovement = false;
-        _animator.SetTrigger("Frown");
         _rangedAttackOnCooldown = true;
-        _rightHandTarget = new Vector3(1f, 0.5f, 0f);
+        _rightHandTarget = new Vector3(-4.5f, 0.5f, 0f);
+        yield return new WaitForSeconds(0.4f);
+        _rightHandTarget = new Vector3(1f, 1f, 0f);
+        _animator.SetTrigger("Frown");
         yield return new WaitForSeconds(_fistReturnTime / 4f);
         SpawnRockWave();
         _normalMovement = true;
+        yield return new WaitForSeconds(0.3f);
+        _returnHand = true;
+        yield return new WaitForSeconds(0.1f);
+        _rightHandAnimator.SetBool("Open", false);
         yield return new WaitForSeconds(_fistReturnTime * 3f / 4f);
+        
         _bossState = BossState.Idle;
         yield return new WaitForSeconds(AttackDelay - _fistReturnTime - 0.2f);
         _rangedAttackOnCooldown = false;
@@ -205,8 +226,8 @@ public class BossBehavior : MonoBehaviour
         }
         else if (_bossState == BossState.Stunned)
         {
-            _rigidbody.linearVelocityY = Vector2.MoveTowards(_rigidbody.linearVelocity,
-            (transform.position.y - 6f ) * Vector3.down
+            _rigidbody.linearVelocityY = Vector2.MoveTowards(_rigidbody.linearVelocity, (transform.position.y - Mathf.Clamp(
+                transform.position.y, 8f , 12f)) * Vector3.down
             * MoveSpeedSlow/5f, Acceleration  * Time.deltaTime / 2f).y;
             _rigidbody.linearVelocityX = -_stunnedXSpeed/2f;
         }
@@ -260,6 +281,7 @@ public class BossBehavior : MonoBehaviour
         _rightHandTarget = RandomizeHandTarget(_rightHandCenter);
         _rangedAttackOnCooldown = false;
         _punchAttackOnCooldown = false;
+        _rightHandAnimator.SetBool("Open", false);
     }
 
     private IEnumerator ITakeDamage()
@@ -294,21 +316,52 @@ public class BossBehavior : MonoBehaviour
     private void TriggerPhaseChange()
     {
         _currentPhase++;
+        
         //_intGenerator.IncreaseChoiceNumber();
-        StartCoroutine(_manager.IVibrateScreen());
-        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossFistConnect);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossDived);
         VibrationHandler.Instance.HeavyVibrate();
-        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
         _animator.SetTrigger("TakeDamage");
-        _hitsLeftToStun = _totalHitsToStun;
-        StartCoroutine(IPhaseChange());
+        StartCoroutine(_manager.IVibrateScreen());
+        if (_currentPhase == _totalPhases) StartCoroutine(IDie());
+        else StartCoroutine(IPhaseChange());
     }
 
     private IEnumerator IPhaseChange()
     {
+        _hitsLeftToStun = _totalHitsToStun;
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
         _bossState = BossState.PhaseChange;
         yield return new WaitForSeconds(4f);
         TeleportAndReset();   
+    }
+
+    private IEnumerator IDie()
+    {
+        _manager.OnBossDying();
+        _bossState = BossState.Dying;
+        Vector2 randPost;
+        
+        yield return new WaitForSeconds(0.4f);
+        _animator.SetTrigger("Dying");
+        for (int i = 0; i < 12; i++)
+        {
+            randPost = Random.insideUnitCircle * 4f;
+            Instantiate(Explosion1, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
+            yield return new WaitForSeconds(0.2f);
+            Instantiate(Explosion2, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
+            yield return new WaitForSeconds(0.2f);
+        }
+        _animator.SetTrigger("Dead");
+        _manager.OnBossDead();
+        _bossState = BossState.Dead;
+        StartCoroutine(_manager.IVibrateScreen());
+        Instantiate(Explosion1, transform.position, Quaternion.identity, _enemies.transform).transform.localScale *= 6f;
+        while (true)
+        {
+            randPost = Random.insideUnitCircle * 4f;
+            Instantiate(Explosion2, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
+            yield return new WaitForSeconds(0.6f);
+        }
     }
 
     private void TeleportAndReset()
@@ -364,6 +417,7 @@ public enum BossState
     Damaged,
     PhaseChange,
     Dead,
+    Dying,
 }
 
 public class SemiRandomIntGenerator

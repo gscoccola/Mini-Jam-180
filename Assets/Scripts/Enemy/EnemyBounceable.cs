@@ -39,6 +39,7 @@ public class EnemyBounceable : MonoBehaviour
             if (_enemytype == EnemyType.Rock)
             {
                 collision.collider.gameObject.GetComponent<PlayerMovement>().Stun();
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerHurt);
             }
             else
             {

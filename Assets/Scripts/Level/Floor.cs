@@ -52,6 +52,7 @@ public class Floor : MonoBehaviour
 
     private void DefineBoundaries()
     {
+        if (_floorType == FloorType.BossEnding) return;
         if (_floorType != FloorType.Water && _floorType != FloorType.BossTrigger) return;
         Bounds bounds = _tilemapCollider2D.bounds;
         float worldMin = _tilemap.transform.TransformPoint(bounds.min).x;
@@ -97,4 +98,5 @@ public enum FloorType
     Water,
     Ground,
     BossTrigger,
+    BossEnding,
 }

@@ -107,7 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2078115af9673794489368d690601ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalHitsToStun: 1
+  _totalHitsToStun: 2
+  _totalPhases: 3
   MoveSpeedSlow: 10
   MoveSpeedFast: 24
   PosAdjustDistance: 25
@@ -118,6 +119,7 @@ MonoBehaviour:
   AttackMovementPause: 0.4
   MaxYOffsetToAttack: 5
   MaxXOffsetToCigaretteAttack: 23
+  _rockMinVelocity: 13
   MaxDistanceToPunchAttack: 11
   _punchFixedSpeed: 10
   _fistReturnSpeed: 12
@@ -126,10 +128,11 @@ MonoBehaviour:
   hoverYOffset: 2.1
   _leftHandCenter: {x: 2.8, y: -2.8, z: 0}
   _rightHandCenter: {x: -2.8, y: -2.8, z: 0}
-  _elasticConstant: 10
+  _elasticConstant: 3000
   _swayRandomizePeriod: 2
   _swayCenterAmplitude: 0.6
-  Projectile: {fileID: 8306077369276571215, guid: 098b8f5311a4f7844b2d649baf68cda4, type: 3}
+  Cigarette: {fileID: 8306077369276571215, guid: 098b8f5311a4f7844b2d649baf68cda4, type: 3}
+  Rock: {fileID: 4174810378592755860, guid: 29c6d1b638a0d2d479a4f56654d24a8a, type: 3}
   RightHand: {fileID: 524816799028899656}
   LeftHand: {fileID: 7183559373221840857}
   BossStateText: {fileID: 0}
@@ -518,7 +521,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 10
   m_LinearDamping: 5
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -566,6 +569,7 @@ GameObject:
   - component: {fileID: 4772781408034164401}
   - component: {fileID: 8834163728189922634}
   - component: {fileID: 524816799028899656}
+  - component: {fileID: 6632772266880677939}
   - component: {fileID: 7614059146222287355}
   - component: {fileID: 4319159826031902546}
   m_Layer: 12
@@ -657,7 +661,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 10
   m_LinearDamping: 5
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -672,6 +676,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6632772266880677939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6038521391666091183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0a7a0692811c244b071bc247193f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SFXAvailable: 0
 --- !u!70 &7614059146222287355
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -746,7 +763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2716350025524128895
 Transform:
   m_ObjectHideFlags: 0
@@ -756,7 +773,7 @@ Transform:
   m_GameObject: {fileID: 7764424507176714513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.12, y: 6.68, z: 0}
+  m_LocalPosition: {x: 0.12, y: 7.07, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
