@@ -125,9 +125,10 @@ public class BossFightManager : MonoBehaviour
 
     private IEnumerator ISetupEnding()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         _levelLoader.Transition();
         yield return new WaitForSeconds(_levelLoader.GetAnimationDuration());
+        MusicPlayer.Instance.PlayWind();
         _behavior.gameObject.SetActive(false);
         _dynamicBackground.gameObject.SetActive(false);
         _playerCamera.CancelDamping();

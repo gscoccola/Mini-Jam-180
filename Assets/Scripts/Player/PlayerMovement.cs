@@ -376,9 +376,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (_isFlying) SetFly(false);
-        ResetCombo();
-        ChangeStance();
-        VibrationHandler.Instance.MediumVibrate();
+        
     }
 
     public void Stun()
@@ -388,6 +386,9 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator IStun()
     {
+        ResetCombo();
+        ChangeStance();
+        VibrationHandler.Instance.MediumVibrate();
         _isStunned = true;
         _stunVFX.SetActive(true);
         yield return new WaitForSeconds(_stunDuration);

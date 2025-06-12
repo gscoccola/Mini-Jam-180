@@ -10,6 +10,8 @@ public class MusicPlayer : Singleton<MusicPlayer>
     public GamePhase _gamePhase;
     AudioSource _audioSource;
     AudioSource _audioSource2;
+    AudioSource _audioSource3;
+    AudioSource _audioSource4;
     AudioSource _audioSourceWind;
     [SerializeField] AudioResource _firstPhaseTrack;
     [SerializeField] AudioResource _firstPhaseComboTrack;
@@ -20,7 +22,14 @@ public class MusicPlayer : Singleton<MusicPlayer>
     [SerializeField] AudioResource _EpilogueTrack;
     [SerializeField] AudioResource _endlessTrack;
     [SerializeField] AudioResource _endlessComboTrack;
+
+    [SerializeField] AudioResource _bossPhase1;
+    [SerializeField] AudioResource _bossPhase2;
+    [SerializeField] AudioResource _bossPhase3;
+    [SerializeField] AudioResource _bossCombo;
     public bool _isSecondTrackEnabled;
+    public bool _isThirdTrackEnabled;
+    public bool _isFourthTrackEnabled;
     public bool _beginFadeOutWind;
     public bool _isPlayingWind;
     public bool _isPlayingMusic;
@@ -29,6 +38,8 @@ public class MusicPlayer : Singleton<MusicPlayer>
     {
         _audioSource = GetComponent<AudioSource>();
         _audioSource2 = transform.GetChild(0).GetComponent<AudioSource>();
+        _audioSource3 = transform.GetChild(2).GetComponent<AudioSource>();
+        _audioSource4 = transform.GetChild(3).GetComponent<AudioSource>();
         _audioSourceWind = transform.GetChild(1).GetComponent<AudioSource>();
 
     }
@@ -40,9 +51,18 @@ public class MusicPlayer : Singleton<MusicPlayer>
         GamePhase previousPhase = _gamePhase;
         if (new List<int> { 1, 2, 3}.Contains(levelIndex)) _gamePhase = GamePhase.First;
         else if (new List<int> { 4, 5}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
-        else if (new List<int> { 6, 7}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
+        else if (new List<int> { 6}.Contains(levelIndex)) _gamePhase = GamePhase.Third;
+        else if (new List<int> {7}.Contains(levelIndex)) _gamePhase = GamePhase.Boss;
         else if(new List<int> {8 }.Contains(levelIndex)) _gamePhase = GamePhase.Epilogue;
         else if(new List<int> {9 }.Contains(levelIndex)) _gamePhase = GamePhase.Endless;
+
+        if (_gamePhase == GamePhase.Boss)
+        {
+            _isThirdTrackEnabled = false;
+            _audioSource3.volume = 0f;
+            _isFourthTrackEnabled = false;
+            _audioSource4.volume = 0f;
+        }
 
         if (previousPhase == _gamePhase) return;
 
@@ -77,6 +97,14 @@ public class MusicPlayer : Singleton<MusicPlayer>
             _audioSource.resource = _endlessTrack;
             _audioSource2.resource = _endlessComboTrack;
         }
+        else if (_gamePhase == GamePhase.Boss)
+        {
+            _audioSource.volume = 0.265f;
+            _audioSource.resource = _bossPhase1;
+            _audioSource2.resource = _bossCombo;
+            _audioSource3.resource = _bossPhase2;
+            _audioSource4.resource = _bossPhase3;
+        }
         _isPlayingMusic = false;
     }
 
@@ -84,12 +112,22 @@ public class MusicPlayer : Singleton<MusicPlayer>
     {
         _audioSource.volume = _audioSource.volume / 4;
         _audioSource2.volume = _audioSource2.volume / 4;
+        if (_gamePhase == GamePhase.Boss)
+        {
+            _audioSource3.volume = _audioSource3.volume / 4;
+            _audioSource4.volume = _audioSource4.volume / 4;
+        }
     }
 
     public void RaiseVolume()
     {
         _audioSource.volume = _audioSource.volume * 4;
         _audioSource2.volume = _audioSource2.volume * 4;
+        if (_gamePhase == GamePhase.Boss)
+        {
+            _audioSource3.volume = _audioSource3.volume * 4;
+            _audioSource4.volume = _audioSource4.volume * 4;
+        }
     }
 
     private void Update()
@@ -100,11 +138,24 @@ public class MusicPlayer : Singleton<MusicPlayer>
             _audioSourceWind.volume = Mathf.MoveTowards(_audioSourceWind.volume, 0, _fadeRate * Time.deltaTime);
         }
 
+        
+
+        if (_isThirdTrackEnabled)
+        {
+            _audioSource3.volume = Mathf.MoveTowards(_audioSource3.volume, _maxVolume2, _fadeRate * Time.deltaTime);
+        }
+
+        if (_isFourthTrackEnabled)
+        {
+            _audioSource4.volume = Mathf.MoveTowards(_audioSource4.volume, _maxVolume2, _fadeRate * Time.deltaTime);
+        }
+
         if (_isSecondTrackEnabled)
         {
             _audioSource2.volume = Mathf.MoveTowards(_audioSource2.volume, _maxVolume2, _fadeRate * Time.deltaTime);
             return;
         }
+
         _audioSource2.volume = 0f;
 
     }
@@ -114,6 +165,12 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _isPlayingMusic = false;
         _audioSource.Stop();
         _audioSource2.Stop();
+        if (_gamePhase == GamePhase.Boss)
+        {
+            _audioSource3.Stop();
+            _audioSource4.Stop();
+        }
+        
     }
 
     public void Play()
@@ -121,6 +178,11 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _isPlayingMusic = true;
         _audioSource.Play();
         _audioSource2.Play();
+        if (_gamePhase == GamePhase.Boss)
+        {
+            _audioSource3.Play();
+            _audioSource4.Play();
+        }   
     }
 
     public void PlayWind()
@@ -139,4 +201,5 @@ public enum GamePhase
     Third,
     Epilogue,
     Endless,
+    Boss,
 }

@@ -6,6 +6,7 @@ public class BossIntroManager : MonoBehaviour
 {
     [SerializeField] BossIntroBehavior Boss;
     [SerializeField] CinemachinePositionComposer _playerCamera;
+    [SerializeField] GameObject _waterSplash;
     CinemachineBasicMultiChannelPerlin _playerCameraShake;
 
     [SerializeField] float SpawnDelay;
@@ -49,12 +50,13 @@ public class BossIntroManager : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossSplash);
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.4f);
 
         Boss.StartMovement();
         
 
         yield return new WaitForSeconds(ShakeDuration - 1f);
+        Instantiate(_waterSplash, Boss.transform.position + Vector3.up * 4f, Quaternion.identity).transform.localScale = Vector3.one * 3f;
 
         _amplitudeDecreasing = true;
     }

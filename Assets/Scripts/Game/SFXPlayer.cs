@@ -44,6 +44,14 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossFistConnectVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _bossDived;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossDivedVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossThrow;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossThrowVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossPunch;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossPunchVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossNewPhase;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossNewPhaseVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossExplosion;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossExplosionVolume;
 
 
     [Header("Player Fall")]
@@ -153,6 +161,10 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_bossStun] = _bossStunVolume,
             [_bossFistConnect] = _bossFistConnectVolume,
             [_bossDived] = _bossDivedVolume,
+            [_bossThrow] = _bossThrowVolume,
+            [_bossPunch] = _bossPunchVolume,
+            [_bossNewPhase] = _bossNewPhaseVolume,
+            [_bossExplosion] = _bossExplosionVolume,
 
         };
     }

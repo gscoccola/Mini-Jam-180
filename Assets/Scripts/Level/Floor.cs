@@ -66,6 +66,7 @@ public class Floor : MonoBehaviour
         if (!_isTriggered && collision.collider.tag == "Player")
         {
             _isTriggered = true;
+            if (_floorType == FloorType.BossEnding) MusicPlayer.Instance._beginFadeOutWind = true;
             if (_floorType == FloorType.Ground)
             {
                 _gameManager.Lose();
@@ -84,6 +85,7 @@ public class Floor : MonoBehaviour
                 FindAnyObjectByType<BossIntroManager>().OnLevelEnd();
                 FindAnyObjectByType<TargetIndicator>().gameObject.SetActive(false);
                 FindAnyObjectByType<MissileSpawner>().StopSpawning();
+                FindAnyObjectByType<Spawner>().gameObject.SetActive(false);
                 MusicPlayer.Instance.Pause();
                 return;
             }

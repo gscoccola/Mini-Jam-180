@@ -40,6 +40,7 @@ public class EnemyBounceable : MonoBehaviour
             {
                 collision.collider.gameObject.GetComponent<PlayerMovement>().Stun();
                 SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerHurt);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossThrow);
             }
             else
             {

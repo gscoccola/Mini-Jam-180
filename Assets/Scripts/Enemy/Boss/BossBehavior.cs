@@ -171,7 +171,9 @@ public class BossBehavior : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         _rightHandTarget = new Vector3(1f, 1f, 0f);
         _animator.SetTrigger("Frown");
-        yield return new WaitForSeconds(_fistReturnTime / 4f);
+        yield return new WaitForSeconds(_fistReturnTime / 8f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossThrow);
+        yield return new WaitForSeconds(_fistReturnTime / 8f);
         SpawnRockWave();
         _normalMovement = true;
         yield return new WaitForSeconds(0.3f);
@@ -187,6 +189,7 @@ public class BossBehavior : MonoBehaviour
 
     private IEnumerator IPunchAttack(Vector3 relativePlayerPos)
     {
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossPunch);
         _animator.SetTrigger("Frown");
         _bossState = BossState.PunchAttack;
         RightHand.GetComponent<Fist>()._SFXAvailable = true;
@@ -332,25 +335,36 @@ public class BossBehavior : MonoBehaviour
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
         _bossState = BossState.PhaseChange;
         yield return new WaitForSeconds(4f);
-        TeleportAndReset();   
+        if (_currentPhase == 1) MusicPlayer.Instance._isThirdTrackEnabled = true;
+        else if (_currentPhase == 2) MusicPlayer.Instance._isFourthTrackEnabled = true;
+        TeleportAndReset();
+        yield return new WaitForSeconds(0.5f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossNewPhase);
     }
 
     private IEnumerator IDie()
     {
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
+        MusicPlayer.Instance.Pause();
         _manager.OnBossDying();
         _bossState = BossState.Dying;
         Vector2 randPost;
         
         yield return new WaitForSeconds(0.4f);
         _animator.SetTrigger("Dying");
+        yield return new WaitForSeconds(0.7f);
         for (int i = 0; i < 12; i++)
         {
+            SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._bossExplosion, Random.Range(0, 2));
             randPost = Random.insideUnitCircle * 4f;
             Instantiate(Explosion1, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
             yield return new WaitForSeconds(0.2f);
+            SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._bossExplosion, Random.Range(0, 2));
             Instantiate(Explosion2, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
             yield return new WaitForSeconds(0.2f);
         }
+        yield return new WaitForSeconds(1f);
+        SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._bossExplosion, 2);
         _animator.SetTrigger("Dead");
         _manager.OnBossDead();
         _bossState = BossState.Dead;
