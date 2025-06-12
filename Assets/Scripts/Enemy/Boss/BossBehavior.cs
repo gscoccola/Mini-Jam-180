@@ -46,6 +46,7 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] Rigidbody2D RightHand;
     [SerializeField] Rigidbody2D LeftHand;
     [SerializeField] TextMeshProUGUI BossStateText;
+    [SerializeField]  Animator _cigarAnimator;
 
     Animator _animator;
     Transform _playerTransform;
@@ -338,6 +339,7 @@ public class BossBehavior : MonoBehaviour
         if (_currentPhase == 1) MusicPlayer.Instance._isThirdTrackEnabled = true;
         else if (_currentPhase == 2) MusicPlayer.Instance._isFourthTrackEnabled = true;
         TeleportAndReset();
+        _cigarAnimator.SetTrigger("PhaseChange");
         yield return new WaitForSeconds(0.5f);
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossNewPhase);
     }
@@ -355,17 +357,19 @@ public class BossBehavior : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         for (int i = 0; i < 12; i++)
         {
-            SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._bossExplosion, Random.Range(0, 2));
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossExplosion);
             randPost = Random.insideUnitCircle * 4f;
             Instantiate(Explosion1, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
             yield return new WaitForSeconds(0.2f);
-            SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._bossExplosion, Random.Range(0, 2));
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossExplosion);
             Instantiate(Explosion2, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
             yield return new WaitForSeconds(0.2f);
         }
         yield return new WaitForSeconds(1f);
-        SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._bossExplosion, 2);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossBigExplosion);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossDead);
         _animator.SetTrigger("Dead");
+        _cigarAnimator.SetTrigger("PhaseChange");
         _manager.OnBossDead();
         _bossState = BossState.Dead;
         StartCoroutine(_manager.IVibrateScreen());
@@ -380,11 +384,11 @@ public class BossBehavior : MonoBehaviour
 
     private void TeleportAndReset()
     {
-        Vector3 newPos = _playerTransform.position + 40f * Vector3.left + 7f * Vector3.up;
+        Vector3 newPos = _playerTransform.position + 45f * Vector3.left;
         transform.position = newPos;
         LeftHand.transform.position = newPos;
         RightHand.transform.position = newPos;
-        _bossState = BossState.Idle;
+        _bossState = BossState.AdjustingPosition;
         _animator.SetTrigger("BackToIdle");
     }
 

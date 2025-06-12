@@ -440,6 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fadeRate: 0.25
   _maxVolume2: 0.2
+  _maxVolume3: 0.4
   _gamePhase: 0
   _firstPhaseTrack: {fileID: 8300000, guid: 49eb32727dc60eb419a5cc4a06772b2b, type: 3}
   _firstPhaseComboTrack: {fileID: 8300000, guid: 3b4ec2518f6c5864b935736b0fd42796, type: 3}
@@ -605,10 +606,22 @@ MonoBehaviour:
   _bossExplosion:
   - {fileID: 8300000, guid: 0bff2d3ff4a2e32459918f34b81ee63b, type: 3}
   - {fileID: 8300000, guid: 78ef3f6da9b9edc46bdacd38431432b1, type: 3}
-  - {fileID: 8300000, guid: 5dc4c9baf2e50004a8f603231cb03cdc, type: 3}
+  - {fileID: 8300000, guid: ef6ecbf3148ba354291bd390d666df48, type: 3}
+  - {fileID: 8300000, guid: f09fe1b24876c154f93667d68e2f3632, type: 3}
+  - {fileID: 8300000, guid: b02c3f35b3760954c8430935a2852839, type: 3}
   _bossExplosionVolume:
   - 0.8
   - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  _bossBigExplosion:
+  - {fileID: 8300000, guid: 028d6888dae63fb4dba1f1ab7167d7fe, type: 3}
+  _bossBigExplosionVolume:
+  - 1
+  _bossDead:
+  - {fileID: 8300000, guid: a16f430766eb0cf40aafc920a4e92eeb, type: 3}
+  _bossDeadVolume:
   - 1
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
@@ -682,7 +695,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
   - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
   - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
-  - {fileID: 8300000, guid: b7a4ce0d65617604b962034119199ec0, type: 3}
+  - {fileID: 8300000, guid: 06f338a4b3694a14e8e246eeffe178bb, type: 3}
   _comboLostVolume:
   - 0.211
   - 0.264

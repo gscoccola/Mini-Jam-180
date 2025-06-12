@@ -42,6 +42,7 @@ public class EnemyBounceable : MonoBehaviour
                 SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerHurt);
                 SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossThrow);
             }
+            else if (_isRedirected) return;
             else
             {
                 collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LeftHandIdle
+  m_Name: CigarDefeat
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 6008074867816511056, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
+      value: {fileID: -3901327314376236078, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
     - time: 0.2
-      value: {fileID: -4997791877351488195, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
+      value: {fileID: -2588398920026716865, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
     - time: 0.4
-      value: {fileID: 700749050, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
+      value: {fileID: 669520516, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
     - time: 0.6
-      value: {fileID: 897078019, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
+      value: {fileID: -1446264248, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 6008074867816511056, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
-    - {fileID: -4997791877351488195, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
-    - {fileID: 700749050, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
-    - {fileID: 897078019, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
+    - {fileID: -3901327314376236078, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
+    - {fileID: -2588398920026716865, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
+    - {fileID: 669520516, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
+    - {fileID: -1446264248, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

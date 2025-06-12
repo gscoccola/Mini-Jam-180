@@ -7,6 +7,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
 {
     [SerializeField] float _fadeRate = 0.2f;
     [SerializeField] float _maxVolume2 = 0.2f;
+    [SerializeField] float _maxVolume3 = 0.4f;
     public GamePhase _gamePhase;
     AudioSource _audioSource;
     AudioSource _audioSource2;
@@ -142,7 +143,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
 
         if (_isThirdTrackEnabled)
         {
-            _audioSource3.volume = Mathf.MoveTowards(_audioSource3.volume, _maxVolume2, _fadeRate * Time.deltaTime);
+            _audioSource3.volume = Mathf.MoveTowards(_audioSource3.volume, _maxVolume3, _fadeRate * Time.deltaTime);
         }
 
         if (_isFourthTrackEnabled)
