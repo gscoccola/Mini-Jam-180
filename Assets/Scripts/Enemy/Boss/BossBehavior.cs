@@ -7,6 +7,9 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] int _totalHitsToStun;
     [SerializeField] int _totalPhases;
 
+    [SerializeField] float _throwProbability;
+    [SerializeField] float _chargeProbability;
+
     [SerializeField] float MoveSpeedSlow;
     [SerializeField] float MoveSpeedFast;
     [SerializeField] float PosAdjustDistance;
@@ -20,6 +23,14 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] float MaxYOffsetToAttack;
     [SerializeField] float MaxXOffsetToCigaretteAttack;
     [SerializeField] float _rockMinVelocity;
+
+
+    [SerializeField] float _chargePrepareTime1;
+    [SerializeField] float _chargePrepareTime2;
+    [SerializeField] float _chargePrepareSpeed;
+    [SerializeField] float _chargeAttackSpeed;
+    [SerializeField] float _chargeXRange;
+    [SerializeField] float _velocityCorrectionFactor;
 
 
     [SerializeField] float MaxDistanceToPunchAttack;
@@ -47,6 +58,8 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] Rigidbody2D LeftHand;
     [SerializeField] TextMeshProUGUI BossStateText;
     [SerializeField]  Animator _cigarAnimator;
+    [SerializeField]  GameObject _chargeIndicator;
+    [SerializeField]  Rigidbody2D _chargeBoss;
 
     Animator _animator;
     Transform _playerTransform;
@@ -61,7 +74,6 @@ public class BossBehavior : MonoBehaviour
     bool _punchAttackOnCooldown;
     int _hitsLeftToStun;
     int _currentPhase = 0;
-    public float _stunnedXSpeed;
     bool _normalMovement = true;
     bool _returnHand = false;
 
@@ -82,7 +94,7 @@ public class BossBehavior : MonoBehaviour
         StartCoroutine(IRandomizeHandTarget());
         _bossState = BossState.StandBy;
         _hitsLeftToStun = _totalHitsToStun;
-        _intGenerator = new SemiRandomIntGenerator(new float[1]{ 0.5f ,}, 1);
+        _intGenerator = new SemiRandomIntGenerator(new float[2]{ _throwProbability, _chargeProbability }, 0);
     }
 
 
@@ -139,6 +151,9 @@ public class BossBehavior : MonoBehaviour
                     break;
                 case 1:
                     StartCoroutine(IThrowAttack());
+                    break;
+                case 2:
+                    StartCoroutine(IChargeAttack());
                     break;
             }
         }
@@ -203,6 +218,25 @@ public class BossBehavior : MonoBehaviour
         _punchAttackOnCooldown = false;
     }
 
+    private IEnumerator IChargeAttack()
+    {
+        _bossState = BossState.ChargeAttackPrepare;
+        yield return new WaitForSeconds(_chargePrepareTime1);
+        _chargeIndicator.SetActive(true);
+        _chargeIndicator.transform.position = new Vector3(_playerTransform.transform.position.x 
+            + _playerTransform.GetComponent<Rigidbody2D>().linearVelocityX * _velocityCorrectionFactor
+            + Random.Range(-1f, 1f) * _chargeXRange / 2f, 18f, 0f);
+        yield return new WaitForSeconds(_chargePrepareTime2);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossCharge);
+        Vector3 teleportPostition = new Vector3(_chargeIndicator.transform.position.x, -3.5f, 0f);
+        _chargeBoss.transform.position = teleportPostition;
+        _chargeBoss.linearVelocityY = _chargeAttackSpeed;
+        _bossState = BossState.ChargeAttackExecute;
+        _chargeIndicator.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        TeleportAndReset();
+    }
+
 
     private void Move(BossState bossState, Vector3 relativePlayerPos)
     {
@@ -214,7 +248,7 @@ public class BossBehavior : MonoBehaviour
         {
             _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
             (relativePlayerPos + TargetXOffset * Vector3.left).normalized
-            * MoveSpeedFast, 3f * Acceleration * Time.deltaTime);
+            * MoveSpeedFast, 5f * Acceleration * Time.deltaTime);
         }
         else if (_bossState == BossState.Idle || _bossState == BossState.PunchAttack
             || (_normalMovement ==true && (_bossState == BossState.CigarAttack || _bossState == BossState.ThrowAttack)))
@@ -226,19 +260,29 @@ public class BossBehavior : MonoBehaviour
         else if (_bossState == BossState.PhaseChange)
         {
             _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
-            MoveSpeedFast * Vector3.down, Acceleration * 2f * Time.deltaTime);
+            MoveSpeedFast * Vector3.down, Acceleration * Time.deltaTime);
         }
         else if (_bossState == BossState.Stunned)
         {
-            _rigidbody.linearVelocityY = Vector2.MoveTowards(_rigidbody.linearVelocity, (transform.position.y - Mathf.Clamp(
-                transform.position.y, 8f , 12f)) * Vector3.down
+            _rigidbody.linearVelocityY = Vector2.MoveTowards(_rigidbody.linearVelocity, 
+                (transform.position.y - /*Mathf.Clamp(transform.position.y, 8f , 12f))*/ 14f) * Vector3.down
             * MoveSpeedSlow/5f, Acceleration  * Time.deltaTime / 2f).y;
-            _rigidbody.linearVelocityX = -_stunnedXSpeed/2f;
+            _rigidbody.linearVelocityX = /*-_stunnedXSpeed/8f*/ 2f;
+            
         }
         else if(_bossState == BossState.CigarAttack || _bossState == BossState.ThrowAttack)
         {
             _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
             Vector3.zero, 6f * Acceleration * Time.deltaTime);
+        }
+        else if(_bossState == BossState.ChargeAttackPrepare)
+        {
+            _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
+            Vector3.down * _chargePrepareSpeed, 4f * Acceleration * Time.deltaTime);
+        }
+        else if(_bossState == BossState.ChargeAttackExecute)
+        {
+            _rigidbody.linearVelocity = Vector2.zero;
         }
 
     }
@@ -275,6 +319,7 @@ public class BossBehavior : MonoBehaviour
     {
         
         _rigidbody.linearVelocityX += -7f;
+        _rigidbody.linearVelocityY += 2f;
         Interrupt();
         StartCoroutine(ITakeDamage());
     }
@@ -321,7 +366,7 @@ public class BossBehavior : MonoBehaviour
     {
         _currentPhase++;
         
-        //_intGenerator.IncreaseChoiceNumber();
+        
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossDived);
         VibrationHandler.Instance.HeavyVibrate();
         _animator.SetTrigger("TakeDamage");
@@ -332,15 +377,25 @@ public class BossBehavior : MonoBehaviour
 
     private IEnumerator IPhaseChange()
     {
+        _intGenerator.IncreaseChoiceNumber();
         _hitsLeftToStun = _totalHitsToStun;
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
         _bossState = BossState.PhaseChange;
-        yield return new WaitForSeconds(4f);
-        if (_currentPhase == 1) MusicPlayer.Instance._isThirdTrackEnabled = true;
-        else if (_currentPhase == 2) MusicPlayer.Instance._isFourthTrackEnabled = true;
-        TeleportAndReset();
+        yield return new WaitForSeconds(0.2f);
         _cigarAnimator.SetTrigger("PhaseChange");
-        yield return new WaitForSeconds(0.5f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossExplosion);
+        Instantiate(Explosion1, LeftHand.transform.position + 0.7f * Vector3.right, Quaternion.identity, _enemies.transform);
+        yield return new WaitForSeconds(3.8f);
+        if (_currentPhase == 1) MusicPlayer.Instance._isThirdTrackEnabled = true;
+        else if (_currentPhase == 2)
+        {
+            MusicPlayer.Instance._isFourthTrackEnabled = true;
+            StartCoroutine(IChargeAttack());
+            yield break;
+        }  
+        TeleportAndReset();
+        
+        yield return new WaitForSeconds(0.1f);
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossNewPhase);
     }
 
@@ -361,13 +416,20 @@ public class BossBehavior : MonoBehaviour
             randPost = Random.insideUnitCircle * 4f;
             Instantiate(Explosion1, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
             yield return new WaitForSeconds(0.2f);
+            randPost = Random.insideUnitCircle * 4f;
             SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossExplosion);
             Instantiate(Explosion2, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
             yield return new WaitForSeconds(0.2f);
         }
-        yield return new WaitForSeconds(1f);
-        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossBigExplosion);
-        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossDead);
+
+        randPost = Random.insideUnitCircle * 4f;
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossBigExplosion, 0.15f);
+        Instantiate(Explosion2, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
+
+        yield return new WaitForSeconds(1.2f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossBigExplosion, dontDestroyOnLoad : true);
+        yield return new WaitForSeconds(0.2f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossDead, dontDestroyOnLoad: true);
         _animator.SetTrigger("Dead");
         _cigarAnimator.SetTrigger("PhaseChange");
         _manager.OnBossDead();
@@ -384,12 +446,16 @@ public class BossBehavior : MonoBehaviour
 
     private void TeleportAndReset()
     {
-        Vector3 newPos = _playerTransform.position + 45f * Vector3.left;
+        Teleport((_playerTransform.position.x - 45f) * Vector3.right + 10f * Vector3.up);
+        _bossState = BossState.AdjustingPosition;
+        _animator.SetTrigger("BackToIdle");
+    }
+
+    private void Teleport(Vector3 newPos)
+    {
         transform.position = newPos;
         LeftHand.transform.position = newPos;
         RightHand.transform.position = newPos;
-        _bossState = BossState.AdjustingPosition;
-        _animator.SetTrigger("BackToIdle");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -404,11 +470,14 @@ public class BossBehavior : MonoBehaviour
 
     private void SpawnRockWave()
     {
-        float angle1 = 25f * Mathf.Deg2Rad;
-        float angle3 = 45f * Mathf.Deg2Rad;
+        Vector3 relativePlayerPos = _playerTransform.position - transform.position;
+        float angle1 = Mathf.Atan(relativePlayerPos.y / relativePlayerPos.x);
+        float angle2 = angle1 + 15f * Mathf.Deg2Rad;
+        float angle3 = angle1 - 15f * Mathf.Deg2Rad;
 
 
-        ThrowAtAngle(angle1, _rockMinVelocity * Random.Range(1f, 1.5f));
+        //ThrowAtAngle(angle1, _rockMinVelocity * Random.Range(1f, 1.5f));
+        ThrowAtAngle(angle2, _rockMinVelocity * Random.Range(1f, 1.5f));
         ThrowAtAngle(angle3, _rockMinVelocity * Random.Range(1f, 1.5f));
 
     }
@@ -429,6 +498,8 @@ public enum BossState
     CigarAttack,
     PunchAttack,
     ThrowAttack,
+    ChargeAttackPrepare,
+    ChargeAttackExecute,
 
     StandBy,
     Stunned,
@@ -475,14 +546,18 @@ public class SemiRandomIntGenerator
         for (int i = 0; i < _choiceNumber; i++)
         {
             aggregatedProb += _currentProbabilities[i];
-            if (randFloat < aggregatedProb) result = i + 1;                
+            if (randFloat < aggregatedProb)
+            {
+                result = i + 1;
+                break;
+            }      
         }
         AdjustProbabilities(result);
 
         Debug.Log("Result is " + result);
         for (int i = 0; i < _choiceNumber; i++)
         {
-            Debug.Log((i+1).ToString() + " " + _currentProbabilities[i]);
+            Debug.Log("The attack number " + (i+1).ToString() + " had probability " + _currentProbabilities[i]);
         }
         
         return result;

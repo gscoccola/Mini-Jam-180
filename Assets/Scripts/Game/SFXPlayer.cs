@@ -56,6 +56,8 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossBigExplosionVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _bossDead;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossDeadVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossCharge;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossChargeVolume;
 
 
     [Header("Player Fall")]
@@ -171,29 +173,35 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_bossExplosion] = _bossExplosionVolume,
             [_bossDead] = _bossDeadVolume,
             [_bossBigExplosion] = _bossBigExplosionVolume,
+            [_bossCharge] = _bossChargeVolume,
 
         };
     }
 
-    public void PlayRandomClipFromArray(AudioClip[] clipArray)
+    public void PlayRandomClipFromArray(AudioClip[] clipArray, float volume = 0f, bool dontDestroyOnLoad = false)
     {
         
         int indexToPlay = 0;
         if (clipArray.Length > 1)
         {
             if (clipArray == _playerBounce) indexToPlay = _playerMovement.PlayerCombo;
-            else if (clipArray == _comboLost) indexToPlay = (int)_gamePhase;
+            else if (clipArray == _comboLost) indexToPlay = (int)_gamePhase;                
             else indexToPlay = UnityEngine.Random.Range(0, clipArray.Length);
         }
-        PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
+        if (volume != 0f)
+        {
+            PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, volume);
+            return;
+        }
+        PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay], dontDestroyOnLoad);
     }
 
-    public void PlayClipFromArrayAtIndex(AudioClip[] clipArray, int index)
+    public void PlayClipFromArrayAtIndex(AudioClip[] clipArray, int index, bool dontDestroyOnLoad = false)
     {
-        PlayClipAtPoint(clipArray[index], _cameraPosition, _volumeDictionary[clipArray][index]);
+        PlayClipAtPoint(clipArray[index], _cameraPosition, _volumeDictionary[clipArray][index], dontDestroyOnLoad);
     }
 
-    public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, float pitch = 1, bool dontDestroyOnLoad = false)
+    public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, bool dontDestroyOnLoad = false)
     {
         GameObject tempGO = new GameObject("TempAudio"); // create the temp object
         tempGO.transform.position = pos; // set its position
@@ -203,7 +211,6 @@ public class SFXPlayer : Singleton<SFXPlayer>
             DontDestroyOnLoad(tempASource);
         }
         tempASource.clip = clip;
-        tempASource.pitch = pitch;
         tempASource.volume = volume;
         tempASource.rolloffMode = AudioRolloffMode.Linear;
         tempASource.maxDistance = 200f;

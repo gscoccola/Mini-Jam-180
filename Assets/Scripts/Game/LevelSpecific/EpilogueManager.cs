@@ -30,13 +30,19 @@ public class EpilogueManager : MonoBehaviour
         _fireworkSpawner = FindAnyObjectByType<FireworkSpawner>();
     }
 
+    private void Start()
+    {
+        _playerMovement._isInputDisabled = true;
+        _playerTransform.GetComponent<Rigidbody2D>().linearVelocityY = -10f;
+    }
+
     private void Update()
     {
         if (!_isGameOver  && _playerMovement._isInputDisabled)
         {
             _isGameOver = true;
             StartCoroutine(IGameOver());
-            MusicPlayer.Instance._beginFadeOutWind = true;
+            
         }
 
         if (_isGameOver)
@@ -57,6 +63,7 @@ public class EpilogueManager : MonoBehaviour
         _mobileScreenButtons.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
         yield return new WaitForSeconds(6f);
+        MusicPlayer.Instance._beginFadeOutWind = true;
         MusicPlayer.Instance.Play();
 
         yield return new WaitForSeconds(period -2f);

@@ -166,12 +166,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (transform.position.y < _minHeight)
         {
+            _rigidBody.linearVelocityX = 0f;
             _rigidBody.linearVelocityY = -3f;
             if (!_isOutOfBounds) GoOutOfBounds();
 
         }
         else if (transform.position.y > _maxHeight + 3f)
         {
+            _rigidBody.linearVelocityX = 0f;
             _rigidBody.linearVelocityY = 3f;
             if (!_isOutOfBounds) GoOutOfBounds();
 

@@ -24,7 +24,7 @@ public class BossFightManager : MonoBehaviour
     [SerializeField] GameObject _pauseButton;
     [SerializeField] GameObject _finalTarget;
     [SerializeField] GameObject _dynamicBackground;
-    LevelLoader _levelLoader;
+    GameManager _gameManager;
     CinemachineBasicMultiChannelPerlin _cameraShake;
     CinemachineConfiner2D _confiner;
     bool _amplitudeIncreasing;
@@ -37,14 +37,13 @@ public class BossFightManager : MonoBehaviour
         _polygonCollider2D = FindAnyObjectByType<PolygonCollider2D>();
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
         _behavior = FindAnyObjectByType<BossBehavior>();
-        _levelLoader = FindAnyObjectByType<LevelLoader>();
+        _gameManager = FindAnyObjectByType<GameManager>();
     }
 
     private void Start()
     {
         _cameraShake = _playerCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         _confiner = _playerCamera.GetComponent<CinemachineConfiner2D>();
-        _behavior._stunnedXSpeed = minScreenSpeed;
         _playerMovement._isInputDisabled = true;
         StartCoroutine(IBossStandBy());
     }
@@ -111,8 +110,8 @@ public class BossFightManager : MonoBehaviour
         _pauseButton.gameObject.SetActive(false);
         _playerCamera.Target.TrackingTarget = _behavior.transform;
         StartCoroutine(IVibrateScreen());
+        UpdateBoundary(_cameraEdgeX + 20f, _yMax, _yMin);
 
-        
         _isGameOver = true;
         _playerMovement._isInputDisabled = true;
         _playerMovement.ToggleGravity();
@@ -126,8 +125,9 @@ public class BossFightManager : MonoBehaviour
     private IEnumerator ISetupEnding()
     {
         yield return new WaitForSeconds(5f);
-        _levelLoader.Transition();
-        yield return new WaitForSeconds(_levelLoader.GetAnimationDuration());
+
+        _gameManager.NextLevel();
+        /*yield return new WaitForSeconds(_levelLoader.GetAnimationDuration());
         MusicPlayer.Instance.PlayWind();
         _behavior.gameObject.SetActive(false);
         _dynamicBackground.gameObject.SetActive(false);
@@ -136,6 +136,6 @@ public class BossFightManager : MonoBehaviour
         _playerMovement.transform.position = new Vector3(-9.54f, -70f, 0f);
         _playerMovement.ToggleGravity();
         _playerCamera.Target.TrackingTarget = _finalTarget.transform;
-        UpdateBoundary(0f, 200f , -103.3f);
+        UpdateBoundary(0f, 200f , -103.3f);*/
     }
 }

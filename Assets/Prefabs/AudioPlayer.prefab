@@ -623,6 +623,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a16f430766eb0cf40aafc920a4e92eeb, type: 3}
   _bossDeadVolume:
   - 1
+  _bossCharge:
+  - {fileID: 8300000, guid: aedf823b7760bf94aaff75c315ba0f95, type: 3}
+  - {fileID: 8300000, guid: 58f215b7ac9e7e5428a78e15581f165a, type: 3}
+  - {fileID: 8300000, guid: e5ed49e6e3ccce94b9b0e7616e11bce8, type: 3}
+  _bossChargeVolume:
+  - 0.7
+  - 0.7
+  - 0.7
   _playerSplash:
   - {fileID: 8300000, guid: 00e9b85b70f3f9748ab73fc3710db9ae, type: 3}
   _playerSplashVolume:
@@ -702,7 +710,7 @@ MonoBehaviour:
   - 0.211
   - 0.211
   - 0.211
-  - 0.211
+  - 0.62
   _button:
   - {fileID: 8300000, guid: 6e4ed70b57ade0a4aadc11382cbd6939, type: 3}
   _buttonVolume:
