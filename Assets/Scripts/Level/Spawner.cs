@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Linq;
 using Alchemy.Inspector;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Spawner : MonoBehaviour
 {

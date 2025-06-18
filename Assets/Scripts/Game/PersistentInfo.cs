@@ -1,9 +1,11 @@
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
-using System.Linq;
+using UnityEngine.SocialPlatforms;
+using UnityEngine.SocialPlatforms.Impl;
 
 // This Singleton class stores all the information that is persistent throughout the session
 
@@ -58,11 +60,15 @@ public class PersistentInfo : Singleton<PersistentInfo>
     public void UnlockAllLevelsAndAchievements()
      {
 
-         foreach (AchievementInfoSO achievement in _achievements)
+         /*foreach (AchievementInfoSO achievement in _achievements)
          {
-             AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, true);
-         }
-         for (int i = 0; i < LevelCompletionInfo.Count - 1; i++)
+             AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, false);
+         }*/
+        AchievementCompletionInfo[1] = new AchievementMilestones(true, true);
+        AchievementCompletionInfo[2] = new AchievementMilestones(true, true);
+        AchievementCompletionInfo[3] = new AchievementMilestones(true, true);
+        AchievementCompletionInfo[4] = new AchievementMilestones(true, false);
+        for (int i = 0; i < LevelCompletionInfo.Count - 1; i++)
          {
             LevelCompletionInfo[i].WasShown = true;
             LevelCompletionInfo[i].WasBeaten = true;

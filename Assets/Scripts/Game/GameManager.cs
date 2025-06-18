@@ -90,7 +90,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        else if (!PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown)
+        else if (!PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown &&
+            FindAnyObjectByType<BossBehavior>() == null)
         {
             PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown = true;
             if (_cameraScript != null) StartCoroutine(_cameraScript.ICameraPan());
@@ -177,6 +178,8 @@ public class GameManager : MonoBehaviour
         OnAchievementUnlocked(3);
         StopAllCoroutines();
         StartCoroutine(ILevelEnd(false));
+        BossBehavior boss = FindAnyObjectByType<BossBehavior>();
+        if (boss != null) boss.OnPlayerDeath();
     }
 
     public void Win()

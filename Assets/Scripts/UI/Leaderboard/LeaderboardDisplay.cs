@@ -107,7 +107,7 @@ public class LeaderboardDisplay : MonoBehaviour
     {
         if (IsPlayerRanked)
         {
-            ScoreEntries[PlayerRank].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = HighscoreSubmitter.GetName();
+            ScoreEntries[PlayerRank].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = HighscoreSubmitter.GetName().Substring(0, 3);
         }   
     }
 

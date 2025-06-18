@@ -20,7 +20,7 @@ TagManager:
   - Boss
   - RedirectedProyectile
   - BossHand
-  - 
+  - Chunk
   - 
   - 
   - 
@@ -64,9 +64,6 @@ TagManager:
   - name: DeadPlayer
     uniqueID: 454996199
     locked: 0
-  - name: Popup
-    uniqueID: 3374126975
-    locked: 0
   - name: BossBack
     uniqueID: 4100020513
     locked: 0
@@ -81,6 +78,9 @@ TagManager:
     locked: 0
   - name: Canvas
     uniqueID: 2813312067
+    locked: 0
+  - name: Popup
+    uniqueID: 3374126975
     locked: 0
   m_RenderingLayers:
   - Default

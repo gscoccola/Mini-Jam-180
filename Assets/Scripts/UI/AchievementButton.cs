@@ -57,8 +57,8 @@ public class AchievementButton : MonoBehaviour
 
     public void AdjustPopup()
     {
-        if (transform.position.x > Screen.width /2)
-        _popup.transform.localPosition = new Vector3(- Mathf.Abs(_popup.transform.localPosition.x), _popup.transform.localPosition.y, 0f);
+        /*if (transform.position.x > Screen.width /2)
+        _popup.transform.localPosition = new Vector3(- Mathf.Abs(_popup.transform.localPosition.x), _popup.transform.localPosition.y, 0f);*/
     }
 
     public int GetId()

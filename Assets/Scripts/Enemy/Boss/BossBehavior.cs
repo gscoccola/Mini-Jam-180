@@ -56,7 +56,6 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] GameObject Explosion2;
     [SerializeField] Rigidbody2D RightHand;
     [SerializeField] Rigidbody2D LeftHand;
-    [SerializeField] TextMeshProUGUI BossStateText;
     [SerializeField]  Animator _cigarAnimator;
     [SerializeField]  GameObject _chargeIndicator;
     [SerializeField]  Rigidbody2D _chargeBoss;
@@ -76,6 +75,7 @@ public class BossBehavior : MonoBehaviour
     int _currentPhase = 0;
     bool _normalMovement = true;
     bool _returnHand = false;
+    Camera _camera;
 
     BossState _bossState;
 
@@ -87,6 +87,7 @@ public class BossBehavior : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _manager = FindAnyObjectByType<BossFightManager>();
         _rightHandAnimator = RightHand.GetComponent<Animator>();
+        _camera = FindAnyObjectByType<Camera>();
     }
 
     private void Start()
@@ -94,14 +95,12 @@ public class BossBehavior : MonoBehaviour
         StartCoroutine(IRandomizeHandTarget());
         _bossState = BossState.StandBy;
         _hitsLeftToStun = _totalHitsToStun;
-        _intGenerator = new SemiRandomIntGenerator(new float[2]{ _throwProbability, _chargeProbability }, 0);
+        _intGenerator = new SemiRandomIntGenerator(new float[2]{ _throwProbability, _chargeProbability }, 1);
     }
 
 
     private void Update()
     {
-        BossStateText.text = _bossState.ToString();
-
         MoveHandToTarget(ref RightHand, _rightHandTarget);
         MoveHandToTarget(ref LeftHand, _leftHandTarget);
 
@@ -118,6 +117,11 @@ public class BossBehavior : MonoBehaviour
         if (_bossState == BossState.PunchAttack || (_bossState == BossState.ThrowAttack && _returnHand == true)) 
             _rightHandTarget = ReturnTargetToCenter(_rightHandTarget, _rightHandCenter);
         if (_bossState == BossState.Stunned && transform.position.x > _manager._cameraEdgeX + 5f) TeleportAndReset();
+        if (_bossState == BossState.Celebrating)
+        {
+            _rightHandTarget = ReturnTargetToCenter(_rightHandTarget, _rightHandCenter);
+            _leftHandTarget = ReturnTargetToCenter(_leftHandTarget, _leftHandCenter);
+        }
 
         AdjustPosition(_bossState, relativePlayerPos);
         Move(_bossState, relativePlayerPos);
@@ -221,8 +225,12 @@ public class BossBehavior : MonoBehaviour
     private IEnumerator IChargeAttack()
     {
         _bossState = BossState.ChargeAttackPrepare;
-        yield return new WaitForSeconds(_chargePrepareTime1);
+        yield return new WaitForSeconds(_chargePrepareTime1 - 0.2f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossChargeWarning);
+        yield return new WaitForSeconds(0.2f);
+        
         _chargeIndicator.SetActive(true);
+        _chargeIndicator.GetComponent<Animator>().SetTrigger("Expand");
         _chargeIndicator.transform.position = new Vector3(_playerTransform.transform.position.x 
             + _playerTransform.GetComponent<Rigidbody2D>().linearVelocityX * _velocityCorrectionFactor
             + Random.Range(-1f, 1f) * _chargeXRange / 2f, 18f, 0f);
@@ -232,9 +240,11 @@ public class BossBehavior : MonoBehaviour
         _chargeBoss.transform.position = teleportPostition;
         _chargeBoss.linearVelocityY = _chargeAttackSpeed;
         _bossState = BossState.ChargeAttackExecute;
-        _chargeIndicator.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.3f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossChargeWoosh);
+        yield return new WaitForSeconds(1.7f);
         TeleportAndReset();
+        _chargeIndicator.SetActive(false);
     }
 
 
@@ -265,7 +275,7 @@ public class BossBehavior : MonoBehaviour
         else if (_bossState == BossState.Stunned)
         {
             _rigidbody.linearVelocityY = Vector2.MoveTowards(_rigidbody.linearVelocity, 
-                (transform.position.y - /*Mathf.Clamp(transform.position.y, 8f , 12f))*/ 14f) * Vector3.down
+                (transform.position.y - 8f) * Vector3.down
             * MoveSpeedSlow/5f, Acceleration  * Time.deltaTime / 2f).y;
             _rigidbody.linearVelocityX = /*-_stunnedXSpeed/8f*/ 2f;
             
@@ -284,6 +294,12 @@ public class BossBehavior : MonoBehaviour
         {
             _rigidbody.linearVelocity = Vector2.zero;
         }
+        else if (_bossState == BossState.Celebrating)
+        {
+            _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
+                (_camera.transform.position - transform.position).normalized
+            * MoveSpeedSlow, Acceleration * Time.deltaTime / 2f);
+        }
 
     }
 
@@ -298,6 +314,7 @@ public class BossBehavior : MonoBehaviour
         while (true)
         {
             if (_bossState == BossState.PunchAttack) yield return new WaitForSeconds(_swayRandomizePeriod);
+            if (_bossState == BossState.Celebrating) yield break;
             _leftHandTarget = RandomizeHandTarget(_leftHandCenter);
             _rightHandTarget = RandomizeHandTarget(_rightHandCenter);
             yield return new WaitForSeconds(_swayRandomizePeriod);
@@ -319,7 +336,6 @@ public class BossBehavior : MonoBehaviour
     {
         
         _rigidbody.linearVelocityX += -7f;
-        _rigidbody.linearVelocityY += 2f;
         Interrupt();
         StartCoroutine(ITakeDamage());
     }
@@ -377,25 +393,36 @@ public class BossBehavior : MonoBehaviour
 
     private IEnumerator IPhaseChange()
     {
-        _intGenerator.IncreaseChoiceNumber();
+        
         _hitsLeftToStun = _totalHitsToStun;
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossHurtLong);
+        MusicPlayer.Instance.EnableLowPass();
         _bossState = BossState.PhaseChange;
         yield return new WaitForSeconds(0.2f);
         _cigarAnimator.SetTrigger("PhaseChange");
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossExplosion);
         Instantiate(Explosion1, LeftHand.transform.position + 0.7f * Vector3.right, Quaternion.identity, _enemies.transform);
-        yield return new WaitForSeconds(3.8f);
-        if (_currentPhase == 1) MusicPlayer.Instance._isThirdTrackEnabled = true;
+        yield return new WaitForSeconds(1.8f);
+        SFXPlayer.Instance.PlayClipFromArrayAtIndex(SFXPlayer.Instance._playerTaunt, _currentPhase - 1);
+        yield return new WaitForSeconds(2f);
+
+        if (_currentPhase == 1)
+        {
+            MusicPlayer.Instance._isThirdTrackEnabled = true;
+            _intGenerator.IncreaseChoiceNumber(new float[2] {0f, 1f});
+        }
+            
         else if (_currentPhase == 2)
         {
+            _intGenerator.IncreaseChoiceNumber(new float[3] {0.5f, 0.5f, 0f });
             MusicPlayer.Instance._isFourthTrackEnabled = true;
+            MusicPlayer.Instance.DisableLowPass();
             StartCoroutine(IChargeAttack());
             yield break;
         }  
         TeleportAndReset();
-        
         yield return new WaitForSeconds(0.1f);
+        MusicPlayer.Instance.DisableLowPass();
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossNewPhase);
     }
 
@@ -423,7 +450,7 @@ public class BossBehavior : MonoBehaviour
         }
 
         randPost = Random.insideUnitCircle * 4f;
-        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossBigExplosion, 0.15f);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossBigExplosion, 0.05f);
         Instantiate(Explosion2, transform.position + new Vector3(randPost.x, randPost.y, 0f), Quaternion.identity, _enemies.transform);
 
         yield return new WaitForSeconds(1.2f);
@@ -487,6 +514,40 @@ public class BossBehavior : MonoBehaviour
         Instantiate(Rock, RightHand.transform.position, Quaternion.identity, _enemies.transform)
             .GetComponent<Rigidbody2D>().linearVelocity = speed * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
+
+    public void OnPlayerDeath()
+    {
+        Interrupt();
+        _bossState = BossState.Celebrating;
+        gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
+        StartCoroutine(ICelebrate());
+    }
+
+    private IEnumerator ICelebrate()
+    {
+        _animator.ResetTrigger("BackToIdle");
+        _animator.SetTrigger("BackToIdle");
+        _normalMovement = false;
+        yield return new WaitForSeconds(0.5f);
+        
+        _animator.SetTrigger("Laugh");
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossVictoryLaugh);
+        yield return new WaitForSeconds(0.7f);
+        _rightHandCenter = new Vector3(-3f, 4f, 0f);
+        _leftHandCenter = new Vector3(3f, 4f, 0f);
+        yield return new WaitForSeconds(0.2f);
+        LeftHand.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        RightHand.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        while (true)
+        {
+            _rightHandCenter += 2f * Vector3.up;
+            _leftHandCenter += 2f * Vector3.up;
+            yield return new WaitForSeconds(0.2f);
+            _rightHandCenter -= 2f * Vector3.up;
+            _leftHandCenter -= 2f * Vector3.up;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
 }
 
 
@@ -507,6 +568,7 @@ public enum BossState
     PhaseChange,
     Dead,
     Dying,
+    Celebrating,
 }
 
 public class SemiRandomIntGenerator
@@ -517,27 +579,35 @@ public class SemiRandomIntGenerator
 
     public SemiRandomIntGenerator(float[] probabilities, int choiceNumber = 0)
     {
-        _initialProbabilities = probabilities;
-        _currentProbabilities = probabilities;
         _choiceNumber = choiceNumber;
+        _initialProbabilities = new float[probabilities.Length + 1];
+        _initialProbabilities[0] = 1f;
+        for (int i = 0; i < probabilities.Length; i++)
+        {
+            _initialProbabilities[0] -= probabilities[i];
+            _initialProbabilities[i + 1] = probabilities[i];
+        }
 
-        if (_choiceNumber > probabilities.Length) Debug.LogError("Not enough probabilities given");
+        _currentProbabilities = NormalizeProbabilities(_initialProbabilities, choiceNumber);
+
+        if (_choiceNumber > probabilities.Length + 1) Debug.LogError("Not enough probabilities given");
         foreach (float probability in probabilities)
         {
             if (probability > 1f || probability < 0f) Debug.LogError("Invalid Probabilities");
         }
+
     }
 
-    public void IncreaseChoiceNumber()
+    public void IncreaseChoiceNumber(float[] currentProbabilities = null)
     {
         _choiceNumber++;
-        _currentProbabilities = _initialProbabilities;
+        _currentProbabilities = currentProbabilities == null ? _initialProbabilities  : currentProbabilities;
         if (_choiceNumber > _initialProbabilities.Length) Debug.LogError("Not enough probabilities given");
     }
 
     public int GetInt()
     {
-        if (_choiceNumber == 0) return 0;
+        if (_choiceNumber == 1) return 0;
 
         int result = 0;
         float randFloat = Random.Range(0f, 1f);
@@ -548,26 +618,59 @@ public class SemiRandomIntGenerator
             aggregatedProb += _currentProbabilities[i];
             if (randFloat < aggregatedProb)
             {
-                result = i + 1;
+                result = i;
                 break;
             }      
         }
-        AdjustProbabilities(result);
 
         Debug.Log("Result is " + result);
         for (int i = 0; i < _choiceNumber; i++)
         {
-            Debug.Log("The attack number " + (i+1).ToString() + " had probability " + _currentProbabilities[i]);
+            Debug.Log("The attack number " + (i).ToString() + " had probability " + _currentProbabilities[i]);
         }
-        
+
+        _currentProbabilities = AdjustProbabilities(result, _currentProbabilities, _initialProbabilities);
+
         return result;
     }
 
-    private void AdjustProbabilities(int result)
+    private float[] AdjustProbabilities(int result, float[] currentProbabilities, float[] initialProbabilities)
     {
-        /*for (int i = 0; i < _choiceNumber; i++)
+        currentProbabilities[result] -= (1f - initialProbabilities[result])/2f;
+        for (int i = 0; i < _choiceNumber; i++)
         {
-            if (i == result) _currentProbabilities[i] -=
-        }*/
+            if (i == result) continue;
+            currentProbabilities[i] += initialProbabilities[i] / 2f;
+        }
+        return NormalizeProbabilities(currentProbabilities, currentProbabilities.Length);
     }
+
+    private float[] NormalizeProbabilities(float[] probabilities, int choiceNumber)
+    {
+        float[] result = new float[choiceNumber];
+        float sum = 0f;
+        for (int i = 0; i < choiceNumber; i++)
+        {
+            result[i] = Mathf.Clamp(probabilities[i], 0f, 1f);
+            sum += result[i];
+        }
+        for (int i = 0; i < _choiceNumber; i++)
+        {
+            result[i] /= sum;
+        }
+
+        return result;
+    }
+
+    public string PrintProbabilities()
+    {
+        string result = "";
+        foreach (float probability in _currentProbabilities)
+        {
+            result += System.Math.Round(probability, 2).ToString() + "   ";
+        }
+        return result;
+    }
+
+
 }

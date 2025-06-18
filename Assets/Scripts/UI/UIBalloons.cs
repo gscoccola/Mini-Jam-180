@@ -15,15 +15,15 @@ public class UIBalloons : MonoBehaviour
             balloon.GetComponent<Animator>().Play("Balloon", 0, Random.Range(0f, 1f));
         }
         _activeBallons = new List<Transform>() { _balloons[0], _balloons[1], _balloons[2] };
-        StartCoroutine(IBalloons());
+        /*StartCoroutine(IBalloons());*/
     }
-
+    /*
     private IEnumerator IBalloons()
     {
         yield return new WaitForSecondsRealtime(0.45f);
         _activeBallons.Add(_balloons[3]);
         _activeBallons.Add(_balloons[4]);
-    }
+    }*/
 
     void Update()
     {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -28,12 +29,16 @@ public class MusicPlayer : Singleton<MusicPlayer>
     [SerializeField] AudioResource _bossPhase2;
     [SerializeField] AudioResource _bossPhase3;
     [SerializeField] AudioResource _bossCombo;
+
+    [SerializeField] AudioMixerGroup _musicMixer;
+
     public bool _isSecondTrackEnabled;
     public bool _isThirdTrackEnabled;
     public bool _isFourthTrackEnabled;
     public bool _beginFadeOutWind;
     public bool _isPlayingWind;
     public bool _isPlayingMusic;
+    public bool _firstTrackFadeIn;
 
     private void OnEnable()
     {
@@ -100,7 +105,8 @@ public class MusicPlayer : Singleton<MusicPlayer>
         }
         else if (_gamePhase == GamePhase.Boss)
         {
-            _audioSource.volume = 0.265f;
+            _audioSource.volume = 0f;
+            _firstTrackFadeIn = true;
             _audioSource.resource = _bossPhase1;
             _audioSource2.resource = _bossCombo;
             _audioSource3.resource = _bossPhase2;
@@ -139,7 +145,14 @@ public class MusicPlayer : Singleton<MusicPlayer>
             _audioSourceWind.volume = Mathf.MoveTowards(_audioSourceWind.volume, 0, _fadeRate * Time.deltaTime);
         }
 
-        
+        if (_firstTrackFadeIn)
+        {
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 0.265f, _fadeRate * Time.deltaTime);
+            if (_audioSource.volume >= 0.264f)
+            {
+                _firstTrackFadeIn = false;
+            }
+        }
 
         if (_isThirdTrackEnabled)
         {
@@ -148,7 +161,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
 
         if (_isFourthTrackEnabled)
         {
-            _audioSource4.volume = Mathf.MoveTowards(_audioSource4.volume, _maxVolume2, _fadeRate * Time.deltaTime);
+            _audioSource4.volume = Mathf.MoveTowards(_audioSource4.volume, _maxVolume3, _fadeRate * Time.deltaTime);
         }
 
         if (_isSecondTrackEnabled)
@@ -191,6 +204,16 @@ public class MusicPlayer : Singleton<MusicPlayer>
         _beginFadeOutWind = false;
         _audioSourceWind.volume = 0.344f;
         _isPlayingWind = true;
+    }
+
+    public void EnableLowPass()
+    {
+        _musicMixer.audioMixer.SetFloat("CutOffFreq", 6000f);
+    }
+
+    public void DisableLowPass()
+    {
+        _musicMixer.audioMixer.SetFloat("CutOffFreq", 22000f);
     }
 
 }

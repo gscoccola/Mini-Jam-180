@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetOffset: 5
+  _spriteRenderer: {fileID: 6715326358880105986}
 --- !u!1 &7990331372163606108
 GameObject:
   m_ObjectHideFlags: 0
