@@ -56,7 +56,7 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] GameObject Explosion2;
     [SerializeField] Rigidbody2D RightHand;
     [SerializeField] Rigidbody2D LeftHand;
-    [SerializeField]  Animator _cigarAnimator;
+    
     [SerializeField]  GameObject _chargeIndicator;
     [SerializeField]  Rigidbody2D _chargeBoss;
 
@@ -67,6 +67,7 @@ public class BossBehavior : MonoBehaviour
     BossFightManager  _manager;
     SemiRandomIntGenerator _intGenerator;
     Animator _rightHandAnimator;
+    Animator _leftHandAnimator;
 
 
     bool _rangedAttackOnCooldown;
@@ -87,6 +88,7 @@ public class BossBehavior : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _manager = FindAnyObjectByType<BossFightManager>();
         _rightHandAnimator = RightHand.GetComponent<Animator>();
+        _leftHandAnimator = LeftHand.GetComponent<Animator>();
         _camera = FindAnyObjectByType<Camera>();
     }
 
@@ -399,7 +401,7 @@ public class BossBehavior : MonoBehaviour
         MusicPlayer.Instance.EnableLowPass();
         _bossState = BossState.PhaseChange;
         yield return new WaitForSeconds(0.2f);
-        _cigarAnimator.SetTrigger("PhaseChange");
+        _leftHandAnimator.SetTrigger("PhaseChange");
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossExplosion);
         Instantiate(Explosion1, LeftHand.transform.position + 0.7f * Vector3.right, Quaternion.identity, _enemies.transform);
         yield return new WaitForSeconds(1.8f);
@@ -458,7 +460,7 @@ public class BossBehavior : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossDead, dontDestroyOnLoad: true);
         _animator.SetTrigger("Dead");
-        _cigarAnimator.SetTrigger("PhaseChange");
+        _leftHandAnimator.SetTrigger("PhaseChange");
         _manager.OnBossDead();
         _bossState = BossState.Dead;
         StartCoroutine(_manager.IVibrateScreen());
@@ -529,24 +531,16 @@ public class BossBehavior : MonoBehaviour
         _animator.SetTrigger("BackToIdle");
         _normalMovement = false;
         yield return new WaitForSeconds(0.5f);
-        
         _animator.SetTrigger("Laugh");
         SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossVictoryLaugh);
         yield return new WaitForSeconds(0.7f);
-        _rightHandCenter = new Vector3(-3f, 4f, 0f);
-        _leftHandCenter = new Vector3(3f, 4f, 0f);
-        yield return new WaitForSeconds(0.2f);
-        LeftHand.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        RightHand.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        while (true)
-        {
-            _rightHandCenter += 2f * Vector3.up;
-            _leftHandCenter += 2f * Vector3.up;
-            yield return new WaitForSeconds(0.2f);
-            _rightHandCenter -= 2f * Vector3.up;
-            _leftHandCenter -= 2f * Vector3.up;
-            yield return new WaitForSeconds(0.2f);
-        }
+        _rightHandAnimator.SetTrigger("Celebrate");
+        _rightHandCenter += 0.5f * Vector3.right;
+        _leftHandCenter += 1f * Vector3.left;
+        yield return new WaitForSeconds(0.6f);
+        _animator.SetTrigger("Smoke");
+        _leftHandAnimator.SetTrigger("NoCigar");
+
     }
 }
 

@@ -345,8 +345,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.03999996, y: -5.58, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3101056435959396837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -720,6 +720,7 @@ MonoBehaviour:
   _mobileInput: {fileID: 2808192143310279570}
   _gamepadInput: {fileID: 5084291070664297991}
   _coverChunk: {fileID: 5047029709544108751, guid: da4aa75124ffb3c43a8bc4849db8012b, type: 3}
+  _torque: -70
 --- !u!61 &6138943253837145508
 BoxCollider2D:
   m_ObjectHideFlags: 0
