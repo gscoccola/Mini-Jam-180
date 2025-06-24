@@ -187,6 +187,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -195,9 +208,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 29
-        width: 33
-        height: 29
+        y: 30
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,10 +229,10 @@ TextureImporter:
       name: drone_33x29_1
       rect:
         serializedVersion: 2
-        x: 33
-        y: 29
-        width: 33
-        height: 29
+        x: 34
+        y: 30
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,10 +251,10 @@ TextureImporter:
       name: drone_33x29_2
       rect:
         serializedVersion: 2
-        x: 66
-        y: 29
-        width: 33
-        height: 29
+        x: 68
+        y: 30
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +273,10 @@ TextureImporter:
       name: drone_33x29_3
       rect:
         serializedVersion: 2
-        x: 99
-        y: 29
-        width: 33
-        height: 29
+        x: 102
+        y: 30
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -282,10 +295,10 @@ TextureImporter:
       name: drone_33x29_4
       rect:
         serializedVersion: 2
-        x: 132
-        y: 29
-        width: 33
-        height: 29
+        x: 136
+        y: 30
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,10 +317,10 @@ TextureImporter:
       name: drone_33x29_5
       rect:
         serializedVersion: 2
-        x: 165
-        y: 29
-        width: 33
-        height: 29
+        x: 170
+        y: 30
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,8 +341,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -348,10 +361,10 @@ TextureImporter:
       name: drone_33x29_7
       rect:
         serializedVersion: 2
-        x: 33
+        x: 34
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,10 +383,10 @@ TextureImporter:
       name: drone_33x29_8
       rect:
         serializedVersion: 2
-        x: 66
+        x: 68
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -392,10 +405,10 @@ TextureImporter:
       name: drone_33x29_9
       rect:
         serializedVersion: 2
-        x: 99
+        x: 102
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -414,10 +427,10 @@ TextureImporter:
       name: drone_33x29_10
       rect:
         serializedVersion: 2
-        x: 132
+        x: 136
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -436,10 +449,10 @@ TextureImporter:
       name: drone_33x29_11
       rect:
         serializedVersion: 2
-        x: 165
+        x: 170
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -458,10 +471,10 @@ TextureImporter:
       name: drone_33x29_12
       rect:
         serializedVersion: 2
-        x: 198
+        x: 204
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -480,10 +493,10 @@ TextureImporter:
       name: drone_33x29_13
       rect:
         serializedVersion: 2
-        x: 231
+        x: 238
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -502,10 +515,10 @@ TextureImporter:
       name: drone_33x29_14
       rect:
         serializedVersion: 2
-        x: 264
+        x: 272
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -524,10 +537,10 @@ TextureImporter:
       name: drone_33x29_15
       rect:
         serializedVersion: 2
-        x: 297
+        x: 306
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -546,10 +559,10 @@ TextureImporter:
       name: drone_33x29_16
       rect:
         serializedVersion: 2
-        x: 330
+        x: 340
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -568,10 +581,10 @@ TextureImporter:
       name: drone_33x29_17
       rect:
         serializedVersion: 2
-        x: 363
+        x: 374
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -590,10 +603,10 @@ TextureImporter:
       name: drone_33x29_18
       rect:
         serializedVersion: 2
-        x: 396
+        x: 408
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -612,20 +625,20 @@ TextureImporter:
       name: drone_33x29_19
       rect:
         serializedVersion: 2
-        x: 429
+        x: 442
         y: 0
-        width: 33
-        height: 29
+        width: 34
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dab80e7b39beb00b0800000000000000
-      internalID: -5761252278612751443
+      spriteID: 9473bedda3182914c806d715d31712fe
+      internalID: -1145987010
       vertices: []
       indices: 
       edges: []
@@ -655,7 +668,7 @@ TextureImporter:
       drone_33x29_16: -8444802904933236132
       drone_33x29_17: -7522943226886651032
       drone_33x29_18: -7081235165709166248
-      drone_33x29_19: -5761252278612751443
+      drone_33x29_19: -1145987010
       drone_33x29_2: 2869762426509747141
       drone_33x29_3: -1944638725617113985
       drone_33x29_4: -1981554008497464466

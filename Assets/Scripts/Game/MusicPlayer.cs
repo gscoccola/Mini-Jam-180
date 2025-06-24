@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MusicPlayer : Singleton<MusicPlayer>
 {
     [SerializeField] float _fadeRate = 0.2f;
+    [SerializeField] float _maxVolume = 0.265f;
     [SerializeField] float _maxVolume2 = 0.2f;
     [SerializeField] float _maxVolume3 = 0.4f;
     public GamePhase _gamePhase;
@@ -113,6 +114,19 @@ public class MusicPlayer : Singleton<MusicPlayer>
             _audioSource4.resource = _bossPhase3;
         }
         _isPlayingMusic = false;
+
+        //DisableMusic();
+    }
+
+    public void DisableMusic()
+    {
+        _audioSource.volume = 0f;
+        _audioSource2.volume = 0f;
+        _audioSource3.volume = 0f;
+        _audioSource4.volume = 0f;
+        _maxVolume = 0f;
+        _maxVolume2 = 0f;
+        _maxVolume3 = 0f;
     }
 
     public void LowerVolume()
@@ -147,7 +161,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
 
         if (_firstTrackFadeIn)
         {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 0.265f, _fadeRate * Time.deltaTime);
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _maxVolume, _fadeRate * Time.deltaTime);
             if (_audioSource.volume >= 0.264f)
             {
                 _firstTrackFadeIn = false;

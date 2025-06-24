@@ -204,243 +204,243 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bird_sheet_20x19_9
+      name: GreyExplosion_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fba76354d68094490800000000000000
-      internalID: -7761663217390683457
+      spriteID: 57fb7bff6085b414c84e8267de6d7f55
+      internalID: -1967837130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_10
+      name: GreyExplosion_1
       rect:
         serializedVersion: 2
         x: 20
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2fb1c1bed44e42b00800000000000000
-      internalID: 803017656886893554
+      spriteID: 8e2b4283d5aa878458b703ecae22f96e
+      internalID: 1636375662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_11
+      name: GreyExplosion_2
       rect:
         serializedVersion: 2
         x: 40
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a5f586e4ced458ef0800000000000000
-      internalID: -106593338850255014
+      spriteID: 162de85a8c6148249a13fcdf5606a01f
+      internalID: -976319539
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_12
+      name: GreyExplosion_3
       rect:
         serializedVersion: 2
         x: 60
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 78365b976430e98a0800000000000000
-      internalID: -6296591627792850041
+      spriteID: e810156395e60484f957375e96fc7ddd
+      internalID: 51815141
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_13
+      name: GreyExplosion_4
       rect:
         serializedVersion: 2
         x: 80
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ef4c318eeec57cd50800000000000000
-      internalID: 6757471947058300158
+      spriteID: be68b975e6062364d861d43d2b1eff6f
+      internalID: 1080664242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_14
+      name: GreyExplosion_5
       rect:
         serializedVersion: 2
         x: 100
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f0db278f45824f820800000000000000
-      internalID: 2951028001245150479
+      spriteID: 82c7b5209697af64b89a7b9f9ed5fb6c
+      internalID: 914687303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_15
+      name: GreyExplosion_6
       rect:
         serializedVersion: 2
         x: 120
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e4864a41afcb64870800000000000000
-      internalID: 8666822315195263054
+      spriteID: 4ed0bf02c6b35654fad0d3200c20a044
+      internalID: 1849132939
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_16
+      name: GreyExplosion_7
       rect:
         serializedVersion: 2
         x: 140
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2a476e14c95f509a0800000000000000
-      internalID: -6267333254946851678
+      spriteID: 7c62eb380e380cb48824a1db8f814b3e
+      internalID: -677252429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_17
+      name: GreyExplosion_8
       rect:
         serializedVersion: 2
         x: 160
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 28cdcfb0b6cb41840800000000000000
-      internalID: 5193983438213667970
+      spriteID: f290394d6d9e93144bc212b8c6479dad
+      internalID: 1458025517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_18
+      name: GreyExplosion_9
       rect:
         serializedVersion: 2
         x: 180
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 26ed807202354a890800000000000000
-      internalID: -7447736486205006238
+      spriteID: b3e01d4a669398d4cbb17b0531171ebd
+      internalID: -473129546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bird_sheet_20x19_19
+      name: GreyExplosion_10
       rect:
         serializedVersion: 2
         x: 200
         y: 0
         width: 20
-        height: 19
+        height: 21
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e92cfb4b8a1fa36f0800000000000000
-      internalID: -703984684840795490
+      spriteID: 5526a3b9f2bac574baa5cc6dd2a93154
+      internalID: -1031173564
       vertices: []
       indices: 
       edges: []
@@ -459,26 +459,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bird_sheet_20x19_0: 2544175893960942567
-      bird_sheet_20x19_1: 1928937032512932687
-      bird_sheet_20x19_10: 803017656886893554
-      bird_sheet_20x19_11: -106593338850255014
-      bird_sheet_20x19_12: -6296591627792850041
-      bird_sheet_20x19_13: 6757471947058300158
-      bird_sheet_20x19_14: 2951028001245150479
-      bird_sheet_20x19_15: 8666822315195263054
-      bird_sheet_20x19_16: -6267333254946851678
-      bird_sheet_20x19_17: 5193983438213667970
-      bird_sheet_20x19_18: -7447736486205006238
-      bird_sheet_20x19_19: -703984684840795490
-      bird_sheet_20x19_2: -3215966429763881185
-      bird_sheet_20x19_3: 680589151997688627
-      bird_sheet_20x19_4: -864315884110493789
-      bird_sheet_20x19_5: -8247382066762666387
-      bird_sheet_20x19_6: 8131475788242741429
-      bird_sheet_20x19_7: -7902206979531444036
-      bird_sheet_20x19_8: -7516333408335723653
-      bird_sheet_20x19_9: -7761663217390683457
+      GreyExplosion_0: -1967837130
+      GreyExplosion_1: 1636375662
+      GreyExplosion_10: -1031173564
+      GreyExplosion_2: -976319539
+      GreyExplosion_3: 51815141
+      GreyExplosion_4: 1080664242
+      GreyExplosion_5: 914687303
+      GreyExplosion_6: 1849132939
+      GreyExplosion_7: -677252429
+      GreyExplosion_8: 1458025517
+      GreyExplosion_9: -473129546
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

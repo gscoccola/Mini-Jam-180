@@ -8,6 +8,9 @@ public class BlurRenderPass : ScriptableRenderPass
 {
     private static readonly int horizontalBlurId = Shader.PropertyToID("_HorizontalBlur");
     private static readonly int verticalBlurId = Shader.PropertyToID("_VerticalBlur");
+    private static readonly int _Amplitude = Shader.PropertyToID("_Amplitude");
+    private static readonly int _Constant = Shader.PropertyToID("_Constant");
+    private static readonly int _Threshold = Shader.PropertyToID("_Threshold");
     private const string k_BlurTextureName = "_BlurTexture";
     private const string k_VerticalPassName = "VerticalBlurRenderPass";
     private const string k_HorizontalPassName = "HorizontalBlurRenderPass";
@@ -37,6 +40,9 @@ public class BlurRenderPass : ScriptableRenderPass
             volumeComponent.verticalBlur.value : defaultSettings.verticalBlur;
         material.SetFloat(horizontalBlurId, horizontalBlur);
         material.SetFloat(verticalBlurId, verticalBlur);
+        material.SetFloat(_Amplitude, defaultSettings._Amplitude);
+        material.SetFloat(_Constant, defaultSettings._Constant);
+        material.SetFloat(_Threshold, defaultSettings._Threshold);
     }
 
     public override void RecordRenderGraph(RenderGraph renderGraph,

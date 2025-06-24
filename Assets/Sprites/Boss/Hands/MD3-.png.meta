@@ -131,8 +131,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 23
-        height: 31
+        width: 24
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,10 +151,10 @@ TextureImporter:
       name: MD3-_1
       rect:
         serializedVersion: 2
-        x: 23
+        x: 24
         y: 0
-        width: 23
-        height: 31
+        width: 24
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,10 +173,10 @@ TextureImporter:
       name: MD3-_2
       rect:
         serializedVersion: 2
-        x: 46
+        x: 48
         y: 0
-        width: 23
-        height: 31
+        width: 24
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,10 +195,10 @@ TextureImporter:
       name: MD3-_3
       rect:
         serializedVersion: 2
-        x: 69
+        x: 72
         y: 0
-        width: 23
-        height: 31
+        width: 24
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

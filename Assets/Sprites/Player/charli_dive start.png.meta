@@ -139,9 +139,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 26
+        y: 27
         width: 26
-        height: 25
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,9 +161,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 26
-        y: 26
+        y: 27
         width: 26
-        height: 25
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,9 +183,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 52
-        y: 26
+        y: 27
         width: 26
-        height: 25
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,7 +207,7 @@ TextureImporter:
         x: 0
         y: 1
         width: 26
-        height: 25
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,28 +218,6 @@ TextureImporter:
       bones: []
       spriteID: dcddbc589b39f2850800000000000000
       internalID: 6354460024266022349
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: charli_dive start_4
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 1
-        width: 26
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6ac273fdb20d2349b12483c459705b8
-      internalID: 795738160
       vertices: []
       indices: 
       edges: []
@@ -262,7 +240,6 @@ TextureImporter:
       charli_dive start_1: -4955388436530934595
       charli_dive start_2: -7240507636966416135
       charli_dive start_3: 6354460024266022349
-      charli_dive start_4: 795738160
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

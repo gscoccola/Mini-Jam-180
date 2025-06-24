@@ -9,51 +9,44 @@ Shader "CustomEffects/Blur"
 
         float _VerticalBlur;
         float _HorizontalBlur;
+
+        float _Amplitude;
+        float _Constant;
+        float _Threshold;
     
         float4 BlurVertical (Varyings input) : SV_Target
         {
-            const float BLUR_SAMPLES = 64;
-            const float BLUR_SAMPLES_RANGE = BLUR_SAMPLES / 2;
             
             float3 color = 0;
+            float pixelFactor1;
+            float pixelFactor2;
+            //float pi = 3.14159265;
             float blurPixels = 0 * _ScreenParams.y;
-            
-            for(float i = -BLUR_SAMPLES_RANGE; i <= BLUR_SAMPLES_RANGE; i++)
-            {
-                float2 sampleOffset = float2 (0, (blurPixels / _BlitTexture_TexelSize.w) * (i / BLUR_SAMPLES_RANGE));
-                color += SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, input.texcoord + sampleOffset).rgb;
-            }
-            
-            //color.g *= (sin(input.texcoord.y * _ScreenParams.y * 2.0f) + 1.0f) * 0.15f + 1.0f;
-            /*color.rgb *= clamp(
-                cos(input.texcoord.y * _ScreenParams.y * 5.0f * _VerticalBlur ) * 1.2f +  + _HorizontalBlur
-                , 0.3f, 1.0f); */
-            /*color.rgb *= 
-                (cos(input.texcoord.y * _ScreenParams.y * _ScreenParams.y * 2.0f) + 1.0f) * 0.135f + 1.0f; */
+            float power = 8.0f;
+            float phaseOffset = 3.14159265f / 8;
+            float pixelsPerWave = 6;
+           
 
-                color.g *= (sin(input.texcoord.y * _ScreenParams.y * 2.0f) + 1.0f) * 0.15f + 1.0f;
-                color.rb *= (cos(input.texcoord.y * _ScreenParams.y * 2.0f) + 1.0f) * 0.135f + 1.0f;
-                color.g *= (sin(input.texcoord.x * _ScreenParams.x * 2.0f) + 1.0f) * 0.15f + 1.0f;
-                color.rb *= (cos(input.texcoord.x * _ScreenParams.x * 2.0f) + 1.0f) * 0.135f + 1.0f;
+            color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, input.texcoord).rgb;
 
-            return float4(color.rgb / (BLUR_SAMPLES + 1), 1);
-        }
-
-        float4 BlurHorizontal (Varyings input) : SV_Target
-        {
-            const float BLUR_SAMPLES = 64;
-            const float BLUR_SAMPLES_RANGE = BLUR_SAMPLES / 2;
+  
+            pixelFactor1 = min ( (1.0f - pow(cos(-_VerticalBlur * phaseOffset + (input.texcoord.y) * 3.14159265f  * _ScreenParams.y / pixelsPerWave), power)) ,
+                   (1.0f - pow(cos(-_VerticalBlur * phaseOffset + (input.texcoord.x ) * 3.14159265f  * _ScreenParams.x / pixelsPerWave), power)) )
+                   * _Amplitude 
+                   + _Constant;
             
-            UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-            float3 color = 0;
-            float blurPixels = _HorizontalBlur * _ScreenParams.x;
-            for(float i = -BLUR_SAMPLES_RANGE; i <= BLUR_SAMPLES_RANGE; i++)
-            {
-                float2 sampleOffset =
-                    float2 ((blurPixels / _BlitTexture_TexelSize.z) * (i / BLUR_SAMPLES_RANGE), 0);
-                color += SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, input.texcoord + sampleOffset).rgb;
-            }
-            return float4(color / (BLUR_SAMPLES + 1), 1);
+                   pixelFactor2 = min ( (1.0f - pow(cos(_VerticalBlur * phaseOffset + (input.texcoord.y) * 3.14159265f * _ScreenParams.y / pixelsPerWave), power)) ,
+                   (1.0f - pow(cos(_HorizontalBlur * phaseOffset + (input.texcoord.x) * 3.14159265f  * _ScreenParams.x / pixelsPerWave), power)) )
+                   * _Amplitude 
+                   + _Constant;
+                   
+                   pixelFactor1 = pixelFactor1 < _Threshold ?  pixelFactor1 * 0.8f  : pixelFactor1;
+                   pixelFactor2 = pixelFactor2 < _Threshold ?  pixelFactor2 * 0.8f  : pixelFactor2;
+
+                   color.g *= pixelFactor1;
+                   color.rb *= pixelFactor2;
+
+            return float4(color.rgb, 1);
         }
     
     ENDHLSL
@@ -74,17 +67,6 @@ Shader "CustomEffects/Blur"
             
             ENDHLSL
         }
-        
-        Pass
-        {
-            Name "BlurPassHorizontal"
 
-            HLSLPROGRAM
-            
-            #pragma vertex Vert
-            #pragma fragment BlurHorizontal
-            
-            ENDHLSL
-        }
     }
 }

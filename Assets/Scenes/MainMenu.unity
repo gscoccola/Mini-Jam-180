@@ -874,7 +874,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 152}
-  m_SizeDelta: {x: 1093.75, y: 618.75}
+  m_SizeDelta: {x: 1100, y: 625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &251108803
 CanvasRenderer:
@@ -4143,12 +4143,12 @@ SpriteRenderer:
   m_SortingLayerID: -448123787
   m_SortingLayer: -4
   m_SortingOrder: -1
-  m_Sprite: {fileID: 1062938222754789094, guid: 0242352fc4da4f74593015e7bebdc827, type: 3}
+  m_Sprite: {fileID: 2115370182, guid: c7f9c451ba75f1b4b9040b08820dc598, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 60000, y: 2.05}
+  m_Size: {x: 60000, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4921,7 +4921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 468.75
+      value: 475
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5446,7 +5446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 468.75
+      value: 475
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5863,7 +5863,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 2034721689}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -5969,7 +5969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 690
+      value: 779.78
       objectReference: {fileID: 0}
     - target: {fileID: 3374007649485858958, guid: 8c01ce6653f5d9d4eb15ca0a8616f191, type: 3}
       propertyPath: m_SizeDelta.y
@@ -6761,15 +6761,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1529959819873025453, guid: 41523d7d9fd6aa148a29fa69c2f960eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 99.94502
       objectReference: {fileID: 0}
     - target: {fileID: 1529959819873025453, guid: 41523d7d9fd6aa148a29fa69c2f960eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 41.128582
       objectReference: {fileID: 0}
     - target: {fileID: 1529959819873025453, guid: 41523d7d9fd6aa148a29fa69c2f960eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.65
+      value: -0.019043922
       objectReference: {fileID: 0}
     - target: {fileID: 1529959819873025453, guid: 41523d7d9fd6aa148a29fa69c2f960eb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6805,7 +6805,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8928055898734352528, guid: 41523d7d9fd6aa148a29fa69c2f960eb, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6945,7 +6945,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 60000, y: 6.8}
+  m_Size: {x: 60000, y: 6.875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7196,7 +7196,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 3478.86, y: 11.25}
+  m_Size: {x: 3400, y: 12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7747,6 +7747,7 @@ GameObject:
   - component: {fileID: 2034721689}
   - component: {fileID: 2034721688}
   - component: {fileID: 2034721691}
+  - component: {fileID: 2034721692}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7872,6 +7873,30 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &2034721692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034721687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_AssetsPPU: 16
+  m_RefResolutionX: 320
+  m_RefResolutionY: 180
+  m_CropFrame: 0
+  m_GridSnapping: 1
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1001 &2037232671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9224,7 +9249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3504012916548504245, guid: d473b451c37720745aaffe038234f138, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 243.75
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 3504012916548504245, guid: d473b451c37720745aaffe038234f138, type: 3}
       propertyPath: m_SizeDelta.y
@@ -9541,6 +9566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 1167875166591646719, guid: 853fdbfd7baa7104b8aef0d7b1cb0f9c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2034721689}
     - target: {fileID: 5314489787282719779, guid: 853fdbfd7baa7104b8aef0d7b1cb0f9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9580,10 +9609,6 @@ PrefabInstance:
     - target: {fileID: 5314489787282719779, guid: 853fdbfd7baa7104b8aef0d7b1cb0f9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5623579077834231031, guid: 853fdbfd7baa7104b8aef0d7b1cb0f9c, type: 3}
-      propertyPath: _animationDuration
-      value: 0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

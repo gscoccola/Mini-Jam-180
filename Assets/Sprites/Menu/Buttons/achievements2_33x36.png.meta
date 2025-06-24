@@ -140,7 +140,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 39
+        width: 40
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -160,9 +160,9 @@ TextureImporter:
       name: achievements2_33x36_1
       rect:
         serializedVersion: 2
-        x: 39
+        x: 40
         y: 0
-        width: 39
+        width: 40
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -182,9 +182,9 @@ TextureImporter:
       name: achievements2_33x36_2
       rect:
         serializedVersion: 2
-        x: 78
+        x: 80
         y: 0
-        width: 39
+        width: 40
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -204,9 +204,9 @@ TextureImporter:
       name: achievements2_33x36_3
       rect:
         serializedVersion: 2
-        x: 117
+        x: 120
         y: 0
-        width: 39
+        width: 40
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -226,9 +226,9 @@ TextureImporter:
       name: achievements2_33x36_4
       rect:
         serializedVersion: 2
-        x: 156
+        x: 160
         y: 0
-        width: 39
+        width: 40
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -248,9 +248,9 @@ TextureImporter:
       name: achievements2_33x36_5
       rect:
         serializedVersion: 2
-        x: 195
+        x: 200
         y: 0
-        width: 39
+        width: 40
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}

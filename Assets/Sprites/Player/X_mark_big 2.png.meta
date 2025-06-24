@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: X_mark_big 1_0
+      name: X_mark_big 2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 28
-        height: 29
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,20 +141,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1a1b369ac653024dad9e22f604c6ee2
-      internalID: 1905886474
+      spriteID: d8adc6b9bb9fe6d4ca9d6a02c98ee05f
+      internalID: -1033030382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_1
+      name: X_mark_big 2_1
       rect:
         serializedVersion: 2
         x: 28
         y: 0
         width: 28
-        height: 29
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbefaee5619397f49b72f5b02c7568ce
-      internalID: 1836783358
+      spriteID: fb25369f806457345b4a196488c50cba
+      internalID: 106833098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_2
+      name: X_mark_big 2_2
       rect:
         serializedVersion: 2
         x: 56
         y: 0
         width: 28
-        height: 29
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0f7608b603db2e4d924a7315e806607
-      internalID: 2112447457
+      spriteID: 8e411827e3e49e8419ced568c83a4925
+      internalID: -198090961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_3
+      name: X_mark_big 2_3
       rect:
         serializedVersion: 2
         x: 84
         y: 0
         width: 28
-        height: 29
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,20 +207,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5aa244a6e34cdc540a59d2c4f33df7eb
-      internalID: -478963580
+      spriteID: 9f33b079422aef34aa6ba201501359c1
+      internalID: -1835480194
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_4
+      name: X_mark_big 2_4
       rect:
         serializedVersion: 2
         x: 112
         y: 0
         width: 28
-        height: 29
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed7cc03b2c5bfb14684416af84c4cb5e
-      internalID: 1837922736
+      spriteID: ce6e1ef13760b2f439e7d75f237dc41c
+      internalID: 697422626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_5
+      name: X_mark_big 2_5
       rect:
         serializedVersion: 2
         x: 140
         y: 0
         width: 28
-        height: 29
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,8 +251,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3aeb9fd3d06ef5c4a9fef97e91979bce
-      internalID: -378220063
+      spriteID: 0d07f6c093c5600458266a91680b88e7
+      internalID: -1015925290
       vertices: []
       indices: 
       edges: []
@@ -271,12 +271,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      X_mark_big 1_0: 1905886474
-      X_mark_big 1_1: 1836783358
-      X_mark_big 1_2: 2112447457
-      X_mark_big 1_3: -478963580
-      X_mark_big 1_4: 1837922736
-      X_mark_big 1_5: -378220063
+      X_mark_big 2_0: -1033030382
+      X_mark_big 2_1: 106833098
+      X_mark_big 2_2: -198090961
+      X_mark_big 2_3: -1835480194
+      X_mark_big 2_4: 697422626
+      X_mark_big 2_5: -1015925290
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

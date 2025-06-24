@@ -131,7 +131,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -139,9 +139,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 989fbd2a4310f5950800000000000000
+      spriteID: 7fa60c624acf1a64dbdaec3f2a957628
       internalID: 6439867317745351049
       vertices: []
       indices: 
@@ -151,9 +151,9 @@ TextureImporter:
       name: 02-_1
       rect:
         serializedVersion: 2
-        x: 59
+        x: 60
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -163,7 +163,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfc5a22d6201d30449823491612e1834
+      spriteID: 2e0c8fb52faeec441be2590a4fcdeb70
       internalID: -320311891
       vertices: []
       indices: 
@@ -173,9 +173,9 @@ TextureImporter:
       name: 02-_2
       rect:
         serializedVersion: 2
-        x: 118
+        x: 120
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -185,7 +185,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0033bbd723bbf3845a9d919da68dd561
+      spriteID: 094f7691045e8bd45bd0315c4ff80f68
       internalID: -1836973943
       vertices: []
       indices: 
@@ -195,9 +195,9 @@ TextureImporter:
       name: 02-_3
       rect:
         serializedVersion: 2
-        x: 177
+        x: 180
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -207,7 +207,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d205a15519a38e6459c16b18396d6b69
+      spriteID: ccf8d98470163e64f86bd4fa81c27e6c
       internalID: 2129652762
       vertices: []
       indices: 

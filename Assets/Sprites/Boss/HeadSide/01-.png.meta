@@ -131,7 +131,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -151,9 +151,9 @@ TextureImporter:
       name: 01-_1
       rect:
         serializedVersion: 2
-        x: 59
+        x: 60
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -173,9 +173,9 @@ TextureImporter:
       name: 01-_2
       rect:
         serializedVersion: 2
-        x: 118
+        x: 120
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -195,9 +195,9 @@ TextureImporter:
       name: 01-_3
       rect:
         serializedVersion: 2
-        x: 177
+        x: 180
         y: 0
-        width: 59
+        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0, y: 0}

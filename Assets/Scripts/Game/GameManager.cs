@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        PersistentCanvas.Instance.OnLevelLoad();
         if (_activeSceneIndex == 0 && !PersistentInfo.Instance._wasLanguageSet) SelectDefaultButton(_argFlag);
         if (_activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)
         {

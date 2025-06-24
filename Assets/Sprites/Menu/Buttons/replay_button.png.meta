@@ -176,7 +176,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 75
+        width: 76
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -196,9 +196,9 @@ TextureImporter:
       name: replay_button_1
       rect:
         serializedVersion: 2
-        x: 75
+        x: 76
         y: 0
-        width: 75
+        width: 76
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -218,9 +218,9 @@ TextureImporter:
       name: replay_button_2
       rect:
         serializedVersion: 2
-        x: 150
+        x: 152
         y: 0
-        width: 75
+        width: 76
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -240,9 +240,9 @@ TextureImporter:
       name: replay_button_3
       rect:
         serializedVersion: 2
-        x: 225
+        x: 228
         y: 0
-        width: 75
+        width: 76
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -262,9 +262,9 @@ TextureImporter:
       name: replay_button_4
       rect:
         serializedVersion: 2
-        x: 300
+        x: 304
         y: 0
-        width: 75
+        width: 76
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}

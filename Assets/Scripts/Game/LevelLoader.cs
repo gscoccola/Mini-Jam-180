@@ -7,6 +7,12 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] float _animationDuration = 0.3f;
 
+
+    private void Awake()
+    {
+        transform.GetChild(0).GetComponent<Canvas>().worldCamera = FindAnyObjectByType<Camera>();
+    }
+
     public void LoadLevel(int levelIndex)
     {
         Time.timeScale = 1f;
