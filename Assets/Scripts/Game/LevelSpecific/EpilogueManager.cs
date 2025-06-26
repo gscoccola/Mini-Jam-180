@@ -45,11 +45,11 @@ public class EpilogueManager : MonoBehaviour
             
         }
 
-        if (_isGameOver)
+        /*if (_isGameOver)
         {
             _confiner.InvalidateBoundingShapeCache();
-            _camera.Lens.OrthographicSize = Mathf.SmoothDamp(_camera.Lens.OrthographicSize, 4f, ref velocity, 10f);
-        }
+            _camera.Lens.OrthographicSize = Mathf.SmoothDamp(_camera.Lens.OrthographicSize, 5.625f, ref velocity, 1f);
+        }*/
 
         if (_playerTransform.position.y < -2000f)
         {
@@ -71,7 +71,11 @@ public class EpilogueManager : MonoBehaviour
         _gameManager.OnAchievementUnlocked(2);
         PersistentInfo.Instance.LevelCompletionInfo[SceneManager.GetActiveScene().buildIndex].WasBeaten = true;
 
-        yield return new WaitForSeconds(period +2);
+        yield return new WaitForSeconds(2f);
+        _confiner.InvalidateBoundingShapeCache();
+        _camera.Lens.OrthographicSize = 5.625f;
+
+        yield return new WaitForSeconds(period);
         _credits.gameObject.SetActive(true);
         VibrationHandler.Instance.HeavyVibrate();
 

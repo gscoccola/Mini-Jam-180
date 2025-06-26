@@ -64,6 +64,9 @@ public class BlurRenderPass : ScriptableRenderPass
 
         textureDesc = resourceData.activeColorTexture.GetDescriptor(renderGraph);
 
+        
+        textureDesc.width= 640; // Set the width of the destination texture
+        textureDesc.height= 360; // Set the width of the destination texture
         var dst = renderGraph.CreateTexture(textureDesc);
 
         // Update the blur settings in the material
@@ -75,10 +78,14 @@ public class BlurRenderPass : ScriptableRenderPass
 
         // The AddBlitPass method adds a vertical blur render graph pass that blits from the source texture (camera color in this case) to the destination texture using the first shader pass (the shader pass is defined in the last parameter).
         RenderGraphUtils.BlitMaterialParameters paraVertical = new(srcCamColor, dst, material, 0);
+        //paraVertical.scale = new Vector2(1.0f, 1.0f);
         renderGraph.AddBlitPass(paraVertical, k_VerticalPassName);
 
         // The AddBlitPass method adds a horizontal blur render graph pass that blits from the texture written by the vertical blur pass to the camera color texture. The method uses the second shader pass.
         RenderGraphUtils.BlitMaterialParameters paraHorizontal = new(dst, srcCamColor, material, 0);
+        //paraHorizontal.scale = new Vector2(2.0f, 2.0f);
         renderGraph.AddBlitPass(paraHorizontal, k_HorizontalPassName);
+
+
     }
 }

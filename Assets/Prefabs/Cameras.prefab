@@ -60,7 +60,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 82.6
-    OrthographicSize: 5.625
+    OrthographicSize: 11.25
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 2591170118100433423}
   - component: {fileID: 5847938046882263322}
   - component: {fileID: 1038203023609268262}
+  - component: {fileID: 5593455062271488685}
   - component: {fileID: 3110745476049044121}
   - component: {fileID: 8280253935595616349}
   m_Layer: 0
@@ -225,7 +226,7 @@ Transform:
   m_GameObject: {fileID: 3525313338217764298}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.686134, y: 5.7, z: -10}
+  m_LocalPosition: {x: 19.156641, y: 4.6375, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,7 +307,7 @@ Camera:
   far clip plane: 5000
   field of view: 82.6
   orthographic: 1
-  orthographic size: 7.640625
+  orthographic size: 5.0104165
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -322,6 +323,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &5593455062271488685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3525313338217764298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7a60dcff74dda4081ec3bd5c043bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ppc: {fileID: 8280253935595616349}
 --- !u!114 &3110745476049044121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +433,7 @@ Transform:
   m_GameObject: {fileID: 3847667415802792232}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.3333325, y: -3.9999998, z: -10}
+  m_LocalPosition: {x: -5.999999, y: -4.4999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -450,7 +464,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 82.6
-    OrthographicSize: 5.625
+    OrthographicSize: 11.25
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0

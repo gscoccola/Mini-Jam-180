@@ -42358,6 +42358,10 @@ PrefabInstance:
       propertyPath: field of view
       value: 82.6
       objectReference: {fileID: 0}
+    - target: {fileID: 1038203023609268262, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
+      propertyPath: orthographic size
+      value: 13.875
+      objectReference: {fileID: 0}
     - target: {fileID: 1514102849395140188, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_Name
       value: Cameras
@@ -42372,11 +42376,11 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.55917
+      value: 95.89
       objectReference: {fileID: 0}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.09
+      value: 13.765
       objectReference: {fileID: 0}
     - target: {fileID: 3467645949538996579, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42400,7 +42404,7 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 4434011431033260198, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.3308263
+      value: -5.999999
       objectReference: {fileID: 0}
     - target: {fileID: 5395978055780557568, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: Composition.ScreenPosition.y
@@ -42436,11 +42440,11 @@ PrefabInstance:
       objectReference: {fileID: 253052991}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.55702
+      value: 29.143288
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.7
+      value: 11.574999
       objectReference: {fileID: 0}
     - target: {fileID: 8370371240038508194, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_LocalPosition.z

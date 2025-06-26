@@ -70,8 +70,8 @@ MonoBehaviour:
   settings:
     horizontalBlur: 0
     verticalBlur: 0
-    _Amplitude: 0.92
-    _Constant: 0.55
-    _Threshold: 0.56
-  shader: {fileID: 4800000, guid: fa27badeef9841f44a5b894324b0867e, type: 3}
+    _Amplitude: 1.12
+    _Constant: 0
+    _Threshold: 0
+  crtShader: {fileID: 4800000, guid: fa27badeef9841f44a5b894324b0867e, type: 3}
   renderPassEvent: 550

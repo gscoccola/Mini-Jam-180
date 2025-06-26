@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BossBehavior : MonoBehaviour
 {
@@ -299,7 +300,7 @@ public class BossBehavior : MonoBehaviour
         else if (_bossState == BossState.Celebrating)
         {
             _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
-                (_camera.transform.position - transform.position).normalized
+                (_camera.GetComponent<PixelPerfectCamera>().RoundToPixel( _camera.transform.position) - transform.position)
             * MoveSpeedSlow, Acceleration * Time.deltaTime / 2f);
         }
 

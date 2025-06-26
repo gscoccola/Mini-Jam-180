@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displacementRatio: 0.1
   offset: {x: 58.25, y: -3, z: 0}
+  _printPosition: 0
 --- !u!1 &7403280851507546867
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displacementRatio: 0.5
   offset: {x: 0, y: -3, z: 0}
+  _printPosition: 0
 --- !u!1 &7873068741536633430
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displacementRatio: 0
   offset: {x: 0, y: 0, z: 0}
+  _printPosition: 0
 --- !u!1 &9026276449378921871
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displacementRatio: 0.05
   offset: {x: 54.97, y: -5.7, z: 0}
+  _printPosition: 0
 --- !u!1 &9214011045349799474
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +530,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 240, y: 2}
+  m_Size: {x: 240, y: 2.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -546,3 +550,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displacementRatio: 0.1
   offset: {x: 0, y: 3.95, z: 0}
+  _printPosition: 0

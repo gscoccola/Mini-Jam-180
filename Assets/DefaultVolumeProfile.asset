@@ -506,6 +506,7 @@ MonoBehaviour:
   - {fileID: -8186968272690591729}
   - {fileID: -3978695733392391637}
   - {fileID: -1083910812058648046}
+  - {fileID: 4283196131953077377}
 --- !u!114 &156332030701414761
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -651,6 +652,25 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &4283196131953077377
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65856e4b5c92af6489c0b76ebde90150, type: 3}
+  m_Name: CustomVolumeComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  horizontalBlur:
+    m_OverrideState: 1
+    m_Value: 0.05
+  verticalBlur:
+    m_OverrideState: 1
+    m_Value: 0.05
 --- !u!114 &5762530381802164056
 MonoBehaviour:
   m_ObjectHideFlags: 3
