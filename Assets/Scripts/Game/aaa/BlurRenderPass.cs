@@ -77,7 +77,7 @@ public class BlurRenderPass : ScriptableRenderPass
             return;
 
         // The AddBlitPass method adds a vertical blur render graph pass that blits from the source texture (camera color in this case) to the destination texture using the first shader pass (the shader pass is defined in the last parameter).
-        RenderGraphUtils.BlitMaterialParameters paraVertical = new(srcCamColor, dst, material, 0);
+        RenderGraphUtils.BlitMaterialParameters paraVertical = new(srcCamColor, dst, material, 1);
         //paraVertical.scale = new Vector2(1.0f, 1.0f);
         renderGraph.AddBlitPass(paraVertical, k_VerticalPassName);
 

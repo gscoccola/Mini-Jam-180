@@ -55,8 +55,8 @@ Shader "CustomEffects/Blur"
             color.r *= pixelFactor2;
             color.b *= pixelFactor0;
            
-            /*bool xBool =  floor(input.texcoord.x  * _ScreenParams.x) % 2 == 1;
-            bool yBool =  floor(input.texcoord.y  * _ScreenParams.y) % 2 == 1;
+            /*bool xBool =  floor(input.texcoord.x  * _ScreenParams.x) % pixelsPerWave == 1;
+            bool yBool =  floor(input.texcoord.y  * _ScreenParams.y) % pixelsPerWave == 1;
 
             if (xBool && yBool)
             {
@@ -74,6 +74,12 @@ Shader "CustomEffects/Blur"
             }*/
 
             return float4(color.rgb, 1);
+
+        }
+
+        float4 PointSample (Varyings input) : SV_Target
+        {
+            return float4(SAMPLE_TEXTURE2D(_BlitTexture, sampler_point_clamp, input.texcoord).rgb, 1);
         }
     
     ENDHLSL
@@ -85,12 +91,27 @@ Shader "CustomEffects/Blur"
         ZWrite Off Cull Off
         Pass
         {
-            Name "BlurPassVertical"
+            Name "CRTPass"
 
             HLSLPROGRAM
             
             #pragma vertex Vert
             #pragma fragment BlurVertical
+            
+            ENDHLSL
+        }
+
+        Tags { "RenderType"="Opaque" "RenderPipeline" = "UniversalPipeline"}
+        LOD 100
+        ZWrite Off Cull Off
+        Pass
+        {
+            Name "SamplePass"
+
+            HLSLPROGRAM
+            
+            #pragma vertex Vert
+            #pragma fragment PointSample
             
             ENDHLSL
         }

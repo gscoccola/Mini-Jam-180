@@ -299,9 +299,18 @@ public class BossBehavior : MonoBehaviour
         }
         else if (_bossState == BossState.Celebrating)
         {
-            _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
-                (_camera.GetComponent<PixelPerfectCamera>().RoundToPixel( _camera.transform.position) - transform.position)
-            * MoveSpeedSlow, Acceleration * Time.deltaTime / 2f);
+            if ((_camera.transform.position.Flatten() + 3f * Vector3.up - transform.position).magnitude > 2f )
+            {
+                _rigidbody.linearVelocity = Vector2.MoveTowards(_rigidbody.linearVelocity,
+                   (_camera.transform.position + 3f * Vector3.up - transform.position)
+               * MoveSpeedSlow, Acceleration * Time.deltaTime / 2f);
+            }
+               
+            else
+            {
+                _rigidbody.linearVelocity = Vector3.zero;
+            }
+                
         }
 
     }
@@ -523,6 +532,7 @@ public class BossBehavior : MonoBehaviour
         Interrupt();
         _bossState = BossState.Celebrating;
         gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
+        FindAnyObjectByType<BossFightManager>().OnPlayerDead();    
         StartCoroutine(ICelebrate());
     }
 

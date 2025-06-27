@@ -82,14 +82,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -194946783
-  m_SortingLayer: 6
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2423258697567584024, guid: 0e2b9043a6c12a0418aa56aac96846ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.6875, y: 4}
+  m_Size: {x: 3.875, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -107,36 +107,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2078115af9673794489368d690601ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalHitsToStun: 2
+  _totalHitsToStun: 3
   _totalPhases: 3
+  _throwProbability: 0.4
+  _chargeProbability: 0.2
   MoveSpeedSlow: 10
   MoveSpeedFast: 24
   PosAdjustDistance: 25
   IdleReturnDistance: 12
   Acceleration: 10
   TargetXOffset: 19
-  AttackDelay: 3.5
+  AttackDelay: 2.5
   AttackMovementPause: 0.4
   MaxYOffsetToAttack: 5
   MaxXOffsetToCigaretteAttack: 23
-  _rockMinVelocity: 13
+  _rockMinVelocity: 15
+  _chargePrepareTime1: 1.5
+  _chargePrepareTime2: 1
+  _chargePrepareSpeed: 24
+  _chargeAttackSpeed: 35
+  _chargeXRange: 3
+  _velocityCorrectionFactor: 1.6
   MaxDistanceToPunchAttack: 11
   _punchFixedSpeed: 10
   _fistReturnSpeed: 12
   _fistReturnTime: 1.5
   hoverXOffset: 1.9
   hoverYOffset: 2.1
-  _leftHandCenter: {x: 2.8, y: -2.8, z: 0}
+  _leftHandCenter: {x: 4, y: -2.8, z: 0}
   _rightHandCenter: {x: -2.8, y: -2.8, z: 0}
   _elasticConstant: 3000
   _swayRandomizePeriod: 2
   _swayCenterAmplitude: 0.6
   Cigarette: {fileID: 8306077369276571215, guid: 098b8f5311a4f7844b2d649baf68cda4, type: 3}
   Rock: {fileID: 4174810378592755860, guid: 29c6d1b638a0d2d479a4f56654d24a8a, type: 3}
+  Explosion1: {fileID: 3467801179110129099, guid: bc21aceefad04c447a82c0baabd3685c, type: 3}
+  Explosion2: {fileID: 3467801179110129099, guid: ce5056142a74250458ebb6343420fbd4, type: 3}
   RightHand: {fileID: 524816799028899656}
   LeftHand: {fileID: 7183559373221840857}
-  BossStateText: {fileID: 0}
-  _stunnedXSpeed: 0
+  _chargeIndicator: {fileID: 0}
+  _chargeBoss: {fileID: 0}
 --- !u!95 &1813835473230280805
 Animator:
   serializedVersion: 7
@@ -175,7 +185,7 @@ Rigidbody2D:
   m_LinearDamping: 1
   m_AngularDamping: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 262df7d55f23d75458d8f132cf72defa, type: 2}
+  m_Material: {fileID: 6200000, guid: 641e9049e80822e41af84c9bf17dc5e5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -239,7 +249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3980858801999299195
 Transform:
   m_ObjectHideFlags: 0
@@ -297,7 +307,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 84890587
-  m_SortingLayer: 8
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -2423258697567584024, guid: 0e2b9043a6c12a0418aa56aac96846ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -408,7 +418,7 @@ Animator:
   m_GameObject: {fileID: 4136449940030722809}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7b24fd05a49fee749afab6a75544d965, type: 2}
+  m_Controller: {fileID: 9100000, guid: ceb7835b6731f8147aee2186ec1de355, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -448,7 +458,7 @@ Transform:
   m_GameObject: {fileID: 5174951267612363146}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.94, y: -1.56, z: 0}
+  m_LocalPosition: {x: 2.47, y: -1.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -496,14 +506,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -194946783
-  m_SortingLayer: 6
+  m_SortingLayer: 4
   m_SortingOrder: -10
-  m_Sprite: {fileID: 6008074867816511056, guid: fef1f1c2439741249b60a88bc5bda2ef, type: 3}
+  m_Sprite: {fileID: 8516011106663468633, guid: 9ea33211bac05ef42ab0e624748828ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 14, y: 3.875}
+  m_Size: {x: 2.625, y: 1.9375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -521,11 +531,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 5
   m_LinearDamping: 5
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 262df7d55f23d75458d8f132cf72defa, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -588,7 +598,7 @@ Transform:
   m_GameObject: {fileID: 6038521391666091183}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.27, y: -2.22, z: 0}
+  m_LocalPosition: {x: -1.21, y: -1.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -636,14 +646,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 84890587
-  m_SortingLayer: 8
+  m_SortingLayer: 6
   m_SortingOrder: 10
-  m_Sprite: {fileID: -503003319121721194, guid: 091fea95ac0c7e742a2d50a15566e2fc, type: 3}
+  m_Sprite: {fileID: 5482365941369345279, guid: 69a41c5b9f200734f90beddf4daddf96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 14, y: 3.875}
+  m_Size: {x: 1.5625, y: 1.5625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -661,11 +671,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 5
   m_LinearDamping: 5
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 262df7d55f23d75458d8f132cf72defa, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

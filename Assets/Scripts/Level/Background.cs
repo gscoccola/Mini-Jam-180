@@ -30,19 +30,19 @@ public class Background : MonoBehaviour
 
         if (!_isSceneZero)
         {
-            transform.position = UpdatedPosition(_pixelPerfectCamera.RoundToPixel(_camera.transform.position));
+            transform.position = UpdatedPosition(_pixelPerfectCamera.RoundToPixel(_camera.transform.position) - _camera.orthographicSize * Vector3.up);
             //transform.position = _camera.transform.position;
             return;
         }
 
         virtualPosition += new Vector3(10 * Time.deltaTime, 0f, 0f);
-        transform.position = UpdatedPosition(virtualPosition);
+        transform.position = UpdatedPosition(virtualPosition + _camera.orthographicSize *Vector3.down);
 
     }
 
     private Vector3 UpdatedPosition(Vector3 target)
     {
-        Vector3 outputPosition = (1 - displacementRatio) * target + offset;
+        Vector3 outputPosition = (1 - displacementRatio) * (target + offset);
         outputPosition = new Vector3(outputPosition.x, outputPosition.y, 0f);
         return outputPosition;
     }

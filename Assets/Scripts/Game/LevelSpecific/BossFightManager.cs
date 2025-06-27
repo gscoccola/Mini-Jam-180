@@ -30,7 +30,7 @@ public class BossFightManager : MonoBehaviour
     bool _amplitudeIncreasing;
     bool _amplitudeDecreasing;
     bool _isGameOver;
-    float velocity;
+    bool _isPlayerDead;
 
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class BossFightManager : MonoBehaviour
     {
         if (!_levelStarted) return;
         _cameraEdgeX = CameraEdgeX(_cameraEdgeX);
-        if (!_isGameOver) UpdateBoundary(_cameraEdgeX, _yMax, _yMin);
+        if (!_isGameOver && !_isPlayerDead) UpdateBoundary(_cameraEdgeX, _yMax, _yMin);
 
         if (_amplitudeDecreasing) _cameraShake.AmplitudeGain = Mathf.Lerp(_cameraShake.AmplitudeGain, 0f, ShakeDuration / 2f);
         else if (_amplitudeIncreasing) _cameraShake.AmplitudeGain = Mathf.Lerp(_cameraShake.AmplitudeGain, ShakeAmplitude, ShakeDuration / 2f);
@@ -60,7 +60,7 @@ public class BossFightManager : MonoBehaviour
         if (_isGameOver)
         {
             _confiner.InvalidateBoundingShapeCache();
-            _playerCamera.Lens.OrthographicSize = Mathf.SmoothDamp(_playerCamera.Lens.OrthographicSize, 9f, ref velocity, 3f);
+            //_playerCamera.Lens.OrthographicSize = 5.625f;
             _confiner.InvalidateBoundingShapeCache();
         }
     }
@@ -137,5 +137,10 @@ public class BossFightManager : MonoBehaviour
         _playerMovement.ToggleGravity();
         _playerCamera.Target.TrackingTarget = _finalTarget.transform;
         UpdateBoundary(0f, 200f , -103.3f);*/
+    }
+
+    public void OnPlayerDead()
+    {
+        _isPlayerDead = true;
     }
 }
