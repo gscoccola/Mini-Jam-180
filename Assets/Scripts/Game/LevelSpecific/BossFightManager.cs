@@ -1,6 +1,7 @@
-using UnityEngine;
-using Unity.Cinemachine;
 using System.Collections;
+using Unity.Cinemachine;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossFightManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class BossFightManager : MonoBehaviour
     [SerializeField] GameObject _pauseButton;
     [SerializeField] GameObject _finalTarget;
     [SerializeField] GameObject _dynamicBackground;
+    [SerializeField] GameObject _cigarPrefab;
+    [SerializeField] float _playerStartingY;
     GameManager _gameManager;
     CinemachineBasicMultiChannelPerlin _cameraShake;
     CinemachineConfiner2D _confiner;
@@ -45,6 +48,14 @@ public class BossFightManager : MonoBehaviour
         _cameraShake = _playerCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         _confiner = _playerCamera.GetComponent<CinemachineConfiner2D>();
         _playerMovement._isInputDisabled = true;
+        if (PersistentInfo.Instance.LevelCompletionInfo[SceneManager.GetActiveScene().buildIndex].WasShown)
+        {
+            StartCoroutine(IBossStandBy(true));
+            Instantiate(_cigarPrefab, new Vector3((_playerMovement.transform.position.x + _behavior.transform.position.x)/2f,
+                _behavior.transform.position.y, 0f), Quaternion.identity);
+            _playerMovement.transform.position = new Vector3(_playerMovement.transform.position.x, _playerStartingY, 0f);
+            return;
+        }
         StartCoroutine(IBossStandBy());
     }
 
@@ -60,13 +71,13 @@ public class BossFightManager : MonoBehaviour
         if (_isGameOver)
         {
             _confiner.InvalidateBoundingShapeCache();
-            //_playerCamera.Lens.OrthographicSize = 5.625f;
             _confiner.InvalidateBoundingShapeCache();
         }
     }
 
-    private IEnumerator IBossStandBy()
+    private IEnumerator IBossStandBy(bool skip = false)
     {
+        if (skip) { _levelStarted = true; yield break; }
         yield return new WaitForSeconds(_initialWait);
         _behavior.StartCoroutine(_behavior.ICigaretteAttack(true));
         yield return new WaitForSeconds(_waitToCameraMovement);

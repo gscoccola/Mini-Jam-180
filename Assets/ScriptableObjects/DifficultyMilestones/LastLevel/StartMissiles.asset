@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ea0ff2387ee0e46ac1ac9da5bd0572, type: 3}
   m_Name: StartMissiles
   m_EditorClassIdentifier: 
-  Distance: 150
+  Distance: 135
   SpecialWaveChance: 0.04
   MissileNumber: 10
   MissileCooldown: 3

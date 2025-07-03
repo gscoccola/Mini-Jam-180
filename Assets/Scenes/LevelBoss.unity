@@ -1043,7 +1043,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -448123787
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: -1
   m_Sprite: {fileID: -1095736159736464296, guid: 0f0590e38c8ee6546977e7b9e003baad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -28901,6 +28901,8 @@ MonoBehaviour:
   _pauseButton: {fileID: 3923181457431929668}
   _finalTarget: {fileID: 1394835819}
   _dynamicBackground: {fileID: 1337829173}
+  _cigarPrefab: {fileID: 8306077369276571215, guid: 098b8f5311a4f7844b2d649baf68cda4, type: 3}
+  _playerStartingY: 15
 --- !u!1001 &1134472711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29095,7 +29097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1038203023609268262, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: orthographic size
-      value: 13.875
+      value: 11.25
       objectReference: {fileID: 0}
     - target: {fileID: 1038203023609268262, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -29816,7 +29818,8 @@ PrefabInstance:
       propertyPath: _spawnsSpecialWaves
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1240379336772770599, guid: 8887688c6bcc5984092b8d2e2c8b2b71, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

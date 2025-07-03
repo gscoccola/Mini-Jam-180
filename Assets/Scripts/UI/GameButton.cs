@@ -78,6 +78,7 @@ public class GameButton : MonoBehaviour
                 _gameManager.ShowTutorial();
                 break;
             case ButtonType.LevelSelect:
+                PersistentInfo.Instance.LevelCompletionInfo[_level].WasShown = false;
                 _gameManager.LoadLevel(_level);
                 break;
             case ButtonType.Pause:

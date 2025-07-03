@@ -92,10 +92,15 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        else if (!PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown &&
-            FindAnyObjectByType<BossBehavior>() == null)
+        else if (!PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown)
         {
             PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown = true;
+            if (FindAnyObjectByType<BossBehavior>() != null)
+            {
+                StartLevel(true);
+                return;
+            }
+                
             if (_cameraScript != null) StartCoroutine(_cameraScript.ICameraPan());
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
@@ -161,7 +166,8 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasBeaten = true;
-        LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex + 1].WasShown = false;
+        LoadLevel(_activeSceneIndex + 1);
     }
 
     public void ReloadLevel()
