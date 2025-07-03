@@ -65,8 +65,8 @@ public class BlurRenderPass : ScriptableRenderPass
         textureDesc = resourceData.activeColorTexture.GetDescriptor(renderGraph);
 
         
-        textureDesc.width= 640; // Set the width of the destination texture
-        textureDesc.height= 360; // Set the width of the destination texture
+        //textureDesc.width= 640; // Set the width of the destination texture
+        //textureDesc.height= 360; // Set the width of the destination texture
         var dst = renderGraph.CreateTexture(textureDesc);
 
         // Update the blur settings in the material

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,8 +49,6 @@ public class GameManager : MonoBehaviour
 
     InGameMenu _lastMenu;
 
-
-
     private void Awake()
     {
         _camera = FindAnyObjectByType<Camera>();
@@ -63,8 +62,10 @@ public class GameManager : MonoBehaviour
         _scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
     }
 
+
     private void Start()
     {
+
         PersistentCanvas.Instance.OnLevelLoad();
         if (_activeSceneIndex == 0 && !PersistentInfo.Instance._wasLanguageSet) SelectDefaultButton(_argFlag);
         if (_activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)

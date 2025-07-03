@@ -460,38 +460,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8105195659705964920, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
-      propertyPath: m_Size.x
-      value: 3.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 8105195659705964920, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
-      propertyPath: m_Size.y
-      value: 5.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 8105195659705964920, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 8105195659705964920, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.68
-      objectReference: {fileID: 0}
     - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
       propertyPath: _chargeBoss
       value: 
       objectReference: {fileID: 4920218683155311887}
     - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
-      propertyPath: _totalPhases
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
       propertyPath: _chargeIndicator
       value: 
       objectReference: {fileID: 19555833}
-    - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
-      propertyPath: _totalHitsToStun
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29119,7 +29095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1038203023609268262, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: orthographic size
-      value: 11.25
+      value: 13.875
       objectReference: {fileID: 0}
     - target: {fileID: 1038203023609268262, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
       propertyPath: m_CullingMask.m_Bits

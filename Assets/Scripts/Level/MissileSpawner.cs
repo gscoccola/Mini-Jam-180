@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.UIElements;
 
 public class MissileSpawner : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class MissileSpawner : MonoBehaviour
     [SerializeField] private float _waveCooldown = 3f;
     [SerializeField] private float _warningTime = 1f;
 
+    [SerializeField] BossBackgroundBehavior _bossBackgroundBehavior;
     List<GameObject> _activeLasers = new List<GameObject>();
 
     private int _laneNumber;
@@ -28,6 +28,7 @@ public class MissileSpawner : MonoBehaviour
     {
         _player = FindAnyObjectByType<PlayerMovement>().transform;
         _enemiesFolder = GameObject.Find("Enemies");
+        //_bossBackgroundBehavior = FindAnyObjectByType<BossBackgroundBehavior>();
         GenerateLanes();
     }
 
@@ -41,6 +42,7 @@ public class MissileSpawner : MonoBehaviour
     {
         StartCoroutine(ISpawnMissileWave());
         _isSpawning = true;
+        _bossBackgroundBehavior.Activate();
     }
 
     public void StopSpawning()
@@ -51,10 +53,15 @@ public class MissileSpawner : MonoBehaviour
             Destroy(laser);
         }
         _activeLasers.Clear();
+        _bossBackgroundBehavior._isExiting = true;
     }
 
     private IEnumerator ISpawnMissileWave()
     {
+        StartCoroutine(_bossBackgroundBehavior.IAttack());
+
+        yield return new WaitForSeconds(_warningTime);
+
         _laneArray = RandomIntArrayGeneration.Shuffle(_laneArray);
         
         float playerX = _player.transform.position.x;
@@ -71,7 +78,7 @@ public class MissileSpawner : MonoBehaviour
         foreach (GameObject laser in _activeLasers)
         {
             Instantiate(_missilePrefab, new Vector3(laser.transform.position.x, _player.transform.position.y + 10f, 0f),
-            Quaternion.identity, _enemiesFolder.transform);
+            Quaternion.Euler(0f, 0f, -90f), _enemiesFolder.transform);
             yield return new WaitForSeconds(0.05f);
         }
 
@@ -83,7 +90,7 @@ public class MissileSpawner : MonoBehaviour
         }
         _activeLasers.Clear();
 
-        yield return new WaitForSeconds(_waveCooldown);
+        yield return new WaitForSeconds(_waveCooldown - _warningTime);
         StartCoroutine(ISpawnMissileWave());
     }
 
