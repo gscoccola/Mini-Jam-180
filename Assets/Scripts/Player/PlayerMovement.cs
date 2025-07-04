@@ -270,6 +270,7 @@ public class PlayerMovement : MonoBehaviour
     void CalculateIsOnFloor()
     {
         IsOnFloor = _feetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        gameObject.layer = IsOnFloor ? LayerMask.NameToLayer("GroundedPlayer") : LayerMask.NameToLayer("Player");
         if (!IsOnFloor) _isRunning = false;
         if (IsOnFloor && PlayerCombo!=0)
         {

@@ -530,6 +530,7 @@ public class BossBehavior : MonoBehaviour
     public void OnPlayerDeath()
     {
         Interrupt();
+        if ((transform.position - _camera.transform.position).magnitude > 20f) TeleportAndReset();
         _bossState = BossState.Celebrating;
         gameObject.layer = LayerMask.NameToLayer("PlayerInvulnerable");
         FindAnyObjectByType<BossFightManager>().OnPlayerDead();    

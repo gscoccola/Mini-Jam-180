@@ -11,7 +11,6 @@ public class BlurRenderPass : ScriptableRenderPass
     private static readonly int _Amplitude = Shader.PropertyToID("_Amplitude");
     private static readonly int _Constant = Shader.PropertyToID("_Constant");
     private static readonly int _Threshold = Shader.PropertyToID("_Threshold");
-    private const string k_BlurTextureName = "_BlurTexture";
     private const string k_VerticalPassName = "VerticalBlurRenderPass";
     private const string k_HorizontalPassName = "HorizontalBlurRenderPass";
 
@@ -64,9 +63,12 @@ public class BlurRenderPass : ScriptableRenderPass
 
         textureDesc = resourceData.activeColorTexture.GetDescriptor(renderGraph);
 
+        if (defaultSettings._UseReferenceResolution)
+        {
+            textureDesc.width = 640; // Set the width of the destination texture
+            textureDesc.height = 360; // Set the width of the destination texture
+        }
         
-        //textureDesc.width= 640; // Set the width of the destination texture
-        //textureDesc.height= 360; // Set the width of the destination texture
         var dst = renderGraph.CreateTexture(textureDesc);
 
         // Update the blur settings in the material

@@ -62,4 +62,5 @@ public class BlurSettings
     [Range(0, 2f)] public float _Amplitude;
     [Range(0, 2f)] public float _Constant;
     [Range(0, 20f)] public float _Threshold;
+    public bool _UseReferenceResolution;
 }
