@@ -36,29 +36,31 @@ public class FireworkSpawner : MonoBehaviour
 
     public IEnumerator ISpawnWave()
     {
-        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._fireworkWhistle);
+        while (true)
+        {
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._fireworkWhistle);
 
-        yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2f);
 
-        List<Vector3> positions = Random.Range(0, 2) == 0 ? _positions1: _positions2;
-        _colors.Shuffle();
-        positions.Shuffle();
+            List<Vector3> positions = Random.Range(0, 2) == 0 ? _positions1 : _positions2;
+            _colors.Shuffle();
+            positions.Shuffle();
 
-        StartCoroutine(ISpawnFirework(positions[2], _colors[2]));
-
-
-        yield return new WaitForSeconds(0.2f);
-
-
-        StartCoroutine(ISpawnFirework(positions[1], _colors[1]));
+            StartCoroutine(ISpawnFirework(positions[2], _colors[2]));
 
 
-        yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.2f);
 
-        StartCoroutine(ISpawnFirework(positions[0], _colors[0]));
 
-        yield return new WaitForSeconds(period - 2.4f);
-        StartCoroutine(ISpawnWave());
+            StartCoroutine(ISpawnFirework(positions[1], _colors[1]));
+
+
+            yield return new WaitForSeconds(0.2f);
+
+            StartCoroutine(ISpawnFirework(positions[0], _colors[0]));
+
+            yield return new WaitForSeconds(period - 2.4f);
+        }
     }
 
     private IEnumerator ISpawnFirework(Vector3 position, Color color)

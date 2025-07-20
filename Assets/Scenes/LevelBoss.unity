@@ -470,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 19555833}
     - target: {fileID: 8703847467152831357, guid: fdc7a333c52e2104ca0b3c7fc980ae99, type: 3}
       propertyPath: _totalHitsToStun
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28837,6 +28837,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 7403280851507546867, guid: a7fb2c71c5445e64292aa4327c3001fd, type: 3}
     - {fileID: 9214011045349799474, guid: a7fb2c71c5445e64292aa4327c3001fd, type: 3}
+    - {fileID: 3201821231775594892, guid: a7fb2c71c5445e64292aa4327c3001fd, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3573662378332120373, guid: a7fb2c71c5445e64292aa4327c3001fd, type: 3}
       insertIndex: -1

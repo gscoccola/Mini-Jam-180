@@ -32,6 +32,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
     [SerializeField] AudioResource _bossCombo;
 
     [SerializeField] AudioMixerGroup _musicMixer;
+    [SerializeField] bool _isMusicEnabled = true;
 
     public bool _isSecondTrackEnabled;
     public bool _isThirdTrackEnabled;
@@ -40,6 +41,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
     public bool _isPlayingWind;
     public bool _isPlayingMusic;
     public bool _firstTrackFadeIn;
+
 
     private void OnEnable()
     {
@@ -115,7 +117,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
         }
         _isPlayingMusic = false;
 
-        //DisableMusic();
+        if (!_isMusicEnabled) DisableMusic();
     }
 
     public void DisableMusic()
@@ -203,7 +205,9 @@ public class MusicPlayer : Singleton<MusicPlayer>
 
     public void Play()
     {
+        
         _isPlayingMusic = true;
+        if (!_isMusicEnabled) return;
         _audioSource.Play();
         _audioSource2.Play();
         if (_gamePhase == GamePhase.Boss)

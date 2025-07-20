@@ -12,4 +12,5 @@ public class BackgroundSetSO : ScriptableObject
     public Sprite BuidlingsSprite;
     public Sprite BushesSprite;
     public Color ContrastingColor;
+    public Color BackgroundBossColor;
 }

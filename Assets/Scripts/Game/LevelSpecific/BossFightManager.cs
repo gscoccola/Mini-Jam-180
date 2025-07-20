@@ -34,6 +34,7 @@ public class BossFightManager : MonoBehaviour
     bool _amplitudeDecreasing;
     bool _isGameOver;
     bool _isPlayerDead;
+    public bool _shortStart;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class BossFightManager : MonoBehaviour
         _playerMovement = FindAnyObjectByType<PlayerMovement>();
         _behavior = FindAnyObjectByType<BossBehavior>();
         _gameManager = FindAnyObjectByType<GameManager>();
+        _shortStart = PersistentInfo.Instance.LevelCompletionInfo[SceneManager.GetActiveScene().buildIndex].WasShown;
     }
 
     private void Start()
@@ -48,7 +50,8 @@ public class BossFightManager : MonoBehaviour
         _cameraShake = _playerCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         _confiner = _playerCamera.GetComponent<CinemachineConfiner2D>();
         _playerMovement._isInputDisabled = true;
-        if (PersistentInfo.Instance.LevelCompletionInfo[SceneManager.GetActiveScene().buildIndex].WasShown)
+
+        if (_shortStart)
         {
             StartCoroutine(IBossStandBy(true));
             Instantiate(_cigarPrefab, new Vector3((_playerMovement.transform.position.x + _behavior.transform.position.x)/2f,
