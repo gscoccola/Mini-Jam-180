@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 3201821231775594892}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120.5, y: 31.5, z: 0}
+  m_LocalPosition: {x: 120.5, y: 7.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -111,19 +111,19 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -448123787
-  m_SortingLayer: -3
+  m_SortingLayer: -5
   m_SortingOrder: 1
   m_Sprite: {fileID: 340198482, guid: 5dfe4244c7ce6724280924dc743ae78f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 238.69, y: 11}
+  m_Size: {x: 240, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &2700057566277966932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displacementRatio: 0.1
-  offset: {x: 58.25, y: -3, z: 0}
+  offset: {x: 58.25, y: 0, z: 0}
+  _printPosition: 0
 --- !u!1 &7403280851507546867
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,14 +214,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -448123787
-  m_SortingLayer: -3
+  m_SortingLayer: -5
   m_SortingOrder: 4
   m_Sprite: {fileID: 2395028364090877961, guid: 24e077671ab05994eaab32769e6846e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 390.1, y: 4.8}
+  m_Size: {x: 390, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -239,7 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displacementRatio: 0.5
-  offset: {x: 0, y: -3, z: 0}
+  offset: {x: 0, y: -0.3, z: 0}
+  _printPosition: 0
 --- !u!1 &7873068741536633430
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +270,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 89, y: 34.6, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3573662378332120373}
@@ -315,14 +317,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -448123787
-  m_SortingLayer: -3
+  m_SortingLayer: -5
   m_SortingOrder: -2
   m_Sprite: {fileID: 3568574763037466278, guid: 8ef2174ade793bd4f85f9ea97646b87b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 238.8, y: 11.7}
+  m_Size: {x: 240, y: 12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -342,6 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displacementRatio: 0
   offset: {x: 0, y: 0, z: 0}
+  _printPosition: 0
 --- !u!1 &9026276449378921871
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,14 +420,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -448123787
-  m_SortingLayer: -3
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7745840689195864237, guid: 5c625eb1f06c6da4dbe7aa0a3095ac1e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 238.69, y: 6.8}
+  m_Size: {x: 240, y: 6.875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -443,7 +446,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displacementRatio: 0.05
-  offset: {x: 54.97, y: -5.7, z: 0}
+  offset: {x: 54.97, y: 0, z: 0}
+  _printPosition: 0
 --- !u!1 &9214011045349799474
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,14 +523,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -448123787
-  m_SortingLayer: -3
+  m_SortingLayer: -5
   m_SortingOrder: -1
   m_Sprite: {fileID: 1062938222754789094, guid: 0242352fc4da4f74593015e7bebdc827, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 238.69, y: 2.05}
+  m_Size: {x: 240, y: 2.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -545,4 +549,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displacementRatio: 0.1
-  offset: {x: 0, y: 3.95, z: 0}
+  offset: {x: 0, y: 16, z: 0}
+  _printPosition: 0

@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14512841314304
-    m_Localized: Tutorial
+    m_Localized: Controls
     m_Metadata:
       m_Items: []
   - m_Id: 14569669939200
@@ -47,7 +47,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14867863982080
-    m_Localized: 'Game Design: E. Pellegrino
+    m_Localized: 'Game Design:
+
+      E. Pellegrino
 
       Programming and UI:
 
@@ -59,7 +61,7 @@ MonoBehaviour:
       A. Lobos
 
       Pixel Art: rayryuk,
-      shokodibuja'
+      Monzonito, shokodibuja'
     m_Metadata:
       m_Items: []
   - m_Id: 15143362646016
@@ -117,7 +119,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3743158487764992
-    m_Localized: Golden Ballons Unlocked!
+    m_Localized: 'Endless mode:
+
+      Cola Unlocked!'
     m_Metadata:
       m_Items: []
   - m_Id: 5765749100531712
@@ -142,6 +146,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8112459583868928
     m_Localized: Loading Leaderboard...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8433617101410304
+    m_Localized: Rank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8434362043355136
+    m_Localized: Profile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8811159788474368
+    m_Localized: No network connection
     m_Metadata:
       m_Items: []
   references:

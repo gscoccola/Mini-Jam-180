@@ -11,6 +11,8 @@ using System;
 
 public class PlayfabManager : Singleton<PlayfabManager>
 {
+    public bool _nameChangeBeingProcessed;
+    public bool _openLeaderBoardAfterNameChange;
 
     public void Login(int playerID)
     {
@@ -44,6 +46,11 @@ public class PlayfabManager : Singleton<PlayfabManager>
     {
         SendMaximumLevelReached();
         SendAchievementCount();
+    }
+
+    public void SendCheatStatus()
+    {
+        SendStatistic("Has Used Cheats", 1);
     }
 
     public void SendHighscore(int score)
@@ -80,12 +87,12 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
 
 
-    public void GetGlobalStatistics(bool openLeaderboardWhenDone)
+    public void GetGlobalStatistics(bool openLeaderboardWhenDone, int maxResultsCount)
     {
         PlayFabClientAPI.GetLeaderboard(
             new GetLeaderboardRequest()
             {
-                MaxResultsCount = 10,
+                MaxResultsCount = maxResultsCount,
                 StartPosition = 0,
                 StatisticName = "Highscore",
             },
@@ -97,11 +104,17 @@ public class PlayfabManager : Singleton<PlayfabManager>
                     if (openLeaderboardWhenDone) FindAnyObjectByType<GameManager>().OpenLeaderBoard();
                     Debug.Log("Leaderboard loaded");
                 }
-                
-                else Debug.Log("No leaderboard found");
+
+                else
+                {
+                    if (openLeaderboardWhenDone) FindAnyObjectByType<GameManager>().CancelOpenLeaderBoard();
+                    Debug.Log("No leaderboard found");
+                }
+                    
             },
             error =>
             {
+                if (openLeaderboardWhenDone) FindAnyObjectByType<GameManager>().CancelOpenLeaderBoard();
                 Debug.Log(error.GenerateErrorReport());
             }
             );
@@ -110,8 +123,8 @@ public class PlayfabManager : Singleton<PlayfabManager>
 
 
 
-    /*
-    private void GetStatistics()
+    
+    /*private void GetStatistics()
     {
         PlayFabClientAPI.GetPlayerStatistics(
             new GetPlayerStatisticsRequest(),
@@ -120,8 +133,6 @@ public class PlayfabManager : Singleton<PlayfabManager>
         );
     }
 
-
-    
     private void OnGetStatistics(GetPlayerStatisticsResult result)
     {
         Dictionary<string, int> highScores;
@@ -131,31 +142,35 @@ public class PlayfabManager : Singleton<PlayfabManager>
             if (eachStat.StatisticName != "Highscore") return;
             highScores[eachStat.]
             Debug.Log("Statistic (" + eachStat.StatisticName + "): " + eachStat.Value);
-        }
-            
+        }    
     }*/
 
-    public void UpdateDisplayName(string name)
+    public void UpdateDisplayName(string name, bool openLeaderBoardAfterwards = false)
     {
+        _nameChangeBeingProcessed = true;
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
         {
             DisplayName = name
         }, result => {
             Debug.Log("The player's display name is now: " + result.DisplayName);
+            _nameChangeBeingProcessed = false;
+            if (_openLeaderBoardAfterNameChange) FindAnyObjectByType<GameManager>().StartLoadingLeaderboard();
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
     private void OnStatisticUpdated(UpdatePlayerStatisticsResult result)
     {
-        //Debug.Log("Statistic Updated");
+        //Debug.Log("Statistic Updated " + result );
     }
 
     private void OnLogin(LoginResult result)
     {
-        Debug.Log("Successful Login as " + PersistentInfo.Instance.PlayerId);
+        Debug.Log("Successful Login as " + PersistentInfo.Instance.CustomPlayerId);
         SendMobile();
-        GetGlobalStatistics(false);
+        GetGlobalStatistics(false, 1);
         SendCompletionStatistics();
+        SendHighscore(PersistentInfo.Instance.PersonalHighScore);
+        PersistentInfo.Instance.PlayfabId = result.PlayFabId;
     }
 
     private void OnError(PlayFabError error)

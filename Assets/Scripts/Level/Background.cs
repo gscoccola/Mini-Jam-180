@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class Background : MonoBehaviour
@@ -8,10 +9,13 @@ public class Background : MonoBehaviour
     [SerializeField] Vector3 offset;
     Vector3 virtualPosition;
     bool _isSceneZero;
+    PixelPerfectCamera _pixelPerfectCamera;
+    public bool _printPosition;
 
     private void Awake()
     {
         _camera = FindAnyObjectByType<Camera>();
+        _pixelPerfectCamera = _camera.GetComponent<PixelPerfectCamera>();
     }
 
     private void Start()
@@ -22,16 +26,24 @@ public class Background : MonoBehaviour
 
     private void Update()
     {
+        //Vector3 target = _isSceneZero ? _camera.transform.position : Vector3.zero;
+
         if (!_isSceneZero)
         {
-            transform.position = (1 - displacementRatio) * _camera.transform.position + offset;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+            transform.position = UpdatedPosition(_pixelPerfectCamera.RoundToPixel(_camera.transform.position) - _camera.orthographicSize * Vector3.up);
+            //transform.position = _camera.transform.position;
             return;
         }
 
-        
         virtualPosition += new Vector3(10 * Time.deltaTime, 0f, 0f);
-        transform.position = (1 - displacementRatio) * virtualPosition + offset;
+        transform.position = UpdatedPosition(virtualPosition + _camera.orthographicSize *Vector3.down);
 
+    }
+
+    private Vector3 UpdatedPosition(Vector3 target)
+    {
+        Vector3 outputPosition = (1 - displacementRatio) * (target + offset);
+        outputPosition = new Vector3(outputPosition.x, outputPosition.y, 0f);
+        return outputPosition;
     }
 }

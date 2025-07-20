@@ -7,19 +7,26 @@ public class EnemyBounceable : MonoBehaviour
     [SerializeField] GameObject _explosionPrefab;
     public EnemyType _enemytype;
     bool _isDestroyed;
+    bool _isRedirected;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!_isDestroyed && !collider.GetComponent<PlayerMovement>().IsDead)
+        
+        if (!_isDestroyed)
         {
-            if ( Vector3.Dot(collider.transform.position - transform.position, Vector3.left) > 0.2f)
-            {
-                collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype, false);
-            }
+            if (collider.gameObject.tag == "Boss") collider.gameObject.GetComponent<BossBehavior>().TakeDamage();
             else
             {
-                collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
+                if (Vector3.Dot(collider.transform.position - transform.position, Vector3.left) > 0.2f)
+                {
+                    collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype, false);
+                }
+                else
+                {
+                    collider.gameObject.GetComponent<PlayerMovement>().Deviate(_enemytype);
+                }
             }
+            
             PlayDeathSFX();
             Die();
         }
@@ -27,17 +34,48 @@ public class EnemyBounceable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!_isDestroyed && !collision.collider.GetComponent<PlayerMovement>().IsDead)
+        if (!_isDestroyed)
         {
-            collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
-            PlayDeathSFX();
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerBounce);
-            Die();
+            if (_enemytype == EnemyType.Rock)
+            {
+                collision.collider.gameObject.GetComponent<PlayerMovement>().Stun();
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerHurt);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossThrow);
+            }
+            else if (_isRedirected) return;
+            else
+            {
+                collision.collider.gameObject.GetComponent<PlayerMovement>().Boost(_enemytype);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerBounce);
+                Die(true);
+            }
+            
         }
     }
 
-    void Die()
+    void Die(bool redirect = false) 
     {
+        if (_enemytype == EnemyType.Cigarette)
+        {
+            if (redirect && !_isRedirected)
+            {
+                _isRedirected = true;
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+                GetComponent<Rigidbody2D>().linearVelocity *= -2.5f;
+                GetComponent<CapsuleCollider2D>().enabled = false;
+                gameObject.layer = LayerMask.NameToLayer("RedirectedProyectile");
+                return;
+            }
+            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            _isDestroyed = true;
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<ParticleSystem>().Stop();
+            PlayDeathSFX();
+            Destroy(gameObject, 5f);
+            return;
+        }
+        PlayDeathSFX();
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         _isDestroyed = true;
         Destroy(gameObject, 0.01f);
@@ -48,19 +86,22 @@ public class EnemyBounceable : MonoBehaviour
         switch (_enemytype)
         {
             case EnemyType.Bird:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._birdDeath);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._birdDeath);
                 break;
 
             case EnemyType.Drone:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneDeath);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._droneDeath);
                 break;
 
             case EnemyType.DronePink:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._droneShock);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._droneShock);
                 break;
 
             case EnemyType.Balloon:
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonDeath);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._balloonDeath);
+                break;
+            case EnemyType.Cigarette:
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._bossCigarHit);
                 break;
         }
     }
@@ -74,4 +115,6 @@ public enum EnemyType
     DronePink,
     Balloon,
     GoldenBalloon,
+    Cigarette,
+    Rock,
 }

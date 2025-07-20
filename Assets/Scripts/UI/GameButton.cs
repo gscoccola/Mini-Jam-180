@@ -27,7 +27,7 @@ public class GameButton : MonoBehaviour
     {
         if (_animator != null && (_type == ButtonType.Achievements || _type == ButtonType.AchievementMenuInGame))
         {
-            _animator.SetBool("isVibrating", PersistentInfo.Instance._newAchievement);
+            _animator.SetBool("isVibrating", PersistentInfo.Instance._isThereNewAchievement);
         }
     }
 
@@ -50,7 +50,7 @@ public class GameButton : MonoBehaviour
             StartCoroutine(IButtonCooldown());
             PerfomButtonAction();
         }
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._button);
     }
 
     IEnumerator IButtonCooldown()
@@ -78,6 +78,7 @@ public class GameButton : MonoBehaviour
                 _gameManager.ShowTutorial();
                 break;
             case ButtonType.LevelSelect:
+                PersistentInfo.Instance.LevelCompletionInfo[_level].WasShown = false;
                 _gameManager.LoadLevel(_level);
                 break;
             case ButtonType.Pause:
@@ -126,7 +127,14 @@ public class GameButton : MonoBehaviour
                 _gameManager.SubmitHighScore();
                 break;
             case ButtonType.Leaderboard:
-                _gameManager.LoadLeaderboard();
+                _gameManager.StartLoadingLeaderboard();
+                break;
+            case ButtonType.CloseLeaderboard:
+                _gameManager.CloseLeaderboard();
+                break;
+            case ButtonType.UnlockEverything:
+                _gameManager.UnlockEverything();
+                PlayfabManager.Instance.SendCheatStatus();
                 break;
         }
     }
@@ -166,4 +174,6 @@ public enum ButtonType
     BackFromAchievementMenuInGame,
     SubmitHighScore,
     Leaderboard,
+    CloseLeaderboard,
+    UnlockEverything,
 }

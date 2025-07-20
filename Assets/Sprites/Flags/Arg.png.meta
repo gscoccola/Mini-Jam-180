@@ -140,7 +140,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 75
+        width: 76
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -160,9 +160,9 @@ TextureImporter:
       name: Arg_1
       rect:
         serializedVersion: 2
-        x: 75
+        x: 76
         y: 0
-        width: 75
+        width: 76
         height: 42
       alignment: 0
       pivot: {x: 0, y: 0}

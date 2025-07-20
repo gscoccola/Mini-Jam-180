@@ -109,6 +109,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -118,7 +131,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 11
+        width: 12
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -138,9 +151,9 @@ TextureImporter:
       name: player_third_fall_11x24_1
       rect:
         serializedVersion: 2
-        x: 11
+        x: 12
         y: 0
-        width: 11
+        width: 12
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -160,9 +173,9 @@ TextureImporter:
       name: player_third_fall_11x24_2
       rect:
         serializedVersion: 2
-        x: 22
+        x: 24
         y: 0
-        width: 11
+        width: 12
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}

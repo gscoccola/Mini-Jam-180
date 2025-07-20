@@ -52,12 +52,13 @@ public class Floor : MonoBehaviour
 
     private void DefineBoundaries()
     {
-        if (_floorType != FloorType.Water) return;
+        if (_floorType == FloorType.BossEnding) return;
+        if (_floorType != FloorType.Water && _floorType != FloorType.BossTrigger) return;
         Bounds bounds = _tilemapCollider2D.bounds;
         float worldMin = _tilemap.transform.TransformPoint(bounds.min).x;
         float worldMax = _tilemap.transform.TransformPoint(bounds.max).x;
         FindAnyObjectByType<TargetIndicator>().SetBounds(worldMin, worldMax);
-        FindAnyObjectByType<CameraScript>().SetStartPosition(worldMax);
+        FindAnyObjectByType<CameraPan>().SetStartPosition(worldMax);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,18 +66,31 @@ public class Floor : MonoBehaviour
         if (!_isTriggered && collision.collider.tag == "Player")
         {
             _isTriggered = true;
+            if (_floorType == FloorType.BossEnding) MusicPlayer.Instance._beginFadeOutWind = true;
             if (_floorType == FloorType.Ground)
             {
                 _gameManager.Lose();
                 _playerMovement.Die();
-                SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerDeath);
+                SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerDeath);
                 Instantiate(_bloodSplatter, _playerMovement.transform.position, Quaternion.identity);
                 return;
             }
-            _gameManager.Win();
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._playerSplash);
+
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._playerSplash);
             _playerMovement.Win();
             Instantiate(_waterSplash, _playerMovement.transform.position, Quaternion.identity);
+
+            if (_floorType == FloorType.BossTrigger)
+            {
+                FindAnyObjectByType<BossIntroManager>().OnLevelEnd();
+                FindAnyObjectByType<TargetIndicator>().gameObject.SetActive(false);
+                FindAnyObjectByType<MissileSpawner>().StopSpawning();
+                FindAnyObjectByType<Spawner>().gameObject.SetActive(false);
+                MusicPlayer.Instance.Pause();
+                return;
+            }
+            _gameManager.Win();
+            
         }
     }
 }
@@ -85,4 +99,6 @@ public enum FloorType
 {
     Water,
     Ground,
+    BossTrigger,
+    BossEnding,
 }

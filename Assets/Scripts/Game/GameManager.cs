@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    int _epilogueLevelIndex = 7;
     [SerializeField] float _endDelay;
     [SerializeField] InGameMenu _loseMenu;
     [SerializeField] InGameMenu _winMenu;
@@ -29,9 +29,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _loadingTextEsp;
     [SerializeField] GameObject _loadingTextEng;
     [SerializeField] HighscoreSubmitter _highscoreSumbitter;
-    [SerializeField] GameObject _loadingScreen;
+    [SerializeField] InGameMenu _loadingScreen;
+    [SerializeField] LeaderboardDisplay _leaderboardMenu;
+    [SerializeField] InGameMenu _noNetworkMenu;
 
-    CameraScript _cameraScript;
+    CameraPan _cameraScript;
     Camera _camera;
 
     LevelLoader _levelLoader;
@@ -47,23 +49,24 @@ public class GameManager : MonoBehaviour
 
     InGameMenu _lastMenu;
 
-
-
     private void Awake()
     {
         _camera = FindAnyObjectByType<Camera>();
         _levelLoader = FindAnyObjectByType<LevelLoader>();
         _spawner = FindAnyObjectByType<Spawner>();
         _mSpawner = FindAnyObjectByType<MissileSpawner>();
-        _cameraScript = FindAnyObjectByType<CameraScript>();
+        _cameraScript = FindAnyObjectByType<CameraPan>();
         _indicator = FindAnyObjectByType<TargetIndicator>();
         _isPlayingOnMobile = Application.isMobilePlatform;
         _activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         _scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
     }
 
+
     private void Start()
     {
+
+        PersistentCanvas.Instance.OnLevelLoad();
         if (_activeSceneIndex == 0 && !PersistentInfo.Instance._wasLanguageSet) SelectDefaultButton(_argFlag);
         if (_activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)
         {
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour
         if (_activeSceneIndex != 0 && _isPlayingOnMobile)
             _mobileInputButtons.gameObject.SetActive(true);
 
-        if (_activeSceneIndex == 0 || _activeSceneIndex == _epilogueLevelIndex)
+        if (_activeSceneIndex == 0 || FindAnyObjectByType<EpilogueManager>() != null)
         {
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
@@ -92,6 +95,12 @@ public class GameManager : MonoBehaviour
         else if (!PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown)
         {
             PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown = true;
+            if (FindAnyObjectByType<BossBehavior>() != null)
+            {
+                StartLevel(true);
+                return;
+            }
+                
             if (_cameraScript != null) StartCoroutine(_cameraScript.ICameraPan());
             if (!MusicPlayer.Instance._isPlayingWind) MusicPlayer.Instance.PlayWind();
             MusicPlayer.Instance.Pause();
@@ -135,7 +144,7 @@ public class GameManager : MonoBehaviour
         _isPaused = true;
         Time.timeScale = 0f;
         _pauseMenu.gameObject.SetActive(true);
-        SelectDefaultButton(_pauseMenu.transform.GetChild(1).gameObject);
+        SelectDefaultButton(_pauseMenu.transform.GetChild(0).gameObject);
 
         if (_isPlayingOnMobile) _mobileInputButtons.gameObject.SetActive(false);
     }
@@ -157,7 +166,8 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasBeaten = true;
-        LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex + 1].WasShown = false;
+        LoadLevel(_activeSceneIndex + 1);
     }
 
     public void ReloadLevel()
@@ -176,6 +186,8 @@ public class GameManager : MonoBehaviour
         OnAchievementUnlocked(3);
         StopAllCoroutines();
         StartCoroutine(ILevelEnd(false));
+        BossBehavior boss = FindAnyObjectByType<BossBehavior>();
+        if (boss != null) boss.OnPlayerDeath();
     }
 
     public void Win()
@@ -218,24 +230,25 @@ public class GameManager : MonoBehaviour
         {
             _winMenu.gameObject.SetActive(true);
             SelectDefaultButton(_winMenu.transform.GetChild(1).gameObject);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._victory);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._victory);
             yield return new WaitForSeconds(1.2f);
             Instantiate(_confetti, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity);
             yield return new WaitForSeconds(1.8f);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._winDialog);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._winDialog);
         }
         else if (newHighscore)
         {
             _highscoreSumbitter.gameObject.SetActive(true);
             _highscoreSumbitter.SetName(PersistentInfo.Instance.DisplayName);
             _highscoreSumbitter.SetScore(PersistentInfo.Instance.LastScore);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._victory);
             SelectDefaultButton(_highscoreSumbitter.transform.GetChild(0).GetChild(0).gameObject);
         }
         else
         {
             _loseMenu.gameObject.SetActive(true);
             SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._defeat);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._defeat);
         }
     }
 
@@ -266,22 +279,83 @@ public class GameManager : MonoBehaviour
     public void SubmitHighScore()
     {
         string name = _highscoreSumbitter.GetName();
-        PersistentInfo.Instance.DisplayName = name;
-        PlayfabManager.Instance.UpdateDisplayName(name);
-        PersistentInfo.Instance.SaveDisplayName();
+        if (name != PersistentInfo.Instance.DisplayName)
+        {
+            PersistentInfo.Instance.DisplayName = name;
+            PlayfabManager.Instance.UpdateDisplayName(name);
+            PersistentInfo.Instance.SaveDisplayName();
+        }
         _highscoreSumbitter.gameObject.SetActive(false);
         _loseMenu.gameObject.SetActive(true);
         SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
     }
 
-    public void LoadLeaderboard()
+    public void CloseLeaderboard()
     {
-        PlayfabManager.Instance.GetGlobalStatistics(true);
+        if (_noNetworkMenu.gameObject.activeSelf)
+        {
+            _noNetworkMenu.gameObject.SetActive(false);
+        }
+        else
+        {
+            string name = _leaderboardMenu.GetName();
+            if (name != PersistentInfo.Instance.DisplayName)
+            {
+                PersistentInfo.Instance.DisplayName = name;
+                PlayfabManager.Instance.UpdateDisplayName(name);
+                PersistentInfo.Instance.SaveDisplayName();
+            }
+            _leaderboardMenu.gameObject.SetActive(false);
+        }
+
+        if (_activeSceneIndex == 0)
+        {
+            _levelSelectMenu.gameObject.SetActive(true);
+            SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject);
+        }
+        else
+        {
+            _loseMenu.gameObject.SetActive(true);
+            SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
+        }
+        LeaderboardManager.Instance.HighScores = null;
+    }
+
+    public void StartLoadingLeaderboard()
+    {
+        if (PlayfabManager.Instance._nameChangeBeingProcessed)
+        {
+            PlayfabManager.Instance._openLeaderBoardAfterNameChange = true;
+            return;
+        }
+
+        PlayfabManager.Instance.GetGlobalStatistics(true, 100);
+
+        if (_activeSceneIndex == 0)
+        {
+            _levelSelectMenu.gameObject.SetActive(false);
+            _loadingScreen.gameObject.SetActive(true);
+        }
+        else
+        {
+            _loseMenu.gameObject.SetActive(false);
+            _loadingScreen.gameObject.SetActive(true);
+        }  
     }
 
     public void OpenLeaderBoard()
     {
+        _loadingScreen.gameObject.SetActive(false);
+        _leaderboardMenu.gameObject.SetActive(true);
+        SelectDefaultButton(_leaderboardMenu.transform.GetChild(0).GetChild(4).gameObject);
+    }
 
+    public void CancelOpenLeaderBoard()
+    {
+        
+        _loadingScreen.gameObject.SetActive(false);
+        _noNetworkMenu.gameObject.SetActive(true);
+        SelectDefaultButton(_noNetworkMenu.transform.GetChild(0).gameObject);
     }
 
     internal void ToggleCredits()
@@ -330,7 +404,7 @@ public class GameManager : MonoBehaviour
             {
                 _levelSelectMenu.gameObject.SetActive(true);
                 _startMenu.gameObject.SetActive(false);
-                SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject);
+                SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject);
                 return;
             }
             _levelSelectMenu.gameObject.SetActive(false);
@@ -384,7 +458,7 @@ public class GameManager : MonoBehaviour
         PersistentCanvas.Instance.ShowPopup();
 
         PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;
-        PersistentInfo.Instance._newAchievement = true;
+        PersistentInfo.Instance._isThereNewAchievement = true;
     }
 
     public void SetLocale(string locale)
@@ -432,7 +506,7 @@ public class GameManager : MonoBehaviour
         {
             _pauseButton.gameObject.SetActive(true);
             _pauseButton.SetPressed();
-            SelectDefaultButton(_pauseMenu.transform.GetChild(1).gameObject);
+            SelectDefaultButton(_pauseMenu.transform.GetChild(0).gameObject);
         }
         if (_lastMenu == _creditsMenu)
         {
@@ -450,4 +524,12 @@ public class GameManager : MonoBehaviour
         if (_isPlayingOnMobile) EventSystem.current.SetSelectedGameObject(null);
         else EventSystem.current.SetSelectedGameObject(gameObject);
     }
+
+    public void UnlockEverything()
+    {
+        PersistentInfo.Instance.UnlockAllLevelsAndAchievements();
+        ReloadLevel();
+    }
+
+    
 }

@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Alchemy.Inspector;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SFXPlayer : Singleton<SFXPlayer>
 {
@@ -22,6 +22,49 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileFallVolume;
     [FoldoutGroup("Enemy")] public AudioClip[] _missileHit;
     [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _missileHitVolume;
+
+    [Header("Boss")]
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossScream;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossScreamVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossEarthquake;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossEarthquakeVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossCigarAttack;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossCigarAttackVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossCigarHit;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossCigarHitVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossSplash;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossSplashVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossHurtShort;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossHurtShortVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossHurtLong;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossHurtLongVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossStun;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossStunVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossFistConnect;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossFistConnectVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossDived;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossDivedVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossThrow;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossThrowVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossPunch;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossPunchVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossNewPhase;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossNewPhaseVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossExplosion;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossExplosionVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossBigExplosion;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossBigExplosionVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossDead;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossDeadVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossCharge;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossChargeVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossChargeWoosh;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossChargeWooshVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossChargeWarning;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossChargeWarningVolume;
+    [FoldoutGroup("Enemy")] public AudioClip[] _bossVictoryLaugh;
+    [FoldoutGroup("Enemy")][SerializeField][Range(0f, 1f)] float[] _bossVictoryLaughVolume;
+
 
     [Header("Player Fall")]
     [FoldoutGroup("Player")] public AudioClip[] _playerSplash;
@@ -46,6 +89,8 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerHurtVolume;
     [FoldoutGroup("Player")] public AudioClip[] _playerBounce;
     [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerBounceVolume;
+    [FoldoutGroup("Player")] public AudioClip[] _playerTaunt;
+    [FoldoutGroup("Player")][SerializeField][Range(0f, 1f)] float[] _playerTauntVolume;
 
     [Header("End Music")]
     [FoldoutGroup("Music")] public AudioClip[] _victory;
@@ -60,6 +105,8 @@ public class SFXPlayer : Singleton<SFXPlayer>
     [Header("Button")]
     [FoldoutGroup("Game misc")] public AudioClip[] _button;
     [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonVolume;
+    [FoldoutGroup("Game misc")] public AudioClip[] _buttonSmall;
+    [FoldoutGroup("Game misc")][SerializeField][Range(0f, 1f)] float[] _buttonSmallVolume;
 
     [Header("Achievement Click")]
     [FoldoutGroup("Game misc")] public AudioClip[] _achievement;
@@ -117,39 +164,56 @@ public class SFXPlayer : Singleton<SFXPlayer>
             [_chestOpen] = _chestOpenVolume,
             [_balloonRelease] = _balloonReleaseVolume,
             [_droneShock] = _droneShockVolume,
+            [_buttonSmall] = _buttonSmallVolume,
+            [_bossScream] = _bossScreamVolume,
+            [_bossEarthquake] = _bossEarthquakeVolume,
+            [_bossCigarAttack] = _bossCigarAttackVolume,
+            [_bossCigarHit] = _bossCigarHitVolume,
+            [_bossSplash] = _bossSplashVolume,
+            [_bossHurtShort] = _bossHurtShortVolume,
+            [_bossHurtLong] = _bossHurtLongVolume,
+            [_bossStun] = _bossStunVolume,
+            [_bossFistConnect] = _bossFistConnectVolume,
+            [_bossDived] = _bossDivedVolume,
+            [_bossThrow] = _bossThrowVolume,
+            [_bossPunch] = _bossPunchVolume,
+            [_bossNewPhase] = _bossNewPhaseVolume,
+            [_bossExplosion] = _bossExplosionVolume,
+            [_bossDead] = _bossDeadVolume,
+            [_bossBigExplosion] = _bossBigExplosionVolume,
+            [_bossCharge] = _bossChargeVolume,
+            [_bossChargeWoosh] = _bossChargeWooshVolume,
+            [_bossChargeWarning] = _bossChargeWarningVolume,
+            [_bossVictoryLaugh] = _bossVictoryLaughVolume,
+            [_playerTaunt] = _playerTauntVolume,
 
         };
     }
 
-    public void PlayClipFromArray(AudioClip[] clipArray)
+    public void PlayRandomClipFromArray(AudioClip[] clipArray, float volume = 0f, bool dontDestroyOnLoad = false)
     {
         
-        int indexToPlay;
-        if (clipArray== _playerBounce)
+        int indexToPlay = 0;
+        if (clipArray.Length > 1)
         {
-            indexToPlay = _playerMovement.PlayerCombo;
+            if (clipArray == _playerBounce) indexToPlay = _playerMovement.PlayerCombo;
+            else if (clipArray == _comboLost) indexToPlay = (int)_gamePhase;                
+            else indexToPlay = UnityEngine.Random.Range(0, clipArray.Length);
         }
-        else if (clipArray == _playerHurt)
+        if (volume != 0f)
         {
-            indexToPlay = Random.Range(0, clipArray.Length);
+            PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, volume);
+            return;
         }
-        else if (clipArray == _comboLost)
-        {
-            indexToPlay = (int)_gamePhase;
-        }
-        else
-        {
-            indexToPlay = Random.Range(0, clipArray.Length);
-        }
-        PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay]);
+        PlayClipAtPoint(clipArray[indexToPlay], _cameraPosition, _volumeDictionary[clipArray][indexToPlay], dontDestroyOnLoad);
     }
 
-    public void PlayClipFromArrayAtIndex(AudioClip[] clipArray, int index)
+    public void PlayClipFromArrayAtIndex(AudioClip[] clipArray, int index, bool dontDestroyOnLoad = false)
     {
-        PlayClipAtPoint(clipArray[index], _cameraPosition, _volumeDictionary[clipArray][index]);
+        PlayClipAtPoint(clipArray[index], _cameraPosition, _volumeDictionary[clipArray][index], dontDestroyOnLoad);
     }
 
-    public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, float pitch = 1, bool dontDestroyOnLoad = false)
+    public static AudioSource PlayClipAtPoint(AudioClip clip, Vector3 pos, float volume = 1, bool dontDestroyOnLoad = false)
     {
         GameObject tempGO = new GameObject("TempAudio"); // create the temp object
         tempGO.transform.position = pos; // set its position
@@ -159,7 +223,6 @@ public class SFXPlayer : Singleton<SFXPlayer>
             DontDestroyOnLoad(tempASource);
         }
         tempASource.clip = clip;
-        tempASource.pitch = pitch;
         tempASource.volume = volume;
         tempASource.rolloffMode = AudioRolloffMode.Linear;
         tempASource.maxDistance = 200f;

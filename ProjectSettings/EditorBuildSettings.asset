@@ -25,7 +25,10 @@ EditorBuildSettings:
     guid: 71c369a458343c8459d77d133555620c
   - enabled: 1
     path: Assets/Scenes/LevelLast.unity
-    guid: b2ce05f0a24468f45807b760258dd53c
+    guid: 58d51781f5ebf1c4eaa6e04876c4d2dd
+  - enabled: 1
+    path: Assets/Scenes/LevelBoss.unity
+    guid: 573b86c58bc9b4b489753a501f60b776
   - enabled: 1
     path: Assets/Scenes/Epilogue.unity
     guid: f4594501ce2382948941c0bdf6e9b7f0

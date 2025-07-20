@@ -1,0 +1,93 @@
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.RenderGraphModule.Util;
+using UnityEngine.Rendering.Universal;
+
+public class BlurRenderPass : ScriptableRenderPass
+{
+    private static readonly int horizontalBlurId = Shader.PropertyToID("_HorizontalBlur");
+    private static readonly int verticalBlurId = Shader.PropertyToID("_VerticalBlur");
+    private static readonly int _Amplitude = Shader.PropertyToID("_Amplitude");
+    private static readonly int _Constant = Shader.PropertyToID("_Constant");
+    private static readonly int _Threshold = Shader.PropertyToID("_Threshold");
+    private const string k_VerticalPassName = "VerticalBlurRenderPass";
+    private const string k_HorizontalPassName = "HorizontalBlurRenderPass";
+
+    private BlurSettings defaultSettings;
+    private Material material;
+
+    private RenderTextureDescriptor blurTextureDescriptor;
+    private TextureDesc textureDesc;
+
+    public BlurRenderPass(Material material, BlurSettings defaultSettings)
+    {
+        this.material = material;
+        this.defaultSettings = defaultSettings;
+    }
+
+    private void UpdateBlurSettings()
+    {
+        if (material == null) return;
+
+        // Use the Volume settings or the default settings if no Volume is set.
+        var volumeComponent =
+            VolumeManager.instance.stack.GetComponent<CustomVolumeComponent>();
+        float horizontalBlur = volumeComponent.horizontalBlur.overrideState ?
+            volumeComponent.horizontalBlur.value : defaultSettings.horizontalBlur;
+        float verticalBlur = volumeComponent.verticalBlur.overrideState ?
+            volumeComponent.verticalBlur.value : defaultSettings.verticalBlur;
+        material.SetFloat(horizontalBlurId, horizontalBlur);
+        material.SetFloat(verticalBlurId, verticalBlur);
+        material.SetFloat(_Amplitude, defaultSettings._Amplitude);
+        material.SetFloat(_Constant, defaultSettings._Constant);
+        material.SetFloat(_Threshold, defaultSettings._Threshold);
+    }
+
+    public override void RecordRenderGraph(RenderGraph renderGraph,
+    ContextContainer frameData)
+    {
+        UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
+
+        UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
+
+        // The following line ensures that the render pass doesn't blit
+        // from the back buffer.
+        if (resourceData.isActiveTargetBackBuffer)
+            return;
+
+        TextureHandle srcCamColor = resourceData.activeColorTexture;
+        /*blurTextureDescriptor = resourceData.activeColorTexture.GetDescriptor(renderGraph);
+        blurTextureDescriptor.name = k_BlurTextureName;
+        blurTextureDescriptor.depthBufferBits = 0;*/
+
+        textureDesc = resourceData.activeColorTexture.GetDescriptor(renderGraph);
+
+        if (defaultSettings._UseReferenceResolution)
+        {
+            textureDesc.width = 640; // Set the width of the destination texture
+            textureDesc.height = 360; // Set the width of the destination texture
+        }
+        
+        var dst = renderGraph.CreateTexture(textureDesc);
+
+        // Update the blur settings in the material
+        UpdateBlurSettings();
+
+        // This check is to avoid an error from the material preview in the scene
+        if (!srcCamColor.IsValid() || !dst.IsValid())
+            return;
+
+        // The AddBlitPass method adds a vertical blur render graph pass that blits from the source texture (camera color in this case) to the destination texture using the first shader pass (the shader pass is defined in the last parameter).
+        RenderGraphUtils.BlitMaterialParameters paraVertical = new(srcCamColor, dst, material, 1);
+        //paraVertical.scale = new Vector2(1.0f, 1.0f);
+        renderGraph.AddBlitPass(paraVertical, k_VerticalPassName);
+
+        // The AddBlitPass method adds a horizontal blur render graph pass that blits from the texture written by the vertical blur pass to the camera color texture. The method uses the second shader pass.
+        RenderGraphUtils.BlitMaterialParameters paraHorizontal = new(dst, srcCamColor, material, 0);
+        //paraHorizontal.scale = new Vector2(2.0f, 2.0f);
+        renderGraph.AddBlitPass(paraHorizontal, k_HorizontalPassName);
+
+
+    }
+}

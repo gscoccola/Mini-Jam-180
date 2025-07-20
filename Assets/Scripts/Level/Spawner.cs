@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Linq;
 using Alchemy.Inspector;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Spawner : MonoBehaviour
 {
@@ -23,8 +20,9 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Parameters")][SerializeField] private float _goldenBalloonSpawnChance;
     [FoldoutGroup("Parameters")][SerializeField] private float _specialWaveChance;
 
-    [Header("Endless mode?")]
+    [Header("Soecial Level")]
     [FoldoutGroup("Parameters")][SerializeField] private bool _isEndlessLevel;
+    [FoldoutGroup("Parameters")][SerializeField] private bool _isBossFight;
 
     [Header("Reference")]
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBird;
@@ -32,8 +30,9 @@ public class Spawner : MonoBehaviour
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabDronePink;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabBalloon;
     [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabGoldenBalloon;
+    [FoldoutGroup("Reference")][SerializeField] private GameObject _enemyPrefabCloud;
 
-    private float _localTime;
+    private float _spawnPhase;
     private float _lastX;
     private Transform _player;
     private int _laneNumber;
@@ -45,6 +44,7 @@ public class Spawner : MonoBehaviour
     public bool _isTopSparser;
     private float _attenuationPerLane;
     private bool _spawnGoldenBallons;
+    private int _bossWaveType;
 
     private void Awake()
     {
@@ -56,7 +56,8 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         if (PersistentInfo.Instance.AchievementCompletionInfo == null) return;
-        if (PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count() ==
+        if (FindAnyObjectByType<EndlessLevelManager>() != null &&
+            PersistentInfo.Instance.AchievementCompletionInfo.Where(x => x.Value.WasShown).Count() ==
             PersistentInfo.Instance.AchievementCompletionInfo.Count()) _spawnGoldenBallons = true;
     }
 
@@ -81,12 +82,12 @@ public class Spawner : MonoBehaviour
 
         transform.position = Vector3.right * (_player.position.x - _spawnXOffset);
         float deltaX = transform.position.x - _lastX;
-        _localTime += Mathf.Max(Time.deltaTime * (1 - deltaX / (Time.deltaTime * 3f)), 0f);
+        float waveVelocity = _isBossFight ? 5f : 3f;
+        _spawnPhase += Time.deltaTime - deltaX / waveVelocity ;
         _lastX = transform.position.x;
-
-        if (_localTime > _spawnPeriod)
+        if (_spawnPhase > _spawnPeriod)
         {
-            _localTime = 0f;
+            _spawnPhase = 0f;
             SpawnWave(transform.position.x);
             if (_spawnsSpecialWaves) SpawnSquadWave(transform.position.x);
         }
@@ -107,19 +108,34 @@ public class Spawner : MonoBehaviour
 
     public void InitialBurst()
     {
-        for (int i = 0; i < (_spawnXOffset - 6f) / 4f ; i++)
+        float minDistance = _isBossFight ? 10f : 6f;
+        float spacing = _isBossFight ? _spawnPeriod * 5f : _minXSpacing;
+        for (int i = 1; i < (_spawnXOffset - minDistance) / spacing; i++)
         {
-            SpawnWave(_player.position.x - _spawnXOffset  + 4f*i);
+            SpawnWave(_player.position.x - _spawnXOffset  + spacing * i);
         }
     }
 
     private void SpawnWave(float x)
     {
+        if (_isBossFight) 
+        {
+
+            for (int i = _bossWaveType; i <= _laneNumber; i+=2)
+            {
+                SpawnEnemy(new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f), _enemyPrefabCloud, false);
+            }
+            _bossWaveType = (_bossWaveType + 1) % 2;
+            return;
+        }
+
+
         for (int i = 0; i <= _laneNumber; i++)
         {
             SpawnRandomEnemy(new Vector3(x, _minSpawnHeight + _laneHeight * i, 0f), i);
         }
     }
+
 
     private void SpawnSquadWave(float x)
     {

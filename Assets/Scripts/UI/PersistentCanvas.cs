@@ -11,7 +11,13 @@ public class PersistentCanvas : Singleton<PersistentCanvas>
     [SerializeField] float _delay = 3f;
     [SerializeField] GameObject _popupPrefab;
 
-    public void ShowPopup()
+    public void OnLevelLoad()
+    {
+        GetComponent<Canvas>().worldCamera = FindAnyObjectByType<Camera>();
+        GetComponent<Canvas>().sortingLayerName = "Popup";
+    }
+
+public void ShowPopup()
     {
         GameObject popup = Instantiate(_popupPrefab, transform.position, Quaternion.identity, transform);
         RectTransform rectTransform = popup.GetComponent<RectTransform>();

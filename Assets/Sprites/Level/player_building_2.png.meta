@@ -213,6 +213,32 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: player_building_2_3
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 0
+        width: 132
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 11, z: 0, w: 11}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: -66, y: -32}
+        - {x: 66, y: -32}
+        - {x: 66, y: 32}
+        - {x: -66, y: 32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5ded36606d25d040a642f5924c51379
+      internalID: 186892681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -230,6 +256,7 @@ TextureImporter:
       player_building_2_0: 1016649849823591680
       player_building_2_1: 7708499274874620132
       player_building_2_2: -7458036116606321657
+      player_building_2_3: 186892681
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

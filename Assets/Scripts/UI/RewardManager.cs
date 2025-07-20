@@ -54,7 +54,7 @@ public class RewardManager : MonoBehaviour
     {
         _chestAnim.SetTrigger("Open");
         VibrationHandler.Instance.MediumVibrate();
-        SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._chestOpen);
+        SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._chestOpen);
     }
 
     private IEnumerator IDisableControls(float delay)
@@ -76,9 +76,9 @@ public class RewardManager : MonoBehaviour
             OpenChest();
             yield return new WaitForSecondsRealtime(_balloonDelay);
             _UIBalloons.gameObject.SetActive(true);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._balloonRelease);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._balloonRelease);
             VibrationHandler.Instance.HeavyVibrate();
-            yield return new WaitForSecondsRealtime(_balloonDelay);
+            yield return new WaitForSecondsRealtime(_balloonDelay + 1f);
             _popup.SetActive(true);
             yield return new WaitForSecondsRealtime(_chestInputDisable- 2*_balloonDelay);
         }

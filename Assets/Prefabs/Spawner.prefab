@@ -53,14 +53,16 @@ MonoBehaviour:
   _birdSpawnChance: 0.2
   _droneSpawnChance: 0.12
   _balloonSpawnChance: 0.09
-  _goldenBalloonSpawnChance: 0.25
+  _goldenBalloonSpawnChance: 0.18
   _specialWaveChance: 0.03
   _isEndlessLevel: 0
+  _isBossFight: 0
   _enemyPrefabBird: {fileID: 4174810378592755860, guid: 5f8198dbd79a40d4590f32f31f3e26e3, type: 3}
   _enemyPrefabDrone: {fileID: 4174810378592755860, guid: 20edd7fdf0f0d5046aeb6813dd92cc6c, type: 3}
   _enemyPrefabDronePink: {fileID: 4174810378592755860, guid: da7a6284091dab542a4a552501218269, type: 3}
   _enemyPrefabBalloon: {fileID: 4174810378592755860, guid: 3981391d2f756fd40b41e2e51c172755, type: 3}
   _enemyPrefabGoldenBalloon: {fileID: 4174810378592755860, guid: 31881a3317e88b04fa6eeafcb553c8c9, type: 3}
+  _enemyPrefabCloud: {fileID: 4174810378592755860, guid: 3cbbfb25fc3ed034c9152cf39492de63, type: 3}
   _mapHeight: 0
   _spawnsSpecialWaves: 0
   _isTopSparser: 0

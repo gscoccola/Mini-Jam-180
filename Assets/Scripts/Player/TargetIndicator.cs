@@ -3,15 +3,16 @@ using UnityEngine;
 public class TargetIndicator : MonoBehaviour
 {
     [SerializeField] float TargetOffset = 1f;
-
+    [SerializeField] SpriteRenderer _spriteRenderer;
     Transform _player;
     float _minBound;
     float _maxBound;
 
     public void SetBounds(float minBound, float maxBound)
     {
-        _maxBound = maxBound - TargetOffset;
-        _minBound = minBound + TargetOffset;
+        float center = (minBound + maxBound) / 2f;
+        _maxBound = Mathf.Max( maxBound - TargetOffset, center);
+        _minBound = Mathf.Min(minBound + TargetOffset, center);
     }
 
     private void Awake()
@@ -26,21 +27,26 @@ public class TargetIndicator : MonoBehaviour
         if (transform.position.x < _minBound)
         {
             float angle = Mathf.Clamp( 
-                Mathf.Atan( transform.position.y * 0.6f / (transform.position.x - _minBound)) * Mathf.Rad2Deg ,
+                Mathf.Atan( transform.position.y * 0.8f / (transform.position.x - _minBound)) * Mathf.Rad2Deg ,
                 -90f, -5f);
             transform.localRotation = Quaternion.Euler(0f, 0f, angle - 270);
-            return;
+            _spriteRenderer.enabled = new Vector2(transform.position.x - _minBound, transform.position.y).magnitude > 12f;
         }
 
-        if ( transform.position.x > _maxBound)
+        else if ( transform.position.x > _maxBound)
         {
             float angle = Mathf.Clamp(
-                Mathf.Atan(transform.position.y * 0.6f / (transform.position.x - _maxBound)) * Mathf.Rad2Deg,
+                Mathf.Atan(transform.position.y * 0.8f / (transform.position.x - _maxBound)) * Mathf.Rad2Deg,
                 5f, 90f);
             transform.localRotation = Quaternion.Euler(0f, 0f, angle - 90);
-            return;
+            _spriteRenderer.enabled = new Vector2(transform.position.x - _maxBound, transform.position.y).magnitude > 12f;
         }
 
-        transform.localRotation = Quaternion.identity;
+        else
+        {
+            transform.localRotation = Quaternion.identity;
+            _spriteRenderer.enabled = transform.position.y > 12f;
+        }
+            
     }
 }

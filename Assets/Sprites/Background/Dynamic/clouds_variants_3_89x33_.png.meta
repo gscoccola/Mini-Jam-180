@@ -150,23 +150,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: clouds_variants_89x33__0
+      name: clouds_variants_3_89x33__0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 623
-        height: 33
+        width: 624
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6e6fb719ea050ce00800000000000000
-      internalID: 1062938222754789094
+      spriteID: 93f187ec37e1e1a42b74c069ca7a6ef1
+      internalID: -1732613872
       vertices: []
       indices: 
       edges: []
@@ -185,7 +185,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      clouds_variants_89x33__0: 1062938222754789094
+      clouds_variants_3_89x33__0: -1732613872
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

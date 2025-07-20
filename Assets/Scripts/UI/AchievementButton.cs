@@ -57,8 +57,8 @@ public class AchievementButton : MonoBehaviour
 
     public void AdjustPopup()
     {
-        if (transform.position.x > Screen.width /2)
-        _popup.transform.localPosition = new Vector3(- Mathf.Abs(_popup.transform.localPosition.x), _popup.transform.localPosition.y, 0f);
+        /*if (transform.position.x > Screen.width /2)
+        _popup.transform.localPosition = new Vector3(- Mathf.Abs(_popup.transform.localPosition.x), _popup.transform.localPosition.y, 0f);*/
     }
 
     public int GetId()
@@ -85,8 +85,8 @@ public class AchievementButton : MonoBehaviour
         if (_rewardManager.DropNextPadlock()) return;
         if (_wasUnlocked && !_wasShown)
         {
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._achievement);
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._achievement);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._button);
             VibrationHandler.Instance.HeavyVibrate();
             Instantiate(_confettiPrefab, new Vector3(_camera.transform.position.x, _camera.transform.position.y, 0f), Quaternion.identity)
                 .transform.localScale = 2.8296f *(_camera.orthographicSize / 5) * Vector3.one;
@@ -100,7 +100,7 @@ public class AchievementButton : MonoBehaviour
         }
         else
         {
-            SFXPlayer.Instance.PlayClipFromArray(SFXPlayer.Instance._button);
+            SFXPlayer.Instance.PlayRandomClipFromArray(SFXPlayer.Instance._button);
             VibrationHandler.Instance.LightVibrate();
         }
         SetPopup(!wasPressed);

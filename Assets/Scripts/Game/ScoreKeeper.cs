@@ -36,6 +36,6 @@ public class ScoreKeeper : MonoBehaviour
 
     public int GetScore()
     {
-        return _score;
+        return _maxScore;
     }
 }

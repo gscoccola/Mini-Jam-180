@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -16,11 +17,11 @@ TagManager:
   - Enemy
   - Player
   - PlayerInvulnerable
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Boss
+  - RedirectedProyectile
+  - BossHand
+  - Chunk
+  - GroundedPlayer
   - 
   - 
   - 
@@ -42,17 +43,20 @@ TagManager:
   - name: Background
     uniqueID: 3846843509
     locked: 0
+  - name: BossBackground
+    uniqueID: 144020467
+    locked: 0
   - name: Building
     uniqueID: 440181797
+    locked: 0
+  - name: Enemy
+    uniqueID: 1310998815
     locked: 0
   - name: Pointer
     uniqueID: 925421531
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Enemy
-    uniqueID: 1310998815
     locked: 0
   - name: Player
     uniqueID: 690074621
@@ -62,6 +66,21 @@ TagManager:
     locked: 0
   - name: DeadPlayer
     uniqueID: 454996199
+    locked: 0
+  - name: BossBack
+    uniqueID: 4100020513
+    locked: 0
+  - name: BossMissiles
+    uniqueID: 1770813741
+    locked: 0
+  - name: BossFront
+    uniqueID: 84890587
+    locked: 0
+  - name: Explosion
+    uniqueID: 2398324303
+    locked: 0
+  - name: Canvas
+    uniqueID: 2813312067
     locked: 0
   - name: Popup
     uniqueID: 3374126975

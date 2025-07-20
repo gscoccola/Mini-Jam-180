@@ -18,3 +18,4 @@ MonoBehaviour:
   BuidlingsSprite: {fileID: 6454316093721598762, guid: 4ff4314890b860d4eb2e0b85c03d99c2, type: 3}
   BushesSprite: {fileID: 2395028364090877961, guid: 24e077671ab05994eaab32769e6846e2, type: 3}
   ContrastingColor: {r: 0.29803923, g: 0.63529414, b: 0.9490196, a: 1}
+  BackgroundBossColor: {r: 0.4627451, g: 0.043137256, b: 0.043137256, a: 1}

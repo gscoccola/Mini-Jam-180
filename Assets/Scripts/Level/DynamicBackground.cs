@@ -23,6 +23,7 @@ public class DynamicBackground : MonoBehaviour
     SpriteRenderer[] _activeBackground;
     SpriteRenderer[] _standByBackground;
 
+    [SerializeField] BossBackgroundBehavior _backgroundBoss;
 
     bool _isBackgroundFading = false;
     float _alpha = 1f;
@@ -43,6 +44,7 @@ public class DynamicBackground : MonoBehaviour
         SwapSprites(currentSetIndex);
         _scoreText.color = backgroundSets[currentSetIndex].ContrastingColor;
         _scoreText2.color = backgroundSets[currentSetIndex].ContrastingColor;
+        _backgroundBoss.ChangeColor(backgroundSets[currentSetIndex].BackgroundBossColor);
     }
 
     private void SwapSprites(int index)

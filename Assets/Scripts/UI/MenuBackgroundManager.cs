@@ -18,7 +18,7 @@ public class MenuBackgroundManager : MonoBehaviour
     private void Start()
     {
         var maxLevelIndex = PersistentInfo.Instance.LevelCompletionInfo.Where(x => x.Value.WasShown).Max(x => x.Key);
-        if (backgroundSets[maxLevelIndex] is null) return;
+        if (maxLevelIndex >= backgroundSets.Count) maxLevelIndex = backgroundSets.Count - 1;
         _mountains.sprite = backgroundSets[maxLevelIndex].MountainsSprite;
         _buildings.sprite = backgroundSets[maxLevelIndex].BuidlingsSprite;
         _sky.sprite = backgroundSets[maxLevelIndex].SkySprite;

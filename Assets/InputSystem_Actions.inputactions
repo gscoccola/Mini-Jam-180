@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TogglePostProcessing",
+                    "type": "Button",
+                    "id": "ec5a61f5-4aa3-4947-a594-4512648fc851",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -286,7 +295,7 @@
                 {
                     "name": "",
                     "id": "0d90bf10-b525-4529-8cc1-828f61c63e71",
-                    "path": "<Keyboard>/l",
+                    "path": "<Keyboard>/numpadPlus",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -313,6 +322,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb11ecf5-2b22-418c-9149-aaf3bb2c4328",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TogglePostProcessing",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

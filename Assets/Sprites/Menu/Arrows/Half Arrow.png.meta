@@ -126,133 +126,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: X_mark_big 1_0
+      name: Half Arrow_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 28
-        height: 17
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1a1b369ac653024dad9e22f604c6ee2
-      internalID: 1905886474
+      spriteID: 65f265e9781718542a9ac874f507d9ea
+      internalID: -1016547292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_1
+      name: Half Arrow_1
       rect:
         serializedVersion: 2
         x: 28
         y: 0
         width: 28
-        height: 17
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbefaee5619397f49b72f5b02c7568ce
-      internalID: 1836783358
+      spriteID: 98022d40b3c915a4fbf13e82e9665237
+      internalID: 1710793387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_2
+      name: Half Arrow_2
       rect:
         serializedVersion: 2
         x: 56
         y: 0
         width: 28
-        height: 17
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0f7608b603db2e4d924a7315e806607
-      internalID: 2112447457
+      spriteID: f7358d26804cb4649adf5c6fa2b3fdaf
+      internalID: -2001284428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_3
+      name: Half Arrow_3
       rect:
         serializedVersion: 2
         x: 84
         y: 0
         width: 28
-        height: 17
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5aa244a6e34cdc540a59d2c4f33df7eb
-      internalID: -478963580
+      spriteID: 87a7edbac6bcda84bb38dc4478c75c89
+      internalID: -1013473068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_4
+      name: Half Arrow_4
       rect:
         serializedVersion: 2
         x: 112
         y: 0
         width: 28
-        height: 17
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed7cc03b2c5bfb14684416af84c4cb5e
-      internalID: 1837922736
+      spriteID: 92464ed180baeb0488328c38b6b51f37
+      internalID: 810723030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: X_mark_big 1_5
+      name: Half Arrow_5
       rect:
         serializedVersion: 2
         x: 140
         y: 0
         width: 28
-        height: 17
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3aeb9fd3d06ef5c4a9fef97e91979bce
-      internalID: -378220063
+      spriteID: 94c8168e65ab158499b257a72f754e13
+      internalID: 1448502900
       vertices: []
       indices: 
       edges: []
@@ -271,12 +271,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      X_mark_big 1_0: 1905886474
-      X_mark_big 1_1: 1836783358
-      X_mark_big 1_2: 2112447457
-      X_mark_big 1_3: -478963580
-      X_mark_big 1_4: 1837922736
-      X_mark_big 1_5: -378220063
+      Half Arrow_0: -1016547292
+      Half Arrow_1: 1710793387
+      Half Arrow_2: -2001284428
+      Half Arrow_3: -1013473068
+      Half Arrow_4: 810723030
+      Half Arrow_5: 1448502900
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
