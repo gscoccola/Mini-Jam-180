@@ -28,7 +28,7 @@ public class AchievementInfoSO: ScriptableObject
         }
         else
         {
-            return Name;
+            return NameEsp;
         }
     }
 
@@ -40,7 +40,7 @@ public class AchievementInfoSO: ScriptableObject
         }
         else
         {
-            return Description;
+            return DescriptionEsp;
         }
     }
 

@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14512841314304
-    m_Localized: Controles
+    m_Localized: Tutorial
     m_Metadata:
       m_Items: []
   - m_Id: 14569669939200
@@ -48,7 +48,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14867863982080
     m_Localized: "Dise\xF1o de juego:\nE. Pellegrino\nProgramaci\xF3n y UI:\nG. Scoccola\nM\xFAsica
-      y Sonido: A. Lobos\nPixel Art: rayryuk, Monzonito, shokodibuja"
+      y Sonido: A. Lobos\nPixel Art: rayryuk, shokodibuja"
     m_Metadata:
       m_Items: []
   - m_Id: 15143362646016
@@ -106,7 +106,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3743158487764992
-    m_Localized: "Modo infinito:\n\xA1Cola \nDesbloqueada!"
+    m_Localized: "\xA1Globos Dorados Desbloqueados!"
     m_Metadata:
       m_Items: []
   - m_Id: 5765749100531712
@@ -135,14 +135,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8433617101410304
     m_Localized: Puesto
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8434362043355136
-    m_Localized: Perfil
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8811159788474368
-    m_Localized: "Sin conexi\xF3n a internet"
     m_Metadata:
       m_Items: []
   references:

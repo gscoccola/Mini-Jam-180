@@ -110,12 +110,6 @@ public class GameButton : MonoBehaviour
                 if (PopupClose != null) PopupClose.Invoke(this, new ClosePopupEventArgs());
                 _gameManager.DeleteData();
                 break;
-            case ButtonType.SetLocaleArg:
-                _gameManager.SetLocale("es");
-                break;
-            case ButtonType.SetLocaleEng:
-                _gameManager.SetLocale("en");
-                break;
             case ButtonType.AchievementMenuInGame:
                 _gameManager.AchievementMenuInGame();
                 break;
@@ -134,7 +128,6 @@ public class GameButton : MonoBehaviour
                 break;
             case ButtonType.UnlockEverything:
                 _gameManager.UnlockEverything();
-                PlayfabManager.Instance.SendCheatStatus();
                 break;
         }
     }

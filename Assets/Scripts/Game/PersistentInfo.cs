@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.SocialPlatforms.Impl;
 
-// This Singleton class stores all the information that is persistent throughout the session
+// This Singleton class stores all the persistent session information
 
 public class PersistentInfo : Singleton<PersistentInfo>
 {
@@ -18,14 +16,12 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public int PersonalHighScore;
 
-    public int CustomPlayerId;
+    public int PlayerId;
 
     public string DisplayName;
 
 
     /* other fields */
-
-    public string PlayfabId;
 
     public int GlobalHighScore;
 
@@ -33,11 +29,10 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public bool _isThereNewAchievement;
 
-    public string LanguageCode;
+    public string LanguageCode = "es";
 
     [SerializeField] private AchievementInfoSO[] _achievements;
 
-    public bool _wasLanguageSet;
     
     private void OnEnable()
     {
@@ -52,18 +47,8 @@ public class PersistentInfo : Singleton<PersistentInfo>
         /*TestChestDELETEAFTERTEST();*/
     }
 
-    private void Start()
-    {
-        PlayfabManager.Instance.Login(CustomPlayerId);
-    }
-
     public void UnlockAllLevelsAndAchievements()
      {
-
-         /*foreach (AchievementInfoSO achievement in _achievements)
-         {
-             AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, false);
-         }*/
         AchievementCompletionInfo[1] = new AchievementMilestones(true, true);
         AchievementCompletionInfo[2] = new AchievementMilestones(true, true);
         AchievementCompletionInfo[3] = new AchievementMilestones(true, true);
@@ -81,8 +66,8 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     private void PlayerIdSetup()
     {
-        CustomPlayerId = UnityEngine.Random.Range(0, 2147483647);
-        PlayerPrefs.SetInt("PlayerId", CustomPlayerId);
+        PlayerId = 0;
+        PlayerPrefs.SetInt("PlayerId", PlayerId);
     }
 
     private void AchievementDictSetup()
@@ -138,48 +123,19 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     private void LoadAllData()
     {
-        if ( PlayerPrefs.HasKey("LevelData"))
-        {
-            string[] levelData = PlayerPrefs.GetString("LevelData").Split(",", System.StringSplitOptions.RemoveEmptyEntries);
-            foreach (var s in levelData)
-            {
-                LevelCompletionInfo[(int)Char.GetNumericValue(s[0])] = new LevelMileStones(BoolFromChar(s[1]), BoolFromChar(s[2]));
-            }
-        }
-
-        if (PlayerPrefs.HasKey("AchievementData"))
-        {
-            string[] achievementData = PlayerPrefs.GetString("AchievementData").Split(",", System.StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in achievementData)
-            {
-                AchievementCompletionInfo[(int)Char.GetNumericValue(s[0])] = new AchievementMilestones(BoolFromChar(s[1]), BoolFromChar(s[2]));
-                if (s[1] != s[2]) _isThereNewAchievement = true;
-            }
-        }
-        else    Debug.Log("No achievement data found");
-
         if (PlayerPrefs.HasKey("PlayerId"))
         {
-            CustomPlayerId = PlayerPrefs.GetInt("PlayerId");
+            PlayerId = PlayerPrefs.GetInt("PlayerId") + 1;
+            PlayerPrefs.SetInt("PlayerId", PlayerId);
         }
         else
         {
             PlayerIdSetup();
-            Debug.Log("No PlayerId data found, creating new ID");
-            Debug.Log(CustomPlayerId);
+            Debug.Log("No PlayerId data found, starting ID from 0");
         }
 
-        if (PlayerPrefs.HasKey("HighScore"))
-        {
-            PersonalHighScore = PlayerPrefs.GetInt("HighScore");
-        }
-        else PersonalHighScore = 0;
-
-        if (PlayerPrefs.HasKey("DisplayName"))
-        {
-            DisplayName = PlayerPrefs.GetString("DisplayName");
-        }
-        else DisplayName = "AAA";
+        PersonalHighScore = 0;
+        DisplayName = "AAA";
     }
 
     public void ResetData()
@@ -188,6 +144,8 @@ public class PersistentInfo : Singleton<PersistentInfo>
         //PlayerPrefs.DeleteAll();
         PlayerPrefs.DeleteKey("AchievementData");
         PlayerPrefs.DeleteKey("LevelData");
+        PlayerPrefs.DeleteKey("HighScore");
+        PlayerPrefs.DeleteKey("DisplayName");
         LevelDictSetup();
         AchievementDictSetup();
         LoadAllData();

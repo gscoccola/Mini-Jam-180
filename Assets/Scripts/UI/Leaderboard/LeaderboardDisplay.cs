@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 
@@ -15,14 +14,14 @@ public class LeaderboardDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        MergeLocalAndGlobalData();
+        DisplayLeaderboard();
         PopulateProfileInfo();
     }
 
-    private void MergeLocalAndGlobalData()
+    private void DisplayLeaderboard()
     {
         PlayerRank = LeaderboardManager.Instance.HighScores.Count;
-        string playerId = PersistentInfo.Instance.PlayfabId;
+        int playerId = PersistentInfo.Instance.PlayerId;
         int playerScore = PersistentInfo.Instance.PersonalHighScore;
         string playerName = PersistentInfo.Instance.DisplayName;
 
@@ -32,13 +31,13 @@ public class LeaderboardDisplay : MonoBehaviour
 
         while (i < ScoreEntries.Length && j < LeaderboardManager.Instance.HighScores.Count)
         {
-            if (LeaderboardManager.Instance.HighScores[j].PlayFabId == playerId)
+            if (LeaderboardManager.Instance.HighScores[j].PlayerID == playerId)
             {
                 j++;
                 continue;
             }
 
-            if (!wasPlayerShown && playerScore >= LeaderboardManager.Instance.HighScores[j].StatValue)
+            if (!wasPlayerShown && playerScore >= LeaderboardManager.Instance.HighScores[j].Score)
             {
                 IsPlayerRanked = true;
                 wasPlayerShown = true;
@@ -50,7 +49,7 @@ public class LeaderboardDisplay : MonoBehaviour
 
             PopulateLeaderboardEntry(i, 
                 LeaderboardManager.Instance.HighScores[j].DisplayName,
-                LeaderboardManager.Instance.HighScores[j].StatValue);
+                LeaderboardManager.Instance.HighScores[j].Score);
             i++;
             j++;
         }
@@ -61,13 +60,13 @@ public class LeaderboardDisplay : MonoBehaviour
 
         while (j < LeaderboardManager.Instance.HighScores.Count)
         {
-            if (LeaderboardManager.Instance.HighScores[j].PlayFabId == playerId)
+            if (LeaderboardManager.Instance.HighScores[j].PlayerID == playerId)
             {
                 j++;
                 continue;
             }
 
-            if (playerScore >= LeaderboardManager.Instance.HighScores[j].StatValue)
+            if (playerScore >= LeaderboardManager.Instance.HighScores[j].Score)
             {
                 PlayerRank = i;
                 return;
@@ -120,13 +119,13 @@ public class LeaderboardDisplay : MonoBehaviour
 
 public class HighscoreEntry
 {
-    public string PlayFabId;
+    public int PlayerId;
     public string DisplayName;
     public int Score;
 
-    public HighscoreEntry(string playFabId, string displayName, int score)
+    public HighscoreEntry(int playerId, string displayName, int score)
     {
-        PlayFabId = playFabId;
+        PlayerId = playerId;
         DisplayName = displayName;
         Score = score;
     }

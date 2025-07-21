@@ -28684,66 +28684,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e46bdda5b7363d459d80331e787ac14, type: 3}
---- !u!1 &966591128
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 966591131}
-  - component: {fileID: 966591130}
-  - component: {fileID: 966591129}
-  m_Layer: 0
-  m_Name: PlayFabManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &966591129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966591128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 755edac38e073a943b3f51a5ac716848, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HighScores: []
---- !u!114 &966591130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966591128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aafb9571087f6ca4aafb05737659c1cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nameChangeBeingProcessed: 0
-  _openLeaderBoardAfterNameChange: 0
---- !u!4 &966591131
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966591128}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1000311333 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8778218724399714773, guid: b90559887ecadbc42b0b80f5de1b5c8a, type: 3}
@@ -28908,6 +28848,7 @@ MonoBehaviour:
   _dynamicBackground: {fileID: 1337829173}
   _cigarPrefab: {fileID: 8306077369276571215, guid: 098b8f5311a4f7844b2d649baf68cda4, type: 3}
   _playerStartingY: 15
+  _shortStart: 0
 --- !u!1001 &1134472711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46497,7 +46438,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 966591131}
   - {fileID: 1507482843}
   - {fileID: 1304848686}
   - {fileID: 1134472711}

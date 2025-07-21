@@ -17,6 +17,7 @@ public class LevelButtonManager : MonoBehaviour
         {
             if (levelInfo.Key >= _gameButtons.Length) {
                 Debug.LogError("More levels than buttons!");
+
                 return; 
             }
             EnableButton(_gameButtons[levelInfo.Key]);

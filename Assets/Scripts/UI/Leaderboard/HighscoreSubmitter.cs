@@ -13,7 +13,7 @@ public class HighscoreSubmitter : MonoBehaviour
         {
             name += character.Character.ToString();
         }
-        return name + PersistentInfo.Instance.CustomPlayerId.ToString();
+        return name + PersistentInfo.Instance.PlayerId.ToString();
     }
 
     public void SetName(string name)

@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _achievementsMenu;
     [SerializeField] InGameMenu _achievementsMenuInGame;
     [SerializeField] InGameMenu _startMenu;
-    [SerializeField] InGameMenu _languageMenu;
     [SerializeField] InGameMenu _tutorialMenu;
     [SerializeField] InGameMenu _levelSelectMenu;
     [SerializeField] InGameMenu _deleteDataMenu;
@@ -67,13 +66,9 @@ public class GameManager : MonoBehaviour
     {
 
         PersistentCanvas.Instance.OnLevelLoad();
-        if (_activeSceneIndex == 0 && !PersistentInfo.Instance._wasLanguageSet) SelectDefaultButton(_argFlag);
-        if (_activeSceneIndex == 0 && PersistentInfo.Instance._wasLanguageSet)
-        {
-            _languageMenu.gameObject.SetActive(false);
-            _startMenu.gameObject.SetActive(true);
-            SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
-        }
+        if (_activeSceneIndex == 0)
+        SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
+
 
 
         PersistentInfo.Instance.SaveCompletionData();
@@ -221,7 +216,6 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
 
-        PlayfabManager.Instance.SendCompletionStatistics();
         MusicPlayer.Instance.Pause();
 
         yield return new WaitForSeconds(_endDelay);
@@ -256,7 +250,7 @@ public class GameManager : MonoBehaviour
     {
         int score = _scoreKeeper.GetScore();
         _scoreKeeper.gameObject.SetActive(false);
-        PlayfabManager.Instance.SendHighscore(score);
+        LeaderboardManager.Instance.SendHighscore(score);
         PersistentInfo.Instance.LastScore = score;
 
         if (score > PersistentInfo.Instance.GlobalHighScore)
@@ -282,7 +276,7 @@ public class GameManager : MonoBehaviour
         if (name != PersistentInfo.Instance.DisplayName)
         {
             PersistentInfo.Instance.DisplayName = name;
-            PlayfabManager.Instance.UpdateDisplayName(name);
+            LeaderboardManager.Instance.UpdateDisplayName(name);
             PersistentInfo.Instance.SaveDisplayName();
         }
         _highscoreSumbitter.gameObject.SetActive(false);
@@ -292,21 +286,15 @@ public class GameManager : MonoBehaviour
 
     public void CloseLeaderboard()
     {
-        if (_noNetworkMenu.gameObject.activeSelf)
-        {
-            _noNetworkMenu.gameObject.SetActive(false);
-        }
-        else
-        {
+       
             string name = _leaderboardMenu.GetName();
             if (name != PersistentInfo.Instance.DisplayName)
             {
                 PersistentInfo.Instance.DisplayName = name;
-                PlayfabManager.Instance.UpdateDisplayName(name);
+                LeaderboardManager.Instance.UpdateDisplayName(name);
                 PersistentInfo.Instance.SaveDisplayName();
             }
             _leaderboardMenu.gameObject.SetActive(false);
-        }
 
         if (_activeSceneIndex == 0)
         {
@@ -318,44 +306,27 @@ public class GameManager : MonoBehaviour
             _loseMenu.gameObject.SetActive(true);
             SelectDefaultButton(_loseMenu.transform.GetChild(1).gameObject);
         }
-        LeaderboardManager.Instance.HighScores = null;
+        //LeaderboardManager.Instance.HighScores = null;
     }
 
     public void StartLoadingLeaderboard()
     {
-        if (PlayfabManager.Instance._nameChangeBeingProcessed)
-        {
-            PlayfabManager.Instance._openLeaderBoardAfterNameChange = true;
-            return;
-        }
-
-        PlayfabManager.Instance.GetGlobalStatistics(true, 100);
 
         if (_activeSceneIndex == 0)
         {
             _levelSelectMenu.gameObject.SetActive(false);
-            _loadingScreen.gameObject.SetActive(true);
         }
         else
         {
             _loseMenu.gameObject.SetActive(false);
-            _loadingScreen.gameObject.SetActive(true);
-        }  
+        }
+        OpenLeaderBoard();
     }
 
     public void OpenLeaderBoard()
     {
-        _loadingScreen.gameObject.SetActive(false);
         _leaderboardMenu.gameObject.SetActive(true);
         SelectDefaultButton(_leaderboardMenu.transform.GetChild(0).GetChild(4).gameObject);
-    }
-
-    public void CancelOpenLeaderBoard()
-    {
-        
-        _loadingScreen.gameObject.SetActive(false);
-        _noNetworkMenu.gameObject.SetActive(true);
-        SelectDefaultButton(_noNetworkMenu.transform.GetChild(0).gameObject);
     }
 
     internal void ToggleCredits()
@@ -459,18 +430,6 @@ public class GameManager : MonoBehaviour
 
         PersistentInfo.Instance.AchievementCompletionInfo[achievementIndex].WasUnlocked = true;
         PersistentInfo.Instance._isThereNewAchievement = true;
-    }
-
-    public void SetLocale(string locale)
-    {
-        
-        PersistentInfo.Instance._wasLanguageSet = true;
-        _argFlag.SetActive(false);
-        _usaFlag.SetActive(false);
-        if (locale == "es") _loadingTextEsp.gameObject.SetActive(true);
-        else if (locale == "en") _loadingTextEng.gameObject.SetActive(true);
-
-        StartCoroutine(ISetLocale(locale));
     }
 
     public IEnumerator ISetLocale(string locale)
