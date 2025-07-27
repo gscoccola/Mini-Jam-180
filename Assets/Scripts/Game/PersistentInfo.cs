@@ -31,6 +31,8 @@ public class PersistentInfo : Singleton<PersistentInfo>
 
     public string LanguageCode = "es";
 
+    public bool _loadTrailer = true;
+
     [SerializeField] private AchievementInfoSO[] _achievements;
 
     
@@ -44,15 +46,15 @@ public class PersistentInfo : Singleton<PersistentInfo>
         AchievementDictSetup();
         LevelDictSetup();
         LoadAllData();
-        /*TestChestDELETEAFTERTEST();*/
+        UnlockAllLevelsAndAchievements(true, true);
     }
 
-    public void UnlockAllLevelsAndAchievements()
+    public void UnlockAllLevelsAndAchievements(bool levels = true, bool achievements = true)
      {
         AchievementCompletionInfo[1] = new AchievementMilestones(true, true);
         AchievementCompletionInfo[2] = new AchievementMilestones(true, true);
         AchievementCompletionInfo[3] = new AchievementMilestones(true, true);
-        AchievementCompletionInfo[4] = new AchievementMilestones(true, false);
+        AchievementCompletionInfo[4] = new AchievementMilestones(true, true);
         for (int i = 0; i < LevelCompletionInfo.Count - 1; i++)
          {
             LevelCompletionInfo[i].WasShown = true;
@@ -75,7 +77,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
         AchievementCompletionInfo = new();
         foreach (AchievementInfoSO achievement in _achievements)
         {
-            AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones();
+            AchievementCompletionInfo[achievement.GetId()] = new AchievementMilestones(true, true);
         }
     }
 
@@ -88,7 +90,7 @@ public class PersistentInfo : Singleton<PersistentInfo>
         LevelCompletionInfo.Add(0, new LevelMileStones(true));
         for (int i = 1; i < sceneCount; i++)
         {
-            LevelCompletionInfo[i] = new LevelMileStones();
+            LevelCompletionInfo[i] = new LevelMileStones(true);
         }
     }
 
@@ -142,12 +144,12 @@ public class PersistentInfo : Singleton<PersistentInfo>
     {
         _isThereNewAchievement = false;
         //PlayerPrefs.DeleteAll();
-        PlayerPrefs.DeleteKey("AchievementData");
-        PlayerPrefs.DeleteKey("LevelData");
+        //PlayerPrefs.DeleteKey("AchievementData");
+        //PlayerPrefs.DeleteKey("LevelData");
         PlayerPrefs.DeleteKey("HighScore");
         PlayerPrefs.DeleteKey("DisplayName");
-        LevelDictSetup();
-        AchievementDictSetup();
+        //LevelDictSetup();
+        //AchievementDictSetup();
         LoadAllData();
     }
 

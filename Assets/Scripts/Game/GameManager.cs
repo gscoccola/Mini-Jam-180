@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InGameMenu _loadingScreen;
     [SerializeField] LeaderboardDisplay _leaderboardMenu;
     [SerializeField] InGameMenu _noNetworkMenu;
+    [SerializeField] GameObject _trailerMenu;
 
     CameraPan _cameraScript;
     Camera _camera;
@@ -66,9 +67,7 @@ public class GameManager : MonoBehaviour
     {
 
         PersistentCanvas.Instance.OnLevelLoad();
-        if (_activeSceneIndex == 0)
-        SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
-
+        if (_activeSceneIndex == 0) OnMenuLoad(PersistentInfo.Instance._loadTrailer);
 
 
         PersistentInfo.Instance.SaveCompletionData();
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        else if (!PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown)
+        else if (_activeSceneIndex != 9 && !PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown)
         {
             PersistentInfo.Instance.LevelCompletionInfo[_activeSceneIndex].WasShown = true;
             if (FindAnyObjectByType<BossBehavior>() != null)
@@ -298,8 +297,8 @@ public class GameManager : MonoBehaviour
 
         if (_activeSceneIndex == 0)
         {
-            _levelSelectMenu.gameObject.SetActive(true);
-            SelectDefaultButton(_levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject);
+            _startMenu.gameObject.SetActive(true);
+            SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
         }
         else
         {
@@ -314,7 +313,7 @@ public class GameManager : MonoBehaviour
 
         if (_activeSceneIndex == 0)
         {
-            _levelSelectMenu.gameObject.SetActive(false);
+            _startMenu.gameObject.SetActive(false);
         }
         else
         {
@@ -399,9 +398,9 @@ public class GameManager : MonoBehaviour
 
     private void ActivateProperTutorial()
     {
-        if (_isPlayingOnMobile) _tutorialMenu.transform.GetChild(1).gameObject.SetActive(true);
-        else if (Gamepad.current != null) _tutorialMenu.transform.GetChild(4).gameObject.SetActive(true);
-        else _tutorialMenu.transform.GetChild(0).gameObject.SetActive(true); 
+        //if (_isPlayingOnMobile) _tutorialMenu.transform.GetChild(1).gameObject.SetActive(true);
+        //else if (Gamepad.current != null) _tutorialMenu.transform.GetChild(4).gameObject.SetActive(true);
+        _tutorialMenu.transform.GetChild(0).gameObject.SetActive(true); 
     }
 
     public void ExitLevel()
@@ -490,5 +489,25 @@ public class GameManager : MonoBehaviour
         ReloadLevel();
     }
 
-    
+    private void OnMenuLoad(bool trailer)
+    {
+        if (trailer)
+        {
+            _trailerMenu.gameObject.SetActive(true);
+            _startMenu.gameObject.SetActive(false);
+            SelectDefaultButton(_trailerMenu.transform.GetChild(0).gameObject);
+            PersistentInfo.Instance._loadTrailer = false;
+            return;
+        }
+
+        SelectDefaultButton(_startMenu.transform.GetChild(0).gameObject);
+    }
+
+    public void TimeOutReset()
+    {
+        if (_trailerMenu.gameObject != null && _trailerMenu.gameObject.activeSelf) return;
+        PersistentInfo.Instance._loadTrailer = true;
+        PersistentInfo.Instance.ResetData();
+        LoadLevel(0);
+    }
 }

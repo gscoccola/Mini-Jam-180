@@ -21,9 +21,8 @@ public class PoolCover : MonoBehaviour
 
     private void Start()
     {
-        if (Application.isMobilePlatform) _mobileInput.SetActive(true);
-        else if (Gamepad.current != null) _gamepadInput.SetActive(true);
-        else _keyboardInput.SetActive(true);
+        _keyboardInput.SetActive(true);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

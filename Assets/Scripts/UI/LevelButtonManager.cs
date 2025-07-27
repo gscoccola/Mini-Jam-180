@@ -16,7 +16,7 @@ public class LevelButtonManager : MonoBehaviour
         foreach (KeyValuePair<int, LevelMileStones> levelInfo in beatenLevels)
         {
             if (levelInfo.Key >= _gameButtons.Length) {
-                Debug.LogError("More levels than buttons!");
+                //Debug.LogError("More levels than buttons!");
 
                 return; 
             }

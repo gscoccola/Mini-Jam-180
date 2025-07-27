@@ -71,6 +71,7 @@ public class LeaderboardManager : Singleton<LeaderboardManager>
                 };
                 highScores.Add(entry);
             }
+            PersistentInfo.Instance.GlobalHighScore = highScores.Count > 0 ? highScores[0].Score : 0;
             return highScores;
         }
     }
