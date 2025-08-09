@@ -62,11 +62,11 @@ public class EpilogueManager : MonoBehaviour
     {
         _mobileScreenButtons.gameObject.SetActive(false);
         _pauseButton.gameObject.SetActive(false);
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(3f);
         MusicPlayer.Instance._beginFadeOutWind = true;
         MusicPlayer.Instance.Play();
 
-        yield return new WaitForSeconds(period -2f);
+        yield return new WaitForSeconds(period/2f -2f);
         _fireworkSpawner.Begin();
         _gameManager.OnAchievementUnlocked(2);
         PersistentInfo.Instance.LevelCompletionInfo[SceneManager.GetActiveScene().buildIndex].WasBeaten = true;
@@ -75,7 +75,7 @@ public class EpilogueManager : MonoBehaviour
         _confiner.InvalidateBoundingShapeCache();
         _camera.Lens.OrthographicSize = 5.625f;
 
-        yield return new WaitForSeconds(period);
+        yield return new WaitForSeconds(period / 2f);
         _credits.gameObject.SetActive(true);
         VibrationHandler.Instance.HeavyVibrate();
 
