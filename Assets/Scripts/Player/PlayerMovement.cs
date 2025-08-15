@@ -282,7 +282,7 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(InputValue value)
     {
         _horizontalInput = Mathf.Abs(value.Get<Vector2>().x) > 0.8f ? Mathf.Sign(value.Get<Vector2>().x) : 0f;
-        _verticalInput = Mathf.Abs(value.Get<Vector2>().y) > 0.2f;
+        _verticalInput = -value.Get<Vector2>().y > 0.7f;
     }
 
     public void TouchMove(TouchScreenButtonType direction, bool state)

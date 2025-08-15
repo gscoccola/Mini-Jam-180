@@ -57,6 +57,7 @@ public class MusicPlayer : Singleton<MusicPlayer>
     public void OnLevelLoad(int levelIndex)
     {
         _isSecondTrackEnabled = false;
+        DisableLowPass();
         GamePhase previousPhase = _gamePhase;
         if (new List<int> { 1, 2, 3}.Contains(levelIndex)) _gamePhase = GamePhase.First;
         else if (new List<int> { 4, 5}.Contains(levelIndex)) _gamePhase = GamePhase.Second;
